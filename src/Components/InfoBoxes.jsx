@@ -95,8 +95,8 @@ const IconWrapper = styled.div`
   padding: 12px;
   font-size: 1;
   display: flex;
-  width: 40px;
-  height: 40px;
+  width: 85px;
+  height: 85px;
   justify-content: center;
   align-items: center;
   box-shadow: 0 0 5px #793535;
@@ -165,7 +165,7 @@ const InfoBoxes = () => {
           transition={{ type: "spring", stiffness: 100, damping: 20 }}
         >
           <IconWrapper>
-            <FontAwesomeIcon icon={faVideo} size="2x" />
+            <FontAwesomeIcon icon={faVideo} size="4x" />
           </IconWrapper>
           <InfoContentWrapper>
             <InfoTitle>
@@ -180,7 +180,7 @@ const InfoBoxes = () => {
           transition={{ type: "spring", stiffness: 100, damping: 20 }}
         >
           <IconWrapper>
-            <FontAwesomeIcon icon={faClock} size="2x" />
+            <FontAwesomeIcon icon={faClock} size="4x" />
           </IconWrapper>
           <InfoContentWrapper>
             <InfoTitle>¿DURACIÓN Y TIEMPO DE LAS CONSULTAS?</InfoTitle>
@@ -193,7 +193,7 @@ const InfoBoxes = () => {
           transition={{ type: "spring", stiffness: 100, damping: 20 }}
         >
           <IconWrapper>
-            <FontAwesomeIcon icon={faUsers} size="2x" />
+            <FontAwesomeIcon icon={faUsers} size="4x" />
           </IconWrapper>
           <InfoContentWrapper>
             <InfoTitle>¿CON QUIÉN TRABAJO?</InfoTitle>
@@ -206,7 +206,7 @@ const InfoBoxes = () => {
           transition={{ type: "spring", stiffness: 100, damping: 20 }}
         >
           <IconWrapper>
-            <FontAwesomeIcon icon={faCreditCard} size="2x" />
+            <FontAwesomeIcon icon={faCreditCard} size="4x" />
           </IconWrapper>
           <InfoContentWrapper>
             <InfoTitle>FORMAS DE PAGO</InfoTitle>

@@ -21,7 +21,8 @@ const VideoContainer = styled.div`
   align-items: center;
   margin: 0 auto;
   padding: 10px;
-  margin-bottom: 150px;
+  margin-bottom: 60px;
+  margin-top: 60px;
 `;
 
 const Video = styled.video`

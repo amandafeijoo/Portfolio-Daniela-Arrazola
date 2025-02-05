@@ -6,19 +6,19 @@ const Container = styled.div`
   position: relative;
   border: 2px solid #d2b48c;
   text-align: center;
-  margin-bottom: 150px; 
+  margin-bottom: 100px; 
   background-color: #f5f5dc; 
   padding: 20px; 
   border-radius: 15px; 
-  box-shadow: 0 0 10px 5px rgba(0, 0, 0, 0.4); 
-  margin: 0 auto;
+  box-shadow: 0 0 5px 2px rgba(0, 0, 0, 0.7),
+    0 0 10px 4px rgba(34, 139, 34, 0.2), 0 0 15px 6px rgba(0, 0, 0, 0.2);    margin: 0 auto;
   width: 85%;
   max-width: 1000px;
-  height: 1140px; 
+  height: 996px; 
   overflow: hidden;
   position: relative;
   margin-top: 50px;
-  margin-bottom: 50px; 
+  margin-bottom: 20px; 
   background: linear-gradient(
     135deg,
     rgba(245, 245, 220, 0.6) 50%,
@@ -62,34 +62,19 @@ const Container = styled.div`
   }
 `;
 
-const ProfileImage = styled.img`
-  width: 400px;
-  height: 490px;
-  border-radius: 20%;
-  border: 2px solid white;
-  box-shadow: 0 0 10px 5px rgba(0, 0, 0, 0.4);
+
+const ProfileVideoBottom = styled.video`
+  width: 560px;
+  height: 400px;
+  border-radius: 10%;
+  box-shadow: 0 0 5px 2px rgba(0, 0, 0, 0.7),
+    0 0 10px 4px rgba(34, 139, 34, 0.2), 0 0 15px 6px rgba(0, 0, 0, 0.2);  
   position: absolute;
-  top: -50px; 
-  left: 50%;
-  transform: translateX(-50%);
-
-  @media (max-width: 768px) { /* iPad Mini */
-    width: 300px;
-    height: 370px;
-  }
-
-  @media (max-width: 430px) { /* iPhone 15, iPhone 15 Pro */
-    width: 250px;
-    height: 300px;
-    
-  }
-`;
-
-const ProfileImageBottom = styled(ProfileImage)`
-  top: auto;
-  bottom: 25px; 
-  box-shadow: 0 0 10px 5px rgba(0, 0, 0, 0.4);
+  top: 490px; 
   align-items: center;
+  border: 3px solid #d2b48c;
+  left: 60%;
+  transform: translateX(-50%);
 
   @media (max-width: 768px) { /* iPad Mini */
     bottom: 30px;
@@ -107,11 +92,12 @@ const TextContainer = styled.div`
   font-family: "Playfair Display", serif;
   text-align: justify;
   position: relative;
-  background-color: #d2b48c; 
+  background-color: #f5f5dc;
+  border: 3px solid #d2b48c;
   padding: 40px;
   border-radius: 15px;
-  box-shadow: 0 0 10px 5px rgba(0, 0, 0, 0.4);
-  margin: 0 auto;
+  box-shadow: 0 0 5px 2px rgba(0, 0, 0, 0.9),
+    0 0 10px 4px rgba(34, 139, 34, 0.2), 0 0 15px 6px rgba(0, 0, 0, 0.2);    margin: 0 auto;
   width: 80%;
   height: 700px; 
 
@@ -131,26 +117,30 @@ const TextContainer = styled.div`
 
 const ReadMoreButton = styled.button`
   font-family: "Playfair Display", serif;
+  font-size: 1.2em;
   position: absolute;
-  bottom: 70px;
-  right: 150px;
+  bottom: 300px;
+  right: 720px;
   padding: 18px 20px;
-  background: rgba(75, 63, 47, 0.6); 
-  color: #f5eedc; 
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  font-size: 16px;
-  box-shadow: 0 0 5px rgba(0, 0, 0, 0.4);
-  transition: background 0.3s;
-  margin-top: 20px; /* Added margin-top */
+  background-color: rgba(48, 84, 69, 0.5);
+  border: 2px solid #f5f5dc;
+  border-radius: 25px;
+  color: #F5EEDC;
+  display: flex;
+  text-decoration: none;
+  box-sizing: border-box;
+  text-transform: none;
+  transition: background-color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease;
+  margin-top: 20px;
 
   &:hover {
-    background: linear-gradient(
-      45deg,
-      rgba(58, 47, 36, 0.8),
-      rgba(58, 47, 36, 0.5)
-    ); 
+    background-color: rgba(245, 238, 220, 0.5);
+    color: #305445;
+  }
+
+  & svg {
+    color: white;
+    margin-right: 8px;
   }
 
   @media (max-width: 768px) { /* iPad Mini */
@@ -167,7 +157,7 @@ const ReadMoreButton = styled.button`
 `;
 
 const StyledH1 = styled.h1`
-  font-size: 2em;
+  font-size: 1.8em;
   color: #6f4e37; 
   margin-bottom: 20px;
   font-family: "Playfair Display", serif;
@@ -184,7 +174,7 @@ const StyledH1 = styled.h1`
 `;
 
 const StyledH2 = styled.h2`
-  font-size: 3em;
+  font-size: 2em;
   color: #4b3f2f;
   margin-bottom: 15px;
   font-family: "Playfair Display", serif;
@@ -199,7 +189,7 @@ const StyledH2 = styled.h2`
 `;
 
 const StyledP = styled.p`
-  font-size: 1.2em;
+  font-size: 1em;
   line-height: 1.6;
   color: #4b3f2f;
   margin-bottom: 10px;
@@ -219,7 +209,7 @@ const AcercaDe = () => {
     <Container>
       <TextContainer>
         <StyledH1>Acerca de</StyledH1>
-        <StyledH2>Daniela Arrazola</StyledH2>
+        <StyledH2>Daniela Arrázola</StyledH2>
         <StyledP>
           La vida no viene con un manual, y como tú, yo también estoy en
           constante aprendizaje. Mi mayor impulso como terapeuta es mi propia
@@ -240,7 +230,7 @@ const AcercaDe = () => {
         </StyledP>
       </TextContainer>
       <ReadMoreButton>Leer más</ReadMoreButton>
-      <ProfileImageBottom src="images/profile.svg" alt="Profile" />
+      <ProfileVideoBottom src="images/videodaniela.mp4" autoPlay loop muted />
     </Container>
   );
 };

@@ -17,13 +17,13 @@ const Container = styled.div`
   background-color: #f5f5dc;
   padding: 20px;
   border-radius: 15px;
-  box-shadow: 0 0 10px 5px rgba(0, 0, 0, 0.4);
-  margin: 0 auto;
+  box-shadow: 0 0 5px 2px rgba(0, 0, 0, 0.7),
+    0 0 10px 4px rgba(34, 139, 34, 0.2), 0 0 15px 6px rgba(0, 0, 0, 0.2);  margin: 0 auto;
   width: 100%;
   overflow: hidden;
   position: relative;
   margin-top: 50px;
-  margin-bottom: 150px;
+  margin-bottom: 60px;
   background: linear-gradient(
     135deg,
     rgba(245, 245, 220, 0.6) 50%,
@@ -53,8 +53,8 @@ const InfoContainer = styled.div`
   gap: 50px;
   padding: 20px;
   border-radius: 10px;
-  box-shadow: 0 0 5px 2px rgba(0, 0, 0, 0.2),
-    0 0 10px 4px rgba(34, 139, 34, 0.2), 0 0 15px 6px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 0 5px 2px rgba(34, 139, 34, 0.1),
+    0 0 10px 4px rgba(34, 139, 34, 0.2), 0 0 15px 6px rgba(0, 0, 0, 0.7);
   margin: 20px;
   margin-bottom: 90px;
   background-size: 200% 200%;
@@ -165,7 +165,7 @@ const InfoBoxes = () => {
           transition={{ type: "spring", stiffness: 100, damping: 20 }}
         >
           <IconWrapper>
-            <FontAwesomeIcon icon={faVideo} size="4x" />
+            <FontAwesomeIcon icon={faVideo} size="3x" />
           </IconWrapper>
           <InfoContentWrapper>
             <InfoTitle>
@@ -180,7 +180,7 @@ const InfoBoxes = () => {
           transition={{ type: "spring", stiffness: 100, damping: 20 }}
         >
           <IconWrapper>
-            <FontAwesomeIcon icon={faClock} size="4x" />
+            <FontAwesomeIcon icon={faClock} size="3x" />
           </IconWrapper>
           <InfoContentWrapper>
             <InfoTitle>¿DURACIÓN Y TIEMPO DE LAS CONSULTAS?</InfoTitle>
@@ -193,7 +193,7 @@ const InfoBoxes = () => {
           transition={{ type: "spring", stiffness: 100, damping: 20 }}
         >
           <IconWrapper>
-            <FontAwesomeIcon icon={faUsers} size="4x" />
+            <FontAwesomeIcon icon={faUsers} size="3x" />
           </IconWrapper>
           <InfoContentWrapper>
             <InfoTitle>¿CON QUIÉN TRABAJO?</InfoTitle>
@@ -206,7 +206,7 @@ const InfoBoxes = () => {
           transition={{ type: "spring", stiffness: 100, damping: 20 }}
         >
           <IconWrapper>
-            <FontAwesomeIcon icon={faCreditCard} size="4x" />
+            <FontAwesomeIcon icon={faCreditCard} size="3x" />
           </IconWrapper>
           <InfoContentWrapper>
             <InfoTitle>FORMAS DE PAGO</InfoTitle>

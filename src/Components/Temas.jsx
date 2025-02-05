@@ -20,9 +20,9 @@ const images = [
 ];
 
 const SlideShowContainer = styled.div`
-  width: 50%;
+  width: 45%;
   margin: 0 auto;
-  margin-top: 20px;
+  margin-top: 40px;
   margin-bottom: 40px;
   display: flex;
   flex-direction: column;
@@ -71,8 +71,8 @@ const SlideShowContainer = styled.div`
 `;
 
 const Slide = styled.img`
-  width: 80%;
-  height: 90%;
+  width: 75%;
+  height: 75%;
   border-radius: 15px;
   left: 50%;
   margin-top: 50px;

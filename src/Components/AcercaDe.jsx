@@ -128,7 +128,7 @@ const ReadMoreButton = styled.button`
   font-family: "Playfair Display", serif;
   font-size: 1.2em;
   position: absolute;
-  bottom: 300px;
+  bottom: 400px;
   right: 720px;
   padding: 18px 20px;
   background-color: rgba(48, 84, 69, 0.5);

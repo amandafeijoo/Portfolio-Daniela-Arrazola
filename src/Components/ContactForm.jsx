@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Box, Button, TextField, Typography } from "@mui/material";
 import styled from "styled-components";
 import "@fontsource/playfair-display";
@@ -7,8 +7,8 @@ const Container = styled.div`
   width: 100%;
   margin: 0 auto;
   padding: 20px;
-  margin-top: 100px;
-  margin-bottom: 60px;
+  margin-top: 80px;
+  margin-bottom: 80px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -20,6 +20,15 @@ const Container = styled.div`
     0 0 10px 4px rgba(34, 139, 34, 0.2), 0 0 15px 6px rgba(0, 0, 0, 0.2);
   height: 100%;
   border: 2px solid #d2b48c;
+  transition: transform 0.5s ease-out;
+
+  &.visible {
+    transform: translateY(0);
+  }
+
+  &.hidden {
+    transform: translateY(50px); /* Limita el desplazamiento a 50px */
+  }
 
   @media (min-width: 768px) {
     width: 70%; /* Aumenta el ancho en pantallas medianas */
@@ -37,6 +46,26 @@ const ContactForm = () => {
     message: "",
   });
 
+  const [isVisible, setIsVisible] = useState(true);
+  const [lastScrollY, setLastScrollY] = useState(0);
+
+  const handleScroll = () => {
+    const scrollPosition = window.scrollY;
+    if (scrollPosition > lastScrollY && scrollPosition > 100) {
+      setIsVisible(false);
+    } else {
+      setIsVisible(true);
+    }
+    setLastScrollY(scrollPosition);
+  };
+
+  useEffect(() => {
+    window.addEventListener("scroll", handleScroll);
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, [lastScrollY]);
+
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData({
@@ -51,7 +80,7 @@ const ContactForm = () => {
   };
 
   return (
-    <Container>
+    <Container className={isVisible ? "visible" : "hidden"}>
       <Box
         component="form"
         onSubmit={handleSubmit}

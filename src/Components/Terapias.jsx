@@ -13,7 +13,7 @@ const TerapiasContainer = styled.div`
   overflow: hidden;
   position: sticky; /* Cambiado a sticky */
   top: 0; /* Para que se quede en la parte superior al hacer scroll */
-  z-index: 2; /* Ajusta el z-index según sea necesario */
+  z-index: 2;
   border-radius: 15px;
   box-shadow: 0 0 5px 2px rgba(0, 0, 0, 0.7),
     0 0 10px 4px rgba(34, 139, 34, 0.2), 0 0 15px 6px rgba(0, 0, 0, 0.2);

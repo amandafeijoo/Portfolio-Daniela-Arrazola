@@ -18,7 +18,8 @@ const Container = styled.div`
   padding: 20px;
   border-radius: 15px;
   box-shadow: 0 0 5px 2px rgba(0, 0, 0, 0.7),
-    0 0 10px 4px rgba(34, 139, 34, 0.2), 0 0 15px 6px rgba(0, 0, 0, 0.2);  margin: 0 auto;
+    0 0 10px 4px rgba(34, 139, 34, 0.2), 0 0 15px 6px rgba(0, 0, 0, 0.2);
+  margin: 0 auto;
   width: 100%;
   overflow: hidden;
   position: relative;
@@ -46,10 +47,7 @@ const Container = styled.div`
 
 const InfoContainer = styled.div`
   display: flex;
-  grid-template-columns: repeat(
-    auto-fit,
-    minmax(400px, 1fr)
-  ); 
+  grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
   gap: 50px;
   padding: 20px;
   border-radius: 10px;

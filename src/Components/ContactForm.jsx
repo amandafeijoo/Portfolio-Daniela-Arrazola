@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
-import { Box, Button, TextField, Typography } from '@mui/material';
-import styled from 'styled-components';
+import React, { useState } from "react";
+import { Box, Button, TextField, Typography } from "@mui/material";
+import styled from "styled-components";
 import "@fontsource/playfair-display";
 
 const Container = styled.div`
@@ -22,19 +22,19 @@ const Container = styled.div`
   border: 2px solid #d2b48c;
 
   @media (min-width: 768px) {
-    width: 50%;
+    width: 70%; /* Aumenta el ancho en pantallas medianas */
   }
 
   @media (min-width: 1024px) {
-    width: 30%;
+    width: 50%; /* Aumenta el ancho en pantallas grandes */
   }
 `;
 
 const ContactForm = () => {
   const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    message: '',
+    name: "",
+    email: "",
+    message: "",
   });
 
   const handleChange = (e) => {
@@ -47,8 +47,7 @@ const ContactForm = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Aquí puedes manejar el envío del formulario, por ejemplo, enviarlo a un servidor
-    console.log('Form data:', formData);
+    console.log("Form data:", formData);
   };
 
   return (
@@ -57,21 +56,30 @@ const ContactForm = () => {
         component="form"
         onSubmit={handleSubmit}
         sx={{
-          display: 'flex',
-          width: '100%',
-          flexDirection: 'column',
+          display: "flex",
+          width: "100%",
+          flexDirection: "column",
           gap: 2,
-          maxWidth: 600,
-          margin: '0 auto',
+          maxWidth: 800, 
+          margin: "0 auto",
           padding: 2,
-          backgroundColor: 'rgba(245, 238, 220, 0.9)',
-          boxShadow: '0 0 5px 2px rgba(0, 0, 0, 0.7), 0 0 10px 4px rgba(34, 139, 34, 0.2), 0 0 15px 6px rgba(0, 0, 0, 0.2)', // Aquí se establece el boxShadow personalizado
-          border: '2px solid #d2b48c', // Aquí se establece el borde
+          backgroundColor: "rgba(245, 238, 220, 0.9)",
+          boxShadow:
+            "0 0 5px 2px rgba(0, 0, 0, 0.7), 0 0 10px 4px rgba(34, 139, 34, 0.2), 0 0 15px 6px rgba(0, 0, 0, 0.2)", // Aquí se establece el boxShadow personalizado
+          border: "2px solid #d2b48c", 
           borderRadius: 3,
-          boxShadow: 3,
         }}
       >
-        <Typography variant="h5" component="h1" sx={{ textAlign: 'center', marginBottom: 2, fontFamily: 'Playfair Display', color: '#793535' }}>
+        <Typography
+          variant="h5"
+          component="h1"
+          sx={{
+            textAlign: "center",
+            marginBottom: 2,
+            fontFamily: "Playfair Display",
+            color: "#793535",
+          }}
+        >
           CONTACTO
         </Typography>
         <TextField
@@ -83,13 +91,19 @@ const ContactForm = () => {
           sx={{
             "& .MuiOutlinedInput-root": {
               "& input": {
-                fontFamily: 'Playfair Display',
-                color: '#305445',
+                fontFamily: "Playfair Display",
+                color: "#305445",
+              },
+              "&.Mui-focused .MuiOutlinedInput-notchedOutline": {
+                borderColor: "#793535",
               },
             },
             "& .MuiInputLabel-root": {
-              fontFamily: 'Playfair Display',
-              color: '#305445',
+              fontFamily: "Playfair Display",
+              color: "#305445",
+              "&.Mui-focused": {
+                color: "#793535",
+              },
             },
           }}
         />
@@ -103,13 +117,19 @@ const ContactForm = () => {
           sx={{
             "& .MuiOutlinedInput-root": {
               "& input": {
-                fontFamily: 'Playfair Display',
-                color: '#305445',
+                fontFamily: "Playfair Display",
+                color: "#305445",
+              },
+              "&.Mui-focused .MuiOutlinedInput-notchedOutline": {
+                borderColor: "#793535",
               },
             },
             "& .MuiInputLabel-root": {
-              fontFamily: 'Playfair Display',
-              color: '#305445',
+              fontFamily: "Playfair Display",
+              color: "#305445",
+              "&.Mui-focused": {
+                color: "#793535",
+              },
             },
           }}
         />
@@ -124,13 +144,19 @@ const ContactForm = () => {
           sx={{
             "& .MuiOutlinedInput-root": {
               "& input": {
-                fontFamily: 'Playfair Display',
-                color: '#305445',
+                fontFamily: "Playfair Display",
+                color: "#305445",
+              },
+              "&.Mui-focused .MuiOutlinedInput-notchedOutline": {
+                borderColor: "#793535",
               },
             },
             "& .MuiInputLabel-root": {
-              fontFamily: 'Playfair Display',
-              color: '#305445',
+              fontFamily: "Playfair Display",
+              color: "#305445",
+              "&.Mui-focused": {
+                color: "#793535",
+              },
             },
           }}
         />
@@ -139,23 +165,24 @@ const ContactForm = () => {
           variant="contained"
           color="primary"
           sx={{
-            fontFamily: 'Playfair Display',
-            fontSize: '1.1em',
-            backgroundColor: 'rgba(48,84,69,0.5)',
-            border: '2px solid #4A6F5E',
-            borderRadius: '25px',
-            color: '#F5EEDC',
-            display: 'flex',
-            textDecoration: 'none',
-            boxSizing: 'border-box',
-            transition: 'background-color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease',
-            '&:hover': {
-              backgroundColor: 'rgba(245,238,220,0.5)',
-              color: '#305445',
+            fontFamily: "Playfair Display",
+            fontSize: "1.1em",
+            backgroundColor: "rgba(48,84,69,0.5)",
+            border: "2px solid #4A6F5E",
+            borderRadius: "25px",
+            color: "#F5EEDC",
+            display: "flex",
+            textDecoration: "none",
+            boxSizing: "border-box",
+            transition:
+              "background-color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease",
+            "&:hover": {
+              backgroundColor: "rgba(245,238,220,0.5)",
+              color: "#305445",
             },
-            '& svg': {
-              color: 'white',
-              marginRight: '8px',
+            "& svg": {
+              color: "white",
+              marginRight: "8px",
             },
           }}
         >

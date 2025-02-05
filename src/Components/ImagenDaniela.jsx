@@ -1,5 +1,5 @@
-import React from 'react';
-import styled from 'styled-components';
+import React from "react";
+import styled from "styled-components";
 
 const ContenedorPadre = styled.div`
   display: flex;
@@ -81,7 +81,7 @@ const Imagen = styled.img`
 const ContenedorTexto = styled.div`
   width: 100%;
   margin-top: 170px;
-  margin-right: 20px;    
+  margin-right: 20px;
   padding: 20px;
   border: 2px solid #d2b48c;
   box-shadow: 0 0 5px 2px rgba(0, 0, 0, 0.2),
@@ -102,7 +102,11 @@ const ImagenDaniela = () => {
       </ContenedorPrincipal1>
       <ContenedorPrincipal2>
         <ContenedorTexto>
-          Hola, soy Daniela, y si estás aquí, es posible que estés buscando una forma de sentirte mejor, de entenderte más o de superar un momento difícil. Déjame decirte que no estás solo. Como psicóloga, mi misión es crear un espacio seguro y sin juicios donde podamos trabajar juntos.
+          Hola, soy Daniela, y si estás aquí, es posible que estés buscando una
+          forma de sentirte mejor, de entenderte más o de superar un momento
+          difícil. Déjame decirte que no estás solo. Como psicóloga, mi misión
+          es crear un espacio seguro y sin juicios donde podamos trabajar
+          juntos.
         </ContenedorTexto>
       </ContenedorPrincipal2>
     </ContenedorPadre>

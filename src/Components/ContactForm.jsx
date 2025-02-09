@@ -15,6 +15,7 @@ const Container = styled.div`
   align-items: center;
   overflow: hidden;
   position: relative;
+  background-color: rgba(34, 139, 34, 0.2);
   border-radius: 15px;
   box-shadow: 0 0 5px 2px rgba(0, 0, 0, 0.7),
     0 0 10px 4px rgba(34, 139, 34, 0.2), 0 0 15px 6px rgba(0, 0, 0, 0.2);
@@ -89,13 +90,13 @@ const ContactForm = () => {
           width: "100%",
           flexDirection: "column",
           gap: 2,
-          maxWidth: 800, 
+          maxWidth: 800,
           margin: "0 auto",
           padding: 2,
           backgroundColor: "rgba(245, 238, 220, 0.9)",
           boxShadow:
             "0 0 5px 2px rgba(0, 0, 0, 0.7), 0 0 10px 4px rgba(34, 139, 34, 0.2), 0 0 15px 6px rgba(0, 0, 0, 0.2)", // Aquí se establece el boxShadow personalizado
-          border: "2px solid #d2b48c", 
+          border: "2px solid #d2b48c",
           borderRadius: 3,
         }}
       >

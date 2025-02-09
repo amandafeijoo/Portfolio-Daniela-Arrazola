@@ -1,6 +1,12 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
-import { FaInstagram, FaFacebook, FaLinkedin } from "react-icons/fa";
+import {
+  FaInstagram,
+  FaFacebook,
+  FaLinkedin,
+  FaWhatsapp,
+} from "react-icons/fa";
 import {
   AppBar,
   Toolbar,
@@ -119,6 +125,7 @@ const SocialIcons = styled.div`
 `;
 const Header = () => {
   const [anchorEl, setAnchorEl] = useState(null);
+  const navigate = useNavigate();
 
   const handleMenuOpen = (event) => {
     setAnchorEl(event.currentTarget);
@@ -126,6 +133,15 @@ const Header = () => {
 
   const handleMenuClose = () => {
     setAnchorEl(null);
+  };
+  const handleNavigateHome = () => {
+    handleMenuClose();
+    navigate("/");
+  };
+
+  const handleNavigateFullAcerca = () => {
+    handleMenuClose();
+    navigate("/full-acerca");
   };
 
   return (
@@ -156,33 +172,33 @@ const Header = () => {
         </SocialIcons>
       </TopHeader>
       <BottomHeader>
-        <CenterButton>
-          <Button>RESERVAR MI CONSULTA</Button>
-        </CenterButton>
         <IconButton
           edge="start"
           color="inherit"
           aria-label="menu"
           onClick={handleMenuOpen}
           sx={{
-            marginLeft: "-10px", 
+            marginLeft: "-10px",
           }}
         >
           <MenuIcon
             sx={{
-              fontSize: "1.7em", 
-              color: "#f5f5dc", 
+              fontSize: "1.7em",
+              color: "#f5f5dc",
             }}
           />
         </IconButton>
+        <CenterButton>
+          <Button>RESERVAR MI CONSULTA</Button>
+        </CenterButton>
         <Menu
           anchorEl={anchorEl}
           open={Boolean(anchorEl)}
           onClose={handleMenuClose}
           PaperProps={{
             sx: {
-              backgroundColor: "rgba(210, 180, 140, 0.9)",       
-              backdropFilter: 'blur(10px)',
+              backgroundColor: "rgba(210, 180, 140, 0.9)",
+              backdropFilter: "blur(10px)",
               border: "2px solid #6f4e37",
               borderRadius: "10px",
               width: "350px",
@@ -194,7 +210,7 @@ const Header = () => {
           }}
         >
           <MenuItem
-            onClick={handleMenuClose}
+            onClick={handleNavigateHome}
             sx={{
               fontSize: "1.5em",
               fontFamily: "Playfair Display",
@@ -204,7 +220,7 @@ const Header = () => {
             Inicio
           </MenuItem>
           <MenuItem
-            onClick={handleMenuClose}
+            onClick={handleNavigateFullAcerca}
             sx={{
               fontSize: "1.5em",
               fontFamily: "Playfair Display",
@@ -241,7 +257,7 @@ const Header = () => {
               sx={{
                 color: "#305445",
                 "&:hover": {
-                  color: "#4b3f2f", 
+                  color: "#4b3f2f",
                 },
               }}
             >
@@ -253,7 +269,7 @@ const Header = () => {
               sx={{
                 color: "#305445",
                 "&:hover": {
-                  color: "#4b3f2f", 
+                  color: "#4b3f2f",
                 },
               }}
             >
@@ -265,7 +281,7 @@ const Header = () => {
               sx={{
                 color: "#305445",
                 "&:hover": {
-                  color: "#4b3f2f", 
+                  color: "#4b3f2f",
                 },
               }}
             >
@@ -277,32 +293,37 @@ const Header = () => {
             <Typography
               variant="body2"
               sx={{
-                fontSize: "1.1em",
+                fontSize: "1em",
                 fontFamily: "Playfair Display",
-                color: "#4b3f2f",
+                color: "#793535",
               }}
             >
-              arrazoladanii@gmail.com
+              danielaarrazolabenitez@gmail.com
             </Typography>
             <Typography
               variant="body2"
               sx={{
-                fontSize: "1.1em",
+                fontSize: "1em",
+                marginLeft: "27px",
                 fontFamily: "Playfair Display",
-                color: "#4b3f2f",
+                color: "#793535",
+                display: "flex",
+                alignItems: "center",
               }}
             >
-              +34620664428
+              <FaWhatsapp style={{ marginRight: "8px" }} />
+              +47 98315132
             </Typography>
             <Typography
               variant="body2"
               sx={{
-                fontSize: "1.1em",
+                fontSize: "0.8em",
+                marginTop: "10px",
                 fontFamily: "Playfair Display",
-                color: "#4b3f2f",
+                color: "#793535",
               }}
             >
-              © 2025 Daniela Arrazola
+              © 2025 Daniela Arrázola
             </Typography>
           </Box>
         </Menu>

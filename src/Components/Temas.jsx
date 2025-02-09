@@ -1,26 +1,9 @@
 import "@fontsource/playfair-display";
-import React, { useEffect, useState } from "react";
+import React from "react";
 import styled from "styled-components";
 
-const images = [
-  "/images/1.svg",
-  "/images/2.svg",
-  "/images/3.svg",
-  "/images/4.svg",
-  "/images/5.svg",
-  "/images/6.svg",
-  "/images/7.svg",
-  "/images/8.svg",
-  "/images/9.svg",
-  "/images/10.svg",
-  "/images/11.svg",
-  "/images/12.svg",
-  "/images/13.svg",
-  "/images/14.svg",
-];
-
 const SlideShowContainer = styled.div`
-  width: 45%;
+  width: 75%;
   margin: 0 auto;
   margin-top: 40px;
   margin-bottom: 40px;
@@ -31,17 +14,11 @@ const SlideShowContainer = styled.div`
   overflow: hidden;
   position: relative;
   border-radius: 15px;
+  height: 700px;
+  background-color: rgba(34, 139, 34, 0.2);
   box-shadow: 0 0 5px 2px rgba(0, 0, 0, 0.7),
     0 0 10px 4px rgba(34, 139, 34, 0.2), 0 0 15px 6px rgba(0, 0, 0, 0.2);
-  height: 700px;
-  border: 3px solid #d2b48c;
-  background: linear-gradient(
-    135deg,
-    rgba(245, 245, 220, 0.7) 2%,
-    rgba(34, 139, 34, 0.2) 100%,
-    rgba(46, 139, 87, 0.7) 75%,
-    rgba(245, 245, 220, 0.7) 0%
-  );
+  border: 3px solid rgba(48, 84, 69, 0.5);
 
   @media (max-width: 1024px) {
     /* iPad Pro */
@@ -70,59 +47,46 @@ const SlideShowContainer = styled.div`
   }
 `;
 
-const Slide = styled.img`
-  width: 75%;
-  height: 75%;
-  border-radius: 15px;
-  left: 50%;
-  margin-top: 50px;
-  margin-bottom: 50px;
-  transform: translateX(-50%);
+const Video = styled.video`
+  width: 90%;
+  height: 90%;
+  border-radius: 20px;
+  object-fit: cover;
+  display: block;
   box-shadow: 0 0 5px 2px rgba(0, 0, 0, 0.7),
     0 0 10px 4px rgba(34, 139, 34, 0.2), 0 0 15px 6px rgba(0, 0, 0, 0.2);
-  height: 700px;
-  border: 2px solid #d2b48c;
-  position: absolute;
-  opacity: 0;
-  transition: opacity 1s ease-in-out;
-  &.active {
-    opacity: 1;
-  }
+  border: 3px solid #d2b48c;
 
   @media (max-width: 1024px) {
     /* iPad Pro */
-    width: 70%;
-    height: 80%;
+    border-radius: 15px;
   }
 
   @media (max-width: 834px) {
     /* iPad Air */
-    width: 70%;
-    height: 80%;
+    border-radius: 15px;
   }
 
   @media (max-width: 768px) {
     /* iPad Mini */
-    width: 80%;
-    height: 70%;
+    border-radius: 10px;
   }
 
   @media (max-width: 430px) {
     /* iPhone 15, iPhone 15 Pro */
-    width: 90%;
-    height: 60%;
+    border-radius: 5px;
   }
 `;
 
 const Button = styled.button`
   position: absolute;
   font-family: "Playfair Display", serif;
-  bottom: 80px;
-  right: 310px;
-  background-color: rgba(48, 84, 69, 0.7);
+  bottom: 75px;
+  right: 110px;
+  background-color: rgba(48, 84, 69, 0.8);
   color: #f5eedc;
   border: none;
-  padding: 15px 19px;
+  padding: 17px 19px;
   font-size: 1em;
   border-radius: 5px;
   cursor: pointer;
@@ -168,33 +132,13 @@ const Button = styled.button`
 `;
 
 const Temas = () => {
-  const [currentIndex, setCurrentIndex] = useState(0);
-
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setCurrentIndex((prevIndex) => (prevIndex + 1) % images.length);
-    }, 3000);
-
-    return () => clearInterval(interval);
-  }, []);
-
   return (
     <SlideShowContainer>
-      {images.map((src, index) => (
-        <Slide
-          key={index}
-          src={src}
-          alt={`Slide ${index + 1}`}
-          className={index === currentIndex ? "active" : ""}
-        />
-      ))}
-      <Button
-        onClick={() =>
-          setCurrentIndex((prevIndex) => (prevIndex + 1) % images.length)
-        }
-      >
-        Ver más
-      </Button>
+      <Video autoPlay loop muted playsInline>
+        <source src="/images/temas.mp4" type="video/mp4" />
+        Your browser does not support the video tag.
+      </Video>
+      <Button onClick={() => alert("Ver más")}>Ver más</Button>
     </SlideShowContainer>
   );
 };

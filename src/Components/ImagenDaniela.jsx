@@ -33,7 +33,7 @@ const ContenedorPrincipal1 = styled.div`
     rgba(46, 139, 87, 0.7) 75%,
     rgba(245, 245, 220, 0.7) 0%
   );
-  transition: transform 0.5s ease-out;
+  transition: transform 1.5s ease-out; /* Aumenta la duración de la transición */
   &.visible {
     transform: translateY(0);
   }
@@ -68,7 +68,7 @@ const ContenedorPrincipal2 = styled.div`
     rgba(245, 245, 220, 0.7) 0%
   );
   z-index: 1;
-  transition: transform 0.5s ease-out;
+  transition: transform 1.5s ease-out; /* Aumenta la duración de la transición */
   &.visible {
     transform: translateY(0);
   }
@@ -155,13 +155,13 @@ const ImagenDaniela = () => {
           Hola, soy Daniela, y si estás aquí, es posible que estés buscando una
           forma de sentirte mejor, de entenderte más o de superar un momento
           difícil. Déjame decirte que no estás solo. Como psicóloga, mi misión
-          es crear un espacio seguro y sin juicios donde podamos trabajar
-          juntos.
+          es crear un espacio seguro, sin juicios y sin prisas donde podamos
+          trabajar juntos.
         </ContenedorTexto>
       </ContenedorPrincipal2>
       <ContenedorPrincipal1 ref={contenedor1Ref} className="hidden">
         <ContenedorImagen>
-          <Imagen src="/images/danielaintro.svg" alt="Daniela" />
+          <Imagen src="/images/daniela.svg" alt="Daniela" />
         </ContenedorImagen>
       </ContenedorPrincipal1>
     </ContenedorPadre>

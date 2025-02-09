@@ -14,7 +14,7 @@ const Container = styled.div`
   border: 2px solid #d2b48c;
   text-align: center;
   margin-bottom: 100px;
-  background-color: #f5f5dc;
+  background-color: rgba(34, 139, 34, 0.2);
   padding: 20px;
   border-radius: 15px;
   box-shadow: 0 0 5px 2px rgba(0, 0, 0, 0.7),
@@ -59,14 +59,14 @@ const InfoContainer = styled.div`
   width: 95%;
   overflow: hidden;
   margin: 0 auto;
-  background-color: #d4cbb5;
+  background-color: #f5eedc;
 `;
 
 const InfoBox = styled(motion.div)`
   padding: 10px;
   background-color: ${(props) => props.bgColor};
   border-radius: 15px;
-  border: 2px solid #d2b48c;
+  border: 2px solid #b07241;
   box-shadow: 0 0 5px 2px rgba(0, 0, 0, 0.2),
     0 0 10px 4px rgba(34, 139, 34, 0.2), 0 0 15px 6px rgba(0, 0, 0, 0.2);
   color: #f5eedc;

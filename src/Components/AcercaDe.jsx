@@ -1,4 +1,5 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import "@fontsource/playfair-display";
 
@@ -7,7 +8,7 @@ const Container = styled.div`
   border: 2px solid #d2b48c;
   text-align: center;
   margin-bottom: 100px;
-  background-color: #f5f5dc;
+  background-color: rgba(34, 139, 34, 0.1);
   padding: 20px;
   border-radius: 15px;
   box-shadow: 0 0 5px 2px rgba(0, 0, 0, 0.7),
@@ -15,30 +16,11 @@ const Container = styled.div`
   margin: 0 auto;
   width: 85%;
   max-width: 1000px;
-  height: 996px;
+  height: 930px;
   overflow: hidden;
   position: relative;
   margin-top: 50px;
   margin-bottom: 20px;
-  background: linear-gradient(
-    135deg,
-    rgba(245, 245, 220, 0.6) 50%,
-    rgba(85, 124, 112, 0.2) 85%
-  );
-  background-size: 200% 200%;
-  animation: move 10s ease infinite;
-
-  @keyframes move {
-    0% {
-      background-position: 0% 50%;
-    }
-    50% {
-      background-position: 100% 50%;
-    }
-    100% {
-      background-position: 0% 50%;
-    }
-  }
 
   @media (max-width: 1024px) {
     /* iPad Pro */
@@ -66,18 +48,17 @@ const Container = styled.div`
     height: 888px; /* Adjusted height for iPhone */
   }
 `;
-
-const ProfileVideoBottom = styled.video`
-  width: 560px;
-  height: 400px;
+const ProfileImage = styled.img`
+  width: 400px;
+  height: 450px;
   border-radius: 10%;
   box-shadow: 0 0 5px 2px rgba(0, 0, 0, 0.7),
     0 0 10px 4px rgba(34, 139, 34, 0.2), 0 0 15px 6px rgba(0, 0, 0, 0.2);
   position: absolute;
-  top: 490px;
+  top: 440px;
   align-items: center;
   border: 3px solid #d2b48c;
-  left: 60%;
+  left: 58%;
   transform: translateX(-50%);
 
   @media (max-width: 768px) {
@@ -92,14 +73,14 @@ const ProfileVideoBottom = styled.video`
 `;
 
 const TextContainer = styled.div`
-  margin-top: 20px;
+  margin-top: 50px;
   margin-bottom: 100px;
   color: #4b3f2f;
   font-family: "Playfair Display", serif;
   text-align: justify;
   position: relative;
-  background-color: #f5f5dc;
-  border: 3px solid #d2b48c;
+  background-color: #f5eedc;
+  border: 3px solid #b07241;
   padding: 40px;
   border-radius: 15px;
   box-shadow: 0 0 5px 2px rgba(0, 0, 0, 0.9),
@@ -128,11 +109,11 @@ const ReadMoreButton = styled.button`
   font-family: "Playfair Display", serif;
   font-size: 1.2em;
   position: absolute;
-  bottom: 400px;
-  right: 720px;
+  bottom: 350px;
+  right: 680px;
   padding: 18px 20px;
-  background-color: rgba(48, 84, 69, 0.5);
-  border: 2px solid #f5f5dc;
+  background-color: rgba(48, 84, 69, 0.5); // Manteniendo el color original
+  border: 2px solid rgba(48, 84, 69, 0.5);
   border-radius: 25px;
   color: #f5eedc;
   display: flex;
@@ -144,12 +125,17 @@ const ReadMoreButton = styled.button`
   margin-top: 20px;
 
   &:hover {
-    background-color: rgba(245, 238, 220, 0.5);
-    color: #305445;
+    background-color: rgba(
+      48,
+      84,
+      69,
+      0.7
+    ); // Un poco más oscuro al pasar el ratón
+    color: #f5eedc;
   }
 
   & svg {
-    color: white;
+    color: #f5eedc;
     margin-right: 8px;
   }
 
@@ -223,6 +209,10 @@ const StyledP = styled.p`
 `;
 
 const AcercaDe = () => {
+  const navigate = useNavigate();
+  const handleReadMore = () => {
+    navigate("/full-acerca");
+  };
   return (
     <Container>
       <TextContainer>
@@ -235,20 +225,15 @@ const AcercaDe = () => {
           puedes con todo y, aun así, buscar una forma de avanzar.
         </StyledP>
         <StyledP>
-          Inicié mi camino en Criminología, con un Máster en Seguridad Privada y
-          la titulación de Detective Privado. Sin embargo, encontré mi verdadera
-          vocación en la Psicología, donde puedo ayudarte a cuidar tu salud
-          mental.
-        </StyledP>
-        <StyledP>
-          Cuando no estoy trabajando, puedes encontrarme disfrutando de la
-          naturaleza, bailando, viajando o explorando experiencias
-          gastronómicas. Estas pasiones me ayudan a reconectar y seguir
-          creciendo, tanto personal como profesionalmente.
+          Sin embargo, fue la Psicología la que me mostró algo aún más poderoso:
+          la capacidad que todos tenemos de sanar, crecer y transformarnos. No
+          tienes que hacerlo solo, yo te acompaño a alcanzar el equilibrio que
+          necesitas, brindándote un espacio en donde puedas sentirte escuchado y
+          comprendido.
         </StyledP>
       </TextContainer>
-      <ReadMoreButton>Leer más</ReadMoreButton>
-      <ProfileVideoBottom src="images/videodaniela.mp4" autoPlay loop muted />
+      <ReadMoreButton onClick={handleReadMore}>Leer más</ReadMoreButton>
+      <ProfileImage src="images/profile.svg" alt="Daniela" />
     </Container>
   );
 };

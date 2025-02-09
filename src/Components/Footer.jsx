@@ -85,7 +85,7 @@ const Footer = () => {
             variant="body2"
             sx={{ fontFamily: "Playfair Display", color: "#f5eedc" }}
           >
-            Copyright © 2024 Daniela Arrazola
+            Copyright © 2025 Daniela Arrazola
           </Typography>
           <Typography
             variant="body2"

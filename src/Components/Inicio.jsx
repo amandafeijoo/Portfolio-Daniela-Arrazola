@@ -1,4 +1,5 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 import Slider from "react-slick";
 import styled, { keyframes } from "styled-components";
 import "slick-carousel/slick/slick.css";
@@ -239,9 +240,20 @@ const OverlayText = styled.div`
   font-family: "Playfair Display", serif;
   background-color: rgba(48, 84, 69, 0.7);
   padding: 40px;
-  width: 600px;
-  height: 600px;
+  width: 500px;
+  height: 500px;
   border-radius: 50%;
+  animation: float 3s ease-in-out infinite;
+
+  @keyframes float {
+    0%,
+    100% {
+      transform: translate(-50%, -50%) translateY(0);
+    }
+    50% {
+      transform: translate(-50%, -50%) translateY(-20px);
+    }
+  }
 
   @media (max-width: 768px) {
     padding: 20px;
@@ -274,6 +286,11 @@ const Title = styled.h1`
 `;
 
 const Inicio = () => {
+  const navigate = useNavigate();
+  const handleVerMasClick = () => {
+    navigate("/full-acerca");
+  };
+
   const settings = {
     dots: false,
     infinite: true,
@@ -297,9 +314,7 @@ const Inicio = () => {
                 <Image src="/images/perfil1.1.svg" alt="Perfil 1" />
                 <ButtonContainer1>
                   <Button
-                    href="#"
-                    target="_blank"
-                    rel="noopener noreferrer"
+                    onClick={handleVerMasClick}
                     sx={{
                       fontFamily: "'Playfair Display', serif",
                       padding: "12px 25px",
@@ -334,24 +349,24 @@ const Inicio = () => {
                 </ButtonContainer1>
               </CarouselItem>
               <CarouselItem>
-                <VideoComponent src="/images/perfil2.mp4" />
-                <OverlayText>
-                  <Title>CADA PREOCUPACIÓN ES SOLO UNA PARTE DEL PAISAJE</Title>
-                </OverlayText>
-              </CarouselItem>
-              <CarouselItem>
-                <VideoComponent src="/images/perfil3.mp4" />
+                <VideoComponent src="/images/perfil1.mp4" />
                 <OverlayText>
                   <Title>
-                    ÁQUI APRENDERÁS A VER EL CAMPO COMPLETO LLENO DE
-                    POSIBILIDADES
+                    Tomar las riendas de tu bienestar es el mayor acto de amor
+                    propio
                   </Title>
                 </OverlayText>
               </CarouselItem>
               <CarouselItem>
-                <VideoComponent src="/images/perfil5.mp4" />
+                <VideoComponent src="/images/perfil2.mp4" />
                 <OverlayText>
-                  <Title>NO ESTÁS SOLO</Title>
+                  <Title>No pongas en pausa tu felicidad.</Title>
+                </OverlayText>
+              </CarouselItem>
+              <CarouselItem>
+                <VideoComponent src="/images/perfil4.mp4" />
+                <OverlayText>
+                  <Title>Tu momento es ahora</Title>
                 </OverlayText>
               </CarouselItem>
             </Slider>

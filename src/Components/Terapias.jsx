@@ -2,7 +2,8 @@ import React from "react";
 import styled from "styled-components";
 
 const TerapiasContainer = styled.div`
-  width: 70%;
+  width: 75%;
+  height: 700px;
   margin: 0 auto;
   margin-top: 70px;
   margin-bottom: 70px;
@@ -57,15 +58,19 @@ const VideoContainer = styled.div`
   align-items: center;
   margin: 0 auto;
   padding: 10px;
-  background-color: #f5f5dc;
+  background-color: #d2b48c;
   border-radius: 15px;
 `;
 
 const Video = styled.video`
-  width: 100%;
-  height: 100%;
+  width: 90%;
+  height: 90%;
+  border-radius: 20px;
   object-fit: cover;
   display: block;
+  box-shadow: 0 0 5px 2px rgba(0, 0, 0, 0.7),
+    0 0 10px 4px rgba(34, 139, 34, 0.2), 0 0 15px 6px rgba(0, 0, 0, 0.2);
+  border: 3px solid #d2b48c;
 `;
 
 const Terapias = () => {

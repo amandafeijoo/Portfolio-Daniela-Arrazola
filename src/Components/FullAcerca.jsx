@@ -1,12 +1,19 @@
 import React from "react";
-import styled from "styled-components";
+import styled, { keyframes } from 'styled-components';
+import "@fontsource/playfair-display";
+
+const moveAnimation = keyframes`
+  0% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+  100% { transform: translateY(0); }
+`;
 
 const FullAcercaContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: flex-start;
   padding: 20px;
-  background-color: #f5f5f5;
+  background-color: #557c70;
   border-radius: 10px;
   box-shadow: 0 0 5px 2px rgba(0, 0, 0, 0.7),
     0 0 10px 4px rgba(34, 139, 34, 0.2), 0 0 15px 6px rgba(0, 0, 0, 0.2);
@@ -14,35 +21,92 @@ const FullAcercaContainer = styled.div`
 `;
 
 const Name = styled.h1`
-  font-size: 2.5em;
-  color: #4b3f2f;
+  font-size: 2.9em;
+  color: #d2b48c;
   margin-bottom: 20px;
+    font-family: "Playfair Display", serif;
+    text-align: center;
+    padding: 20px;
+    
+    `;
+
+const Section = styled.div`
+  margin: 20px 0;
+  padding: 20px;
+  border: 2px solid #ccc;
+  border-radius: 8px;
+  box-shadow: 0 0 5px 2px rgba(0, 0, 0, 0.6),
+    0 0 10px 4px rgba(34, 139, 34, 0.2), 0 0 15px 6px rgba(0, 0, 0, 0.5);
+  background-color: #8fa99e;
+  transition: transform 0.3s ease, box-shadow 0.3s ease; /* Transiciones */
+  position: relative;
+  z-index: 1;
+
+  &:hover {
+    transform: translateY(-5px); /* Efecto de elevación al pasar el ratón */
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.7);
+  }
 `;
+
+const Section2 = styled.div`
+  margin: 20px 0;
+  padding: 20px;
+  border: 2px solid #ccc;
+  border-radius: 8px;
+  box-shadow: 0 0 5px 2px rgba(0, 0, 0, 0.6),
+    0 0 10px 4px rgba(34, 139, 34, 0.2), 0 0 15px 6px rgba(0, 0, 0, 0.5);
+  background-color: #7f918e;
+  transition: transform 0.3s ease, box-shadow 0.3s ease; /* Transiciones */
+  position: relative;
+  z-index: 1;
+
+  &:hover {
+    transform: translateY(-5px); /* Efecto de elevación al pasar el ratón */
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.7);
+  }
+`;
+
+
 
 const ContentContainer = styled.div`
   display: flex;
-  flex-direction: row;
-  width: 100%;
-  margin-bottom: 20px;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
 `;
 
 const TextContainer = styled.div`
   flex: 1;
   padding-right: 20px;
-  font-size: 1.2em;
+  max-width: 40%;
+  font-size: 1.1em;
   line-height: 1.6;
-  color: #333;
+  color: #4b3f2f;
+  font-family: "Playfair Display", serif;
+  text-align: justify;
+  background-color: #f5eedc;
+  border: 3px solid #b07241;
+  padding: 40px;
+  border-radius: 15px;
+  box-shadow: 0 0 5px 2px rgba(0, 0, 0, 0.9),
+    0 0 10px 4px rgba(34, 139, 34, 0.2), 0 0 15px 6px rgba(0, 0, 0, 0.2);
+  height: 550px;
+  transition: all 0.3s ease-in-out; /* Transición agregada */
 `;
 
 const VideoContainer = styled.div`
   flex: 1;
   display: flex;
   justify-content: center;
+  max-width: 50%;
+  padding: 10px;
   align-items: center;
+  animation: ${moveAnimation} 3s infinite; /* Animación agregada */
+
 `;
 
 const Video = styled.video`
-  width: 80%;
+  width: 70%;
   height: auto;
   border-radius: 10px;
   box-shadow: 0 0 5px 2px rgba(0, 0, 0, 0.7),
@@ -72,6 +136,7 @@ const FullAcerca = () => {
   return (
     <FullAcercaContainer>
       <Name>Daniela Arrázola</Name>
+      <Section>
       <ContentContainer>
         <TextContainer>
           Quiero compartirte un pedacito de mi historia, porque creo que la
@@ -89,11 +154,12 @@ const FullAcerca = () => {
         </TextContainer>
         <VideoContainer>
           <Video autoPlay loop muted>
-            <source src="/images/acerca1.mp4" type="video/mp4" />
+            <source src="/images/acerca1.1.mp4" type="video/mp4" />
             Your browser does not support the video tag.
           </Video>
         </VideoContainer>
       </ContentContainer>
+        </Section>
       <ContentContainer>
         <VideoContainer>
           <Video autoPlay loop muted>
@@ -117,6 +183,7 @@ const FullAcerca = () => {
           experiencias que expandan mi visión del mundo.
         </TextContainer>
       </ContentContainer>
+        <Section2>
       <ContentContainer>
         <TextContainer>
           El verde es el color de este proyecto porque representa dos partes
@@ -134,11 +201,12 @@ const FullAcerca = () => {
         </TextContainer>
         <VideoContainer>
           <Video autoPlay loop muted>
-            <source src="/images/acerca2.mp4" type="video/mp4" />
+            <source src="/images/acerca2.2.mp4" type="video/mp4" />
             Your browser does not support the video tag.
           </Video>
         </VideoContainer>
       </ContentContainer>
+        </Section2>
       <ImagesContainer>
         <Image src="/images/acerca1.svg" alt="Acerca 1" />
         <Image src="/images/acerca2.svg" alt="Acerca 2" />

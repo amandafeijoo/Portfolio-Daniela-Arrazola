@@ -144,6 +144,10 @@ const Header = () => {
     navigate("/full-acerca");
   };
 
+  const handleNavigateServicios = () => {
+    navigate('/servicios');
+  };
+
   return (
     <>
       <TopHeader>
@@ -230,15 +234,15 @@ const Header = () => {
             Acerca
           </MenuItem>
           <MenuItem
-            onClick={handleMenuClose}
-            sx={{
-              fontSize: "1.5em",
-              fontFamily: "Playfair Display",
-              color: "#4b3f2f",
-            }}
-          >
-            Servicios
-          </MenuItem>
+        onClick={handleNavigateServicios}
+        sx={{
+          fontSize: "1.5em",
+          fontFamily: "Playfair Display",
+          color: "#4b3f2f",
+        }}
+      >
+        Servicios
+      </MenuItem>
           <MenuItem
             onClick={handleMenuClose}
             sx={{

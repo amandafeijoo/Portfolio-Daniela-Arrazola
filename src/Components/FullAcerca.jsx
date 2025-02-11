@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from 'react';
 import styled, { keyframes } from 'styled-components';
 import "@fontsource/playfair-display";
 
@@ -133,6 +133,9 @@ const Image = styled.img`
 `;
 
 const FullAcerca = () => {
+    useEffect(() => {
+        window.scrollTo(0, 0);
+      }, []);
   return (
     <FullAcercaContainer>
       <Name>Daniela Arrázola</Name>

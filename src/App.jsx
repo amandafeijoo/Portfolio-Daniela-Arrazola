@@ -13,6 +13,7 @@ import Precios from "./Components/Precios";
 import Footer from "./Components/Footer";
 import ImagenDaniela from "./Components/ImagenDaniela";
 import FullAcerca from "./Components/FullAcerca"; // Importa el componente FullAcerca
+import Services from "./Components/Services";
 
 const Section = styled.div`
   margin: 20px 0;
@@ -112,6 +113,14 @@ function App() {
           element={
             <Section>
               <ContactForm />
+            </Section>
+          }
+        />
+        <Route
+          path="/servicios"
+          element={
+            <Section>
+              <Services />
             </Section>
           }
         />

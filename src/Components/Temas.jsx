@@ -1,6 +1,7 @@
 import "@fontsource/playfair-display";
 import React from "react";
 import styled from "styled-components";
+import { useNavigate } from "react-router-dom";
 
 const SlideShowContainer = styled.div`
   width: 75%;
@@ -132,13 +133,19 @@ const Button = styled.button`
 `;
 
 const Temas = () => {
+  const navigate = useNavigate();
+
+  const handleNavigateServicios = () => {
+    navigate('/servicios');
+  };
+
   return (
     <SlideShowContainer>
       <Video autoPlay loop muted playsInline>
         <source src="/images/temas.mp4" type="video/mp4" />
         Your browser does not support the video tag.
       </Video>
-      <Button onClick={() => alert("Ver más")}>Ver más</Button>
+      <Button onClick={handleNavigateServicios}>Ver más</Button>
     </SlideShowContainer>
   );
 };

@@ -9,9 +9,16 @@ import {
   List,
   ListItem,
   ListItemText,
+  keyframes,
 } from "@mui/material";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import "@fontsource/playfair-display";
+
+const moveAnimation = keyframes`
+  0% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+  100% { transform: translateY(0); }
+`;
 
 const Image = () => (
   <Box
@@ -23,6 +30,7 @@ const Image = () => (
       borderRadius: 2,
       overflow: "hidden",
       border: "2px solid #d2b48c",
+      animation: `${moveAnimation} 3s infinite`,
     }}
   >
     <img
@@ -30,6 +38,10 @@ const Image = () => (
       alt="Service Image"
       width="100%"
       style={{ borderRadius: "inherit" }}
+      onError={(e) => {
+        e.target.onerror = null;
+        e.target.src = "/images/placeholder.png";
+      }}
     />
   </Box>
 );
@@ -98,6 +110,7 @@ const Service7 = () => {
                     fontFamily: "Playfair Display",
                     textAlign: "justify",
                     lineHeight: 1.6,
+                    marginBottom: 3,
                   }}
                 >
                   Ser padre puede sentirse como ser el capitán de un barco en
@@ -107,7 +120,8 @@ const Service7 = () => {
                   por más que repitas lo mismo una y otra vez, sientes que tu
                   hijo simplemente no escucha. Y cuando la paciencia se agota,
                   aparecen los gritos, la culpa y la sensación de estar a la
-                  deriva.
+                  deriva. Pero aquí hay algo que necesitas saber: el cerebro de
+                  tu hijo no funciona como el tuyo.
                 </Typography>
                 <Typography
                   variant="body1"
@@ -116,18 +130,7 @@ const Service7 = () => {
                     fontFamily: "Playfair Display",
                     textAlign: "justify",
                     lineHeight: 1.6,
-                  }}
-                >
-                  Pero aquí hay algo que necesitas saber: el cerebro de tu hijo
-                  no funciona como el tuyo.
-                </Typography>
-                <Typography
-                  variant="body1"
-                  sx={{
-                    color: "#4b3f2f",
-                    fontFamily: "Playfair Display",
-                    textAlign: "justify",
-                    lineHeight: 1.6,
+                    marginBottom: 3,
                   }}
                 >
                   El cerebro infantil es como una semilla en crecimiento, lleno
@@ -143,6 +146,7 @@ const Service7 = () => {
                     fontFamily: "Playfair Display",
                     textAlign: "justify",
                     lineHeight: 1.6,
+                    marginBottom: 3,
                   }}
                 >
                   El cerebro adulto, en cambio, es como un mapa con caminos ya
@@ -160,6 +164,7 @@ const Service7 = () => {
                     fontFamily: "Playfair Display",
                     textAlign: "justify",
                     lineHeight: 1.6,
+                    marginBottom: 3,
                   }}
                 >
                   La buena noticia es que hay otras rutas. No se trata de ser
@@ -246,7 +251,7 @@ const Service7 = () => {
                   No nacemos sabiendo ser padres, pero sí podemos aprender a
                   criar desde la calma y el respeto. Si hoy sientes que la
                   crianza te desborda, recuerda: si cambias la forma en que te
-                  comunicas con tu hijo, él cambiará la forma en que te escucha{" "}
+                  comunicas con tu hijo, él cambiará la forma en que te escucha.{" "}
                 </Typography>
               </AccordionDetails>
             </Accordion>

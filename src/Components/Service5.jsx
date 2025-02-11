@@ -1,13 +1,39 @@
 import React, { useEffect } from 'react';
-import { Container, Box, Typography, Accordion, AccordionSummary, AccordionDetails, List, ListItem, ListItemText } from '@mui/material';
+import { Container, Box, Typography, Accordion, AccordionSummary, AccordionDetails, List, ListItem, ListItemText,keyframes } from '@mui/material';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import "@fontsource/playfair-display";
 
+const moveAnimation = keyframes`
+  0% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+  100% { transform: translateY(0); }
+`;
+
 const Image = () => (
-    <Box sx={{ width: '72%', marginBottom: 2, boxShadow: '0 0 5px 2px rgba(0, 0, 0, 0.7), 0 0 10px 4px rgba(34, 139, 34, 0.2), 0 0 15px 6px rgba(0, 0, 0, 0.2)', borderRadius: 2, overflow: 'hidden', border: '2px solid #d2b48c' }}>
-      <img src="/images/5.svg" alt="Service Image" width="100%" style={{ borderRadius: 'inherit' }} />
-    </Box>
-  );
+  <Box
+    sx={{
+      width: "72%",
+      marginBottom: 2,
+      boxShadow:
+        "0 0 5px 2px rgba(0, 0, 0, 0.7), 0 0 10px 4px rgba(34, 139, 34, 0.2), 0 0 15px 6px rgba(0, 0, 0, 0.2)",
+      borderRadius: 2,
+      overflow: "hidden",
+      border: "2px solid #d2b48c",
+      animation: `${moveAnimation} 3s infinite`,
+    }}
+  >
+    <img
+      src="/images/5.svg"
+      alt="Service Image"
+      width="100%"
+      style={{ borderRadius: "inherit" }}
+      onError={(e) => {
+        e.target.onerror = null;
+        e.target.src = "/images/placeholder.png";
+      }}
+    />
+  </Box>
+);
 
 const Service5 = () => {
   useEffect(() => {

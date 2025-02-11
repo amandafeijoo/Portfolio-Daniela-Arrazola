@@ -2,87 +2,154 @@
 
 🌟 Web Portfolio: Daniela Arrazola Benítez
 
-This repository contains the source code for the professional website developed for Daniela Arrazola Benítez, a General Health Psychologist. The project is targeted at users in Norway and Spain, providing information about her psychological services, online consultations, contact details, and the possibility of adding reviews in the future.
 
-🎯 Project Purpose
+This repository contains the source code for the professional website of Daniela Arrazola Benítez, a General Health Psychologist. The platform is designed to provide information about her psychological services, online consultations, and future functionalities such as a review module.
 
-The goal is to create a professional and functional website that reflects Daniela's work philosophy and expertise. The primary objective is to build trust, highlight her services, and facilitate interaction with her patients through tools like a booking system and a future review module.
+🎯 Project Objective
+
+The purpose of this project is to create a professional, dynamic, and functional website that reflects Daniela's work philosophy and expertise. Its intuitive and modern design aims to build trust and facilitate patient interaction through a booking system and communication tools.
+
+🚀 Technologies Used
+
+Frontend
+
+React.js
+
+CSS3 with MUI (Material-UI) for styled components
+
+Framer Motion for interactive animations
+
+React Hook Form for form validation
+
+Backend (Future Development)
+
+Django (Python)
+
+PostgreSQL for database management
+
+REST API for booking and review management
+
+Other Tools
+
+Stripe for online payment integration
+
+Google Analytics for traffic monitoring
+
+
+
+📌 Key Features
+
+Responsive Design: Adapted for all devices.
+
+Smooth Animations: Implemented with Framer Motion.
+
+Booking System: Easy-to-use and accessible.
+
+Dark/Light Mode: For an improved user experience.
+
+Fast Loading: Optimized resources and code.
+
+
 
 🖥️ Website Structure
 
-Homepage
-Background with a featured image: A professional photo of Daniela.
-Main title: Daniela Arrazola Benítez - General Health Psychologist.
-Welcome message:
-"Hi, I’m Daniela, and if you’re here, you might be looking for a way to feel better, understand yourself more, or overcome a difficult time. Let me tell you that you are not alone. As a psychologist, my mission is to create a safe and non-judgmental space where we can work together."
-Online Consultations
-Highlighted section with an image (nature videos).
-Information about therapy services:
-Introduction to the purpose of therapy.
-Explanation of the Cognitive Behavioral Therapy approach.
-List of topics covered:
-Anxiety and stress.
-Depression.
-Anger management, among others.
-Call-to-action button: "I want to book my consultation".
-Practical Information
-Platform: Zoom.
-Duration: 60 minutes per session.
-Target audience: Adults over 18 years old.
-Payment methods:
-PayPal.
-Bizum (Spain).
-Vipps (Norway).
-Rates:
-Individual consultation: €80 per session.
-4-session package: €300 (discount included).
+Navigation Menu
+
+Home
+
+Services
+
+Therapy
+
 About Me
-More personal section with a casual photo.
-Professional background:
-Initial experience in criminology, with a master’s degree in private security and a detective certification.
-Psychology training and specializations:
-Emotional management.
-Eating disorders.
-Body-oriented techniques.
-Personal passions: nature, dance, travel, and gastronomy.
-Contact (In Development)
-Contact form: This section will allow users to send inquiries and messages directly to Daniela.
-Reviews (Planned)
-A review module will be added where patients can share their experiences.
-This feature will help build trust and provide valuable feedback.
+
+FAQ
+
+Blog
+
+Home
+
+Featured Image: Professional photo of Daniela in a slide.
+
+Animated Welcome Message with Framer Motion.
+
+Inspirational Message:
+
+"Hi, I’m Daniela, and if you’re here, you might be looking for a way to feel better. My mission is to create a safe space where we can work together."
+
+Therapy
+
+Cognitive-Behavioral Approach with practical tools.
+
+Services Offered:
+
+Anxiety and Depression
+
+Emotional Regulation
+
+Self-Esteem and Personal Growth
+
+Grief and Life Changes
+
+Social Skills Development
+
+Obsessive-Compulsive Disorder
+
+Couples Therapy
+
+Button: "I want to book my consultation"
+
+Practical Information
+
+Platform: Zoom
+
+Session Duration: 50-60 minutes
+
+Payment Methods: Credit/Debit Card, PayPal, Bizum, Vipps
+
+Available Languages: Norwegian 🇳🇴 | Spanish 🇪🇸
+
+Rates
+
+Individual Consultation: €80 per session
+
+4-Session Package: €300 (discount applied)
+
+Couples Therapy: €105 per session
 
 
-🛠️ Technologies Used
 
-Current Technologies
-Frontend: React.js.
-Design: CSS3 and libraries like MUI (Material-UI) for styled components.
-Future Implementations
-Backend: Django (Python).
-Database: PostgreSQL.
-Reviews System: A system to store and display patient reviews using Django and PostgreSQL.
 
-🚀 Local Installation
+📩 Contact & Contribution
 
-If you want to run this project on your local environment:
-
-Clone this repository:
-git clone https://github.com/your-username/daniela-arrazola-website.git
-Navigate to the project directory:
-cd daniela-arrazola-website
-Install dependencies:
-npm install
-Start the development server:
-npm start
-Open your browser and visit http://localhost:3000 to see the project in action.
-
-📩 Contact
-
-For any inquiries related to this project, feel free to contact me:
+If you would like to contribute to this project or report an issue, feel free to contact me:
 
 Freelancer: Amanda Flores Feijóo
 Email: amandaflores@webcode-art.com
 GitHub: https://github.com/amandafeijoo
+
+
+How to Run the Project Locally
+
+Clone the repository:
+
+git clone https://github.com/your-username/daniela-arrazola-website.git
+
+Navigate to the project directory:
+
+cd daniela-arrazola-website
+
+Install dependencies:
+
+npm install
+
+Start the development server:
+
+npm start
+
+Open in your browser: http://localhost:3000
+
+
 
 ✨ Final Notes
 

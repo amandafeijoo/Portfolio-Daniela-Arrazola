@@ -82,6 +82,7 @@ const Button = styled.button`
   padding: 17px 20px;
   font-size: 1.1em;
   border-radius: 25px;
+  margin-right: 55px;
   cursor: pointer;
   transition: background-color 0.3s ease, box-shadow 0.3s ease,
     transform 0.3s ease;
@@ -148,6 +149,11 @@ const Header = () => {
     navigate('/servicios');
   };
 
+  const handleNavigateContacto = () => {
+    handleMenuClose();
+    navigate("/contact");
+  }
+
   return (
     <>
       <TopHeader>
@@ -167,7 +173,7 @@ const Header = () => {
             <FaFacebook />
           </a>
           <a
-            href="https://www.linkedin.com"
+            href="https://www.linkedin.com/in/daniela-a-9b2845199/"
             target="_blank"
             rel="noopener noreferrer"
           >
@@ -244,7 +250,7 @@ const Header = () => {
         Servicios
       </MenuItem>
           <MenuItem
-            onClick={handleMenuClose}
+            onClick={handleNavigateContacto}
             sx={{
               fontSize: "1.5em",
               fontFamily: "Playfair Display",

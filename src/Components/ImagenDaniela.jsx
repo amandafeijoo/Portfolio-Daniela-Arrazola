@@ -1,4 +1,7 @@
 import React, { useEffect, useRef } from "react";
+import { Box, Button, Typography } from "@mui/material";
+import { motion } from "framer-motion";
+import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import "@fontsource/playfair-display";
 
@@ -33,7 +36,7 @@ const ContenedorPrincipal1 = styled.div`
     rgba(46, 139, 87, 0.7) 75%,
     rgba(245, 245, 220, 0.7) 0%
   );
-  transition: transform 1.5s ease-out; /* Aumenta la duración de la transición */
+  transition: transform 1.5s ease-out;
   &.visible {
     transform: translateY(0);
   }
@@ -45,7 +48,7 @@ const ContenedorPrincipal1 = styled.div`
 const ContenedorPrincipal2 = styled.div`
   position: absolute;
   top: 0;
-  left: 80px; /* Ajusta este valor según sea necesario */
+  left: 80px; 
   width: 40%;
   margin: 0 auto;
   padding: 40px;
@@ -68,7 +71,7 @@ const ContenedorPrincipal2 = styled.div`
     rgba(245, 245, 220, 0.7) 0%
   );
   z-index: 1;
-  transition: transform 1.5s ease-out; /* Aumenta la duración de la transición */
+  transition: transform 1.5s ease-out; 
   &.visible {
     transform: translateY(0);
   }
@@ -147,16 +150,20 @@ const ImagenDaniela = () => {
       }
     };
   }, []);
+  const navigate = useNavigate();
+  const handleNavigateFullAcerca = () => {
+    navigate("/full-acerca");
+  };
 
   return (
     <ContenedorPadre>
       <ContenedorPrincipal2 ref={contenedor2Ref} className="hidden">
         <ContenedorTexto>
-          Hola, soy Daniela, y si estás aquí, es posible que estés buscando una
-          forma de sentirte mejor, de entenderte más o de superar un momento
-          difícil. Déjame decirte que no estás solo. Como psicóloga, mi misión
-          es crear un espacio seguro, sin juicios y sin prisas donde podamos
-          trabajar juntos.
+          Hola, soy Daniela Arrázola, y si estás aquí, es posible que estés
+          buscando una forma de sentirte mejor, de entenderte más o de superar
+          un momento difícil. Déjame decirte que no estás solo. Como psicóloga,
+          mi misión es crear un espacio seguro, sin juicios y sin prisas donde
+          podamos trabajar juntos.
         </ContenedorTexto>
       </ContenedorPrincipal2>
       <ContenedorPrincipal1 ref={contenedor1Ref} className="hidden">
@@ -164,6 +171,31 @@ const ImagenDaniela = () => {
           <Imagen src="/images/daniela.svg" alt="Daniela" />
         </ContenedorImagen>
       </ContenedorPrincipal1>
+      <Button
+        variant="contained"
+        component={motion.button}
+        whileHover={{ scale: 1.1 }}
+        whileTap={{ scale: 0.95 }}
+        sx={{
+          backgroundColor: "rgba(255, 255, 255, 0.2)",
+          backdropFilter: "blur(5px)",
+          color: "#4b3f2f",
+          fontSize: "1.2rem",
+          fontFamily: "Playfair Display",
+          fontWeight: "500",
+          padding: "12px 24px",
+          textTransform: "none",
+          borderRadius: "30px",
+          transition: "all 0.3s ease",
+          border: "2px solid #4b3f2f",
+          marginLeft: "520px",
+          "&:hover": {
+            backgroundColor: "rgba(255, 255, 255, 0.3)",
+          },
+        }}
+      >
+        Leer más sobre mí
+      </Button>
     </ContenedorPadre>
   );
 };

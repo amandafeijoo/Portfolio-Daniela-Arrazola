@@ -129,7 +129,7 @@ const Contact = () => {
           <Grid item xs={12} md={4}>
             <Box
               sx={{
-                marginLeft: "-225px",
+                marginLeft: "-125px",
                 marginTop: "15px",
                 position: "relative",
                 zIndex: 2,

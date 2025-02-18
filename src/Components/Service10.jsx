@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect,useState } from "react";
 import {
   Container,
   Box,
@@ -13,6 +13,7 @@ import {
 } from "@mui/material";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import "@fontsource/playfair-display";
+import Reserva from "./Reserva";
 
 const moveAnimation = keyframes`
   0% { transform: translateY(0); }
@@ -49,8 +50,14 @@ const Service10 = () => {
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
+  const [expanded, setExpanded] = useState(true);
+
+  const handleChange = () => {
+    setExpanded(!expanded);
+  };
 
   return (
+    <>
     <Container>
       <Box
         sx={{
@@ -76,16 +83,7 @@ const Service10 = () => {
         >
           <Image />
           <Box sx={{ width: "100%", marginBottom: 2 }}>
-            <Accordion
-              sx={{
-                margin: 2,
-                backgroundColor: "#f5eedc",
-                border: "2px solid #d2b48c",
-                borderRadius: 2,
-                boxShadow:
-                  "0 0 5px 2px rgba(0, 0, 0, 0.3), 0 0 10px 4px rgba(34, 139, 34, 0.2), 0 0 15px 6px rgba(0, 0, 0, 0.2)",
-              }}
-            >
+          <Accordion expanded={expanded} onChange={handleChange} sx={{ margin: 2, backgroundColor: "#f5eedc", border: "2px solid #d2b48c", borderRadius: 2, boxShadow: "0 0 5px 2px rgba(0, 0, 0, 0.3), 0 0 10px 4px rgba(34, 139, 34, 0.2), 0 0 15px 6px rgba(0, 0, 0, 0.2)" }}>
               <AccordionSummary
                 expandIcon={<ExpandMoreIcon />}
                 sx={{
@@ -195,6 +193,8 @@ const Service10 = () => {
         </Box>
       </Box>
     </Container>
+    <Reserva />
+    </>
   );
 };
 

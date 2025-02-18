@@ -68,8 +68,8 @@ const CenterButton = styled.div`
 
   @media (max-width: 768px) {
     margin: 10px 0;
-    display: flex; /* Add flex display */
-    align-items: center; /* Center items vertically */
+    display: flex; 
+    align-items: center; 
   }
 `;
 
@@ -126,6 +126,8 @@ const SocialIcons = styled.div`
 `;
 const Header = () => {
   const [anchorEl, setAnchorEl] = useState(null);
+  const [isSubMenuOpen, setIsSubMenuOpen] = useState(false);
+
   const navigate = useNavigate();
 
   const handleMenuOpen = (event) => {
@@ -134,9 +136,19 @@ const Header = () => {
 
   const handleMenuClose = () => {
     setAnchorEl(null);
+    setIsSubMenuOpen(false);
   };
+
+  const handleSubMenuToggle = () => {
+    setIsSubMenuOpen((prev) => !prev);
+  };
+
   const handleNavigateHome = () => {
     handleMenuClose();
+    navigate("/");
+  };
+
+  const handleClick = () => {
     navigate("/");
   };
 
@@ -146,17 +158,74 @@ const Header = () => {
   };
 
   const handleNavigateServicios = () => {
-    navigate('/servicios');
+    navigate("/servicios");
   };
 
   const handleNavigateContacto = () => {
     handleMenuClose();
     navigate("/contact");
-  }
+  };
+
+  const handleReservaClick = () => {
+    navigate("/reserva");
+  };
+
+  const handleNavigateService1 = () => {
+    handleMenuClose();
+    navigate("/service1");
+  };
+  const handleNavigateService2 = () => {
+    handleMenuClose();
+    navigate("/service2");
+  };
+  const handleNavigateService3 = () => {
+    handleMenuClose();
+    navigate("/service3");
+  };
+  const handleNavigateService4 = () => {
+    handleMenuClose();
+    navigate("/service4");
+  };
+  const handleNavigateService5 = () => {
+    handleMenuClose();
+    navigate("/service5");
+  };
+  const handleNavigateService6 = () => {
+    handleMenuClose();
+    navigate("/service6");
+  };
+  const handleNavigateService7 = () => {
+    handleMenuClose();
+    navigate("/service7");
+  };
+  const handleNavigateService8 = () => {
+    handleMenuClose();
+    navigate("/service8");
+  };
+  const handleNavigateService9 = () => {
+    handleMenuClose();
+    navigate("/service9");
+  };
+  const handleNavigateService10 = () => {
+    handleMenuClose();
+    navigate("/service10");
+  };
+  const handleNavigateService11 = () => {
+    handleMenuClose();
+    navigate("/service11");
+  };
+  const handleNavigateService12 = () => {
+    handleMenuClose();
+    navigate("/service12");
+  };
+  const handleNavigateService13 = () => {
+    handleMenuClose();
+    navigate("/service13");
+  };
 
   return (
     <>
-      <TopHeader>
+      {/* <TopHeader>
         <SocialIcons>
           <a
             href="https://www.instagram.com"
@@ -180,7 +249,7 @@ const Header = () => {
             <FaLinkedin />
           </a>
         </SocialIcons>
-      </TopHeader>
+      </TopHeader> */}
       <BottomHeader>
         <IconButton
           edge="start"
@@ -199,7 +268,22 @@ const Header = () => {
           />
         </IconButton>
         <CenterButton>
-          <Button>RESERVAR MI CONSULTA</Button>
+          <Box
+            component="img"
+            src="/images/logoDaniela.svg"
+            alt="Logo Daniela"
+            onClick={handleClick} 
+            sx={{
+              position: "absolute",
+              top: "60%", 
+              left: "50%", 
+              transform: "translate(-50%, -50%)", 
+              width: "18%", 
+              height: "auto", 
+              objectFit: "contain", 
+              cursor: "pointer", 
+            }}
+          />
         </CenterButton>
         <Menu
           anchorEl={anchorEl}
@@ -207,12 +291,12 @@ const Header = () => {
           onClose={handleMenuClose}
           PaperProps={{
             sx: {
-              backgroundColor: "rgba(210, 180, 140, 0.9)",
+              backgroundColor: "rgb(225, 235, 213)",
               backdropFilter: "blur(10px)",
               border: "2px solid #6f4e37",
               borderRadius: "10px",
-              width: "350px",
-              height: "400px",
+              width: isSubMenuOpen ? "600px" : "450px",
+              height: isSubMenuOpen ? "auto" : "450px",
               padding: "15px",
               display: "flex",
               flexDirection: "column",
@@ -240,17 +324,151 @@ const Header = () => {
             Acerca
           </MenuItem>
           <MenuItem
-        onClick={handleNavigateServicios}
-        sx={{
-          fontSize: "1.5em",
-          fontFamily: "Playfair Display",
-          color: "#4b3f2f",
-        }}
-      >
-        Servicios
-      </MenuItem>
+            onClick={handleSubMenuToggle}
+            sx={{
+              fontSize: "1.5em",
+              fontFamily: "Playfair Display",
+              color: "#4b3f2f",
+            }}
+          >
+            Servicios
+          </MenuItem>
+          {isSubMenuOpen && (
+            <>
+              <MenuItem
+                onClick={handleNavigateService1}
+                sx={{
+                  fontSize: "1em",
+                  fontFamily: "Playfair Display",
+                  color: "#8b6f5a",
+                }}
+              >
+                Ansiedad y Depresión
+              </MenuItem>
+              <MenuItem
+                onClick={handleNavigateService2}
+                sx={{
+                  fontSize: "1em",
+                  fontFamily: "Playfair Display",
+                  color: "#8b6f5a",
+                }}
+              >
+                Regulación emocional
+              </MenuItem>
+              <MenuItem
+                onClick={handleNavigateService2}
+                sx={{
+                  fontSize: "1em",
+                  fontFamily: "Playfair Display",
+                  color: "#8b6f5a",
+                }}
+              >
+                Autoestima y Conocimiento Personal
+              </MenuItem>
+              <MenuItem
+                onClick={handleNavigateService2}
+                sx={{
+                  fontSize: "1em",
+                  fontFamily: "Playfair Display",
+                  color: "#8b6f5a",
+                }}
+              >
+                Duelo y Cambios
+              </MenuItem>
+              <MenuItem
+                onClick={handleNavigateService2}
+                sx={{
+                  fontSize: "1em",
+                  fontFamily: "Playfair Display",
+                  color: "#8b6f5a",
+                }}
+              >
+                Conflictos interpersonales
+              </MenuItem>
+              <MenuItem
+                onClick={handleNavigateService2}
+                sx={{
+                  fontSize: "1em",
+                  fontFamily: "Playfair Display",
+                  color: "#8b6f5a",
+                }}
+              >
+                Habilidades sociales
+              </MenuItem>
+              <MenuItem
+                onClick={handleNavigateService2}
+                sx={{
+                  fontSize: "1em",
+                  fontFamily: "Playfair Display",
+                  color: "#8b6f5a",
+                }}
+              >
+                Crianza
+              </MenuItem>
+              <MenuItem
+                onClick={handleNavigateService2}
+                sx={{
+                  fontSize: "1em",
+                  fontFamily: "Playfair Display",
+                  color: "#8b6f5a",
+                }}
+              >
+                Productividad y gestión del tiempo
+              </MenuItem>
+              <MenuItem
+                onClick={handleNavigateService2}
+                sx={{
+                  fontSize: "1em",
+                  fontFamily: "Playfair Display",
+                  color: "#8b6f5a",
+                }}
+              >
+                Crecimiento personal y hábitos saludables
+              </MenuItem>
+              <MenuItem
+                onClick={handleNavigateService2}
+                sx={{
+                  fontSize: "1em",
+                  fontFamily: "Playfair Display",
+                  color: "#8b6f5a",
+                }}
+              >
+                Fobias
+              </MenuItem>
+              <MenuItem
+                onClick={handleNavigateService2}
+                sx={{
+                  fontSize: "1em",
+                  fontFamily: "Playfair Display",
+                  color: "#8b6f5a",
+                }}
+              >
+                Trastorno Obsesivo Compulsivo
+              </MenuItem>
+              <MenuItem
+                onClick={handleNavigateService2}
+                sx={{
+                  fontSize: "1em",
+                  fontFamily: "Playfair Display",
+                  color: "#8b6f5a",
+                }}
+              >
+                Trastornos del Neurodesarrollo
+              </MenuItem>
+              <MenuItem
+                onClick={handleNavigateService2}
+                sx={{
+                  fontSize: "1em",
+                  fontFamily: "Playfair Display",
+                  color: "#8b6f5a",
+                }}
+              >
+                Trastornos de la conducta alimentaria
+              </MenuItem>
+            </>
+          )}
           <MenuItem
-            onClick={handleNavigateContacto}
+            onClick={handleSubMenuToggle}
             sx={{
               fontSize: "1.5em",
               fontFamily: "Playfair Display",
@@ -258,6 +476,16 @@ const Header = () => {
             }}
           >
             Contacto
+          </MenuItem>
+          <MenuItem
+            onClick={handleReservaClick}
+            sx={{
+              fontSize: "1.5em",
+              fontFamily: "Playfair Display",
+              color: "#4b3f2f",
+            }}
+          >
+            Reservar una Terapia
           </MenuItem>
           <Divider />
           <Box display="flex" justifyContent="center" mt={1} mb={1}>
@@ -299,13 +527,14 @@ const Header = () => {
             </IconButton>
           </Box>
           <Divider />
-          <Box textAlign="center" mt={1}>
+          <Box textAlign="center" mt={3}>
             <Typography
               variant="body2"
               sx={{
                 fontSize: "1em",
                 fontFamily: "Playfair Display",
-                color: "#793535",
+                color: "#305445",
+                marginLeft: "27px",
               }}
             >
               danielaarrazolabenitez@gmail.com
@@ -314,9 +543,9 @@ const Header = () => {
               variant="body2"
               sx={{
                 fontSize: "1em",
-                marginLeft: "27px",
+                marginLeft: "87px",
                 fontFamily: "Playfair Display",
-                color: "#793535",
+                color: "#305445",
                 display: "flex",
                 alignItems: "center",
               }}
@@ -328,9 +557,9 @@ const Header = () => {
               variant="body2"
               sx={{
                 fontSize: "0.8em",
-                marginTop: "10px",
+                marginTop: "40px",
                 fontFamily: "Playfair Display",
-                color: "#793535",
+                color: "#305445",
               }}
             >
               © 2025 Daniela Arrázola

@@ -1,6 +1,7 @@
 import React from "react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import styled from "styled-components";
+import Home from "./Components/Home";
 import Inicio from "./Components/Inicio";
 import GlobalStyle from "./GlobalStyle";
 import Header from "./Components/Header";
@@ -12,9 +13,28 @@ import ContactForm from "./Components/ContactForm";
 import Precios from "./Components/Precios";
 import Footer from "./Components/Footer";
 import ImagenDaniela from "./Components/ImagenDaniela";
-import FullAcerca from "./Components/FullAcerca"; // Importa el componente FullAcerca
+import FullAcerca from "./Components/FullAcerca"; 
 import Services from "./Components/Services";
 import Contact from "./Components/Contact";
+import Reserva from "./Components/Reserva";
+import Calendar from "./Components/Calendar";
+import Service from "./Components/Service1";
+import Service2 from "./Components/Service2";
+import Service3 from "./Components/Service3";
+import Service4 from "./Components/Service4";
+import Service5 from "./Components/Service5";
+import Service6 from "./Components/Service6";
+import Service7 from "./Components/Service7";
+import Service8 from "./Components/Service8";
+import Service9 from "./Components/Service9";
+import Service10 from "./Components/Service10";
+import Service11 from "./Components/Service11";
+import Service12 from "./Components/Service12";
+import Service13 from "./Components/Service13";
+import ImageTextEffect from "./Components/ImageTextEffect";
+import InfiniteScrollGallery from "./Components/InfiniteScrollGallery";
+import PricingCards from "./Components/PricingCards";
+import InfoBoxesReserva from "./Components/InfoBoxesReserva";
 
 const Section = styled.div`
   margin: 20px 0;
@@ -65,30 +85,24 @@ function App() {
           element={
             <>
               <Section>
-                <Inicio />
+                <Home />
               </Section>
               <Section>
                 <ImagenDaniela />
               </Section>
               <Container>
+                <StickySection zIndex={0}>
+                  <ImageTextEffect />
+                </StickySection>
                 <StickySection zIndex={1}>
-                  <Temas />
+                  <InfiniteScrollGallery />
                 </StickySection>
                 <StickySection zIndex={2}>
-                  <Terapias />
-                </StickySection>
-                <StickySection zIndex={3}>
-                  <Precios />
+                  <PricingCards />
                 </StickySection>
               </Container>
               <Section>
-                <InfoBoxes />
-              </Section>
-              <Section>
-                <AcercaDe />
-              </Section>
-              <Section>
-                <ContactForm />
+                <InfoBoxesReserva />
               </Section>
             </>
           }
@@ -130,6 +144,126 @@ function App() {
           element={
             <Section>
               <Contact />
+            </Section>
+          }
+        />
+        <Route
+          path="/reserva"
+          element={
+            <Section>
+              <Reserva />
+            </Section>
+          }
+        />
+        <Route
+          path="/calendar"
+          element={
+            <Section>
+              <Calendar />
+            </Section>
+          }
+        />
+        <Route
+          path="/service1"
+          element={
+            <Section>
+              <Service />
+            </Section>
+          }
+        />
+        <Route
+          path="/service2"
+          element={
+            <Section>
+              <Service2 />
+            </Section>
+          }
+        />
+        <Route
+          path="/service3"
+          element={
+            <Section>
+              <Service3 />
+            </Section>
+          }
+        />
+        <Route
+          path="/service4"
+          element={
+            <Section>
+              <Service4 />
+            </Section>
+          }
+        />
+        <Route
+          path="/service5"
+          element={
+            <Section>
+              <Service5 />
+            </Section>
+          }
+        />
+        <Route
+          path="/service6"
+          element={
+            <Section>
+              <Service6 />
+            </Section>
+          }
+        />
+        <Route
+          path="/service7"
+          element={
+            <Section>
+              <Service7 />
+            </Section>
+          }
+        />
+        <Route
+          path="/service8"
+          element={
+            <Section>
+              <Service8 />
+            </Section>
+          }
+        />
+        <Route
+          path="/service9"
+          element={
+            <Section>
+              <Service9 />
+            </Section>
+          }
+        />
+        <Route
+          path="/service10"
+          element={
+            <Section>
+              <Service10 />
+            </Section>
+          }
+        />
+        <Route
+          path="/service11"
+          element={
+            <Section>
+              <Service11 />
+            </Section>
+          }
+        />
+        <Route
+          path="/service12"
+          element={
+            <Section>
+              <Service12 />
+            </Section>
+          }
+        />
+        <Route
+          path="/service13"
+          element={
+            <Section>
+              <Service13 />
             </Section>
           }
         />

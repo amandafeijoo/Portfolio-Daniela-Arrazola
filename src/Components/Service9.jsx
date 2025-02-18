@@ -1,8 +1,8 @@
-import React, { useEffect } from 'react';
+import React, { useEffect,useState } from 'react';
 import { Container, Box, Typography, Accordion, AccordionSummary, AccordionDetails, List, ListItem, ListItemText,keyframes } from '@mui/material';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import "@fontsource/playfair-display";
-
+import Reserva from './Reserva';
 
 const moveAnimation = keyframes`
   0% { transform: translateY(0); }
@@ -37,17 +37,23 @@ const Image = () => (
   );
 
 const Service9 = () => {
+  const [expanded, setExpanded] = useState(true);
+
+  const handleChange = () => {
+    setExpanded(!expanded);
+  }
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
 
   return (
+    <>
     <Container>
       <Box sx={{ margin: 2, padding: 2, border: '2px solid #d2b48c', borderRadius: 2, boxShadow: '0 0 5px 2px rgba(0, 0, 0, 0.3), 0 0 10px 4px rgba(34, 139, 34, 0.2), 0 0 15px 6px rgba(0, 0, 0, 0.2)', backgroundColor: '#f5eedc', transition: 'transform 0.3s ease, box-shadow 0.3s ease', position: 'relative', zIndex: 1, '&:hover': { transform: 'translateY(-5px)', boxShadow: 8 } }}>
         <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
           <Image />
           <Box sx={{ width: '100%', marginBottom: 2 }}>
-            <Accordion sx={{ margin: 2, backgroundColor: '#f5eedc', border: '2px solid #d2b48c', borderRadius: 2, boxShadow: '0 0 5px 2px rgba(0, 0, 0, 0.3), 0 0 10px 4px rgba(34, 139, 34, 0.2), 0 0 15px 6px rgba(0, 0, 0, 0.2)' }}>
+          <Accordion expanded={expanded} onChange={handleChange} sx={{ margin: 2, backgroundColor: "#f5eedc", border: "2px solid #d2b48c", borderRadius: 2, boxShadow: "0 0 5px 2px rgba(0, 0, 0, 0.3), 0 0 10px 4px rgba(34, 139, 34, 0.2), 0 0 15px 6px rgba(0, 0, 0, 0.2)" }}>
               <AccordionSummary expandIcon={<ExpandMoreIcon />} sx={{ backgroundColor: 'rgba(48, 84, 69, 0.8)', color: '#f5eedc' }}>
                 <Typography variant="h5" component="h2" sx={{ fontFamily: 'Playfair Display' }}>
                   Imagina que tu bienestar es un jardín.
@@ -91,6 +97,8 @@ const Service9 = () => {
         </Box>
       </Box>
     </Container>
+    <Reserva /> 
+    </>
   );
 };
 

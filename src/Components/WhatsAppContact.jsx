@@ -61,12 +61,17 @@ const WhatsAppContact = () => {
   };
 
   return (
-    <Box textAlign="center" p={2} position="relative">
+    <Box
+      textAlign="center"
+      p={2}
+      position="relative"
+      width="400px" 
+    >
       <IconButton
         onClick={() => setShowOptions(!showOptions)}
         sx={{
           color: "#128C7E",
-          fontSize: "2.9rem",
+          fontSize: "3.5rem",
           "&:hover": {
             color: "#f5eedc",
           },
@@ -82,6 +87,7 @@ const WhatsAppContact = () => {
           backgroundColor="#f5eedc"
           border="2px solid #d2b48c"
           borderRadius={2}
+          width="100%" 
           boxShadow="0 0 5px 2px rgba(0, 0, 0, 0.3), 0 0 10px 4px rgba(34, 139, 34, 0.2), 0 0 15px 6px rgba(0, 0, 0, 0.2)"
         >
           <Typography

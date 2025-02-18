@@ -1,5 +1,5 @@
-import React, { useEffect } from 'react';
-import styled, { keyframes } from 'styled-components';
+import React, { useEffect } from "react";
+import styled, { keyframes } from "styled-components";
 import "@fontsource/playfair-display";
 
 const moveAnimation = keyframes`
@@ -21,14 +21,13 @@ const FullAcercaContainer = styled.div`
 `;
 
 const Name = styled.h1`
-  font-size: 2.9em;
-  color: #d2b48c;
+  font-size: 4.5em;
+  color: "rgba(255, 255, 255, 0.2)";
   margin-bottom: 20px;
-    font-family: "Playfair Display", serif;
-    text-align: center;
-    padding: 20px;
-    
-    `;
+  font-family: "Playfair Display", serif;
+  text-align: center;
+  padding: 20px;
+`;
 
 const Section = styled.div`
   margin: 20px 0;
@@ -66,8 +65,6 @@ const Section2 = styled.div`
   }
 `;
 
-
-
 const ContentContainer = styled.div`
   display: flex;
   align-items: center;
@@ -91,7 +88,7 @@ const TextContainer = styled.div`
   box-shadow: 0 0 5px 2px rgba(0, 0, 0, 0.9),
     0 0 10px 4px rgba(34, 139, 34, 0.2), 0 0 15px 6px rgba(0, 0, 0, 0.2);
   height: 550px;
-  transition: all 0.3s ease-in-out; /* Transición agregada */
+  transition: all 0.3s ease-in-out;
 `;
 
 const VideoContainer = styled.div`
@@ -101,8 +98,7 @@ const VideoContainer = styled.div`
   max-width: 50%;
   padding: 10px;
   align-items: center;
-  animation: ${moveAnimation} 3s infinite; /* Animación agregada */
-
+  animation: ${moveAnimation} 3s infinite; 
 `;
 
 const Video = styled.video`
@@ -114,55 +110,37 @@ const Video = styled.video`
   border: 2px solid #d2b48c;
 `;
 
-const ImagesContainer = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 100%;
-  margin-top: 20px;
-`;
-
-const Image = styled.img`
-  width: 400px; /* Aumenta el ancho de las imágenes */
-  height: auto;
-  margin: 0 10px;
-  box-shadow: 0 0 5px 2px rgba(0, 0, 0, 0.7),
-    0 0 10px 4px rgba(34, 139, 34, 0.2), 0 0 15px 6px rgba(0, 0, 0, 0.2);
-  border: 2px solid #d2b48c;
-  border-radius: 15px;
-`;
-
 const FullAcerca = () => {
-    useEffect(() => {
-        window.scrollTo(0, 0);
-      }, []);
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
   return (
     <FullAcercaContainer>
       <Name>Daniela Arrázola</Name>
       <Section>
-      <ContentContainer>
-        <TextContainer>
-          Quiero compartirte un pedacito de mi historia, porque creo que la
-          conexión genuina empieza desde la autenticidad.
-          <br />
-          Mi vida ha sido todo menos lineal, llena de momentos de reinvención.
-          <br />
-          Nací en Colombia, crecí en Noruega y, finalmente, elegí España para
-          cumplir mis sueños. En cada etapa, me tocó empezar de cero, adaptarme
-          a nuevas realidades y aprender a vivir en culturas muy distintas.
-          Aunque los retos fueron grandes, hoy agradezco este recorrido que me
-          ha dado visión única sobre el valor de las transiciones y el
-          crecimiento personal. Si alguna vez te has sentido perdido o sin
-          rumbo, quiero que sepas que yo también he estado allí.
-        </TextContainer>
-        <VideoContainer>
-          <Video autoPlay loop muted>
-            <source src="/images/acerca1.1.mp4" type="video/mp4" />
-            Your browser does not support the video tag.
-          </Video>
-        </VideoContainer>
-      </ContentContainer>
-        </Section>
+        <ContentContainer>
+          <TextContainer>
+            Quiero compartirte un pedacito de mi historia, porque creo que la
+            conexión genuina empieza desde la autenticidad.
+            <br />
+            Mi vida ha sido todo menos lineal, llena de momentos de reinvención.
+            <br />
+            Nací en Colombia, crecí en Noruega y, finalmente, elegí España para
+            cumplir mis sueños. En cada etapa, me tocó empezar de cero,
+            adaptarme a nuevas realidades y aprender a vivir en culturas muy
+            distintas. Aunque los retos fueron grandes, hoy agradezco este
+            recorrido que me ha dado visión única sobre el valor de las
+            transiciones y el crecimiento personal. Si alguna vez te has sentido
+            perdido o sin rumbo, quiero que sepas que yo también he estado allí.
+          </TextContainer>
+          <VideoContainer>
+            <Video autoPlay loop muted>
+              <source src="/images/acerca1.1.mp4" type="video/mp4" />
+              Your browser does not support the video tag.
+            </Video>
+          </VideoContainer>
+        </ContentContainer>
+      </Section>
       <ContentContainer>
         <VideoContainer>
           <Video autoPlay loop muted>
@@ -186,35 +164,31 @@ const FullAcerca = () => {
           experiencias que expandan mi visión del mundo.
         </TextContainer>
       </ContentContainer>
-        <Section2>
-      <ContentContainer>
-        <TextContainer>
-          El verde es el color de este proyecto porque representa dos partes
-          fundamentales de mi historia: la belleza de la naturaleza noruega y la
-          fuerza de las esmeraldas colombianas. Para mí, el verde es sinónimo de
-          vida, crecimiento y conexión.
-          <br />
-          Cuando no trabajo me encontrarás disfrutando del sol y de los paisajes
-          naturales, también bailando diferentes ritmos latinoamericanos,
-          visitando algún rincón del mundo o disfrutando de increíbles
-          experiencias gastronómicas.
-          <br />
-          Gracias a mi historia de vida y a mis constantes viajes entre ambos
-          países, puedo ofrecerte terapia en los dos idiomas: noruego y español.
-        </TextContainer>
-        <VideoContainer>
-          <Video autoPlay loop muted>
-            <source src="/images/acerca2.2.mp4" type="video/mp4" />
-            Your browser does not support the video tag.
-          </Video>
-        </VideoContainer>
-      </ContentContainer>
-        </Section2>
-      <ImagesContainer>
-        <Image src="/images/acerca1.svg" alt="Acerca 1" />
-        <Image src="/images/acerca2.svg" alt="Acerca 2" />
-        <Image src="/images/acerca3.svg" alt="Acerca 3" />
-      </ImagesContainer>
+      <Section2>
+        <ContentContainer>
+          <TextContainer>
+            El verde es el color de este proyecto porque representa dos partes
+            fundamentales de mi historia: la belleza de la naturaleza noruega y
+            la fuerza de las esmeraldas colombianas. Para mí, el verde es
+            sinónimo de vida, crecimiento y conexión.
+            <br />
+            Cuando no trabajo me encontrarás disfrutando del sol y de los
+            paisajes naturales, también bailando diferentes ritmos
+            latinoamericanos, visitando algún rincón del mundo o disfrutando de
+            increíbles experiencias gastronómicas.
+            <br />
+            Gracias a mi historia de vida y a mis constantes viajes entre ambos
+            países, puedo ofrecerte terapia en los dos idiomas: noruego y
+            español.
+          </TextContainer>
+          <VideoContainer>
+            <Video autoPlay loop muted>
+              <source src="/images/acerca2.2.mp4" type="video/mp4" />
+              Your browser does not support the video tag.
+            </Video>
+          </VideoContainer>
+        </ContentContainer>
+      </Section2>
     </FullAcercaContainer>
   );
 };

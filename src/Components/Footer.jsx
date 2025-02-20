@@ -1,112 +1,67 @@
-import React from "react";
-import { Box, Typography, Link } from "@mui/material";
+import { Box, Typography, Link, Divider } from "@mui/material";
 import styled from "styled-components";
-import InstagramIcon from "@mui/icons-material/Instagram";
-import FacebookIcon from "@mui/icons-material/Facebook";
-import LinkedInIcon from "@mui/icons-material/LinkedIn";
 import "@fontsource/playfair-display";
+import { useNavigate } from "react-router-dom";
 
 const FooterContainer = styled(Box)`
   display: flex;
-  justify-content: space-between;
+  flex-direction: column;
   align-items: center;
   padding: 20px;
-  background-color: #557c70;
+  background-color: #f7f7f7;
   border-top: 2px solid #d2b48c;
-  box-shadow: 0 0 5px 2px rgba(0, 0, 0, 0.7),
-    0 0 10px 4px rgba(34, 139, 34, 0.2), 0 0 15px 6px rgba(0, 0, 0, 0.2);
+  box-shadow: 0px -2px 5px rgba(0, 0, 0, 0.1);
+  text-align: center;
 `;
 
-const Logo = styled.img`
-  height: 250px;
-  margin-left: 80px;
+const FooterText = styled(Typography)`
+  font-family: "Playfair Display";
+  color: #333;
+  margin: 5px 0;
 `;
 
-const SocialIcons = styled(Box)`
+const FooterLinks = styled(Box)`
   display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  gap: 10px;
-  margin-right: 80px;
-  font-size: 40px;
+  gap: 15px;
+  margin-top: 5px;
+
   a {
-    color: #f5eedc;
+    color: #557c70;
+    text-decoration: none;
+    font-weight: 500;
     transition: color 0.3s;
+    cursor: pointer; /*  cursor pointer */
 
     &:hover {
-      color: #305445;
+      color: #2c7a7b;
     }
   }
 `;
 
 const Footer = () => {
+  const navigate = useNavigate();
+
+  const handleNavigate = (path) => {
+    navigate(path);
+  };
+
   return (
     <FooterContainer>
-      <Logo src="/images/logoDaniela.svg" alt="Logo Daniela" />
-      <Box textAlign="center">
-        <Typography
-          variant="body1"
-          sx={{ fontFamily: "Playfair Display", color: "#f5eedc" }}
-        >
-          danielaarrazolabenitez@gmail.com
-        </Typography>
-        <Typography
-          variant="body2"
-          sx={{ fontFamily: "Playfair Display", color: "#f5eedc" }}
-        >
-          +47 98315132
-        </Typography>
-        <Link
-          href="/faq"
-          sx={{
-            fontFamily: "Playfair Display",
-            color: "#f5eedc",
-            display: "block",
-            marginTop: "10px",
-          }}
-        >
-          Preguntas Frecuentes
+      <FooterLinks>
+        <Link onClick={() => handleNavigate("/terms")}>
+          Términos y Condiciones
         </Link>
-      </Box>
-      <SocialIcons>
-        <Box>
-          <Link href="https://www.instagram.com" target="_blank" rel="noopener">
-            <InstagramIcon />
-          </Link>
-          <Link href="https://www.facebook.com" target="_blank" rel="noopener">
-            <FacebookIcon />
-          </Link>
-          <Link href="https://www.linkedin.com" target="_blank" rel="noopener">
-            <LinkedInIcon />
-          </Link>
-        </Box>
-        <Box mt={2}>
-          <Typography
-            variant="body2"
-            sx={{ fontFamily: "Playfair Display", color: "#f5eedc" }}
-          >
-            Copyright © 2025 Daniela Arrazola
-          </Typography>
-          <Typography
-            variant="body2"
-            sx={{ fontFamily: "Playfair Display", color: "#f5eedc" }}
-          >
-            Reservados todos los derechos
-          </Typography>
-          <Link
-            href="/privacy-policy"
-            sx={{
-              fontFamily: "Playfair Display",
-              color: "#f5eedc",
-              display: "block",
-              marginTop: "10px",
-              fontSize: "0.3em",
-            }}
-          >
-            Políticas de Privacidad
-          </Link>
-        </Box>
-      </SocialIcons>
+        <Divider orientation="vertical" flexItem sx={{ bgcolor: "#557c70" }} />
+        <Link onClick={() => handleNavigate("/privacy-policy")}>
+          Política de Privacidad
+        </Link>
+        <Divider orientation="vertical" flexItem sx={{ bgcolor: "#557c70" }} />
+        <Link onClick={() => handleNavigate("/faq")}>Preguntas Frecuentes</Link>
+      </FooterLinks>
+
+      <FooterText variant="body2">
+        © {new Date().getFullYear()} Creado por Webcode-Art | Daniela Arrazola
+      </FooterText>
     </FooterContainer>
   );
 };

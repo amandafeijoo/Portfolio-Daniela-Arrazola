@@ -1,4 +1,3 @@
-import React from "react";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
 import WhatsAppContact from "./WhatsAppContact";
@@ -9,28 +8,41 @@ const VideoContainer = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  max-width: 50%;
+  max-width: 100%;
   padding: 10px;
+
+  @media (min-width: 768px) {
+    max-width: 50%;
+  }
 `;
 
 const Video = styled.video`
-  width: 200%;
+  width: 100%;
   height: auto;
   border-radius: 10px;
   box-shadow: 0 0 5px 2px rgba(0, 0, 0, 0.7),
     0 0 10px 4px rgba(34, 139, 34, 0.2), 0 0 15px 6px rgba(0, 0, 0, 0.2);
   border: 2px solid #d2b48c;
+
+  @media (min-width: 768px) {
+    width: 200%;
+  }
 `;
 
 const Image = styled.img`
-  width: 50%;
-  margin-top: 2px;
+  width: 80%;
+  margin-top: 10px;
   border-radius: 10px;
   transition: transform 0.3s;
   cursor: pointer;
 
   &:hover {
     transform: translateY(-10px);
+  }
+
+  @media (min-width: 768px) {
+    width: 50%;
+    margin-top: 2px;
   }
 `;
 
@@ -41,7 +53,12 @@ const WhatsAppContainer = styled.div`
   position: relative;
   width: 300px;
   height: auto;
-  overflow: visible; 
+  overflow: visible;
+
+  @media (max-width: 768px) {
+    width: 80%; /* Ajusta el tamaño del contenedor de WhatsApp para dispositivos móviles */
+    margin-right: 0;
+  }
 `;
 
 const FlexContainer = styled.div`
@@ -50,6 +67,14 @@ const FlexContainer = styled.div`
   margin-top: 20px;
   justify-content: space-between;
   margin-right: 50px;
+
+  @media (max-width: 768px) {
+    flex-direction: column;
+    align-items: center;
+    margin-right: 50px;
+    width: 140px;
+    margin-top: -50px;
+  }
 `;
 
 const ReservationVideo = () => {

@@ -1,6 +1,5 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import styled from "styled-components";
 import {
   FaInstagram,
   FaFacebook,
@@ -8,8 +7,6 @@ import {
   FaWhatsapp,
 } from "react-icons/fa";
 import {
-  AppBar,
-  Toolbar,
   IconButton,
   Menu,
   MenuItem,
@@ -20,118 +17,18 @@ import {
 import MenuIcon from "@mui/icons-material/Menu";
 import "@fontsource/playfair-display";
 
-const TopHeader = styled.div`
-  display: flex;
-  padding: 12px 0;
-  height: 45px;
-  margin-top: 0px;
-  justify-content: center;
-  align-items: center;
-  background-color: #a1ad7f;
-  color: white;
-  padding: 5px 20px;
-  font-size: 0.9em;
-  color: #f5eedc;
-
-  @media (max-width: 768px) {
-    flex-direction: column;
-    height: auto;
-    padding: 10px;
-  }
-`;
-
-const BottomHeader = styled.div`
-  display: flex;
-  height: 90px;
-  justify-content: space-between;
-  align-items: center;
-  background-color: #557c70;
-  color: white;
-  padding: 10px 20px;
-  font-size: 1em;
-
-  @media (max-width: 768px) {
-    flex-direction: row;
-    height: auto;
-    padding: 10px;
-  }
-
-  @media (max-width: 430px) {
-    padding: 10px 5px;
-    margin-top: 0px;
-    margin-bottom: 0px;
-  }
-`;
-
-const CenterButton = styled.div`
-  margin: auto;
-
-  @media (max-width: 768px) {
-    margin: 10px 0;
-    display: flex; 
-    align-items: center; 
-  }
-`;
-
-const Button = styled.button`
-  background-color: rgba(48, 84, 69, 0.5);
-  font-family: "Playfair Display", serif;
-  color: #f5eedc;
-  border: 2px solid #4a6f5e;
-  box-shadow: 0 0 10px 5px rgba(0, 0, 0, 0.4);
-  padding: 17px 20px;
-  font-size: 1.1em;
-  border-radius: 25px;
-  margin-right: 55px;
-  cursor: pointer;
-  transition: background-color 0.3s ease, box-shadow 0.3s ease,
-    transform 0.3s ease;
-
-  &:hover {
-    background-color: rgba(245, 238, 220, 0.5);
-    color: #305445;
-  }
-
-  & svg {
-    color: white;
-    margin-right: 8px;
-  }
-
-  @media (max-width: 768px) {
-    padding: 10px 15px;
-    font-size: 1em;
-    margin: 0;
-    margin-left: 85px;
-  }
-`;
-
-const SocialIcons = styled.div`
-  display: flex;
-  gap: 15px;
-  font-size: 1.5em;
-
-  a {
-    color: #f5eedc;
-    transition: color 0.3s;
-
-    &:hover {
-      color: #305445;
-    }
-  }
-
-  @media (max-width: 768px) {
-    font-size: 1.2em;
-    gap: 10px;
-  }
-`;
 const Header = () => {
   const [anchorEl, setAnchorEl] = useState(null);
   const [isSubMenuOpen, setIsSubMenuOpen] = useState(false);
 
   const navigate = useNavigate();
 
-  const handleMenuOpen = (event) => {
-    setAnchorEl(event.currentTarget);
+  const handleMenuToggle = (event) => {
+    if (anchorEl) {
+      handleMenuClose();
+    } else {
+      setAnchorEl(event.currentTarget);
+    }
   };
 
   const handleMenuClose = () => {
@@ -155,10 +52,6 @@ const Header = () => {
   const handleNavigateFullAcerca = () => {
     handleMenuClose();
     navigate("/full-acerca");
-  };
-
-  const handleNavigateServicios = () => {
-    navigate("/servicios");
   };
 
   const handleNavigateContacto = () => {
@@ -223,350 +116,508 @@ const Header = () => {
     navigate("/service13");
   };
 
+  const handleLoginClick = () => {
+    navigate("/login");
+  };
+
   return (
     <>
-      {/* <TopHeader>
-        <SocialIcons>
-          <a
-            href="https://www.instagram.com"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <FaInstagram />
-          </a>
-          <a
-            href="https://www.facebook.com"
+      <Box
+        sx={{
+          position: "fixed", // Se mantiene fijo en pantalla
+          top: 0,
+          left: 0,
+          width: "100%",
+          display: "flex",
+          justifyContent: "space-between",
+          alignItems: "center",
+          padding: "10px 20px",
+          backgroundColor: "#557c70", // #557c70,#f5eedc,#4a6f5e
+          zIndex: 20000, // Encima de otros elementos
+          height: "100px",
+          "@media (max-width: 600px)": {
+            padding: "10px 10px",
+            height: "80px",
+          },
+        }}
+      >
+        <Box
+          sx={{
+            position: "fixed",
+            right: "20px",
+            top: "50%",
+            transform: "translateY(-50%)",
+            display: "flex",
+            flexDirection: "column",
+            gap: "10px",
+            zIndex: 20000,
+            "@media (max-width: 600px)": {
+              right: "1px",
+              gap: "5px",
+            },
+          }}
+        >
+          <IconButton
+            sx={{
+              color: "rgba(255, 255, 255, 0.6)",
+              "@media (max-width: 600px)": {
+                fontSize: "1.2em",
+              },
+            }}
+            href="https://facebook.com"
             target="_blank"
             rel="noopener noreferrer"
           >
             <FaFacebook />
-          </a>
-          <a
+          </IconButton>
+          <IconButton
+            sx={{
+              color: "rgba(255, 255, 255, 0.6)",
+              "@media (max-width: 600px)": {
+                fontSize: "1.2em",
+              },
+            }}
             href="https://www.linkedin.com/in/daniela-a-9b2845199/"
             target="_blank"
             rel="noopener noreferrer"
           >
             <FaLinkedin />
-          </a>
-        </SocialIcons>
-      </TopHeader> */}
-      <BottomHeader>
-        <IconButton
-          edge="start"
-          color="inherit"
-          aria-label="menu"
-          onClick={handleMenuOpen}
+          </IconButton>
+          <IconButton
+            sx={{
+              color: "rgba(255, 255, 255, 0.6)",
+              "@media (max-width: 600px)": {
+                fontSize: "1.2em",
+              },
+            }}
+            href="https://www.instagram.com/psicoarrazola?igsh=Y3l4NzI2cGRsMGx4"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <FaInstagram />
+          </IconButton>
+        </Box>
+        <Box
           sx={{
-            marginLeft: "-10px",
+            display: "flex",
+            alignItems: "center",
+            position: "relative",
+            width: "100%",
+            justifyContent: "center",
           }}
         >
-          <MenuIcon
+          <IconButton
+            edge="start"
+            color="inherit"
+            aria-label="menu"
+            onClick={handleMenuToggle}
             sx={{
-              fontSize: "1.7em",
-              color: "#f5f5dc",
+              position: "absolute",
+              left: "20px",
+              color: "rgba(255, 255, 255, 0.7)",
+              "@media (max-width: 600px)": {
+                left: "10px",
+              },
             }}
-          />
-        </IconButton>
-        <CenterButton>
+          >
+            <MenuIcon sx={{ fontSize: "1.7em" }} />
+          </IconButton>
           <Box
             component="img"
             src="/images/logoDaniela.svg"
             alt="Logo Daniela"
-            onClick={handleClick} 
+            onClick={handleClick}
             sx={{
               position: "absolute",
-              top: "60%", 
-              left: "50%", 
-              transform: "translate(-50%, -50%)", 
-              width: "18%", 
-              height: "auto", 
-              objectFit: "contain", 
-              cursor: "pointer", 
+              margin: "0 auto",
+              marginTop: "30px",
+              left: "50%",
+              transform: "translateX(-50%)",
+              maxHeight: "300px",
+              maxWidth: "300px",
+              objectFit: "contain",
+              cursor: "pointer",
+              "@media (max-width: 600px)": {
+                maxHeight: "200px",
+                maxWidth: "200px",
+                marginTop: "20px",
+              },
             }}
           />
-        </CenterButton>
-        <Menu
-          anchorEl={anchorEl}
-          open={Boolean(anchorEl)}
-          onClose={handleMenuClose}
-          PaperProps={{
-            sx: {
-              backgroundColor: "rgb(225, 235, 213)",
-              backdropFilter: "blur(10px)",
-              border: "2px solid #6f4e37",
-              borderRadius: "10px",
-              width: isSubMenuOpen ? "600px" : "450px",
-              height: isSubMenuOpen ? "auto" : "450px",
-              padding: "15px",
-              display: "flex",
-              flexDirection: "column",
+          <Menu
+            anchorEl={anchorEl}
+            open={Boolean(anchorEl)}
+            onClose={handleMenuClose}
+            PaperProps={{
+              sx: {
+                backgroundColor: "#f5eedc",
+                backdropFilter: "blur(10px)",
+                marginTop: "25px",
+                border: "2px solid #d2b48c",
+                boxShadow: "0 0 5px 2px rgba(0, 0, 0, 0.9)",
+                borderRadius: "10px",
+                width: isSubMenuOpen ? "700px" : "450px",
+                height: isSubMenuOpen ? "auto" : "520px",
+                padding: "15px",
+                display: "flex",
+                flexDirection: "column",
+                "@media (max-width: 600px)": {
+                  width: isSubMenuOpen ? "90%" : "80%",
+                  padding: "10px",
+                },
+              },
+            }}
+          >
+            <MenuItem
+              onClick={handleNavigateHome}
+              sx={{
+                fontSize: "1.5em",
+                fontFamily: "Playfair Display",
+                color: "#4b3f2f",
+                "@media (max-width: 600px)": {
+                  fontSize: "1.2em",
+                },
+              }}
+            >
+              Inicio
+            </MenuItem>
+            <MenuItem
+              onClick={handleNavigateFullAcerca}
+              sx={{
+                fontSize: "1.5em",
+                fontFamily: "Playfair Display",
+                color: "#4b3f2f",
+                "@media (max-width: 600px)": {
+                  fontSize: "1.2em",
+                },
+              }}
+            >
+              Acerca
+            </MenuItem>
+            <MenuItem
+              onClick={handleSubMenuToggle}
+              sx={{
+                fontSize: "1.5em",
+                fontFamily: "Playfair Display",
+                color: "#4b3f2f",
+                "@media (max-width: 600px)": {
+                  fontSize: "1.2em",
+                },
+              }}
+            >
+              Servicios
+            </MenuItem>
+            {isSubMenuOpen && (
+              <>
+                <MenuItem
+                  onClick={handleNavigateService1}
+                  sx={{
+                    fontSize: "1em",
+                    fontFamily: "Playfair Display",
+                    color: "#8b6f5a",
+                    "@media (max-width: 600px)": {
+                      fontSize: "0.8em",
+                    },
+                  }}
+                >
+                  Ansiedad y Depresión
+                </MenuItem>
+                <MenuItem
+                  onClick={handleNavigateService2}
+                  sx={{
+                    fontSize: "1em",
+                    fontFamily: "Playfair Display",
+                    color: "#8b6f5a",
+                    "@media (max-width: 600px)": {
+                      fontSize: "0.8em",
+                    },
+                  }}
+                >
+                  Regulación emocional
+                </MenuItem>
+                <MenuItem
+                  onClick={handleNavigateService3}
+                  sx={{
+                    fontSize: "1em",
+                    fontFamily: "Playfair Display",
+                    color: "#8b6f5a",
+                    "@media (max-width: 600px)": {
+                      fontSize: "0.8em",
+                    },
+                  }}
+                >
+                  Autoestima y Conocimiento Personal
+                </MenuItem>
+                <MenuItem
+                  onClick={handleNavigateService4}
+                  sx={{
+                    fontSize: "1em",
+                    fontFamily: "Playfair Display",
+                    color: "#8b6f5a",
+                    "@media (max-width: 600px)": {
+                      fontSize: "0.8em",
+                    },
+                  }}
+                >
+                  Duelo y Cambios
+                </MenuItem>
+                <MenuItem
+                  onClick={handleNavigateService5}
+                  sx={{
+                    fontSize: "1em",
+                    fontFamily: "Playfair Display",
+                    color: "#8b6f5a",
+                    "@media (max-width: 600px)": {
+                      fontSize: "0.8em",
+                    },
+                  }}
+                >
+                  Conflictos interpersonales
+                </MenuItem>
+                <MenuItem
+                  onClick={handleNavigateService6}
+                  sx={{
+                    fontSize: "1em",
+                    fontFamily: "Playfair Display",
+                    color: "#8b6f5a",
+                    "@media (max-width: 600px)": {
+                      fontSize: "0.8em",
+                    },
+                  }}
+                >
+                  Habilidades sociales
+                </MenuItem>
+                <MenuItem
+                  onClick={handleNavigateService7}
+                  sx={{
+                    fontSize: "1em",
+                    fontFamily: "Playfair Display",
+                    color: "#8b6f5a",
+                    "@media (max-width: 600px)": {
+                      fontSize: "0.8em",
+                    },
+                  }}
+                >
+                  Crianza
+                </MenuItem>
+                <MenuItem
+                  onClick={handleNavigateService8}
+                  sx={{
+                    fontSize: "1em",
+                    fontFamily: "Playfair Display",
+                    color: "#8b6f5a",
+                    "@media (max-width: 600px)": {
+                      fontSize: "0.8em",
+                    },
+                  }}
+                >
+                  Productividad y gestión del tiempo
+                </MenuItem>
+                <MenuItem
+                  onClick={handleNavigateService9}
+                  sx={{
+                    fontSize: "1em",
+                    fontFamily: "Playfair Display",
+                    color: "#8b6f5a",
+                    "@media (max-width: 600px)": {
+                      fontSize: "0.8em",
+                    },
+                  }}
+                >
+                  Crecimiento personal y hábitos saludables
+                </MenuItem>
+                <MenuItem
+                  onClick={handleNavigateService10}
+                  sx={{
+                    fontSize: "1em",
+                    fontFamily: "Playfair Display",
+                    color: "#8b6f5a",
+                    "@media (max-width: 600px)": {
+                      fontSize: "0.8em",
+                    },
+                  }}
+                >
+                  Fobias
+                </MenuItem>
+                <MenuItem
+                  onClick={handleNavigateService11}
+                  sx={{
+                    fontSize: "1em",
+                    fontFamily: "Playfair Display",
+                    color: "#8b6f5a",
+                    "@media (max-width: 600px)": {
+                      fontSize: "0.8em",
+                    },
+                  }}
+                >
+                  Trastorno Obsesivo Compulsivo
+                </MenuItem>
+                <MenuItem
+                  onClick={handleNavigateService12}
+                  sx={{
+                    fontSize: "1em",
+                    fontFamily: "Playfair Display",
+                    color: "#8b6f5a",
+                    "@media (max-width: 600px)": {
+                      fontSize: "0.8em",
+                    },
+                  }}
+                >
+                  Trastornos del Neurodesarrollo
+                </MenuItem>
+                <MenuItem
+                  onClick={handleNavigateService13}
+                  sx={{
+                    fontSize: "1em",
+                    fontFamily: "Playfair Display",
+                    color: "#8b6f5a",
+                    "@media (max-width: 600px)": {
+                      fontSize: "0.8em",
+                    },
+                  }}
+                >
+                  Trastornos de la conducta alimentaria
+                </MenuItem>
+              </>
+            )}
+            <MenuItem
+              onClick={handleNavigateContacto}
+              sx={{
+                fontSize: "1.5em",
+                fontFamily: "Playfair Display",
+                color: "#4b3f2f",
+                "@media (max-width: 600px)": {
+                  fontSize: "1.2em",
+                },
+              }}
+            >
+              Contacto
+            </MenuItem>
+            <MenuItem
+              onClick={handleReservaClick}
+              sx={{
+                fontSize: "1.5em",
+                fontFamily: "Playfair Display",
+                color: "#4b3f2f",
+                "@media (max-width: 600px)": {
+                  fontSize: "1.2em",
+                },
+              }}
+            >
+              Reservar una Terapia
+            </MenuItem>
+            <Divider />
+            <Box display="flex" justifyContent="center" mt={1} mb={1}>
+              <IconButton
+                color="inherit"
+                href="https://www.facebook.com"
+                sx={{
+                  color: "#305445",
+                  "&:hover": {
+                    color: "#4b3f2f",
+                  },
+                }}
+              >
+                <FaFacebook />
+              </IconButton>
+              <IconButton
+                color="inherit"
+                href="https://www.instagram.com/psicoarrazola?igsh=Y3l4NzI2cGRsMGx4"
+                sx={{
+                  color: "#305445",
+                  "&:hover": {
+                    color: "#4b3f2f",
+                  },
+                }}
+              >
+                <FaInstagram />
+              </IconButton>
+              <IconButton
+                color="inherit"
+                href="https://www.linkedin.com/in/daniela-a-9b2845199/"
+                sx={{
+                  color: "#305445",
+                  "&:hover": {
+                    color: "#4b3f2f",
+                  },
+                }}
+              >
+                <FaLinkedin />
+              </IconButton>
+            </Box>
+            <Divider />
+            <Box textAlign="center" mt={3}>
+              <Typography
+                variant="body2"
+                sx={{
+                  fontSize: "1em",
+                  fontFamily: "Playfair Display",
+                  color: "#305445",
+                  marginLeft: "27px",
+                }}
+              >
+                danielaarrazolabenitez@gmail.com
+              </Typography>
+              <Typography
+                variant="body2"
+                sx={{
+                  fontSize: "1em",
+                  marginLeft: "87px",
+                  fontFamily: "Playfair Display",
+                  color: "#305445",
+                  display: "flex",
+                  alignItems: "center",
+                }}
+              >
+                <FaWhatsapp style={{ marginRight: "8px" }} />
+                +47 98315132
+              </Typography>
+              <Typography
+                variant="body2"
+                sx={{
+                  fontSize: "0.8em",
+                  marginTop: "40px",
+                  fontFamily: "Playfair Display",
+                  color: "#305445",
+                }}
+              >
+                © 2025 Daniela Arrázola
+              </Typography>
+            </Box>
+          </Menu>
+        </Box>
+        <Box
+          sx={{
+            position: "absolute",
+            right: "20px",
+            top: "50%",
+            transform: "translateY(-50%)",
+            display: "flex",
+            alignItems: "center",
+            gap: "10px",
+            zIndex: 20000,
+            "@media (max-width: 600px)": {
+              right: "10px",
+              gap: "5px",
             },
           }}
         >
-          <MenuItem
-            onClick={handleNavigateHome}
+          <Typography
+            variant="body1"
             sx={{
-              fontSize: "1.5em",
               fontFamily: "Playfair Display",
-              color: "#4b3f2f",
+              color: "rgba(255, 255, 255, 0.7)",
+              cursor: "pointer",
+              "@media (max-width: 600px)": {
+                fontSize: "0.9em",
+              },
             }}
+            onClick={handleLoginClick}
           >
-            Inicio
-          </MenuItem>
-          <MenuItem
-            onClick={handleNavigateFullAcerca}
-            sx={{
-              fontSize: "1.5em",
-              fontFamily: "Playfair Display",
-              color: "#4b3f2f",
-            }}
-          >
-            Acerca
-          </MenuItem>
-          <MenuItem
-            onClick={handleSubMenuToggle}
-            sx={{
-              fontSize: "1.5em",
-              fontFamily: "Playfair Display",
-              color: "#4b3f2f",
-            }}
-          >
-            Servicios
-          </MenuItem>
-          {isSubMenuOpen && (
-            <>
-              <MenuItem
-                onClick={handleNavigateService1}
-                sx={{
-                  fontSize: "1em",
-                  fontFamily: "Playfair Display",
-                  color: "#8b6f5a",
-                }}
-              >
-                Ansiedad y Depresión
-              </MenuItem>
-              <MenuItem
-                onClick={handleNavigateService2}
-                sx={{
-                  fontSize: "1em",
-                  fontFamily: "Playfair Display",
-                  color: "#8b6f5a",
-                }}
-              >
-                Regulación emocional
-              </MenuItem>
-              <MenuItem
-                onClick={handleNavigateService2}
-                sx={{
-                  fontSize: "1em",
-                  fontFamily: "Playfair Display",
-                  color: "#8b6f5a",
-                }}
-              >
-                Autoestima y Conocimiento Personal
-              </MenuItem>
-              <MenuItem
-                onClick={handleNavigateService2}
-                sx={{
-                  fontSize: "1em",
-                  fontFamily: "Playfair Display",
-                  color: "#8b6f5a",
-                }}
-              >
-                Duelo y Cambios
-              </MenuItem>
-              <MenuItem
-                onClick={handleNavigateService2}
-                sx={{
-                  fontSize: "1em",
-                  fontFamily: "Playfair Display",
-                  color: "#8b6f5a",
-                }}
-              >
-                Conflictos interpersonales
-              </MenuItem>
-              <MenuItem
-                onClick={handleNavigateService2}
-                sx={{
-                  fontSize: "1em",
-                  fontFamily: "Playfair Display",
-                  color: "#8b6f5a",
-                }}
-              >
-                Habilidades sociales
-              </MenuItem>
-              <MenuItem
-                onClick={handleNavigateService2}
-                sx={{
-                  fontSize: "1em",
-                  fontFamily: "Playfair Display",
-                  color: "#8b6f5a",
-                }}
-              >
-                Crianza
-              </MenuItem>
-              <MenuItem
-                onClick={handleNavigateService2}
-                sx={{
-                  fontSize: "1em",
-                  fontFamily: "Playfair Display",
-                  color: "#8b6f5a",
-                }}
-              >
-                Productividad y gestión del tiempo
-              </MenuItem>
-              <MenuItem
-                onClick={handleNavigateService2}
-                sx={{
-                  fontSize: "1em",
-                  fontFamily: "Playfair Display",
-                  color: "#8b6f5a",
-                }}
-              >
-                Crecimiento personal y hábitos saludables
-              </MenuItem>
-              <MenuItem
-                onClick={handleNavigateService2}
-                sx={{
-                  fontSize: "1em",
-                  fontFamily: "Playfair Display",
-                  color: "#8b6f5a",
-                }}
-              >
-                Fobias
-              </MenuItem>
-              <MenuItem
-                onClick={handleNavigateService2}
-                sx={{
-                  fontSize: "1em",
-                  fontFamily: "Playfair Display",
-                  color: "#8b6f5a",
-                }}
-              >
-                Trastorno Obsesivo Compulsivo
-              </MenuItem>
-              <MenuItem
-                onClick={handleNavigateService2}
-                sx={{
-                  fontSize: "1em",
-                  fontFamily: "Playfair Display",
-                  color: "#8b6f5a",
-                }}
-              >
-                Trastornos del Neurodesarrollo
-              </MenuItem>
-              <MenuItem
-                onClick={handleNavigateService2}
-                sx={{
-                  fontSize: "1em",
-                  fontFamily: "Playfair Display",
-                  color: "#8b6f5a",
-                }}
-              >
-                Trastornos de la conducta alimentaria
-              </MenuItem>
-            </>
-          )}
-          <MenuItem
-            onClick={handleSubMenuToggle}
-            sx={{
-              fontSize: "1.5em",
-              fontFamily: "Playfair Display",
-              color: "#4b3f2f",
-            }}
-          >
-            Contacto
-          </MenuItem>
-          <MenuItem
-            onClick={handleReservaClick}
-            sx={{
-              fontSize: "1.5em",
-              fontFamily: "Playfair Display",
-              color: "#4b3f2f",
-            }}
-          >
-            Reservar una Terapia
-          </MenuItem>
-          <Divider />
-          <Box display="flex" justifyContent="center" mt={1} mb={1}>
-            <IconButton
-              color="inherit"
-              href="https://www.facebook.com"
-              sx={{
-                color: "#305445",
-                "&:hover": {
-                  color: "#4b3f2f",
-                },
-              }}
-            >
-              <FaFacebook />
-            </IconButton>
-            <IconButton
-              color="inherit"
-              href="https://www.instagram.com"
-              sx={{
-                color: "#305445",
-                "&:hover": {
-                  color: "#4b3f2f",
-                },
-              }}
-            >
-              <FaInstagram />
-            </IconButton>
-            <IconButton
-              color="inherit"
-              href="https://www.linkedin.com"
-              sx={{
-                color: "#305445",
-                "&:hover": {
-                  color: "#4b3f2f",
-                },
-              }}
-            >
-              <FaLinkedin />
-            </IconButton>
-          </Box>
-          <Divider />
-          <Box textAlign="center" mt={3}>
-            <Typography
-              variant="body2"
-              sx={{
-                fontSize: "1em",
-                fontFamily: "Playfair Display",
-                color: "#305445",
-                marginLeft: "27px",
-              }}
-            >
-              danielaarrazolabenitez@gmail.com
-            </Typography>
-            <Typography
-              variant="body2"
-              sx={{
-                fontSize: "1em",
-                marginLeft: "87px",
-                fontFamily: "Playfair Display",
-                color: "#305445",
-                display: "flex",
-                alignItems: "center",
-              }}
-            >
-              <FaWhatsapp style={{ marginRight: "8px" }} />
-              +47 98315132
-            </Typography>
-            <Typography
-              variant="body2"
-              sx={{
-                fontSize: "0.8em",
-                marginTop: "40px",
-                fontFamily: "Playfair Display",
-                color: "#305445",
-              }}
-            >
-              © 2025 Daniela Arrázola
-            </Typography>
-          </Box>
-        </Menu>
-      </BottomHeader>
+            Login
+          </Typography>
+        </Box>
+      </Box>
     </>
   );
 };

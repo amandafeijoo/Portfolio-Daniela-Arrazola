@@ -1,5 +1,5 @@
-import React, { useEffect, useRef } from "react";
-import { Box, Button, Typography } from "@mui/material";
+import { useEffect, useRef } from "react";
+import { Button } from "@mui/material";
 import { motion } from "framer-motion";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
@@ -8,10 +8,14 @@ import "@fontsource/playfair-display";
 const ContenedorPadre = styled.div`
   position: relative;
   width: 70%;
-  height: 120%;
+  height: auto;
   margin: 0 auto;
   margin-top: 20px;
   margin-bottom: 160px;
+  @media (max-width: 768px) {
+    width: 90%;
+    margin-bottom: 80px;
+  }
 `;
 
 const ContenedorPrincipal1 = styled.div`
@@ -43,16 +47,20 @@ const ContenedorPrincipal1 = styled.div`
   &.hidden {
     transform: translateY(200px);
   }
+  @media (max-width: 768px) {
+    width: 100%;
+    margin-bottom: 20px;
+  }
 `;
 
 const ContenedorPrincipal2 = styled.div`
   position: absolute;
   top: 0;
-  left: 80px; 
+  left: 80px;
   width: 40%;
   margin: 0 auto;
   padding: 40px;
-  height: 60%;
+  height: auto;
   margin-top: 350px;
   display: flex;
   flex-direction: column;
@@ -63,20 +71,21 @@ const ContenedorPrincipal2 = styled.div`
   border: 3px solid #d2b48c;
   box-shadow: 0 0 5px 2px rgba(0, 0, 0, 0.7),
     0 0 10px 4px rgba(34, 139, 34, 0.2), 0 0 15px 6px rgba(0, 0, 0, 0.2);
-  background: linear-gradient(
-    135deg,
-    rgba(245, 245, 220, 0.7) 2%,
-    rgba(34, 139, 34, 0.2) 100%,
-    rgba(46, 139, 87, 0.7) 75%,
-    rgba(245, 245, 220, 0.7) 0%
-  );
   z-index: 1;
-  transition: transform 1.5s ease-out; 
+  background-color: rgba(255, 255, 255, 0.2);
+  transition: transform 1.5s ease-out;
   &.visible {
     transform: translateY(0);
   }
   &.hidden {
     transform: translateY(-200px);
+  }
+  @media (max-width: 768px) {
+    position: relative;
+    width: 100%;
+    margin-top: 20px;
+    left: 0;
+    padding: 20px;
   }
 `;
 
@@ -88,11 +97,14 @@ const ContenedorImagen = styled.div`
   overflow: hidden;
   border-radius: 15px;
   height: 500px;
+  @media (max-width: 768px) {
+    height: 300px;
+  }
 `;
 
 const Imagen = styled.img`
-  width: 110%;
-  height: 110%;
+  width: 100%;
+  height: 100%;
   object-fit: contain;
   border-radius: 25px;
   background-color: #f5f5dc;
@@ -112,6 +124,9 @@ const ContenedorTexto = styled.div`
   color: #4b3f2f;
   border-radius: 15px;
   text-align: justify;
+  @media (max-width: 768px) {
+    padding: 20px;
+  }
 `;
 
 const ImagenDaniela = () => {
@@ -131,32 +146,41 @@ const ImagenDaniela = () => {
           }
         });
       },
-      { threshold: 0.1 }
+      { threshold: 0.5 }
     );
 
-    if (contenedor1Ref.current) {
-      observer.observe(contenedor1Ref.current);
+    const contenedor1 = contenedor1Ref.current;
+    const contenedor2 = contenedor2Ref.current;
+
+    if (contenedor1) {
+      observer.observe(contenedor1);
     }
-    if (contenedor2Ref.current) {
-      observer.observe(contenedor2Ref.current);
+    if (contenedor2) {
+      observer.observe(contenedor2);
     }
 
     return () => {
-      if (contenedor1Ref.current) {
-        observer.unobserve(contenedor1Ref.current);
+      if (contenedor1) {
+        observer.unobserve(contenedor1);
       }
-      if (contenedor2Ref.current) {
-        observer.unobserve(contenedor2Ref.current);
+      if (contenedor2) {
+        observer.unobserve(contenedor2);
       }
     };
   }, []);
   const navigate = useNavigate();
+
   const handleNavigateFullAcerca = () => {
     navigate("/full-acerca");
   };
 
   return (
     <ContenedorPadre>
+      <ContenedorPrincipal1 ref={contenedor1Ref} className="hidden">
+        <ContenedorImagen>
+          <Imagen src="/images/daniela1.svg" alt="Daniela" />
+        </ContenedorImagen>
+      </ContenedorPrincipal1>
       <ContenedorPrincipal2 ref={contenedor2Ref} className="hidden">
         <ContenedorTexto>
           Hola, soy Daniela Arrázola, y si estás aquí, es posible que estés
@@ -166,11 +190,6 @@ const ImagenDaniela = () => {
           podamos trabajar juntos.
         </ContenedorTexto>
       </ContenedorPrincipal2>
-      <ContenedorPrincipal1 ref={contenedor1Ref} className="hidden">
-        <ContenedorImagen>
-          <Imagen src="/images/daniela.svg" alt="Daniela" />
-        </ContenedorImagen>
-      </ContenedorPrincipal1>
       <Button
         variant="contained"
         component={motion.button}
@@ -192,7 +211,13 @@ const ImagenDaniela = () => {
           "&:hover": {
             backgroundColor: "rgba(255, 255, 255, 0.3)",
           },
+          "@media (max-width: 768px)": {
+            marginLeft: "0",
+            marginTop: "20px",
+            fontSize: "1em",
+          },
         }}
+        onClick={handleNavigateFullAcerca}
       >
         Leer más sobre mí
       </Button>

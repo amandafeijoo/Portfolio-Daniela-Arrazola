@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import {
   Grid,
   Box,
@@ -29,7 +29,6 @@ const Section = styled.div`
   z-index: 1;
 
   &:hover {
-    transform: translateY(-5px); /* Efecto de elevación al pasar el ratón */
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
   }
 `;
@@ -106,14 +105,14 @@ const Reserva = () => {
           <Typography
             variant="h4"
             sx={{
-              color: "rgba(48, 84, 69, 0.6)",
+              color: "rgb(104, 96, 82)",
               fontFamily: "Playfair Display",
               zIndex: 10,
               position: "relative",
               width: "100%",
               textAlign: "center",
               fontWeight: "bold",
-              fontSize: "4.5rem",
+              fontSize: "2.3rem",
               marginLeft: "-100px",
               marginTop: "20px",
               marginBottom: "50px",
@@ -134,7 +133,7 @@ const Reserva = () => {
               overflow: "hidden",
               width: "80%",
               fontFamily: "Playfair Display",
-              marginBottom: 10, // Agregado marginBottom
+              marginBottom: 10, 
             }}
           >
             <TextField

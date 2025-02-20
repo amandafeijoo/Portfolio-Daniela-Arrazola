@@ -6,6 +6,7 @@ const GlobalStyle = createGlobalStyle`
     background-color: #9FB0A2;
     margin: 0;
     font-family: 'Playfair Display', serif;
+    margin-top: 100px; /* Ajusta este valor según la altura del header */
   }
 
   /* Estilos generales para todos los dispositivos */
@@ -60,3 +61,4 @@ export default GlobalStyle;
 // background-color: #557C70;
 // background-color: #A1AD7F;
 // background-color: #9FB0A2;
+

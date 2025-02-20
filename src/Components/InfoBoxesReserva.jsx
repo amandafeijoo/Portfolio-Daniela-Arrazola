@@ -1,11 +1,11 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { Grid, Box, Typography } from "@mui/material";
 import {
   faCreditCard,
   faClock,
   faQuestionCircle,
   faVideo,
-  faLanguage,
+  // faLanguage,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useNavigate } from "react-router-dom";
@@ -59,7 +59,7 @@ const InfoBoxesReserva = () => {
           sx={{
             width: "100%",
             p: 3,
-            background: "rgba(255, 255, 255, 0.4)",
+            background: "rgba(255, 255, 255, 0.7)",
             borderRadius: "25px",
             boxShadow:
               "0 0 5px 2px rgba(0, 0, 0, 0.7), 0 0 10px 4px rgba(34, 139, 34, 0.2), 0 0 15px 6px rgba(0, 0, 0, 0.2)",
@@ -99,7 +99,7 @@ const InfoBoxesReserva = () => {
             width: "100%",
             height: 280,
             p: 3,
-            backgroundColor: "rgba(255, 255, 255, 0.6)",
+            backgroundColor: "rgba(255, 255, 255, 0.7)",
             border: "2px solid #d2b48c",
             borderRadius: "25px",
             boxShadow:
@@ -165,7 +165,7 @@ const InfoBoxesReserva = () => {
             width: "100%",
             height: 280,
             p: 3,
-            background: "rgba(255, 255, 255, 0.4)",
+            background: "rgba(255, 255, 255, 0.7)",
             border: "2px solid #d2b48c",
             borderRadius: "25px",
             boxShadow:
@@ -217,7 +217,7 @@ const InfoBoxesReserva = () => {
             width: "100%",
             height: 280,
             p: 3,
-            backgroundColor: "rgba(255, 255, 255, 0.6)",
+            backgroundColor: "rgba(255, 255, 255, 0.7)",
             border: "2px solid #d2b48c",
             borderRadius: "25px",
             boxShadow:

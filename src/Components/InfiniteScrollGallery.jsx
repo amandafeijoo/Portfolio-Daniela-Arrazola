@@ -1,12 +1,13 @@
-import React from "react";
 import { Box, Typography } from "@mui/material";
-import { motion } from "framer-motion";
+import { motion, useAnimation } from "framer-motion";
 import { useNavigate } from "react-router-dom";
+import { useEffect } from "react";
 
 const images = [
   { src: "/images/servicios1.svg" },
   { src: "/images/s1image.svg", path: "/service1" },
   { src: "images/servicios2.svg" },
+  { src: "images/servicios18.svg" },
   { src: "/images/s2image.svg", path: "/service2" },
   { src: "images/servicios3.svg" },
   { src: "/images/s3image.svg", path: "/service3" },
@@ -17,10 +18,12 @@ const images = [
   { src: "images/servicios6.svg" },
   { src: "/images/s6image.svg", path: "/service6" },
   { src: "images/servicios7.svg" },
+  { src: "images/servicios15.svg" },
   { src: "/images/s7image.svg", path: "/service7" },
   { src: "images/servicios8.svg" },
   { src: "/images/s8image.svg", path: "/service8" },
   { src: "images/servicios9.svg" },
+  { src: "images/servicios16.svg" },
   { src: "/images/s9image.svg", path: "/service9" },
   { src: "images/servicios10.svg" },
   { src: "/images/s10image.svg", path: "/service10" },
@@ -34,29 +37,44 @@ const images = [
 
 const getRandomSize = (index) => {
   const sizes = [
-    { width: "250px", height: "400px" }, // Alto
-    { width: "350px", height: "250px" }, // Ancho
-    { width: "300px", height: "450px" }, // Alto
-    { width: "400px", height: "300px" }, // Ancho
-    { width: "250px", height: "350px" }, // Alto
-    { width: "450px", height: "300px" }, // Ancho
+    { width: "200px", height: "300px" }, // Alto
+    { width: "250px", height: "200px" }, // Ancho
+    { width: "300px", height: "225px" }, // Ancho
+    { width: "200px", height: "280px" }, // Alto
+    { width: "320px", height: "240px" }, // Ancho
+    { width: "150px", height: "150px" }, // Cuadrado
+    { width: "200px", height: "300px" }, // Alto
+    { width: "200px", height: "150px" }, // Rectangular
+    { width: "240px", height: "360px" }, // Alto
   ];
   return sizes[index % sizes.length];
 };
 
 const InfiniteScrollGallery = () => {
   const navigate = useNavigate();
+  const controls = useAnimation();
 
   const handleImageClick = (path) => {
     navigate(path);
   };
+
+  useEffect(() => {
+    controls.start({
+      x: ["0%", "-100%"],
+      transition: {
+        ease: "linear",
+        duration: 380,
+        repeat: Infinity,
+      },
+    });
+  }, [controls]);
 
   return (
     <Box sx={{ padding: "20px", position: "relative" }}>
       <Typography
         variant="h4"
         sx={{
-          color: "rgba(48, 84, 69, 0.6)",
+          color: "#f5eedc",
           fontFamily: "Playfair Display",
           marginBottom: "10px",
           zIndex: 10,
@@ -64,7 +82,7 @@ const InfiniteScrollGallery = () => {
           width: "100%",
           textAlign: "center",
           fontWeight: "bold",
-          fontSize: "4.5rem",
+          fontSize: { xs: "3rem", md: "4.5rem", fontWeight: "bold" },
         }}
       >
         Servicios
@@ -79,7 +97,7 @@ const InfiniteScrollGallery = () => {
           position: "relative",
           width: "100%",
           textAlign: "center",
-          fontSize: "1rem",
+          fontSize: { xs: "0.8rem", md: "1rem" },
           fontStyle: "italic",
         }}
       >
@@ -101,7 +119,7 @@ const InfiniteScrollGallery = () => {
             position: "relative",
             width: "100%",
             textAlign: "center",
-            fontSize: "2rem",
+            fontSize: { xs: "1.5rem", md: "2rem" },
           }}
         >
           ↓
@@ -111,22 +129,16 @@ const InfiniteScrollGallery = () => {
         sx={{
           overflow: "hidden",
           display: "grid",
-          gridTemplateColumns: "repeat(6, 1fr)",
+          gridTemplateColumns: {
+            xs: "repeat(2, 1fr)",
+            sm: "repeat(3, 1fr)",
+            md: "repeat(6, 1fr)",
+          },
           alignItems: "center",
           padding: "20px",
         }}
       >
-        <motion.div
-          style={{ display: "flex" }}
-          initial={{ x: "0%" }}
-          animate={{ x: "-100%" }} // Se mueve a la izquierda
-          transition={{
-            ease: "linear",
-            duration: 380, // Velocidad de desplazamiento más lenta
-            repeat: Infinity,
-          }}
-        >
-          {/* Generar imágenes pegadas */}
+        <motion.div style={{ display: "flex" }} animate={controls}>
           {[...images, ...images].map((img, index) => {
             const size = getRandomSize(index);
             return (
@@ -137,9 +149,9 @@ const InfiniteScrollGallery = () => {
                 style={{
                   width: size.width,
                   height: size.height,
-                  objectFit: "cover", // Evita distorsión
+                  objectFit: "cover",
                   borderRadius: "0px",
-                  margin: "0", // Asegura que no haya espacios entre imágenes
+                  margin: "0",
                   border: "1px solid #d2b48c",
                   cursor: "pointer",
                 }}

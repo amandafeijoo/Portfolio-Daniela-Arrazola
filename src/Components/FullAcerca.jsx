@@ -72,21 +72,22 @@ const ContentContainer = styled.div`
 
 const TextContainer = styled.div`
   flex: 1;
-  width: 100%;
+  width: 60%; /* 🔹 Ajusta el ancho para hacerlo más alargado */
+  max-width: 75%; /* 🔹 Limita el ancho máximo */
   font-size: clamp(1rem, 2vw, 1.1rem);
-  line-height: 1.6;
+  line-height: 1.8; /* 🔹 Aumenta la separación entre líneas para más altura */
   color: #4b3f2f;
   font-family: "Playfair Display", serif;
   text-align: justify;
   background-color: #f5eedc;
   border: 2px solid #b07241;
-  padding: 20px;
+  padding: 25px; /* 🔹 Más padding para darle más cuerpo */
   border-radius: 15px;
   box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.3);
   transition: all 0.3s ease-in-out;
 
   @media (min-width: 768px) {
-    max-width: 50%;
+    max-width: 55%; /* 🔹 Ajuste para pantallas grandes */
   }
 `;
 

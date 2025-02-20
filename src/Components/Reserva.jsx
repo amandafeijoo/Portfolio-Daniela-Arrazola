@@ -15,22 +15,32 @@ import ReservationVideo from "./ReservationVideo";
 import InfoBoxesReserva from "./InfoBoxesReserva";
 import AddToCalendar from "react-add-to-calendar";
 import styled from "styled-components";
+import Swal from "sweetalert2";
 
-const Section = styled.div`
-  margin: 20px 0;
+// 📌 Contenedor de fondo con más tamaño y bordes dorados
+const BackgroundContainer = styled.div`
+  background-color: rgb(132, 151, 139);
+  padding: 60px;
+  border-radius: 25px;
+  box-shadow: 0 12px 25px rgba(0, 0, 0, 0.3);
+  border: 4px solid #c0a080;
+  max-width: 1350px;
+  margin-bottom: 40px;
+  margin: auto;
+`;
+
+// 📌 Estilos para el título mejorado
+const Title = styled(Typography)`
+  font-family: "Playfair Display";
+  font-size: 3em !important;
+  font-weight: bold !important;
+  text-align: center;
+  color: #f5eedc;
+  text-transform: uppercase;
+  letter-spacing: 2px;
   padding: 20px;
-  border: 2px solid #ccc;
-  border-radius: 8px;
-  box-shadow: 0 0 5px 2px rgba(0, 0, 0, 0.2),
-    0 0 10px 4px rgba(34, 139, 34, 0.2), 0 0 15px 6px rgba(0, 0, 0, 0.2);
-  background-color: #8fa99e;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-  position: relative;
-  z-index: 1;
-
-  &:hover {
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
-  }
+  margin-bottom: 40px;
+  margin-top: 40px;
 `;
 
 const Reserva = () => {
@@ -47,9 +57,52 @@ const Reserva = () => {
   const [comments, setComments] = useState("");
   const [privacyAccepted, setPrivacyAccepted] = useState(false);
 
+  const [errors, setErrors] = useState({
+    firstName: false,
+    email: false,
+    selectedDate: false,
+    selectedOption: false,
+    selectedConsultationType: false,
+    privacyAccepted: false,
+  });
+
+  // 🔹 Expresión regular para validar un email
+  const validateEmail = (email) => {
+    const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return emailPattern.test(email);
+  };
   const handleSubmit = (event) => {
     event.preventDefault();
-    // Aquí  manejar el envío del formulario
+    const newErrors = {
+      firstName: firstName.trim() === "",
+      email: email.trim() === "" || !validateEmail(email), // 📌 Verifica el formato
+      selectedDate: !selectedDate,
+      selectedOption: selectedOption.trim() === "",
+      selectedConsultationType: selectedConsultationType.trim() === "",
+      privacyAccepted: !privacyAccepted,
+    };
+
+    setErrors(newErrors);
+
+    // 📌 Si hay errores, mostrar alerta y no enviar
+    if (Object.values(newErrors).some((error) => error)) {
+      Swal.fire({
+        icon: "error",
+        title: "Oops...",
+        text: "Por favor, completa todos los campos obligatorios.",
+        confirmButtonColor: "#c0a080",
+      });
+      return;
+    }
+
+    // 📌 Si todo está bien, enviar la reserva
+    Swal.fire({
+      icon: "success",
+      title: "¡Reserva exitosa!",
+      text: "Tu cita ha sido reservada correctamente.",
+      confirmButtonColor: "#4A6F5E",
+    });
+
     console.log({
       firstName,
       email,
@@ -60,6 +113,16 @@ const Reserva = () => {
       comments,
       privacyAccepted,
     });
+
+    // 📌 Resetear formulario después de la reserva
+    setFirstName("");
+    setEmail("");
+    setSelectedDate(null);
+    setSelectedTime("");
+    setSelectedOption("");
+    setSelectedConsultationType("");
+    setComments("");
+    setPrivacyAccepted(false);
   };
 
   const options = [
@@ -79,11 +142,9 @@ const Reserva = () => {
   ];
 
   const consultationTypes = [
-    "Consulta inicial",
-    "Seguimiento",
     "Terapia Individual - 80€ ",
     "Terapia de Pareja - 105€",
-    'Pack 4 Sesiones - 300€"',
+    "Pack 4 Sesiones - 300€",
   ];
 
   const event = selectedDate
@@ -100,197 +161,160 @@ const Reserva = () => {
 
   return (
     <>
-      <Grid container spacing={2} sx={{ marginTop: 2 }}>
-        <Grid item xs={12} md={8} sx={{ marginTop: 2 }}>
-          <Typography
-            variant="h4"
-            sx={{
-              color: "rgb(104, 96, 82)",
-              fontFamily: "Playfair Display",
-              zIndex: 10,
-              position: "relative",
-              width: "100%",
-              textAlign: "center",
-              fontWeight: "bold",
-              fontSize: "2.3rem",
-              marginLeft: "-100px",
-              marginTop: "20px",
-              marginBottom: "50px",
-            }}
-          >
-            Reserva tu Terapia
-          </Typography>
-          <Box
-            component="form"
-            onSubmit={handleSubmit}
-            sx={{
-              p: 3,
-              backgroundColor: "#f5eedc",
-              border: "2px solid #d2b48c",
-              borderRadius: "25px",
-              boxShadow:
-                "0 0 5px 2px rgba(0, 0, 0, 0.7), 0 0 10px 4px rgba(34, 139, 34, 0.2), 0 0 15px 6px rgba(0, 0, 0, 0.2)",
-              overflow: "hidden",
-              width: "80%",
-              fontFamily: "Playfair Display",
-              marginBottom: 10, 
-            }}
-          >
-            <TextField
-              label="Nombre Completo"
-              value={firstName}
-              onChange={(e) => setFirstName(e.target.value)}
-              fullWidth
-              margin="normal"
-              InputLabelProps={{ style: { fontFamily: "Playfair Display" } }}
-              InputProps={{ style: { fontFamily: "Playfair Display" } }}
-            />
-            <TextField
-              label="Correo Electrónico"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              fullWidth
-              margin="normal"
-              InputLabelProps={{ style: { fontFamily: "Playfair Display" } }}
-              InputProps={{ style: { fontFamily: "Playfair Display" } }}
-            />
-            <Calendar
-              selectedDate={selectedDate}
-              setSelectedDate={setSelectedDate}
-              selectedTime={selectedTime}
-              setSelectedTime={setSelectedTime}
-            />
-            <TextField
-              select
-              label="Motivo de la consulta"
-              value={selectedOption}
-              onChange={(e) => setSelectedOption(e.target.value)}
-              fullWidth
-              margin="normal"
-              InputLabelProps={{ style: { fontFamily: "Playfair Display" } }}
-              InputProps={{ style: { fontFamily: "Playfair Display" } }}
-            >
-              {options.map((option) => (
-                <MenuItem
-                  key={option}
-                  value={option}
-                  sx={{ fontFamily: "Playfair Display" }}
-                >
-                  {option}
-                </MenuItem>
-              ))}
-            </TextField>
-            <TextField
-              select
-              label="Tipo de terapia"
-              value={selectedConsultationType}
-              onChange={(e) => setSelectedConsultationType(e.target.value)}
-              fullWidth
-              margin="normal"
-              InputLabelProps={{ style: { fontFamily: "Playfair Display" } }}
-              InputProps={{ style: { fontFamily: "Playfair Display" } }}
-            >
-              {consultationTypes.map((type) => (
-                <MenuItem
-                  key={type}
-                  value={type}
-                  sx={{ fontFamily: "Playfair Display" }}
-                >
-                  {type}
-                </MenuItem>
-              ))}
-            </TextField>
-            <TextField
-              label="Comentarios"
-              value={comments}
-              onChange={(e) => setComments(e.target.value)}
-              fullWidth
-              margin="normal"
-              multiline
-              rows={4}
-              InputLabelProps={{ style: { fontFamily: "Playfair Display" } }}
-              InputProps={{ style: { fontFamily: "Playfair Display" } }}
-            />
-            <FormControlLabel
-              control={
-                <Checkbox
-                  checked={privacyAccepted}
-                  onChange={(e) => setPrivacyAccepted(e.target.checked)}
-                  name="privacyAccepted"
-                  color="primary"
-                />
-              }
-              label={
-                <Typography
-                  sx={{ fontFamily: "Playfair Display", fontStyle: "italic" }}
-                >
-                  He leído y acepto las políticas de privacidad
-                </Typography>
-              }
-            />
-            <Typography
+      <BackgroundContainer>
+        <Title variant="h4">Reserva tu Terapia</Title>
+
+        <Grid container spacing={2}>
+          <Grid item xs={12} md={8}>
+            <Box
+              component="form"
+              onSubmit={handleSubmit}
               sx={{
-                fontFamily: "Playfair Display",
-                fontSize: "0.7em",
-                marginTop: "8px",
-                marginBottom: "10px",
-              }}
-            >
-              Al enviar el formulario se solicitan datos como tu email y nombre
-              que se almacenan en una cookie para que no tengas que volver a
-              completarlos en próximos envíos. Para enviar el formulario debes
-              aceptar nuestra política de privacidad. Responsable de los datos:
-              Daniela Arrázola Benítez | Finalidad: Responder a solicitudes del
-              formulario | Legitimación: Tu consentimiento expreso |
-              Destinatario: Daniela Arrázola Benítez (datos almacenados sólo en
-              cliente email) | Derechos: Tienes derecho al acceso,
-              rectificación, supresión, limitación, portabilidad y olvido de tus
-              datos.
-            </Typography>
-            {event && (
-              <AddToCalendar
-                event={event}
-                buttonLabel="Agregar a mi calendario"
-              />
-            )}
-            <Button
-              type="submit"
-              variant="contained"
-              color="primary"
-              sx={{
-                fontFamily: "Playfair Display",
+                p: 4,
+                backgroundColor: "#f5eedc",
+                border: "3px solid #d2b48c",
+                borderRadius: "25px",
+                boxShadow:
+                  "0 6px 12px rgba(0, 0, 0, 0.3), 0 0 10px 3px rgba(34, 139, 34, 0.2)",
                 width: "100%",
-                fontSize: "1.1em",
-                backgroundColor: "rgba(48,84,69,0.5)",
-                border: "2px solid #4A6F5E",
-                borderRadius: "20px",
-                color: "#F5EEDC",
-                display: "flex",
-                textDecoration: "none",
-                boxSizing: "border-box",
-                transition:
-                  "background-color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease",
-                "&:hover": {
-                  backgroundColor: "rgba(245,238,220,0.5)",
-                  color: "#305445",
-                },
-                "& svg": {
-                  color: "white",
-                  marginRight: "8px",
-                },
+                marginTop: "20px",
+                fontFamily: "Playfair Display",
               }}
             >
-              Reservar
-            </Button>
-          </Box>
+              <TextField
+                label="Nombre Completo"
+                value={firstName}
+                onChange={(e) => setFirstName(e.target.value)}
+                fullWidth
+                margin="normal"
+                error={errors.firstName} // 📌 Aplica error si el campo está vacío
+                helperText={errors.firstName ? "Este campo es obligatorio" : ""}
+                required
+              />
+              <TextField
+                label="Correo Electrónico"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                fullWidth
+                margin="normal"
+                error={errors.email} // 📌 Aplica error si el campo está vacío
+                helperText={
+                  errors.email ? "Introduce un correo electrónico válido" : ""
+                }
+                required
+              />
+              <Calendar
+                selectedDate={selectedDate}
+                setSelectedDate={setSelectedDate}
+                selectedTime={selectedTime}
+                setSelectedTime={setSelectedTime}
+              />
+              <TextField
+                select
+                label="Motivo de la consulta"
+                value={selectedOption}
+                onChange={(e) => setSelectedOption(e.target.value)}
+                fullWidth
+                margin="normal"
+                error={errors.selectedOption} // 📌 Aplica error si el campo está vacío
+                helperText={
+                  errors.selectedOption ? "Este campo es obligatorio" : ""
+                }
+                required
+              >
+                {options.map((option) => (
+                  <MenuItem key={option} value={option}>
+                    {option}
+                  </MenuItem>
+                ))}
+              </TextField>
+              <TextField
+                select
+                label="Tipo de terapia"
+                value={selectedConsultationType}
+                onChange={(e) => setSelectedConsultationType(e.target.value)}
+                fullWidth
+                margin="normal"
+                error={errors.selectedConsultationType} // 📌 Aplica error si el campo está vacío
+                helperText={
+                  errors.selectedConsultationType
+                    ? "Este campo es obligatorio"
+                    : ""
+                }
+                required
+              >
+                {consultationTypes.map((type) => (
+                  <MenuItem key={type} value={type}>
+                    {type}
+                  </MenuItem>
+                ))}
+              </TextField>
+              <TextField
+                label="Comentarios"
+                value={comments}
+                onChange={(e) => setComments(e.target.value)}
+                fullWidth
+                margin="normal"
+                multiline
+                rows={4}
+              />
+              <FormControlLabel
+                control={
+                  <Checkbox
+                    checked={privacyAccepted}
+                    onChange={(e) => setPrivacyAccepted(e.target.checked)}
+                    color="primary"
+                    error={errors.privacyAccepted} // 📌 Aplica error si el campo está vacío
+                    helperText={
+                      errors.privacyAccepted ? "Este campo es obligatorio" : ""
+                    }
+                    required
+                  />
+                }
+                label={
+                  <Typography
+                    sx={{ fontFamily: "Playfair Display", fontStyle: "italic" }}
+                  >
+                    He leído y acepto las políticas de privacidad
+                  </Typography>
+                }
+              />
+              {event && (
+                <AddToCalendar
+                  event={event}
+                  buttonLabel="Agregar a mi calendario"
+                />
+              )}
+              <Button
+                type="submit"
+                variant="contained"
+                sx={{
+                  width: "100%",
+                  fontSize: "1.2em",
+                  backgroundColor: "#4A6F5E",
+                  border: "2px solid #c0a080",
+                  borderRadius: "20px",
+                  color: "#F5EEDC",
+                  marginTop: "10px",
+                  transition:
+                    "background-color 0.3s ease, box-shadow 0.3s ease",
+                  "&:hover": {
+                    backgroundColor: "#c0a080",
+                    color: "#305445",
+                  },
+                }}
+              >
+                Reservar
+              </Button>
+            </Box>
+          </Grid>
+          <Grid item xs={12} md={4}>
+            <ReservationVideo />
+          </Grid>
         </Grid>
-        <Grid item xs={12} md={4} sx={{ marginTop: 4 }}>
-          <ReservationVideo />
-        </Grid>
-      </Grid>
-      <Section>
-        <InfoBoxesReserva />
-      </Section>
+      </BackgroundContainer>
+
+      <InfoBoxesReserva />
     </>
   );
 };

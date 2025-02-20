@@ -22,6 +22,8 @@ const FooterText = styled(Typography)`
 
 const FooterLinks = styled(Box)`
   display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
   gap: 15px;
   margin-top: 5px;
 
@@ -30,7 +32,7 @@ const FooterLinks = styled(Box)`
     text-decoration: none;
     font-weight: 500;
     transition: color 0.3s;
-    cursor: pointer; /*  cursor pointer */
+    cursor: pointer;
 
     &:hover {
       color: #2c7a7b;
@@ -54,6 +56,12 @@ const Footer = () => {
         <Divider orientation="vertical" flexItem sx={{ bgcolor: "#557c70" }} />
         <Link onClick={() => handleNavigate("/privacy-policy")}>
           Política de Privacidad
+        </Link>
+        <Divider orientation="vertical" flexItem sx={{ bgcolor: "#557c70" }} />
+        <Link onClick={() => handleNavigate("/legal-notice")}>Aviso Legal</Link>
+        <Divider orientation="vertical" flexItem sx={{ bgcolor: "#557c70" }} />
+        <Link onClick={() => handleNavigate("/cookies-policy")}>
+          Política de Cookies
         </Link>
         <Divider orientation="vertical" flexItem sx={{ bgcolor: "#557c70" }} />
         <Link onClick={() => handleNavigate("/faq")}>Preguntas Frecuentes</Link>

@@ -65,7 +65,7 @@ const WhatsAppContact = () => {
       <IconButton
         onClick={() => setShowOptions(!showOptions)}
         sx={{
-          color: "#128C7E",
+          color: "#0F6C5E",
           fontSize: "3rem",
           "&:hover": {
             color: "#f5eedc",

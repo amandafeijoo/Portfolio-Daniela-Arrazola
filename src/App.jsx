@@ -12,7 +12,7 @@ import Services from "./Components/Services";
 import Contact from "./Components/Contact";
 import Reserva from "./Components/Reserva";
 import Calendar from "./Components/Calendar";
-import Service from "./Components/Service1";
+import Service1 from "./Components/Service1";
 import Service2 from "./Components/Service2";
 import Service3 from "./Components/Service3";
 import Service4 from "./Components/Service4";
@@ -34,6 +34,8 @@ import Testimonials from "./Components/testimonials";
 import PrivacyPolicy from "./Components/PrivacyPolicy";
 import Login from "./Components/Login";
 import AdminDashboard from "./Components/AdminDashboard";
+import LegalNotice from "./Components/LegalNotice";
+import CookiesPolicy from "./Components/CookiesPolicy";
 
 const Section = styled.div`
   margin: 20px 0;
@@ -169,7 +171,7 @@ function App() {
           path="/service1"
           element={
             <Section>
-              <Service />
+              <Service1 />
             </Section>
           }
         />
@@ -299,6 +301,22 @@ function App() {
           element={
             <Section>
               <AdminDashboard />
+            </Section>
+          }
+        />
+        <Route
+          path="/legal-notice"
+          element={
+            <Section>
+              <LegalNotice />
+            </Section>
+          }
+        />
+        <Route
+          path="/cookies-policy"
+          element={
+            <Section>
+              <CookiesPolicy />
             </Section>
           }
         />

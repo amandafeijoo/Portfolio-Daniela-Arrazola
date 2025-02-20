@@ -1,3 +1,4 @@
+import { useNavigate } from "react-router-dom";
 import { Box, Typography, Button } from "@mui/material";
 import { motion } from "framer-motion";
 import "@fontsource/playfair-display";
@@ -21,6 +22,12 @@ const plans = [
 ];
 
 const PricingCards = () => {
+  const navigate = useNavigate();
+
+  const handleNavigate = () => {
+    navigate("/reserva");
+  };
+
   return (
     <Box
       sx={{
@@ -51,8 +58,8 @@ const PricingCards = () => {
           width: "100%",
           height: "100%",
           objectFit: "cover",
-          zIndex: -1, 
-          opacity: 0.5, 
+          zIndex: -1,
+          opacity: 0.5,
         }}
       >
         <source src="/images/Precios-4.mp4" type="video/mp4" />
@@ -64,8 +71,8 @@ const PricingCards = () => {
           whileHover={{ scale: 1.03 }}
           transition={{ duration: 0.3 }}
           style={{
-            background: "rgba(255, 255, 255, 0.8)", 
-            border: "2px solid #c2a97c", 
+            background: "rgba(255, 255, 255, 0.8)",
+            border: "2px solid #c2a97c",
             padding: "40px",
             borderRadius: "15px",
             boxShadow: "4px 4px 10px rgba(0, 0, 0, 0.1)",
@@ -73,7 +80,7 @@ const PricingCards = () => {
             width: "100%",
             maxWidth: "320px",
             color: "#4b3f2f",
-            zIndex: 2, 
+            zIndex: 2,
           }}
         >
           <Typography
@@ -123,6 +130,7 @@ const PricingCards = () => {
                 color: "#f5eedc",
               },
             }}
+            onClick={handleNavigate}
           >
             Reservar una cita
           </Button>

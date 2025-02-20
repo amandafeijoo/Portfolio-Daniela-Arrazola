@@ -42,8 +42,8 @@ const InfoBoxesReserva = () => {
       container
       spacing={2}
       sx={{
-        marginTop: 1,
-        marginBottom: 4,
+        marginTop: 9,
+        marginBottom: 8,
         display: "flex",
         flexWrap: "nowrap",
         overflowX: "auto",

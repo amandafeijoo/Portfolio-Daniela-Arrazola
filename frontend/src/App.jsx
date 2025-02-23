@@ -1,0 +1,344 @@
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import { lazy, Suspense } from "react";
+import styled from "styled-components";
+import GlobalStyle from "./GlobalStyle";
+import Header from "./Components/Header";
+
+// Importación de componentes con Lazy Loading
+const Home = lazy(() => import("./Components/Home"));
+const AcercaDe = lazy(() => import("./Components/AcercaDe"));
+const ContactForm = lazy(() => import("./Components/ContactForm"));
+const ImagenDaniela = lazy(() => import("./Components/ImagenDaniela"));
+const FullAcerca = lazy(() => import("./Components/FullAcerca"));
+const Services = lazy(() => import("./Components/Services"));
+const Contact = lazy(() => import("./Components/Contact"));
+const Reserva = lazy(() => import("./Components/Reserva"));
+const Calendar = lazy(() => import("./Components/Calendar"));
+const Service1 = lazy(() => import("./Components/Service1"));
+const Service2 = lazy(() => import("./Components/Service2"));
+const Service3 = lazy(() => import("./Components/Service3"));
+const Service4 = lazy(() => import("./Components/Service4"));
+const Service5 = lazy(() => import("./Components/Service5"));
+const Service6 = lazy(() => import("./Components/Service6"));
+const Service7 = lazy(() => import("./Components/Service7"));
+const Service8 = lazy(() => import("./Components/Service8"));
+const Service9 = lazy(() => import("./Components/Service9"));
+const Service10 = lazy(() => import("./Components/Service10"));
+const Service11 = lazy(() => import("./Components/Service11"));
+const Service12 = lazy(() => import("./Components/Service12"));
+const Service13 = lazy(() => import("./Components/Service13"));
+const ImageTextEffect = lazy(() => import("./Components/ImageTextEffect"));
+const InfiniteScrollGallery = lazy(() => import("./Components/InfiniteScrollGallery"));
+const PricingCards = lazy(() => import("./Components/PricingCards"));
+const InfoBoxesReserva = lazy(() => import("./Components/InfoBoxesReserva"));
+const FAQSection = lazy(() => import("./Components/FAQSection"));
+const Testimonials = lazy(() => import("./Components/Testimonials"));
+const PrivacyPolicy = lazy(() => import("./Components/PrivacyPolicy"));
+const Login = lazy(() => import("./Components/Login"));
+const AdminDashboard = lazy(() => import("./Components/AdminDashboard"));
+const LegalNotice = lazy(() => import("./Components/LegalNotice"));
+const CookiesPolicy = lazy(() => import("./Components/CookiesPolicy"));
+const Footer = lazy(() => import("./Components/Footer"));
+const TestimonialForm = lazy (()=> import ("./Components/TestimonialForm"));
+
+const Section = styled.div`
+  margin: 20px 0;
+  padding: 20px;
+  border: 2px solid #ccc;
+  border-radius: 8px;
+  box-shadow: 0 0 5px 2px rgba(0, 0, 0, 0.2),
+    0 0 10px 4px rgba(34, 139, 34, 0.2), 0 0 15px 6px rgba(0, 0, 0, 0.2);
+  background-color: #8fa99e;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  position: relative;
+  z-index: 1;
+
+  &:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+  }
+`;
+
+const StickySection = styled.div`
+  position: -webkit-sticky; /* For Safari */
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #8fa99e;
+  box-shadow: 0 0 5px 2px rgba(0, 0, 0, 0.2),
+    0 0 10px 4px rgba(34, 139, 34, 0.2), 0 0 15px 6px rgba(0, 0, 0, 0.2);
+  border: 2px solid #d2b48c;
+  z-index: ${(props) => props.zIndex || 0};
+`;
+
+const Container = styled.div`
+  height: 300vh;
+  overflow: visible;
+`;
+
+function App() {
+  return (
+    <Router>
+      <GlobalStyle />
+      <Header />
+      <Suspense fallback={<div>Loading...</div>}>
+        <Routes>
+          <Route
+            path="/"
+            element={
+              <>
+                <Section>
+                  <Home />
+                </Section>
+                <Section>
+                  <ImagenDaniela />
+                </Section>
+                <Container>
+                  <StickySection style={{ zIndex: 1 }}>
+                    <ImageTextEffect />
+                  </StickySection>
+                  <StickySection style={{ zIndex: 2 }}>
+                    <InfiniteScrollGallery />
+                  </StickySection>
+                  <StickySection style={{ zIndex: 3 }}>
+                    <PricingCards />
+                  </StickySection>
+                </Container>
+                <Section>
+                  <InfoBoxesReserva />
+                </Section>
+                <Section>
+                  <Testimonials />
+                </Section>
+              </>
+            }
+          />
+          <Route
+            path="/acerca-de"
+            element={
+              <Section>
+                <AcercaDe />
+              </Section>
+            }
+          />
+          <Route
+            path="/full-acerca"
+            element={
+              <Section>
+                <FullAcerca />
+              </Section>
+            }
+          />
+          <Route
+            path="/contacto"
+            element={
+              <Section>
+                <ContactForm />
+              </Section>
+            }
+          />
+          <Route
+            path="/servicios"
+            element={
+              <Section>
+                <Services />
+              </Section>
+            }
+          />
+          <Route
+            path="/contact"
+            element={
+              <Section>
+                <Contact />
+              </Section>
+            }
+          />
+          <Route
+            path="/reserva"
+            element={
+              <Section>
+                <Reserva />
+              </Section>
+            }
+          />
+          <Route
+            path="/calendar"
+            element={
+              <Section>
+                <Calendar />
+              </Section>
+            }
+          />
+          <Route
+            path="/service1"
+            element={
+              <Section>
+                <Service1 />
+              </Section>
+            }
+          />
+          <Route
+            path="/service2"
+            element={
+              <Section>
+                <Service2 />
+              </Section>
+            }
+          />
+          <Route
+            path="/service3"
+            element={
+              <Section>
+                <Service3 />
+              </Section>
+            }
+          />
+          <Route
+            path="/service4"
+            element={
+              <Section>
+                <Service4 />
+              </Section>
+            }
+          />
+          <Route
+            path="/service5"
+            element={
+              <Section>
+                <Service5 />
+              </Section>
+            }
+          />
+          <Route
+            path="/service6"
+            element={
+              <Section>
+                <Service6 />
+              </Section>
+            }
+          />
+          <Route
+            path="/service7"
+            element={
+              <Section>
+                <Service7 />
+              </Section>
+            }
+          />
+          <Route
+            path="/service8"
+            element={
+              <Section>
+                <Service8 />
+              </Section>
+            }
+          />
+          <Route
+            path="/service9"
+            element={
+              <Section>
+                <Service9 />
+              </Section>
+            }
+          />
+          <Route
+            path="/service10"
+            element={
+              <Section>
+                <Service10 />
+              </Section>
+            }
+          />
+          <Route
+            path="/service11"
+            element={
+              <Section>
+                <Service11 />
+              </Section>
+            }
+          />
+          <Route
+            path="/service12"
+            element={
+              <Section>
+                <Service12 />
+              </Section>
+            }
+          />
+          <Route
+            path="/service13"
+            element={
+              <Section>
+                <Service13 />
+              </Section>
+            }
+          />
+          <Route
+            path="/faq"
+            element={
+              <Section>
+                <FAQSection />
+              </Section>
+            }
+          />
+          <Route
+            path="/privacy-policy"
+            element={
+              <Section>
+                <PrivacyPolicy />
+              </Section>
+            }
+          />
+          <Route
+            path="/login"
+            element={
+              <Section>
+                <Login />
+              </Section>
+            }
+          />
+          <Route
+            path="/admin-dashboard"
+            element={
+              <Section>
+                <AdminDashboard />
+              </Section>
+            }
+          />
+          <Route
+            path="/legal-notice"
+            element={
+              <Section>
+                <LegalNotice />
+              </Section>
+            }
+          />
+          <Route
+            path="/cookies-policy"
+            element={
+              <Section>
+                <CookiesPolicy />
+              </Section>
+            }
+          />
+          <Route
+            path="/testimonios"
+            element={
+              <Section>
+                <TestimonialForm />
+              </Section>
+            }
+          />
+        </Routes>
+      </Suspense>
+      <Section>
+        <Footer />
+      </Section>
+    </Router>
+  );
+}
+
+export default App;

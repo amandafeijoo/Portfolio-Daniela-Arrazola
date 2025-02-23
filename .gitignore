@@ -1,2 +1,29 @@
+# Evitar que se suba la carpeta de dependencias de Node.js
 node_modules/
-.env 
+
+# Evitar que se suba la carpeta de dependencias de Python
+venv/
+env/
+
+# Evitar que se suban archivos de configuración sensibles
+.env
+.env.local
+.env.development
+.env.production
+
+# Archivos de caché de Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Archivos de caché de VSCode
+.vscode/
+
+# Archivos de logs
+logs/
+*.log
+
+# Archivos de compilación de React/Vite
+dist/
+build/

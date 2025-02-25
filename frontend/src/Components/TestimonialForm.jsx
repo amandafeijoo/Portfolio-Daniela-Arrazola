@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { useSearchParams } from "react-router-dom";
 import { TextField, Button, Box, Typography, Paper } from "@mui/material";
 import styled from "styled-components";
-import Swal from "sweetalert2"; // ✅ Importa SweetAlert2
+import Swal from "sweetalert2";
 
 const FormContainer = styled(Paper)`
   background: rgb(219, 193, 172);
@@ -25,6 +25,7 @@ const TestimonialForm = () => {
   const [nombre, setNombre] = useState("");
   const [email, setEmail] = useState("");
   const [mensaje, setMensaje] = useState("");
+  const [imagen, setImagen] = useState(null);
   const [reservaId, setReservaId] = useState(null);
   const [searchParams] = useSearchParams();
 
@@ -34,6 +35,12 @@ const TestimonialForm = () => {
       setReservaId(id);
     }
   }, [searchParams]);
+
+  const handleFileChange = (e) => {
+    if (e.target.files && e.target.files[0]) {
+      setImagen(e.target.files[0]);
+    }
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -49,15 +56,18 @@ const TestimonialForm = () => {
     }
   
     try {
+      const formData = new FormData();
+      formData.append("reserva_id", reservaId);
+      formData.append("nombre_cliente", nombre);
+      formData.append("email_cliente", email);
+      formData.append("mensaje", mensaje);
+      if (imagen) {
+        formData.append("imagen", imagen);
+      }
+  
       const response = await fetch("http://localhost:8000/api/testimonios/crear/", {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          reserva_id: reservaId,
-          nombre_cliente: nombre,
-          email_cliente: email,
-          mensaje,
-        }),
+        body: formData,
       });
   
       if (response.ok) {
@@ -71,15 +81,33 @@ const TestimonialForm = () => {
         setNombre("");
         setEmail("");
         setMensaje("");
+        setImagen(null);
       } else {
-        Swal.fire({
-          icon: "error",
-          title: "Error",
-          text: "Hubo un problema al enviar el testimonio.",
-          confirmButtonColor: "#b07241",
-        });
+        const errorData = await response.json();
+        if (errorData.error === "Ya existe un testimonio para esta reserva") {
+          Swal.fire({
+            icon: "error",
+            title: "Testimonio ya existente",
+            text: "Ya has dejado un testimonio. No se pueden dejar 2 testimonios.",
+            confirmButtonColor: "#b07241",
+          });
+        } else if (errorData.error === "El correo no coincide con la reserva") {
+          Swal.fire({
+            icon: "error",
+            title: "Correo no registrado",
+            text: "El correo proporcionado no coincide con la reserva.",
+            confirmButtonColor: "#b07241",
+          });
+        } else {
+          Swal.fire({
+            icon: "error",
+            title: "Error",
+            text: "Hubo un problema al enviar el testimonio.",
+            confirmButtonColor: "#b07241",
+          });
+        }
       }
-    } catch (error) { // ✅ Aquí es donde debe estar el catch
+    } catch (error) {
       console.error("Error de conexión:", error);
       Swal.fire({
         icon: "error",
@@ -90,7 +118,6 @@ const TestimonialForm = () => {
     }
   };
   
-      
 
   return (
     <Box
@@ -109,10 +136,60 @@ const TestimonialForm = () => {
           Deja tu Testimonio
         </Typography>
         <form onSubmit={handleSubmit}>
-          <TextField label="Nombre" fullWidth value={nombre} onChange={(e) => setNombre(e.target.value)} sx={{ mb: 2 }} required />
-          <TextField label="Email" type="email" fullWidth value={email} onChange={(e) => setEmail(e.target.value)} sx={{ mb: 2 }} required />
-          <TextField label="Mensaje" fullWidth multiline rows={4} value={mensaje} onChange={(e) => setMensaje(e.target.value)} sx={{ mb: 2 }} required />
-          <StyledButton type="submit" variant="contained">Enviar Testimonio</StyledButton>
+          <TextField
+            label="Nombre"
+            fullWidth
+            value={nombre}
+            onChange={(e) => setNombre(e.target.value)}
+            sx={{ mb: 2 }}
+            required
+          />
+          <TextField
+            label="Email"
+            type="email"
+            fullWidth
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            sx={{ mb: 2 }}
+            required
+          />
+          <TextField
+            label="Mensaje"
+            fullWidth
+            multiline
+            rows={4}
+            value={mensaje}
+            onChange={(e) => setMensaje(e.target.value)}
+            sx={{ mb: 2 }}
+            required
+          />
+          {/* Input para subir imagen */}
+          <input
+            type="file"
+            accept="image/png, image/jpeg"
+            onChange={handleFileChange}
+            style={{ marginBottom: "15px" }}
+          />
+          <Typography variant="body2" sx={{ mb: 2 }}>
+            Sube tu foto (*opcional)
+          </Typography>
+          {/* Vista previa y opción de eliminar la imagen */}
+          {imagen && (
+            <Box sx={{ mb: 2, textAlign: "center" }}>
+              <Typography variant="body2">Imagen seleccionada:</Typography>
+              <img
+                src={URL.createObjectURL(imagen)}
+                alt="Vista previa"
+                style={{ width: "100px", height: "auto", margin: "10px auto", display: "block" }}
+              />
+              <Button variant="outlined" color="error" onClick={() => setImagen(null)}>
+                Eliminar foto
+              </Button>
+            </Box>
+          )}
+          <StyledButton type="submit" variant="contained">
+            Enviar Testimonio
+          </StyledButton>
         </form>
       </FormContainer>
     </Box>
@@ -120,4 +197,3 @@ const TestimonialForm = () => {
 };
 
 export default TestimonialForm;
-

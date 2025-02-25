@@ -74,7 +74,7 @@ const ImageTextEffect = () => {
   sx={{
     position: "absolute",
     top: "12%",
-    left: "68%",
+    left: "66%",
     backgroundColor: "rgb(120, 150, 131)", // Verde suave de la paleta
     color: "#f5eedc", // Crema para contraste
     fontSize: { xs: "1rem", md: "1.2rem" },

@@ -13,7 +13,7 @@ import Calendar from "./Calendar";
 import "@fontsource/playfair-display";
 import ReservationVideo from "./ReservationVideo";
 import InfoBoxesReserva from "./InfoBoxesReserva";
-import AddToCalendar from "react-add-to-calendar";
+// import AddToCalendar from "react-add-to-calendar";
 import styled from "styled-components";
 import Swal from "sweetalert2";
 
@@ -56,6 +56,8 @@ const Reserva = () => {
   const [selectedConsultationType, setSelectedConsultationType] = useState("");
   const [comments, setComments] = useState("");
   const [privacyAccepted, setPrivacyAccepted] = useState(false);
+  // const [event, setEvent] = useState(null);
+
   
   const [errors, setErrors] = useState({
     firstName: false,
@@ -81,6 +83,7 @@ const Reserva = () => {
     "Trastorno Obsesivo Compulsivo",
     "Trastornos del Neurodesarrollo",
     "Trastornos de la conducta alimentaria",
+    "Otro (especifique en el campo de comentarios)"
   ];
 
   const consultationTypes = [
@@ -96,9 +99,9 @@ const Reserva = () => {
   };
 
   // 📌 Manejo del envío del formulario
-  const handleSubmit = async (event) => {
-    event.preventDefault();
-
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+  
     // Validaciones en el frontend antes de enviar la solicitud
     const newErrors = {
       firstName: firstName.trim() === "",
@@ -108,11 +111,11 @@ const Reserva = () => {
       selectedConsultationType: selectedConsultationType.trim() === "",
       privacyAccepted: !privacyAccepted,
     };
-
+  
     setErrors(newErrors);
-
+  
     if (Object.values(newErrors).some((error) => error)) {
-      Swal.fire({
+      await Swal.fire({
         icon: "error",
         title: "Oops...",
         text: "Por favor, completa todos los campos obligatorios.",
@@ -120,8 +123,8 @@ const Reserva = () => {
       });
       return;
     }
-
-    // 📌 Datos a enviar al backend
+  
+    // Datos a enviar al backend
     const reservaData = {
       nombre_completo: firstName,
       email: email,
@@ -132,7 +135,7 @@ const Reserva = () => {
       comentarios: comments,
       privacidad_aceptada: privacyAccepted,
     };
-
+  
     try {
       const response = await fetch("http://localhost:8000/api/reservas/crear/", {
         method: "POST",
@@ -141,26 +144,26 @@ const Reserva = () => {
         },
         body: JSON.stringify(reservaData),
       });
-
+  
       const data = await response.json();
-
+  
       if (!response.ok) {
         if (data.errors) {
-          Swal.fire({
+          await Swal.fire({
             icon: "error",
             title: "Error en la reserva",
             text: Object.values(data.errors).join("\n"),
             confirmButtonColor: "#c0a080",
           });
         } else if (data.detail) {
-          Swal.fire({
+          await Swal.fire({
             icon: "error",
             title: "Error",
             text: data.detail,
             confirmButtonColor: "#c0a080",
           });
         } else {
-          Swal.fire({
+          await Swal.fire({
             icon: "error",
             title: "Error",
             text: "Hubo un problema al realizar la reserva.",
@@ -169,9 +172,9 @@ const Reserva = () => {
         }
         return;
       }
-
+  
       if (data.errors && data.errors.includes("Ya existe una reserva en esta fecha y hora.")) {
-        Swal.fire({
+        await Swal.fire({
           icon: "warning",
           title: "Horario no disponible",
           text: "Ya existe una reserva en esta fecha y hora. Por favor, elige otro horario.",
@@ -179,14 +182,38 @@ const Reserva = () => {
         });
         return;
       }
-
-      Swal.fire({
+  
+      // Preguntar al usuario si desea agregar la cita a su calendario
+      const result = await Swal.fire({
         icon: "success",
         title: "¡Reserva exitosa!",
         text: "Tu cita ha sido reservada correctamente.",
-        confirmButtonColor: "#4A6F5E",
+        // showCancelButton: true,
+        // confirmButtonText: "Sí, agregar",
+        // cancelButtonText: "No, gracias",
+        // confirmButtonColor: "#4A6F5E",
       });
-
+  
+      if (result.isConfirmed) {
+        // Construir el objeto event con la información del formulario
+        const startTime = new Date(selectedDate);
+        const [hours, minutes] = selectedTime.split(":");
+        startTime.setHours(hours, minutes);
+  
+        // Suponiendo que la cita dura 1 hora
+        const endTime = new Date(startTime);
+        endTime.setHours(endTime.getHours() + 1);
+  
+        // setEvent({
+        //   title: `Cita de ${selectedConsultationType}`,
+        //   description: `Nombre: ${firstName}. Motivo: ${selectedOption}.`,
+        //   location: "Online/Presencial",
+        //   startTime: startTime.toISOString(),
+        //   endTime: endTime.toISOString(),
+        // });
+      }
+  
+      // Resetear los campos del formulario
       setFirstName("");
       setEmail("");
       setSelectedDate(null);
@@ -195,9 +222,10 @@ const Reserva = () => {
       setSelectedConsultationType("");
       setComments("");
       setPrivacyAccepted(false);
+  
     } catch (error) {
       console.error("Error en la reserva:", error);
-      Swal.fire({
+      await Swal.fire({
         icon: "error",
         title: "Error del servidor",
         text: "No se pudo procesar tu solicitud. Intenta de nuevo más tarde.",
@@ -205,6 +233,7 @@ const Reserva = () => {
       });
     }
   };
+  
 
 
   return (
@@ -316,23 +345,22 @@ const Reserva = () => {
                     helperText={
                       errors.privacyAccepted ? "Este campo es obligatorio" : ""
                     }
-                    required
                   />
                 }
                 label={
                   <Typography
                     sx={{ fontFamily: "Playfair Display", fontStyle: "italic" }}
                   >
-                    He leído y acepto las políticas de privacidad
+                     He leído y acepto las políticas de privacidad
                   </Typography>
                 }
               />
-              {event && (
+              {/* {event && (
                 <AddToCalendar
                   event={event}
                   buttonLabel="Agregar a mi calendario"
                 />
-              )}
+              )} */}
   <Button
     type="submit" // 📌 Esto hace que el botón ejecute handleSubmit automáticamente
     variant="contained"

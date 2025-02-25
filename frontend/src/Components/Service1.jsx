@@ -88,35 +88,33 @@ const Service1 = () => {
     <>
       <Container>
         <Tabs
-          value={currentIndex}
-          onChange={(event, newValue) => navigate(services[newValue].path)}
-          variant="scrollable"
-          scrollButtons
-          allowScrollButtonsMobile
-          sx={{
-            backgroundColor: "rgb(111, 151, 140)",
-            boxShadow: "0 0 5px rgba(0, 0, 0, 0.8)",
-            border: "2px solid #d2b48c",
-            color: "#fff",
-            borderRadius: "10px",
-            marginBottom: "20px",
-            "& .MuiTabs-indicator": { backgroundColor: "#d2b48c" },
-            "& .MuiTab-root": {
-              color: "#f5eedc",
-              textTransform: "none",
-              fontSize: "1rem",
-              fontFamily: "Playfair Display",
-              "&.Mui-selected": {
-                color: "#d2b48c",
-                fontWeight: "bold",
-              },
-            },
-          }}
-        >
-          {services.map((service) => (
-            <Tab key={service.path} label={service.name} />
-          ))}
-        </Tabs>
+                  value={currentIndex}
+                  onChange={(event, newValue) => navigate(services[newValue].path)}
+                  variant="scrollable"
+                  scrollButtons
+                  allowScrollButtonsMobile
+                  sx={{
+                    backgroundColor: "#4A6F5E",
+                    color: "#fff",
+                    borderRadius: "10px",
+                    marginBottom: "20px",
+                    "& .MuiTabs-indicator": { backgroundColor: "#d2b48c" },
+                    "& .MuiTab-root": {
+                      color: "#f5eedc",
+                      textTransform: "none",
+                      fontSize: "1rem",
+                      fontFamily: "Playfair Display",
+                      "&.Mui-selected": {
+                        color: "#d2b48c",
+                        fontWeight: "bold",
+                      },
+                    },
+                  }}
+                >
+                  {services.map((service) => (
+                    <Tab key={service.path} label={service.name} />
+                  ))}
+                </Tabs>
         <Box
           sx={{
             margin: 2,
@@ -158,7 +156,7 @@ const Service1 = () => {
               <AccordionSummary
                 expandIcon={<ExpandMoreIcon />}
                 sx={{
-                  backgroundColor: "rgba(79, 117, 101, 0.8)",
+                  backgroundColor: "rgba(48, 84, 69, 0.8)",
                   color: "#f5eedc",
                 }}
               >

@@ -68,7 +68,7 @@ const WhatsAppContact = () => {
           color: "#0F6C5E",
           fontSize: "3rem",
           "&:hover": {
-            color: "#f5eedc",
+            color: "#305445",
           },
         }}
       >
@@ -77,12 +77,15 @@ const WhatsAppContact = () => {
 
       {showOptions && (
         <Box
-          mt={2}
+          mt={3}
           p={3}
           backgroundColor="#f5eedc"
           border="2px solid #d2b48c"
           borderRadius={2}
-          width="100%"
+          width="400%"
+          left={-60}
+          zIndex="9999"    
+          position={"absolute"}
           boxShadow="0 0 5px 2px rgba(0, 0, 0, 0.3), 0 0 10px 4px rgba(34, 139, 34, 0.2), 0 0 15px 6px rgba(0, 0, 0, 0.2)"
         >
           <Typography

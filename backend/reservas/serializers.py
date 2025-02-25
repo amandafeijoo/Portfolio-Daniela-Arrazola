@@ -16,22 +16,18 @@ class ReservaSerializer(serializers.ModelSerializer):
             'motivo_consulta', 
             'tipo_terapia', 
             'comentarios',
-            'fecha_reserva_formateada',  # 📌 Agregamos la fecha en formato legible
-            'hora_reserva_formateada',  # 📌 Agregamos la hora en formato legible
+            'cancelada',  # Incluye el campo cancelada
+            'fecha_reserva_formateada',  
+            'hora_reserva_formateada',  
         ]
 
     def get_fecha_reserva_formateada(self, obj):
-        """ Devuelve la fecha en formato legible '21-Feb-2025' """
         return obj.fecha_reserva.strftime("%d-%b-%Y")
 
     def get_hora_reserva_formateada(self, obj):
-        """ Devuelve la hora en formato de 24 horas """
         return obj.hora_reserva.strftime("%H:%M")
 
     def validate(self, data):
-        """
-        Validación en el serializer de DRF para evitar reservas solapadas.
-        """
         if Reserva.objects.filter(
             fecha_reserva=data["fecha_reserva"], hora_reserva=data["hora_reserva"]
         ).exists():

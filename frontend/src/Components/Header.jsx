@@ -297,7 +297,7 @@ const Header = () => {
                 },
               }}
             >
-              Acerca
+              Acerca de 
             </MenuItem>
             <MenuItem
               onClick={handleSubMenuToggle}
@@ -509,7 +509,7 @@ const Header = () => {
                 },
               }}
             >
-              Reservar una Terapia
+              Reserva
             </MenuItem>
             <Divider />
             <Box display="flex" justifyContent="center" mt={1} mb={1}>
@@ -623,7 +623,7 @@ const Header = () => {
       },
     }}
   >
-    Login
+    {/* Login */}
   </Typography>
 </Box>
 

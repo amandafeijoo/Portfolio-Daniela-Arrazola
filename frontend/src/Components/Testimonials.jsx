@@ -8,7 +8,6 @@ import "slick-carousel/slick/slick-theme.css";
 import "@fontsource/playfair-display";
 import { FaCertificate } from "react-icons/fa";
 
-
 // 🔹 Contenedor estilizado
 const StyledContainer = styled(Box)`
   border: 2px solid #d2b48c;
@@ -42,18 +41,21 @@ const Testimonials = () => {
       try {
         const response = await fetch("http://localhost:8000/api/testimonios/");
         const data = await response.json();
-        
+
         console.log("Respuesta API:", data); // 🔥 Verifica lo que devuelve la API
-        
+
         if (!data || !Array.isArray(data.aprobados)) {
-          console.error("Error: La API no devolvió una lista de testimonios aprobados", data);
+          console.error(
+            "Error: La API no devolvió una lista de testimonios aprobados",
+            data
+          );
           return;
         }
-  
+
         // Filtrar duplicados en frontend
         const testimoniosUnicos = Array.from(
-          new Set(data.aprobados.map(t => t.id))
-        ).map(id => data.aprobados.find(t => t.id === id));
+          new Set(data.aprobados.map((t) => t.id))
+        ).map((id) => data.aprobados.find((t) => t.id === id));
 
         console.log("Testimonios filtrados en el frontend:", testimoniosUnicos);
         setTestimonios(testimoniosUnicos);
@@ -61,12 +63,14 @@ const Testimonials = () => {
         console.error("Error obteniendo testimonios:", error);
       }
     };
-  
+
     fetchTestimonios();
   }, []);
 
   return (
-    <StyledContainer> {/* ✅ Se agrega el StyledContainer */}
+    <StyledContainer>
+      {" "}
+      {/* ✅ Se agrega el StyledContainer */}
       <Typography
         variant="h4"
         fontWeight="bold"
@@ -83,7 +87,6 @@ const Testimonials = () => {
           mb: 3,
         }}
       />
-
       {testimonios.length === 0 ? (
         <Typography color="gray">No hay testimonios aún.</Typography>
       ) : (
@@ -96,10 +99,17 @@ const Testimonials = () => {
               transition={{ duration: 0.5 }}
             >
               <Box
-                sx={{ textAlign: "center", padding: { xs: "10px", sm: "20px" } }}
+                sx={{
+                  textAlign: "center",
+                  padding: { xs: "10px", sm: "20px" },
+                }}
               >
                 <Avatar
-                  src={testimonio.image || "/images/default-avatar.png"}
+                  src={
+                    testimonio.imagen
+                      ? `http://localhost:8000${testimonio.imagen}`
+                      : "/images/default-avatar.png"
+                  }
                   alt={testimonio.nombre_cliente}
                   sx={{
                     width: { xs: 60, sm: 80 },
@@ -108,6 +118,7 @@ const Testimonials = () => {
                     mb: 2,
                   }}
                 />
+
                 <Typography
                   variant="h6"
                   fontStyle="italic"
@@ -128,7 +139,10 @@ const Testimonials = () => {
                   }}
                 >
                   — {testimonio.nombre_cliente}{" "}
-                  <span style={{ color: "#c0a080", fontSize: "14px" }}>  <FaCertificate/> Verificado</span>
+                  <span style={{ color: "#c0a080", fontSize: "14px" }}>
+                    {" "}
+                    <FaCertificate /> Verificado
+                  </span>
                 </Typography>
               </Box>
             </motion.div>
@@ -140,9 +154,3 @@ const Testimonials = () => {
 };
 
 export default Testimonials;
-
-
-
-
-
-

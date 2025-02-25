@@ -64,6 +64,7 @@ const StyledButton = styled(Button)`
 const StyledCalendar = styled(Calendar)`
   border: none;
   border-radius: 10px;
+  border: 6px solid rgb(211, 190, 151); // Dorado suave
   box-shadow: 0px 3px 8px rgba(0, 0, 0, 0.2);
   background: white;
   padding: 10px;
@@ -74,77 +75,69 @@ const AdminDashboard = () => {
   const [reservasCanceladas, setReservasCanceladas] = useState([]);
   const [reservasEfectuadas, setReservasEfectuadas] = useState([]);
   const [selectedDate, setSelectedDate] = useState(new Date());
-  const [diasConReserva, setDiasConReserva] = useState([]);
+  const [diasConReserva, setDiasConReserva] = useState({}); // ✅ Cambiar de array a objeto
   const [testimoniosPendientes, setTestimoniosPendientes] = useState([]);
   const [testimoniosAprobados, setTestimoniosAprobados] = useState([]);
   const [testimoniosEliminados, setTestimoniosEliminados] = useState([]);
-  
-
-
 
   useEffect(() => {
-    fetch("http://localhost:8000/api/reservas/")  // ✅ Ahora es correcto
+    fetch("http://localhost:8000/api/reservas/")
       .then((res) => res.json())
       .then((data) => {
         if (!Array.isArray(data)) {
           console.error("Error: La API no devolvió una lista de reservas", data);
           return;
         }
-  
+
         const now = new Date();
         const activas = [];
         const efectuadas = [];
         const canceladas = [];
-        const diasReserva = new Set();
+        const diasReserva = {}; // ✅ Usar un objeto en lugar de un Set()
 
-  
         data.forEach((reserva) => {
           const fechaReserva = new Date(reserva.fecha_reserva);
-          const fechaKey = fechaReserva.toDateString();
+          const fechaKey = fechaReserva.toISOString().split("T")[0]; // ✅ Formato YYYY-MM-DD
 
           if (reserva.cancelada) {
             canceladas.push(reserva);
-            diasReserva[fechaKey] = "cancelada";
+            diasReserva[fechaKey] = "cancelada"; // ✅ Guardar estado
           } else if (fechaReserva >= now) {
             activas.push(reserva);
-            diasReserva[fechaKey] = "futura";
+            diasReserva[fechaKey] = "futura"; // ✅ Guardar estado
           } else {
             efectuadas.push(reserva);
-            diasReserva[fechaKey] = "pasada";
+            diasReserva[fechaKey] = "pasada"; // ✅ Guardar estado
           }
         });
-  
+
         setReservas(activas);
         setReservasEfectuadas(efectuadas);
         setReservasCanceladas(canceladas);
-        setDiasConReserva(diasReserva);
-
+        setDiasConReserva(diasReserva); // ✅ Actualizar el estado con el objeto de fechas
       })
       .catch((error) => console.error("Error obteniendo reservas:", error));
-      fetch("http://localhost:8000/api/testimonios/")
-      .then((res) => res.json())
-      .then((data) => {
-        setTestimoniosAprobados(data.aprobados);
-        setTestimoniosPendientes(data.pendientes);
-      })
-      .catch((error) => console.error("Error obteniendo testimonios:", error));
   }, []);
   
 
-  const handleCancelReserva = (id) => {
-    fetch(`http://localhost:8000/api/reservas/${id}/cancelar/`, { method: "DELETE" })
+const handleCancelReserva = (id) => {
+fetch(`http://localhost:8000/api/reservas/${id}/cancelar/`, { method: "PATCH" })
       .then((response) => {
         if (!response.ok) {
           throw new Error("No se pudo cancelar la reserva");
         }
         return response.json();
       })
-      .then(() => {
-        const reservaCancelada = reservas.find((r) => r.id === id);
-        setReservasCanceladas([...reservasCanceladas, reservaCancelada]);
+      .then((data) => {
+        // ✅ Actualizar el estado de las reservas
+        setReservasCanceladas([...reservasCanceladas, data.reserva]);
         setReservas(reservas.filter((reserva) => reserva.id !== id));
   
-        // ✅ Alerta de éxito
+        // ✅ Agregar la fecha al calendario como cancelada
+        const fechaKey = new Date(data.reserva.fecha_reserva).toDateString();
+        setDiasConReserva((prev) => ({ ...prev, [fechaKey]: "cancelada" }));
+  
+        // ✅ Mostrar alerta de éxito con SweetAlert2
         Swal.fire({
           icon: "success",
           title: "Reserva cancelada",
@@ -153,7 +146,7 @@ const AdminDashboard = () => {
         });
       })
       .catch((error) => {
-        console.error(error); // ✅ Ahora TypeScript no marcará error porque la variable se usa aquí
+        console.error(error);
         Swal.fire({
           icon: "error",
           title: "Error",
@@ -161,7 +154,7 @@ const AdminDashboard = () => {
           confirmButtonColor: "#d33",
         });
       });
-  };
+  };  
   
   const handleApproveTestimonial = (id) => {
     fetch(`http://localhost:8000/api/testimonios/${id}/aprobar/`, { method: "PATCH" })
@@ -250,12 +243,12 @@ const AdminDashboard = () => {
   
   return (
     <DashboardContainer>
-      <Typography variant="h4" fontWeight="bold" sx={{ textAlign: "center", mb: 4, color: "#4b3f2f" }}>
+      <Typography variant="h4" fontWeight="bold" sx={{ textAlign: "center", mb: 4, color: "rgb(71, 53, 39)" }}>
         <FaUserCheck /> Panel de Administración
       </Typography>
 
-     {/* 📅 Calendario de Reservas */}
-     <Section>
+      {/* 📅 Calendario de Reservas */}
+      <Section>
         <Typography variant="h5" fontWeight="bold" sx={{ mb: 2, color: "#4b3f2f" }}>
           <FaCalendarAlt /> Calendario de Reservas
         </Typography>
@@ -263,10 +256,10 @@ const AdminDashboard = () => {
           onChange={setSelectedDate}
           value={selectedDate}
           tileClassName={({ date }) => {
-            const key = date.toDateString();
-            if (diasConReserva[key] === "cancelada") return "cancelada-day";
-            if (diasConReserva[key] === "futura") return "futura-day";
-            if (diasConReserva[key] === "pasada") return "pasada-day";
+            const fechaKey = date.toISOString().split("T")[0]; // ✅ Convertir a formato YYYY-MM-DD
+            if (diasConReserva[fechaKey] === "cancelada") return "cancelada-day";
+            if (diasConReserva[fechaKey] === "futura") return "futura-day";
+            if (diasConReserva[fechaKey] === "pasada") return "pasada-day";
             return "";
           }}
         />
@@ -342,22 +335,34 @@ const AdminDashboard = () => {
 </Section>
 
 <Divider sx={{ margin: "30px 0" }} />
-
 {/* ❌ Reservas Canceladas */}
 <Section>
   <Typography variant="h5" fontWeight="bold" sx={{ mb: 2, color: "#4b3f2f" }}>
     <FaTimes /> Reservas Canceladas
   </Typography>
   {reservasCanceladas.length === 0 ? (
-    <Typography color="gray"><FaExclamationCircle /> No hay reservas canceladas.</Typography>
+    <Typography color="gray">
+      <FaExclamationCircle /> No hay reservas canceladas.
+    </Typography>
   ) : (
     <Table>
+      <TableHead>
+        <TableRow>
+          <TableCell>Nombre</TableCell>
+          <TableCell>Email</TableCell>
+          <TableCell>Fecha</TableCell>
+          <TableCell>Hora</TableCell>
+          <TableCell>Motivo</TableCell>
+        </TableRow>
+      </TableHead>
       <TableBody>
         {reservasCanceladas.map((reserva) => (
           <TableRow key={reserva.id}>
             <TableCell>{reserva.nombre_completo}</TableCell>
+            <TableCell>{reserva.email}</TableCell>
             <TableCell>{reserva.fecha_reserva_formateada}</TableCell>
             <TableCell>{reserva.hora_reserva_formateada}</TableCell>
+            <TableCell>{reserva.motivo_consulta}</TableCell>
           </TableRow>
         ))}
       </TableBody>

@@ -32,17 +32,23 @@ const ContactContainer = styled(Box)`
     justify-content: space-between;
   }
 `;
-
 const WhatsAppContainer = styled.div`
   font-size: 2em;
   margin-top: -10px;
-  margin-right: -20px;
-  position: absolute; 
+  margin-right: -600px;
+  position: absolute;
   width: 300px;
   height: auto;
   overflow: visible;
-  z-index: 200; 
+  z-index: 200;
+
+  /* 🔥 Sobrescribimos el ancho que WhatsAppContact tenga por dentro */
+  & > div {
+    max-width: 100px !important; 
+    width: 100% !important;
+  }
 `;
+
 
 const ContactInfoContainer = styled(Box)`
   display: flex;

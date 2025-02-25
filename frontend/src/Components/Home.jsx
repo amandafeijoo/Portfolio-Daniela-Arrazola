@@ -61,25 +61,8 @@ const Home = () => {
           },
         }}
       >
-        <Button
-          variant="text"
-          sx={{
-            color: "white",
-            fontSize: "1.2rem",
-            fontWeight: "500",
-            textTransform: "none",
-            fontFamily: "Playfair Display",
-            "@media (max-width: 600px)": {
-              fontSize: "0.5rem",
-              marginTop: "42px",
-            },
-          }}
-          onClick={handleNavigateReservar}
-        >
-          Reservar una cita
-        </Button>
-        {/* Flecha animada con framer-motion */}
-        <motion.div
+      {/* Flecha animada con framer-motion */}
+      <motion.div
           animate={{ y: [0, 5, 0] }}
           transition={{ repeat: Infinity, duration: 1.5 }}
         >
@@ -96,6 +79,23 @@ const Home = () => {
             ↓
           </Typography>
         </motion.div>
+        <Button
+          variant="text"
+          sx={{
+            color: "white",
+            fontSize: "1.2rem",
+            fontWeight: "500",
+            textTransform: "none",
+            fontFamily: "Playfair Display",
+            "@media (max-width: 600px)": {
+              fontSize: "0.5rem",
+              marginTop: "42px",
+            },
+          }}
+          onClick={handleNavigateReservar}
+        >
+          Reserva aquí con un click! 
+        </Button>
       </Box>
     </Box>
   );

@@ -26,13 +26,14 @@ const VideoContainer = styled.div`
 
 // 📌 Contenedor Flotante Circular
 const FloatingContainer = styled.div`
-  position: absolute;
-  top: 150px;
-  right: 200px;
+  position: relative; /* Agrega esta línea */
+  top: -50px;
+  right: -100px;
   display: flex;
   flex-direction: row;
   align-items: center;
   gap: 15px;
+    z-index: 1; 
 `;
 
 // 📌 Botón flotante con animación

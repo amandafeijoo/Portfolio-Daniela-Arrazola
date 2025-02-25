@@ -1,8 +1,13 @@
-import { Box, Typography } from "@mui/material";
+import { Box, Typography, Button } from "@mui/material";
 import { motion, useAnimation } from "framer-motion";
 import { useNavigate } from "react-router-dom";
 import { useEffect } from "react";
 import styled from "styled-components";
+import Swal from "sweetalert2";
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
+import "@fontsource/playfair-display";
+// import { FaCertificate } from "react-icons/fa";
 
 // 🟢 Definir un contenedor con los estilos adecuados
 const StyledContainer = styled(Box)`
@@ -70,6 +75,24 @@ const InfiniteScrollGallery = () => {
 
   const handleImageClick = (path) => {
     if (path) navigate(path);
+  };
+
+  // Función para manejar la llamada urgente
+  const handleUrgentCall = () => {
+    Swal.fire({
+      title: "Cita urgente",
+      text: "¿Deseas llamar al número de urgencia +47 983 15 132?",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonText: "Sí, llamar",
+      cancelButtonText: "Cancelar",
+      confirmButtonColor: "#d33",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        // Utiliza el protocolo tel: para iniciar la llamada
+        window.location.href = "tel:+4798315132";
+      }
+    });
   };
 
   useEffect(() => {
@@ -162,9 +185,30 @@ const InfiniteScrollGallery = () => {
           })}
         </motion.div>
       </Box>
+      {/* Botón para solicitud de cita urgente */}
+      <Box sx={{ textAlign: "center", mt: 2 }}>
+        <Button
+          variant="contained"
+          color="error"
+          onClick={handleUrgentCall}
+          sx={{
+            backgroundColor: "#AC5038",
+            color: "#f5eedc",
+            borderRadius:"10px",
+            padding:"10px",
+            fontFamily: "Playfair Display",
+          
+
+            "&:hover": {
+              backgroundColor: "#93362c", // Color de fondo al pasar el mouse
+            },
+          }}
+        >
+          Necesito una cita urgente
+        </Button>
+      </Box>
     </StyledContainer>
   );
 };
 
 export default InfiniteScrollGallery;
-

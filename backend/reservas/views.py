@@ -32,3 +32,30 @@ def obtener_reservas(request):
     reservas = Reserva.objects.all().order_by("fecha_reserva", "hora_reserva")  # Ordenadas por fecha y hora
     serializer = ReservaSerializer(reservas, many=True)
     return Response(serializer.data)
+
+
+@api_view(["PATCH"])  # 👈 Usamos PATCH en lugar de DELETE para marcar como cancelada
+def cancelar_reserva(request, reserva_id):
+    try:
+        reserva = Reserva.objects.get(id=reserva_id)
+
+        if reserva.cancelada:
+            return Response(
+                {"error": "La reserva ya está cancelada."},
+                status=status.HTTP_400_BAD_REQUEST
+            )
+        
+        reserva.cancelada = True  # ✅ Marcar como cancelada
+        reserva.save()
+
+        return Response(
+            {"message": "Reserva cancelada correctamente.", "reserva": ReservaSerializer(reserva).data},
+            status=status.HTTP_200_OK
+        )
+    except Reserva.DoesNotExist:
+        return Response(
+            {"error": "No se encontró la reserva."},
+            status=status.HTTP_404_NOT_FOUND
+        )
+
+

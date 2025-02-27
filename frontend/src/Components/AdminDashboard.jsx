@@ -71,6 +71,9 @@ const StyledCalendar = styled(Calendar)`
 `;
 
 const AdminDashboard = () => {
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
   const [reservas, setReservas] = useState([]);
   const [reservasCanceladas, setReservasCanceladas] = useState([]);
   const [reservasEfectuadas, setReservasEfectuadas] = useState([]);

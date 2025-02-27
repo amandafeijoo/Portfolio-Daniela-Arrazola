@@ -2,44 +2,52 @@ import styled, { keyframes } from "styled-components";
 import { useNavigate } from "react-router-dom";
 import WhatsAppContact from "./WhatsAppContact";
 
-// 📌 Definimos la animación de flotación
+// 📌 Animación flotante
 const floatAnimation = keyframes`
   0% { transform: translateY(0px); }
-  50% { transform: translateY(-8px); } /* 🔥 Sube 8px */
+  50% { transform: translateY(-8px); }
   100% { transform: translateY(0px); }
 `;
 
+// 📌 Contenedor Principal Responsivo
 const VideoContainer = styled.div`
-  flex: 1;
   display: flex;
   flex-direction: column;
-  justify-content: center;
   align-items: center;
-  max-width: 100%;
-  margin-top: 70px;
-  padding: 10px;
+  justify-content: center;
+  width: 100%;
+  max-width: 900px; 
+  margin: auto;
+  padding: 20px;
 
-  @media (min-width: 768px) {
-    max-width: 50%;
+  @media (max-width: 1024px) {
+    max-width: 80%;
+  }
+
+  @media (max-width: 768px) {
+    max-width: 95%;
   }
 `;
 
-// 📌 Contenedor Flotante Circular
+// 📌 Contenedor Flotante (los botones estarán en fila en iPhone 15 Pro)
 const FloatingContainer = styled.div`
-  position: relative; /* Agrega esta línea */
-  top: -50px;
-  right: -100px;
   display: flex;
-  flex-direction: row;
+  flex-direction: row; /* 🔥 Siempre en fila */
   align-items: center;
+  justify-content: center;
   gap: 15px;
-    z-index: 1; 
+  margin-bottom: 20px;
+
+  @media (max-width: 429px) {
+    flex-direction: column;
+    gap: 10px;
+  }
 `;
 
 // 📌 Botón flotante con animación
 const FloatingButton = styled.div`
-  width: 87px;
-  height: 87px;
+  width: 80px;
+  height: 80px;
   background-color: rgb(127, 153, 136);
   border: 2px solid #c0a080;
   box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
@@ -48,8 +56,7 @@ const FloatingButton = styled.div`
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-  animation: ${floatAnimation} 3s infinite ease-in-out; /* 🔥 Se mueve arriba y abajo */
+  animation: ${floatAnimation} 3s infinite ease-in-out;
 
   &:hover {
     transform: scale(1.1);
@@ -57,24 +64,32 @@ const FloatingButton = styled.div`
   }
 
   img {
-    width: 80px;
-    height: 80px;
+    width: 70%;
+    height: 70%;
     object-fit: contain;
   }
 `;
 
-// 📌 Video con estilos mejorados
+// 📌 Video sin cortes y con altura ajustada automáticamente
 const Video = styled.video`
-  width: 120%;
-  height: auto;
+  width: 100%;
+  height: auto; /* 🔥 Se adapta sin cortar */
   border-radius: 10px;
-  margin-left: 160px;
   box-shadow: 0 0 5px 2px rgba(0, 0, 0, 0.7),
     0 0 10px 4px rgba(34, 139, 34, 0.2), 0 0 15px 6px rgba(0, 0, 0, 0.2);
   border: 2px solid #d2b48c;
+  object-fit: contain; /* 🔥 Evita recortes */
 
-  @media (min-width: 768px) {
-    width: 200%;
+  &:focus {
+    outline: none;
+  }
+
+  @media (max-width: 768px) {
+    border-radius: 8px;
+  }
+
+  @media (max-width: 480px) {
+    border-radius: 5px;
   }
 `;
 
@@ -87,7 +102,7 @@ const ReservationVideo = () => {
 
   return (
     <VideoContainer>
-      {/* 📌 Contenedor Flotante para WhatsApp y FAQ */}
+      {/* 📌 Contenedor de botones flotantes */}
       <FloatingContainer>
         <FloatingButton>
           <WhatsAppContact />
@@ -97,10 +112,10 @@ const ReservationVideo = () => {
         </FloatingButton>
       </FloatingContainer>
 
-      {/* 📌 Video */}
-      <Video autoPlay loop muted>
+      {/* 📌 Video sin cortes */}
+      <Video autoPlay loop muted playsInline controlsList="nofullscreen">
         <source src="/images/reserva.mp4" type="video/mp4" />
-        Your browser does not support the video tag.
+        Tu navegador no soporta el video.
       </Video>
     </VideoContainer>
   );

@@ -1,10 +1,22 @@
-import { Box, Typography, Button } from "@mui/material";
+import {
+  Box,
+  Typography,
+  Button,
+  useTheme,
+  useMediaQuery,
+} from "@mui/material";
+import { useEffect } from "react";
 import { motion } from "framer-motion";
 import { useNavigate } from "react-router-dom";
 import "@fontsource/playfair-display";
 
 const ImageTextEffect = () => {
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
   const navigate = useNavigate();
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
 
   const handleNavigate = () => {
     navigate("/reserva");
@@ -22,7 +34,7 @@ const ImageTextEffect = () => {
         gap: "5px",
       }}
     >
-      {/* Contenedor del Video y Botón */}
+      {/* Contenedor del Video */}
       <motion.div
         initial={{ opacity: 0, scale: 0.9 }}
         animate={{ opacity: 1, scale: 1 }}
@@ -41,9 +53,10 @@ const ImageTextEffect = () => {
           alt="Terapias Video"
           style={{
             width: "100%",
+            height: isMobile ? "auto" : "100%",
+            maxHeight: isMobile ? "220px" : "none", 
             borderRadius: "15px",
             objectFit: "cover",
-            transition: "all 0.5s ease-in-out",
             boxShadow: "0 0 5px rgba(0, 0, 0, 0.8)",
           }}
           whileHover={{ scale: 1.05 }}
@@ -52,57 +65,69 @@ const ImageTextEffect = () => {
           autoPlay
           loop
           muted
+          playsInline // 🔹 Evita que el video se expanda a pantalla completa en iOS
         />
+
+        {/* Botón en la web y en móviles */}
+        <Box
+          sx={{
+            position: "absolute",
+            bottom: { xs: "10px", md: "50px" }, // 🔹 En móviles queda igual, en la web sube
+            left: "50%",
+            transform: "translateX(-50%)",
+            width: "80%",
+            display: "flex",
+            justifyContent: "center",
+          }}
+        >
+          <Button
+            variant="contained"
+            component={motion.button}
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+            sx={{
+              backgroundColor: "rgb(120, 150, 131)",
+              color: "#f5eedc",
+              fontSize: "1rem",
+              fontFamily: "Playfair Display",
+              fontWeight: "500",
+              padding: "8px 18px",
+              textTransform: "none",
+              borderRadius: "30px",
+              border: "2px solid rgb(211, 190, 151)",
+              boxShadow: "0 4px 6px rgba(0, 0, 0, 0.1)",
+              transition: "all 0.3s ease-in-out",
+              "&:hover": {
+                backgroundColor: "#6F8979",
+                boxShadow: "0 6px 10px rgba(0, 0, 0, 0.15)",
+              },
+              "&:active": {
+                transform: "scale(0.98)",
+              },
+              display: "block", // 🔹 Asegura que el botón se vea en la web y móviles
+            }}
+            onClick={handleNavigate}
+          >
+            Reservar una cita
+          </Button>
+        </Box>
       </motion.div>
 
-      {/* Box con Texto y Fondo */}
+      {/* Contenedor de Texto - Movido un poco a la derecha */}
       <motion.div
         initial={{ opacity: 0, x: 50 }}
         animate={{ opacity: 1, x: 0 }}
         transition={{ duration: 1, delay: 0.3 }}
         sx={{
           maxWidth: { xs: "90%", md: "450px" },
-          margin: "0 auto",
+          margin: { xs: "0 auto", md: "0 auto 0 40px" }, // 🔹 Movido un poco a la derecha en la web
           textAlign: "center",
         }}
       >
-       <Button
-  variant="contained"
-  component={motion.button}
-  whileHover={{ scale: 1.05 }}
-  whileTap={{ scale: 0.95 }}
-  sx={{
-    position: "absolute",
-    top: "12%",
-    left: "66%",
-    backgroundColor: "rgb(120, 150, 131)", // Verde suave de la paleta
-    color: "#f5eedc", // Crema para contraste
-    fontSize: { xs: "1rem", md: "1.2rem" },
-    fontFamily: "Playfair Display",
-    fontWeight: "500",
-    padding: { xs: "10px 20px", md: "12px 24px" },
-    textTransform: "none",  
-    borderRadius: "30px",
-    border: "2px solid rgb(211, 190, 151)", // Dorado suave
-    boxShadow: "0 4px 6px rgba(0, 0, 0, 0.1)",
-    transition: "all 0.3s ease-in-out",
-    "&:hover": {
-      backgroundColor: "#6F8979", // Un verde más oscuro al hacer hover
-      boxShadow: "0 6px 10px rgba(0, 0, 0, 0.15)",
-    },
-    "&:active": {
-      transform: "scale(0.98)",
-    },
-  }}
-  onClick={handleNavigate}
->
-  Reservar una cita
-</Button>
-
         <Box
           sx={{
             background: "rgba(48, 84, 69, 0.3)",
-            marginRight: "20px",
+            marginRight: { xs: "0", md: "20px" }, 
             border: "2px solid #557c70",
             padding: { xs: "20px", md: "30px" },
             borderRadius: "15px",
@@ -118,7 +143,7 @@ const ImageTextEffect = () => {
               fontWeight: "bold",
               mb: 2,
               fontFamily: "Playfair Display, serif",
-              fontSize: { xs: "2rem", md: "2.5rem" },
+              fontSize: { xs: "1.6rem", md: "2.5rem" },
             }}
           >
             Terapia
@@ -126,7 +151,7 @@ const ImageTextEffect = () => {
           <Typography
             variant="body1"
             sx={{
-              fontSize: { xs: "0.9rem", md: "1rem" },
+              fontSize: { xs: "0.8rem", md: "1rem" },
               textAlign: "justify",
               fontFamily: "Playfair Display, serif",
             }}

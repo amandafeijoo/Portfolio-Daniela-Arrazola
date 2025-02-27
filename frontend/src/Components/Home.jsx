@@ -18,7 +18,7 @@ const Home = () => {
         height: "100vh",
         overflow: "hidden",
         "@media (max-width: 600px)": {
-          height: "30vh",
+          height: "35vh",
           top: "-10",
         },
       }}
@@ -61,8 +61,8 @@ const Home = () => {
           },
         }}
       >
-      {/* Flecha animada con framer-motion */}
-      <motion.div
+        {/* Flecha animada con framer-motion */}
+        <motion.div
           animate={{ y: [0, 5, 0] }}
           transition={{ repeat: Infinity, duration: 1.5 }}
         >
@@ -89,12 +89,12 @@ const Home = () => {
             fontFamily: "Playfair Display",
             "@media (max-width: 600px)": {
               fontSize: "0.5rem",
-              marginTop: "42px",
+              marginTop: "2px",
             },
           }}
           onClick={handleNavigateReservar}
         >
-          Reserva aquí con un click! 
+          Reserva aquí con un click!
         </Button>
       </Box>
     </Box>

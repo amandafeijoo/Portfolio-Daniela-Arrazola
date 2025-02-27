@@ -19,7 +19,6 @@ import "@fontsource/playfair-display";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUserShield } from "@fortawesome/free-solid-svg-icons";
 
-
 const Header = () => {
   const [anchorEl, setAnchorEl] = useState(null);
   const [isSubMenuOpen, setIsSubMenuOpen] = useState(false);
@@ -127,7 +126,7 @@ const Header = () => {
     <>
       <Box
         sx={{
-          position: "fixed", // Se mantiene fijo en pantalla
+          position: "fixed", 
           top: 0,
           left: 0,
           width: "100%",
@@ -136,7 +135,7 @@ const Header = () => {
           alignItems: "center",
           padding: "10px 20px",
           backgroundColor: "#557c70", // #557c70,#f5eedc,#4a6f5e
-          zIndex: 20000, // Encima de otros elementos
+          zIndex: 20000, 
           height: "100px",
           "@media (max-width: 600px)": {
             padding: "10px 10px",
@@ -162,7 +161,7 @@ const Header = () => {
         >
           <IconButton
             sx={{
-              color:" #f5eedc",
+              color: " #f5eedc",
               "@media (max-width: 600px)": {
                 fontSize: "1.2em",
               },
@@ -218,19 +217,19 @@ const Header = () => {
               position: "absolute",
               left: "20px",
               color: "#f5eedc",
-              fontSize:"1.3em",
+              fontSize: "1.3em",
               "@media (max-width: 600px)": {
                 left: "10px",
               },
             }}
-          > 
+          >
             <MenuIcon sx={{ fontSize: "1.7em" }} />
           </IconButton>
           <Box
             sx={{
-              display: "inline-block", // ✅ Evita que ocupe más espacio
-              position: "relative", // ✅ No permite que el área de clic crezca
-              pointerEvents: "none", // ✅ Desactiva clics en el contenedor
+              display: "inline-block",
+              position: "relative",
+              pointerEvents: "none", // Desactiva clics en el contenedor
             }}
           >
             <Box
@@ -240,7 +239,13 @@ const Header = () => {
               onClick={handleClick}
               sx={{
                 display: "block",
-                width: "140px",
+                width: {
+                  xs: "90px",
+                  sm: "110px",
+                  md: "130px",
+                  lg: "150px",
+                  xl: "180px",
+                }, // 🔥 Ajuste dinámico según el dispositivo
                 height: "auto",
                 objectFit: "contain",
                 pointerEvents: "auto", // ✅ Solo la imagen recibe los clics
@@ -297,7 +302,7 @@ const Header = () => {
                 },
               }}
             >
-              Acerca de 
+              Acerca de
             </MenuItem>
             <MenuItem
               onClick={handleSubMenuToggle}
@@ -592,41 +597,44 @@ const Header = () => {
           </Menu>
         </Box>
         <Box
-  sx={{
-    position: "absolute",
-    right: "20px",
-    top: "50%",
-    transform: "translateY(-50%)",
-    display: "flex",
-    alignItems: "center",
-    gap: "10px",
-    zIndex: 20000,
-    cursor: "pointer", // Hace que todo el área sea clickeable
-    "@media (max-width: 600px)": {
-      right: "10px",
-      gap: "5px",
-    },
-  }}
-  onClick={handleLoginClick} // Hace clic en toda la caja
->
-  {/* Ícono de administrador */}
-  <FontAwesomeIcon icon={faUserShield} size="lg" style={{ color: "#f5eedc" }} />
+          sx={{
+            position: "absolute",
+            right: "20px",
+            top: "50%",
+            transform: "translateY(-50%)",
+            display: "flex",
+            alignItems: "center",
+            gap: "10px",
+            zIndex: 20000,
+            cursor: "pointer", // Hace que todo el área sea clickeable
+            "@media (max-width: 600px)": {
+              right: "10px",
+              gap: "5px",
+            },
+          }}
+          onClick={handleLoginClick} // Hace clic en toda la caja
+        >
+          {/* Ícono de administrador */}
+          <FontAwesomeIcon
+            icon={faUserShield}
+            size="lg"
+            style={{ color: "#f5eedc" }}
+          />
 
-  {/* Texto "Login" */}
-  <Typography
-    variant="body1"
-    sx={{
-      fontFamily: "Playfair Display",
-      color: "#f5eedc",
-      "@media (max-width: 600px)": {
-        fontSize: "0.9em",
-      },
-    }}
-  >
-    {/* Login */}
-  </Typography>
-</Box>
-
+          {/* Texto "Login" */}
+          <Typography
+            variant="body1"
+            sx={{
+              fontFamily: "Playfair Display",
+              color: "#f5eedc",
+              "@media (max-width: 600px)": {
+                fontSize: "0.9em",
+              },
+            }}
+          >
+            {/* Login */}
+          </Typography>
+        </Box>
       </Box>
     </>
   );

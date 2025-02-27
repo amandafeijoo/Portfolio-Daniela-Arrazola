@@ -13,13 +13,26 @@ const FullAcercaContainer = styled.div`
   flex-direction: column;
   align-items: center;
   padding: 20px;
-  background-color:rgb(104, 144, 132);
+  background-color: rgb(104, 144, 132);
   border-radius: 10px;
   box-shadow: 0 0 5px rgba(0, 0, 0, 0.7);
   border: 2px solid #d2b48c;
   width: 100%;
   max-width: 1400px;
   margin: auto;
+
+  /* 📌 Ajuste para móviles */
+  @media (max-width: 768px) {
+    padding: 15px;
+    width: 95%;
+  }
+
+  /* 📌 Ajuste específico para iPhone 15 (ancho máximo 320px) */
+  @media (max-width: 320px) {
+    width: 100%; 
+    max-width: 110%;
+    padding: 10px;
+  }
 `;
 
 const Name = styled.h1`
@@ -40,11 +53,6 @@ const Section = styled.div`
   padding: 20px;
   margin-bottom: 20px;
   box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2);
-  transition: transform 0.3s ease;
-
-  &:hover {
-    transform: translateY(-5px);
-  }
 
   @media (min-width: 768px) {
     flex-direction: row;
@@ -72,22 +80,41 @@ const ContentContainer = styled.div`
 
 const TextContainer = styled.div`
   flex: 1;
-  width: 60%; /* 🔹 Ajusta el ancho para hacerlo más alargado */
-  max-width: 75%; /* 🔹 Limita el ancho máximo */
-  font-size: clamp(1rem, 2vw, 1.1rem);
-  line-height: 1.8; /* 🔹 Aumenta la separación entre líneas para más altura */
+  width: 90%; /* ✅ Más ancho en móviles */
+  max-width: 700px; /* ✅ Evita que se vuelva demasiado estrecho */
+  font-size: clamp(1rem, 2vw, 1.2rem);
+  line-height: 1.6;
   color: #4b3f2f;
   font-family: "Playfair Display", serif;
   text-align: justify;
   background-color: #f5eedc;
   border: 2px solid #b07241;
-  padding: 25px; /* 🔹 Más padding para darle más cuerpo */
+  padding: 20px;
   border-radius: 15px;
   box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.3);
-  transition: all 0.3s ease-in-out;
+  margin: auto;
 
-  @media (min-width: 768px) {
-    max-width: 55%; /* 🔹 Ajuste para pantallas grandes */
+  /* 📌 Ajuste para móviles */
+  @media (max-width: 768px) {
+    width: 100%;
+    max-width: 90%;
+    padding: 18px;
+  }
+
+  /* 📌 Ajuste específico para iPhone 15 Pro */
+  @media (max-width: 393px) {
+    width: 130%; /* 📌 Ocupa más espacio en iPhone 15 Pro */
+    max-width: 230%;
+    font-size: 1rem;
+    line-height: 1.7;
+    margin-left: -33px;
+    padding: 18px;
+  }
+
+  /* 📌 Ajuste para la web */
+  @media (min-width: 1024px) {
+    max-width: 700px;
+    padding: 25px;
   }
 `;
 
@@ -95,7 +122,7 @@ const VideoContainer = styled.div`
   flex: 1;
   display: flex;
   justify-content: center;
-  max-width: 100%;
+  width: 100%; /* ✅ Más responsivo */
   padding: 10px;
   animation: ${moveAnimation} 3s infinite;
 
@@ -110,6 +137,17 @@ const Video = styled.video`
   border-radius: 10px;
   box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.3);
   border: 2px solid #d2b48c;
+  object-fit: cover;
+
+  /* 🔹 Evita que los videos se expandan en pantalla completa en móviles */
+  &:focus {
+    outline: none;
+  }
+
+  @media (max-width: 768px) {
+    max-width: 100%; /* ✅ Asegura que no sean demasiado pequeños */
+    height: auto;
+  }
 `;
 
 const FullAcerca = () => {
@@ -124,6 +162,19 @@ const FullAcerca = () => {
       <Section>
         <ContentContainer>
           <TextContainer>
+            La vida no viene con un manual, y como tú, yo también estoy en
+            constante aprendizaje. Mi mayor impulso como terapeuta es mi propia
+            humanidad: Sé lo que es enfrentarse a días difíciles, sentir que no
+            puedes con todo y, aun así, buscar una forma de avanzar. Inicié mi
+            camino profesional en Criminología con especialidad en Seguridad
+            Privada y titulada como Detective Privado. Sin embargo, fue la
+            Psicología la que me mostró algo aún más poderoso: la capacidad que
+            todos tenemos de sanar, crecer y transformarnos. No tienes que
+            hacerlo solo, yo te acompaño a alcanzar el equilibrio que necesitas,
+            brindándote un espacio en donde puedas sentirte escuchado y
+            comprendido.
+            <br />
+            <br />
             Quiero compartirte un pedacito de mi historia, porque creo que la
             conexión genuina empieza desde la autenticidad.
             <br />
@@ -138,7 +189,7 @@ const FullAcerca = () => {
             perdido o sin rumbo, quiero que sepas que yo también he estado allí.
           </TextContainer>
           <VideoContainer>
-            <Video autoPlay loop muted>
+            <Video autoPlay loop muted playsInline controlsList="nofullscreen">
               <source src="/images/acerca1.1.mp4" type="video/mp4" />
             </Video>
           </VideoContainer>
@@ -148,7 +199,7 @@ const FullAcerca = () => {
       <Section>
         <ContentContainer>
           <VideoContainer>
-            <Video autoPlay loop muted>
+            <Video autoPlay loop muted playsInline controlsList="nofullscreen">
               <source src="/images/acerca3.mp4" type="video/mp4" />
             </Video>
           </VideoContainer>
@@ -161,11 +212,6 @@ const FullAcerca = () => {
             persona tiene una historia, pero también el poder de escribir nuevas
             páginas. Después de 10 años de formación, mi misión es clara: quiero
             que quienes lleguen a mí se vayan mejor de lo que llegaron.
-            <br />
-            Me considero extrovertida y profundamente sensible, creo que ambas
-            cualidades me permiten conectar conmigo misma y con los demás. Me
-            mueve una curiosidad infinita por aprender, crecer y nutrirme de
-            experiencias que expandan mi visión del mundo.
           </TextContainer>
         </ContentContainer>
       </Section>
@@ -188,7 +234,7 @@ const FullAcerca = () => {
             español.
           </TextContainer>
           <VideoContainer>
-            <Video autoPlay loop muted>
+            <Video autoPlay loop muted playsInline controlsList="nofullscreen">
               <source src="/images/acerca2.2.mp4" type="video/mp4" />
             </Video>
           </VideoContainer>

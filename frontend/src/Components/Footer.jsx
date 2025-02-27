@@ -2,13 +2,14 @@ import { Box, Typography, Link, Divider } from "@mui/material";
 import styled from "styled-components";
 import "@fontsource/playfair-display";
 import { useNavigate } from "react-router-dom";
+import { useEffect } from "react";
 
 const FooterContainer = styled(Box)`
   display: flex;
   flex-direction: column;
   align-items: center;
   padding: 20px;
-  background-color:#f5eedc;
+  background-color: #f5eedc;
   border-top: 2px solid #d2b48c;
   box-shadow: 0px -2px 5px rgba(0, 0, 0, 0.1);
   text-align: center;
@@ -16,7 +17,7 @@ const FooterContainer = styled(Box)`
 
 const FooterText = styled(Typography)`
   font-family: "Playfair Display";
-  color:rgb(85, 119, 103);
+  color: rgb(85, 119, 103);
   margin: 5px 0;
 `;
 
@@ -28,7 +29,7 @@ const FooterLinks = styled(Box)`
   margin-top: 5px;
 
   a {
-    color:rgb(61, 88, 80);
+    color: rgb(61, 88, 80);
     text-decoration: none;
     font-weight: 500;
     transition: color 0.3s;
@@ -41,6 +42,9 @@ const FooterLinks = styled(Box)`
 `;
 
 const Footer = () => {
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
   const navigate = useNavigate();
 
   const handleNavigate = (path) => {

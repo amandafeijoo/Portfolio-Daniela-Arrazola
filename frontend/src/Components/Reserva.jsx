@@ -25,14 +25,27 @@ const BackgroundContainer = styled.div`
   box-shadow: 0 12px 25px rgba(0, 0, 0, 0.3);
   border: 4px solid #c0a080;
   max-width: 1350px;
-  margin-bottom: 40px;
   margin: auto;
+  margin-bottom: 40px;
+
+  @media (max-width: 1024px) {
+    padding: 40px;
+  }
+
+  @media (max-width: 768px) {
+    padding: 25px;
+  }
+
+  @media (max-width: 480px) {
+    padding: 20px;
+    border-radius: 15px;
+  }
 `;
 
 // 📌 Estilos para el título mejorado
 const Title = styled(Typography)`
   font-family: "Playfair Display";
-  font-size: 2.5em !important;
+  font-size: clamp(1.8rem, 4vw, 2.5rem);
   font-weight: bold !important;
   text-align: center;
   color: #f5eedc;
@@ -58,7 +71,6 @@ const Reserva = () => {
   const [privacyAccepted, setPrivacyAccepted] = useState(false);
   // const [event, setEvent] = useState(null);
 
-  
   const [errors, setErrors] = useState({
     firstName: false,
     email: false,
@@ -83,7 +95,7 @@ const Reserva = () => {
     "Trastorno Obsesivo Compulsivo",
     "Trastornos del Neurodesarrollo",
     "Trastornos de la conducta alimentaria",
-    "Otro (especifique en el campo de comentarios)"
+    "Otro (especifique en el campo de comentarios)",
   ];
 
   const consultationTypes = [
@@ -101,7 +113,7 @@ const Reserva = () => {
   // 📌 Manejo del envío del formulario
   const handleSubmit = async (e) => {
     e.preventDefault();
-  
+
     // Validaciones en el frontend antes de enviar la solicitud
     const newErrors = {
       firstName: firstName.trim() === "",
@@ -111,9 +123,9 @@ const Reserva = () => {
       selectedConsultationType: selectedConsultationType.trim() === "",
       privacyAccepted: !privacyAccepted,
     };
-  
+
     setErrors(newErrors);
-  
+
     if (Object.values(newErrors).some((error) => error)) {
       await Swal.fire({
         icon: "error",
@@ -123,7 +135,7 @@ const Reserva = () => {
       });
       return;
     }
-  
+
     // Datos a enviar al backend
     const reservaData = {
       nombre_completo: firstName,
@@ -135,18 +147,21 @@ const Reserva = () => {
       comentarios: comments,
       privacidad_aceptada: privacyAccepted,
     };
-  
+
     try {
-      const response = await fetch("http://localhost:8000/api/reservas/crear/", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(reservaData),
-      });
-  
+      const response = await fetch(
+        "http://localhost:8000/api/reservas/crear/",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(reservaData),
+        }
+      );
+
       const data = await response.json();
-  
+
       if (!response.ok) {
         if (data.errors) {
           await Swal.fire({
@@ -172,8 +187,11 @@ const Reserva = () => {
         }
         return;
       }
-  
-      if (data.errors && data.errors.includes("Ya existe una reserva en esta fecha y hora.")) {
+
+      if (
+        data.errors &&
+        data.errors.includes("Ya existe una reserva en esta fecha y hora.")
+      ) {
         await Swal.fire({
           icon: "warning",
           title: "Horario no disponible",
@@ -182,7 +200,7 @@ const Reserva = () => {
         });
         return;
       }
-  
+
       // Preguntar al usuario si desea agregar la cita a su calendario
       const result = await Swal.fire({
         icon: "success",
@@ -193,17 +211,17 @@ const Reserva = () => {
         // cancelButtonText: "No, gracias",
         // confirmButtonColor: "#4A6F5E",
       });
-  
+
       if (result.isConfirmed) {
-        // Construir el objeto event con la información del formulario
+        //  el objeto event con la información del formulario
         const startTime = new Date(selectedDate);
         const [hours, minutes] = selectedTime.split(":");
         startTime.setHours(hours, minutes);
-  
+
         // Suponiendo que la cita dura 1 hora
         const endTime = new Date(startTime);
         endTime.setHours(endTime.getHours() + 1);
-  
+
         // setEvent({
         //   title: `Cita de ${selectedConsultationType}`,
         //   description: `Nombre: ${firstName}. Motivo: ${selectedOption}.`,
@@ -212,7 +230,7 @@ const Reserva = () => {
         //   endTime: endTime.toISOString(),
         // });
       }
-  
+
       // Resetear los campos del formulario
       setFirstName("");
       setEmail("");
@@ -222,7 +240,6 @@ const Reserva = () => {
       setSelectedConsultationType("");
       setComments("");
       setPrivacyAccepted(false);
-  
     } catch (error) {
       console.error("Error en la reserva:", error);
       await Swal.fire({
@@ -233,8 +250,6 @@ const Reserva = () => {
       });
     }
   };
-  
-
 
   return (
     <>
@@ -247,7 +262,7 @@ const Reserva = () => {
               component="form"
               onSubmit={handleSubmit}
               sx={{
-                p: 4,
+                p: { xs: 3, md: 4 },
                 backgroundColor: "#f5eedc",
                 border: "3px solid #d2b48c",
                 borderRadius: "25px",
@@ -351,7 +366,7 @@ const Reserva = () => {
                   <Typography
                     sx={{ fontFamily: "Playfair Display", fontStyle: "italic" }}
                   >
-                     He leído y acepto las políticas de privacidad
+                    He leído y acepto las políticas de privacidad
                   </Typography>
                 }
               />
@@ -361,28 +376,27 @@ const Reserva = () => {
                   buttonLabel="Agregar a mi calendario"
                 />
               )} */}
-  <Button
-    type="submit" // 📌 Esto hace que el botón ejecute handleSubmit automáticamente
-    variant="contained"
-    sx={{
-      width: "100%",
-      fontSize: "1.2em",
-      backgroundColor: "#4A6F5E",
-      border: "2px solid #c0a080",
-      borderRadius: "20px",
-      color: "#F5EEDC",
-      marginTop: "10px",
-      transition: "background-color 0.3s ease, box-shadow 0.3s ease",
-      "&:hover": {
-        backgroundColor: "#c0a080",
-        color: "#305445",
-      },
-    }}
-  >
-    Reservar
-  </Button>
-
-
+              <Button
+                type="submit" // 📌 Esto hace que el botón ejecute handleSubmit automáticamente
+                variant="contained"
+                sx={{
+                  width: "100%",
+                  fontSize: "1.2em",
+                  backgroundColor: "#4A6F5E",
+                  border: "2px solid #c0a080",
+                  borderRadius: "20px",
+                  color: "#F5EEDC",
+                  marginTop: "10px",
+                  transition:
+                    "background-color 0.3s ease, box-shadow 0.3s ease",
+                  "&:hover": {
+                    backgroundColor: "#c0a080",
+                    color: "#305445",
+                  },
+                }}
+              >
+                Reservar
+              </Button>
             </Box>
           </Grid>
           <Grid item xs={12} md={4}>

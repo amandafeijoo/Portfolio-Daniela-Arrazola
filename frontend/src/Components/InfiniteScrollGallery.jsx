@@ -1,4 +1,10 @@
-import { Box, Typography, Button } from "@mui/material";
+import {
+  Box,
+  Typography,
+  Button,
+  useTheme,
+  useMediaQuery,
+} from "@mui/material";
 import { motion, useAnimation } from "framer-motion";
 import { useNavigate } from "react-router-dom";
 import { useEffect } from "react";
@@ -9,7 +15,7 @@ import "slick-carousel/slick/slick-theme.css";
 import "@fontsource/playfair-display";
 // import { FaCertificate } from "react-icons/fa";
 
-// 🟢 Definir un contenedor con los estilos adecuados
+
 const StyledContainer = styled(Box)`
   border: 2px solid #d2b48c;
   border-radius: 8px;
@@ -20,6 +26,17 @@ const StyledContainer = styled(Box)`
   margin: 20px auto;
   max-width: 1200px;
   text-align: center;
+
+  @media (max-width: 600px) {
+    padding: 20px;
+    margin: 0px auto;
+    max-width: 95%;
+  }
+
+  @media (max-width: 960px) {
+    padding: 25px;
+    margin: 8px auto;
+  }
 `;
 
 const images = [
@@ -54,8 +71,20 @@ const images = [
   { src: "/images/s13image.svg", path: "/service13" },
 ];
 
-const getRandomSize = (index) => {
-  const sizes = [
+const getRandomSize = (index, isMobile, isTablet) => {
+  const mobileSizes = [
+    { width: "110px", height: "140px" },
+    { width: "140px", height: "120px" },
+    { width: "140px", height: "135px" },
+  ];
+
+  const tabletSizes = [
+    { width: "160px", height: "180px" },
+    { width: "180px", height: "160px" },
+    { width: "200px", height: "190px" },
+  ];
+
+  const desktopSizes = [
     { width: "200px", height: "300px" },
     { width: "250px", height: "200px" },
     { width: "300px", height: "225px" },
@@ -66,12 +95,25 @@ const getRandomSize = (index) => {
     { width: "200px", height: "150px" },
     { width: "240px", height: "360px" },
   ];
-  return sizes[index % sizes.length];
+
+  if (isMobile) {
+    return mobileSizes[index % mobileSizes.length]; // Si es móvil, usa tamaños pequeños
+  } else if (isTablet) {
+    return tabletSizes[index % tabletSizes.length]; // Si es tablet, usa tamaños intermedios
+  } else {
+    return desktopSizes[index % desktopSizes.length]; // Si es escritorio, usa los tamaños grandes
+  }
 };
 
 const InfiniteScrollGallery = () => {
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
   const navigate = useNavigate();
   const controls = useAnimation();
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down("sm")); // iPhones y móviles pequeños
+  const isTablet = useMediaQuery(theme.breakpoints.between("sm", "md")); // iPads y tablets
 
   const handleImageClick = (path) => {
     if (path) navigate(path);
@@ -100,11 +142,11 @@ const InfiniteScrollGallery = () => {
       x: ["0%", "-100%"],
       transition: {
         ease: "linear",
-        duration: 380,
+        duration: isMobile ? 280 : 380, // Animación más rápida en móviles
         repeat: Infinity,
       },
     });
-  }, [controls]);
+  }, [controls, isMobile]);
 
   return (
     <StyledContainer>
@@ -115,7 +157,7 @@ const InfiniteScrollGallery = () => {
           fontFamily: "Playfair Display",
           marginBottom: "10px",
           fontWeight: "bold",
-          fontSize: { xs: "2.5rem", md: "3.5rem" },
+          fontSize: { xs: "2rem", md: "3rem" },
         }}
       >
         Servicios
@@ -127,7 +169,7 @@ const InfiniteScrollGallery = () => {
           fontFamily: "Playfair Display",
           marginBottom: "30px",
           fontStyle: "italic",
-          fontSize: { xs: "0.9rem", md: "1.1rem" },
+          fontSize: { xs: "0.85rem", md: "1.1rem" },
         }}
       >
         Haz clic en un servicio para más información
@@ -154,17 +196,19 @@ const InfiniteScrollGallery = () => {
           overflow: "hidden",
           display: "grid",
           gridTemplateColumns: {
-            xs: "repeat(2, 1fr)",
-            sm: "repeat(3, 1fr)",
-            md: "repeat(6, 1fr)",
+            xs: "repeat(1, 1fr)", // 1 imagen por fila en móviles
+            sm: "repeat(2, 1fr)", // 2 en tablets pequeñas
+            md: "repeat(3, 1fr)", // 3 en tablets grandes
+            lg: "repeat(6, 1fr)", // 6 en pantallas grandes
           },
           alignItems: "center",
           padding: "20px",
+          minHeight: "200px", // Para evitar desbordamientos en móviles
         }}
       >
         <motion.div style={{ display: "flex" }} animate={controls}>
           {[...images, ...images].map((img, index) => {
-            const size = getRandomSize(index);
+            const size = getRandomSize(index, isMobile, isTablet);
             return (
               <motion.img
                 key={index}
@@ -194,13 +238,12 @@ const InfiniteScrollGallery = () => {
           sx={{
             backgroundColor: "#AC5038",
             color: "#f5eedc",
-            borderRadius:"10px",
-            padding:"10px",
+            borderRadius: "10px",
+            padding: "10px",
             fontFamily: "Playfair Display",
-          
-
+            fontSize: { xs: "0.85rem", md: "1rem" },
             "&:hover": {
-              backgroundColor: "#93362c", // Color de fondo al pasar el mouse
+              backgroundColor: "#93362c",
             },
           }}
         >

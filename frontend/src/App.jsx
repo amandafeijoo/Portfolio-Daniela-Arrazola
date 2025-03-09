@@ -7,7 +7,6 @@ import Header from "./Components/Header";
 // Importación de componentes con Lazy Loading
 const Home = lazy(() => import("./Components/Home"));
 const AcercaDe = lazy(() => import("./Components/AcercaDe"));
-const ContactForm = lazy(() => import("./Components/ContactForm"));
 const ImagenDaniela = lazy(() => import("./Components/ImagenDaniela"));
 const FullAcerca = lazy(() => import("./Components/FullAcerca"));
 const Services = lazy(() => import("./Components/Services"));
@@ -132,14 +131,14 @@ function App() {
               </Section>
             }
           />
-          <Route
+          {/* <Route
             path="/contacto"
             element={
               <Section>
                 <ContactForm />
               </Section>
             }
-          />
+          /> */}
           <Route
             path="/servicios"
             element={

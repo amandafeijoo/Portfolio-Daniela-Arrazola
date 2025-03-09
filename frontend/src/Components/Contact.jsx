@@ -1,11 +1,6 @@
 import { Box, Typography } from "@mui/material";
 import styled from "styled-components";
-import {
-  FaPhoneAlt,
-  FaEnvelope,
-  FaMapMarkerAlt,
-  FaClock,
-} from "react-icons/fa";
+import { FaPhoneAlt, FaEnvelope, FaMapMarkerAlt, FaClock } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 import "@fontsource/playfair-display";
 import WhatsAppContact from "./WhatsAppContact";
@@ -15,7 +10,7 @@ const ContactContainer = styled(Box)`
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  background-image: url("/images/contact.svg"); 
+  background-image: url("/images/contact.svg");
   background-size: cover;
   background-position: center;
   background-color: #e8ddce;
@@ -30,31 +25,36 @@ const ContactContainer = styled(Box)`
   @media (min-width: 768px) {
     flex-direction: row;
     justify-content: space-between;
+    padding: 30px;
   }
 `;
+
+/* 🔹 Ajuste para subir el icono de WhatsApp */
 const WhatsAppContainer = styled.div`
-  font-size: 2em;
-  margin-top: -10px;
-  margin-right: -600px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 15px;
+  width: 100%;
   position: absolute;
-  width: 300px;
-  height: auto;
-  overflow: visible;
-  z-index: 200;
+  top: 180px; /* 🔥 Más arriba en iPhone 15 Pro */
+  right: -30px;
 
-  /* 🔥 Sobrescribimos el ancho que WhatsAppContact tenga por dentro */
-  & > div {
-    max-width: 100px !important; 
-    width: 100% !important;
+  @media (max-width: 768px) {
+    position: relative;
+    top: 10px;
+    right: 0;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 10px;
   }
 `;
-
 
 const ContactInfoContainer = styled(Box)`
   display: flex;
   flex-direction: column;
   align-items: center;
-  position: relative;
+  width: 100%;
 `;
 
 const ContactInfo = styled(Box)`
@@ -62,46 +62,81 @@ const ContactInfo = styled(Box)`
   padding: 30px;
   border-radius: 15px;
   color: rgb(142, 122, 96);
-  width: 120%;
-  margin-left: 90px;
+  width: 90%;
   max-width: 500px;
   box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.8);
   text-align: left;
+
+  @media (max-width: 768px) {
+    width: 120%;
+    padding: 20px;
+  }
 `;
 
 const InfoItem = styled.div`
   display: flex;
-  align-items: center;
+  align-items: center; /* 📌 Asegura que todo se alinee en una sola línea */
+  gap: 8px; /* 📌 Espacio entre el icono y el texto */
   margin-bottom: 15px;
   font-size: 1rem;
+  flex-wrap: nowrap; /* 📌 Evita que se rompa la línea en pantallas pequeñas */
 
   svg {
-    margin-right: 10px;
-    color: rgb(142, 122, 96); 
+    color: rgb(142, 122, 96);
     font-size: 1.3rem;
   }
 
   a {
     color: inherit;
     text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 8px; /* 📌 Espacio entre ícono y texto */
   }
 `;
 
+
+/* 🔹 Ajuste para el Video */
 const VideoContainer = styled(Box)`
   position: relative;
   width: 100%;
   max-width: 350px;
   border-radius: 20px;
-  margin-top: 70px;
-  margin-right: 70px;
+  margin-top: 20px;
   box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.8);
   overflow: hidden;
   cursor: pointer;
 
   video {
     width: 100%;
-    height: 100%;
+    height: auto;
     object-fit: cover;
+  }
+
+  @media (max-width: 768px) {
+    max-width: 100%;
+    margin-top: 30px;
+  }
+`;
+
+/* 🔹 FAQ Box ahora debajo de la burbuja de pregunta dentro del video */
+const FAQBox = styled(Box)`
+  position: absolute;
+  top: 70%; /* 🔥 Mueve la caja FAQ abajo en el video */
+  left: 50%;
+  transform: translateX(-50%);
+  background: white;
+  padding: 15px;
+  border-radius: 10px;
+  border: 2px solid #d2b48c;
+  box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.6);
+  z-index: 100;
+  width: 250px;
+  text-align: center;
+
+  @media (max-width: 768px) {
+    width: 90%;
+    margin-top:-10px;
   }
 `;
 
@@ -129,18 +164,91 @@ const ContactSection = () => {
         <WhatsAppContainer>
           <WhatsAppContact />
         </WhatsAppContainer>
-        <Box
-          position="absolute"
-          top="300px"
-          background="white"
-          padding="15px"
-          borderRadius="10px"
-          border="2px solid #d2b48c"
-          boxShadow="0px 5px 15px rgba(0, 0, 0, 0.6)"
-          zIndex="100"
-          marginLeft="1290px"
-          width="250px"
-        >
+        <ContactInfo>
+  <Typography
+    variant="h5"
+    fontWeight="bold"
+    sx={{
+      marginBottom: 2,
+      fontSize: { xs: "1.2rem", sm: "1.5rem", md: "1.8rem" }, // 📌 Ajuste por pantalla
+    }}
+  >
+    CONTÁCTAME
+  </Typography>
+
+  <InfoItem>
+    <a href="tel:+479831513">
+      <FaPhoneAlt />
+      <Typography
+        sx={{
+          fontSize: { xs: "0.9rem", sm: "1rem", md: "1.1rem" }, // 📌 Reduce en móvil
+        }}
+      >
+        +47 9831513
+      </Typography>
+    </a>
+  </InfoItem>
+
+  <InfoItem>
+    <a href="mailto:danielaarrazolabenitez@gmail.com">
+      <FaEnvelope />
+      <Typography
+        sx={{
+          fontSize: { xs: "0.rem", sm: "1rem", md: "1.1rem" },
+        }}
+      >
+        danielaarrazolabenitez@gmail.com
+      </Typography>
+    </a>
+  </InfoItem>
+
+  <InfoItem>
+    <FaMapMarkerAlt />
+    <Typography
+      sx={{
+        fontSize: { xs: "0.9rem", sm: "1rem", md: "1.1rem" },
+      }}
+    >
+      Madrid, España
+    </Typography>
+  </InfoItem>
+
+  <Typography
+    fontWeight="bold"
+    sx={{
+      marginBottom: 1,
+      fontSize: { xs: "1rem", sm: "1.2rem", md: "1.3rem" },
+    }}
+  >
+    <FaClock /> Horario:
+  </Typography>
+
+  <Typography
+    sx={{
+      fontSize: { xs: "0.9rem", sm: "1rem", md: "1.1rem" },
+    }}
+  >
+    Lunes - Jueves: 10:00-14:00 y 16:00-20:00
+  </Typography>
+
+  <Typography
+    sx={{
+      fontSize: { xs: "0.9rem", sm: "1rem", md: "1.1rem" },
+    }}
+  >
+    Viernes: 09:00-15:00
+  </Typography>
+</ContactInfo>
+
+      </ContactInfoContainer>
+      {/* Sección del Video */}
+      <VideoContainer onClick={() => navigate("/faq")}>
+        <QuestionBubble>¿Cuánto tiempo debo hacer terapia?</QuestionBubble>
+        <video autoPlay loop muted playsInline preload="metadata">
+          <source src="/images/contact.mp4" type="video/mp4" loading="lazy" />
+          Tu navegador no soporta el video.
+        </video>
+        <FAQBox>
           <Typography fontSize="1.1rem" fontWeight="bold">
             Preguntas Frecuentes
           </Typography>
@@ -148,42 +256,12 @@ const ContactSection = () => {
             Aquí puedes ver las preguntas más comunes sobre la terapia.
           </Typography>
           <button onClick={() => navigate("/faq")}>Ir a FAQ</button>
-        </Box>
-        <ContactInfo>
-          <Typography variant="h5" fontWeight="bold" sx={{ marginBottom: 2 }}>
-            CONTÁCTAME
-          </Typography>
-          <InfoItem>
-            <a href="tel:+479831513">
-              <FaPhoneAlt /> +47 9831513
-            </a>
-          </InfoItem>
-          <InfoItem>
-            <a href="mailto:danielaarrazolabenitez@gmail.com">
-              <FaEnvelope /> danielaarrazolabenitez@gmail.com
-            </a>
-          </InfoItem>
-          <InfoItem>
-            <FaMapMarkerAlt /> Madrid, España
-          </InfoItem>
-          <Typography fontWeight="bold" sx={{ marginBottom: 1 }}>
-            <FaClock /> Horario:
-          </Typography>
-          <Typography>Lunes - Jueves: 10:00-14:00 y 16:00-20:00</Typography>
-          <Typography>Viernes: 09:00-15:00</Typography>
-        </ContactInfo>
-      </ContactInfoContainer>
-
-      {/* Sección del Móvil con el Video */}
-      <VideoContainer onClick={() => navigate("/faq")}>
-        <QuestionBubble>¿Cuánto tiempo debo hacer terapia?</QuestionBubble>
-        <video autoPlay loop muted playsInline preload="metadata">
-          <source src="/images/contact.mp4" type="video/mp4" loading="lazy" />
-          Tu navegador no soporta el video.
-        </video>
+        </FAQBox>
       </VideoContainer>
     </ContactContainer>
   );
 };
 
 export default ContactSection;
+
+

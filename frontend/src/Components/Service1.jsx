@@ -13,6 +13,8 @@ import {
   Container,
   Tabs,
   Tab,
+  useMediaQuery,
+  useTheme,
 } from "@mui/material";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import "@fontsource/playfair-display";
@@ -44,7 +46,7 @@ const services = [
 const Image = () => (
   <Box
     sx={{
-      width: "72%",
+      width: { xs: "100%", sm: "80%", md: "72%" },
       marginBottom: 2,
       boxShadow:
         "0 0 5px 2px rgba(0, 0, 0, 0.7), 0 0 10px 4px rgba(34, 139, 34, 0.2), 0 0 15px 6px rgba(0, 0, 0, 0.2)",
@@ -75,6 +77,8 @@ const Service1 = () => {
 
   const navigate = useNavigate();
   const location = useLocation();
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down("sm")); // 📌 Detección de móvil
 
   const currentIndex = services.findIndex(
     (service) => service.path === location.pathname
@@ -86,43 +90,49 @@ const Service1 = () => {
 
   return (
     <>
-      <Container>
+      <Container maxWidth="lg">
+        {" "}
+        {/* 📌 Define un límite máximo */}
         <Tabs
-                  value={currentIndex}
-                  onChange={(event, newValue) => navigate(services[newValue].path)}
-                  variant="scrollable"
-                  scrollButtons
-                  allowScrollButtonsMobile
-                  sx={{
-                    backgroundColor: "#4A6F5E",
-                    color: "#fff",
-                    borderRadius: "10px",
-                    marginBottom: "20px",
-                    "& .MuiTabs-indicator": { backgroundColor: "#d2b48c" },
-                    "& .MuiTab-root": {
-                      color: "#f5eedc",
-                      textTransform: "none",
-                      fontSize: "1rem",
-                      fontFamily: "Playfair Display",
-                      "&.Mui-selected": {
-                        color: "#d2b48c",
-                        fontWeight: "bold",
-                      },
-                    },
-                  }}
-                >
-                  {services.map((service) => (
-                    <Tab key={service.path} label={service.name} />
-                  ))}
-                </Tabs>
+          value={currentIndex}
+          onChange={(event, newValue) => navigate(services[newValue].path)}
+          variant="scrollable"
+          scrollButtons
+          allowScrollButtonsMobile
+          sx={{
+            backgroundColor: "#4A6F5E",
+            color: "#fff",
+            borderRadius: "10px",
+            marginBottom: "20px",
+            "& .MuiTabs-indicator": { backgroundColor: "#d2b48c" },
+            "& .MuiTab-root": {
+              color: "#f5eedc",
+              textTransform: "none",
+              fontSize: "1rem",
+              fontFamily: "Playfair Display",
+              "&.Mui-selected": {
+                color: "#d2b48c",
+                fontWeight: "bold",
+              },
+            },
+          }}
+        >
+          {services.map((service) => (
+            <Tab key={service.path} label={service.name} />
+          ))}
+        </Tabs>
         <Box
           sx={{
-            margin: 2,
-            padding: 2,
+            width: "100%",
+            maxWidth: "1200px",
+            margin: { xs: 1, sm: 2 }, // 📌 Margen reducido en móviles
+            padding: { xs: 1, sm: 4, md: 6 },
             border: "2px solid #d2b48c",
-            borderRadius: 2,
-            boxShadow:
-              "0 0 5px 2px rgba(0, 0, 0, 0.3), 0 0 10px 4px rgba(34, 139, 34, 0.2), 0 0 15px 6px rgba(0, 0, 0, 0.2)",
+            borderRadius: { xs: 1, sm: 2 },
+            boxShadow: {
+              xs: "0 0 3px 1px rgba(0, 0, 0, 0.2)", // 📌 Menos sombra en móviles
+              sm: "0 0 5px 2px rgba(0, 0, 0, 0.3), 0 0 10px 4px rgba(34, 139, 34, 0.2), 0 0 15px 6px rgba(0, 0, 0, 0.2)",
+            },
             backgroundColor: "#f5eedc",
             transition: "transform 0.3s ease, box-shadow 0.3s ease",
             position: "relative",
@@ -161,7 +171,7 @@ const Service1 = () => {
                 }}
               >
                 <Typography
-                  variant="h5"
+                  variant={isMobile ? "h6" : "h5"} // 📌 Tamaño de texto dinámico
                   component="h2"
                   sx={{ fontFamily: "Playfair Display" }}
                 >

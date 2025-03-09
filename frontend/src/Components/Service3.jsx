@@ -13,6 +13,8 @@ import {
   keyframes,
   Tabs,
   Tab,
+  useMediaQuery,
+  useTheme,
 } from "@mui/material";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import "@fontsource/playfair-display";
@@ -43,8 +45,8 @@ const services = [
 const Image = () => (
   <Box
     sx={{
-      width: "72%",
-      marginBottom: 10,
+      width: { xs: "100%", sm: "80%", md: "72%" }, 
+      marginBottom: 2,
       boxShadow:
         "0 0 5px 2px rgba(0, 0, 0, 0.7), 0 0 10px 4px rgba(34, 139, 34, 0.2), 0 0 15px 6px rgba(0, 0, 0, 0.2)",
       borderRadius: 2,
@@ -74,6 +76,8 @@ const Service3 = () => {
 
   const navigate = useNavigate();
   const location = useLocation();
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down("sm")); // 📌 Detección de móvil
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -115,17 +119,24 @@ const Service3 = () => {
         </Tabs>
         <Box
           sx={{
-            margin: 2,
-            padding: 2,
+            width: "100%",
+            maxWidth: "1200px",
+            margin: { xs: 1, sm: 2 }, 
+            padding: { xs: 1, sm: 4, md: 6 }, 
             border: "2px solid #d2b48c",
-            borderRadius: 2,
-            boxShadow:
-              "0 0 5px 2px rgba(0, 0, 0, 0.3), 0 0 10px 4px rgba(34, 139, 34, 0.2), 0 0 15px 6px rgba(0, 0, 0, 0.2)",
+            borderRadius: { xs: 1, sm: 2 }, 
+            boxShadow: {
+              xs: "0 0 3px 1px rgba(0, 0, 0, 0.2)",
+              sm: "0 0 5px 2px rgba(0, 0, 0, 0.3), 0 0 10px 4px rgba(34, 139, 34, 0.2), 0 0 15px 6px rgba(0, 0, 0, 0.2)",
+            },
             backgroundColor: "#f5eedc",
             transition: "transform 0.3s ease, box-shadow 0.3s ease",
             position: "relative",
             zIndex: 1,
-            "&:hover": { transform: "translateY(-5px)", boxShadow: 8 },
+            "&:hover": {
+              transform: "translateY(-5px)",
+              boxShadow: 8,
+            },
           }}
         >
           <Box
@@ -157,7 +168,7 @@ const Service3 = () => {
                   }}
                 >
                   <Typography
-                    variant="h5"
+                    variant={isMobile ? "h7" : "h5"} 
                     component="h2"
                     sx={{ fontFamily: "Playfair Display" }}
                   >

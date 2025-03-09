@@ -61,7 +61,7 @@ const WhatsAppContact = () => {
   };
 
   return (
-    <Box textAlign="center" p={2} position="relative" width="400px">
+    <Box textAlign="center" p={2} position="relative">
       <IconButton
         onClick={() => setShowOptions(!showOptions)}
         sx={{
@@ -82,11 +82,21 @@ const WhatsAppContact = () => {
           backgroundColor="#f5eedc"
           border="2px solid #d2b48c"
           borderRadius={2}
-          width="400%"
-          left={-60}
-          zIndex="9999"    
-          position={"absolute"}
+          minWidth="250px"
+          maxWidth="400px"
+          width="90%"
+          position="fixed" 
+          transform="translateX(-50%)"
+          zIndex="9999"
           boxShadow="0 0 5px 2px rgba(0, 0, 0, 0.3), 0 0 10px 4px rgba(34, 139, 34, 0.2), 0 0 15px 6px rgba(0, 0, 0, 0.2)"
+          sx={{
+      width: { xs: "90%", sm: "85%", md: "400px" }, // Ancho responsivo
+      left: { xs: "20px", sm: "20px", md: "20%" },  // Móvil y tablet a la izquierda, centrado en escritorio
+      maxWidth: "400px",
+      minWidth: "250px",
+      overflow: "hidden",
+    }}
+  
         >
           <Typography
             variant="h6"
@@ -226,3 +236,4 @@ const WhatsAppContact = () => {
 };
 
 export default WhatsAppContact;
+

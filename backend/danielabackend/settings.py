@@ -13,7 +13,15 @@ https://docs.djangoproject.com/en/5.0/ref/settings/
 from pathlib import Path
 import os
 from dotenv import load_dotenv
+from datetime import timedelta
 
+SIMPLE_JWT = {
+    "ACCESS_TOKEN_LIFETIME": timedelta(hours=1),  # Token válido por 1 hora
+    "REFRESH_TOKEN_LIFETIME": timedelta(days=7),  # Token de refresco válido por 7 días
+    "ROTATE_REFRESH_TOKENS": True,
+    "BLACKLIST_AFTER_ROTATION": True,
+    "AUTH_HEADER_TYPES": ("Bearer",),  # Formato del token en los headers
+}
 
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -48,10 +56,11 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'rest_framework',  # Si usas Django Rest Framework
+    'rest_framework', 
     'corsheaders',
-    'reservas',  # 📌 Agregar aquí la nueva app
+    'reservas',  
     'testimonios',
+    'users',
     
 ]
 
@@ -65,15 +74,18 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
-
 REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework_simplejwt.authentication.JWTAuthentication',  # 📌 Agrega JWT
+    ),
     'DEFAULT_RENDERER_CLASSES': [
-        'rest_framework.renderers.JSONRenderer',  # Responder siempre en JSON
+        'rest_framework.renderers.JSONRenderer',  # 📌 Responder en JSON
     ],
     'DEFAULT_PARSER_CLASSES': [
         'rest_framework.parsers.JSONParser',
     ],
 }
+
 
 
 ROOT_URLCONF = 'danielabackend.urls'
@@ -119,6 +131,8 @@ EMAIL_PORT = int(os.getenv("EMAIL_PORT", 587))  # Si no hay valor, usa 587 por d
 EMAIL_USE_TLS = os.getenv("EMAIL_USE_TLS") == "True"
 EMAIL_HOST_USER = os.getenv("EMAIL_HOST_USER")
 EMAIL_HOST_PASSWORD = os.getenv("EMAIL_HOST_PASSWORD")
+ADMIN_USERNAME = os.getenv("ADMIN_USERNAME")
+ADMIN_PASSWORD = os.getenv("ADMIN_PASSWORD")
 
 # Password validation
 # https://docs.djangoproject.com/en/5.0/ref/settings/#auth-password-validators

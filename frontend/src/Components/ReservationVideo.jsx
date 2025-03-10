@@ -38,10 +38,7 @@ const FloatingContainer = styled.div`
   gap: 15px;
   margin-bottom: 20px;
 
-  @media (max-width: 429px) {
-    flex-direction: column;
-    gap: 10px;
-  }
+
 `;
 
 // 📌 Botón flotante con animación

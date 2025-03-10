@@ -1,20 +1,22 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { Box, Typography, TextField, Button } from "@mui/material";
+import { Box, Typography, TextField, Button, IconButton, InputAdornment } from "@mui/material";
+import { Visibility, VisibilityOff } from "@mui/icons-material";
+import Swal from "sweetalert2";
 import { motion } from "framer-motion";
 import styled from "styled-components";
 import "@fontsource/playfair-display";
 
-// 📌 Contenedor principal 
+// 📌 Contenedor principal
 const LoginContainer = styled(Box)`
   display: flex;
   justify-content: center;
   align-items: center;
   height: 100vh;
-  background-image: url("/images/contact.svg"); /* Imagen de fondo */
+  background-image: url("/images/contact.svg");
   background-size: cover;
   background-position: center;
-  background-color: rgba(232, 221, 206, 0.9); /* Fondo de respaldo */
+  background-color: rgba(232, 221, 206, 0.9);
 `;
 
 // 📌 Tarjeta de Login estilizada
@@ -43,19 +45,68 @@ const StyledButton = styled(Button)`
 `;
 
 const Login = () => {
-  const [email, setEmail] = useState("");
+  const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const [showPassword, setShowPassword] = useState(false); // Estado para alternar visibilidad de contraseña
   const navigate = useNavigate();
 
-  const handleLogin = (e) => {
+  const handleTogglePassword = () => {
+    setShowPassword(!showPassword);
+  };
+
+  const handleLogin = async (e) => {
     e.preventDefault();
 
-    // 🔹 Simulación de login para administrador
-    if (email === "dani@dani.com" && password === "123") {
-      localStorage.setItem("role", "admin"); // Guarda el rol en localStorage
-      navigate("/admin-dashboard"); 
-    } else {
-      alert("Usuario o contraseña incorrectos");
+    try {
+      const response = await fetch("http://localhost:8000/api/users/login/", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ username, password }),
+      });
+
+      if (response.ok) {
+        const data = await response.json();
+        localStorage.setItem("accessToken", data.access);
+        localStorage.setItem("refreshToken", data.refresh);
+
+        // Verificar si el usuario es admin antes de redirigir
+        if (username === "psicoarrazola") {
+          localStorage.setItem("role", "admin");
+
+          Swal.fire({
+            icon: "success",
+            title: "¡Bienvenido!",
+            text: "Inicio de sesión exitoso",
+            showConfirmButton: false,
+            timer: 2000,
+          });
+
+          setTimeout(() => {
+            navigate("/admin-dashboard");
+          }, 2000);
+        } else {
+          Swal.fire({
+            icon: "warning",
+            title: "Acceso denegado",
+            text: "No tienes permisos de administrador.",
+          });
+        }
+      } else {
+        Swal.fire({
+          icon: "error",
+          title: "Error en el inicio de sesión",
+          text: "Usuario o contraseña incorrectos.",
+        });
+      }
+    } catch (error) {
+      console.error("Error en el inicio de sesión:", error);
+      Swal.fire({
+        icon: "error",
+        title: "Error del servidor",
+        text: "No se pudo conectar al servidor. Intenta más tarde.",
+      });
     }
   };
 
@@ -88,22 +139,33 @@ const Login = () => {
         </Typography>
 
         <form onSubmit={handleLogin}>
+          {/* Campo de Usuario */}
           <TextField
             fullWidth
-            label="Correo Electrónico"
+            label="Usuario"
             variant="outlined"
             sx={{
               marginBottom: "15px",
               background: "#fff",
               borderRadius: "5px",
+              "& .MuiInputBase-input": {
+                fontSize: { xs: "0.9rem", sm: "1rem" },
+              },
             }}
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
+            value={username}
+            onChange={(e) => setUsername(e.target.value)}
+            inputProps={{
+              autoCapitalize: "none",
+              autoCorrect: "off",
+              spellCheck: false,
+            }}
           />
+
+          {/* Campo de Contraseña con Ícono de Visibilidad */}
           <TextField
             fullWidth
             label="Contraseña"
-            type="password"
+            type={showPassword ? "text" : "password"} // Alterna entre texto y contraseña
             variant="outlined"
             sx={{
               marginBottom: "20px",
@@ -112,7 +174,17 @@ const Login = () => {
             }}
             value={password}
             onChange={(e) => setPassword(e.target.value)}
+            InputProps={{
+              endAdornment: (
+                <InputAdornment position="end">
+                  <IconButton onClick={handleTogglePassword} edge="end">
+                    {showPassword ? <VisibilityOff /> : <Visibility />}
+                  </IconButton>
+                </InputAdornment>
+              ),
+            }}
           />
+
           <StyledButton type="submit" fullWidth>
             Iniciar Sesión
           </StyledButton>
@@ -123,3 +195,5 @@ const Login = () => {
 };
 
 export default Login;
+
+

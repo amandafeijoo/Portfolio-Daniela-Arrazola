@@ -152,50 +152,97 @@ const WhatsAppContact = () => {
           </Select>
 
           {/* Message Type Selector */}
-          {language && (
-            <>
-              <Typography
-                variant="body1"
-                mt={2}
-                sx={{ fontFamily: "Playfair Display" }}
-              >
-                <FontAwesomeIcon
-                  icon={faCommentDots}
-                  style={{ color: "#305445" }}
-                />{" "}
-                {language === "es"
-                  ? "Selecciona tu consulta:"
-                  : language === "no"
-                  ? "Velg forespørselen din:"
-                  : "Select your inquiry:"}
-              </Typography>
-              <Select
-                fullWidth
-                value={message}
-                onChange={handleMessageChange}
-                displayEmpty
-              >
-                <MenuItem value="">
-                  <em>
-                    {language === "es"
-                      ? "Selecciona una opción"
-                      : language === "no"
-                      ? "Velg et alternativ"
-                      : "Select an option"}
-                  </em>
-                </MenuItem>
-                <MenuItem value={messages[language].consulta}>
-                  {messages[language].consulta}
-                </MenuItem>
-                <MenuItem value={messages[language].reserva}>
-                  {messages[language].reserva}
-                </MenuItem>
-                <MenuItem value={messages[language].pago}>
-                  {messages[language].pago}
-                </MenuItem>
-              </Select>
-            </>
-          )}
+         {/* Message Type Selector */}
+{language && (
+  <>
+    <Typography
+      variant="body1"
+      mt={2}
+      sx={{ fontFamily: "Playfair Display" }}
+    >
+      <FontAwesomeIcon
+        icon={faCommentDots}
+        style={{ color: "#305445" }}
+      />{" "}
+      {language === "es"
+        ? "Selecciona tu consulta:"
+        : language === "no"
+        ? "Velg forespørselen din:"
+        : "Select your inquiry:"}
+    </Typography>
+
+    {/* 🔹 SELECT con opciones responsivas */}
+    <Select
+      fullWidth
+      value={message}
+      onChange={handleMessageChange}
+      displayEmpty
+      MenuProps={{
+        PaperProps: {
+          sx: {
+            maxWidth: "320px", // ✅ Evita que el menú sea más grande que el contenedor
+            overflow: "hidden",
+          },
+        },
+      }}
+      sx={{
+        width: "100%",
+        fontSize: { xs: "0.9rem", sm: "1rem" }, // ✅ Tamaño de texto responsivo
+        backgroundColor: "#fff",
+        borderRadius: "5px",
+      }}
+    >
+      {/* 🔹 Opción por defecto */}
+      <MenuItem value="">
+        <em>
+          {language === "es"
+            ? "Selecciona una opción"
+            : language === "no"
+            ? "Velg et alternativ"
+            : "Select an option"}
+        </em>
+      </MenuItem>
+
+      {/* 🔹 Opciones de mensajes ajustadas correctamente */}
+      <MenuItem
+        value={messages[language].consulta}
+        sx={{
+          whiteSpace: "normal", // ✅ Permite saltos de línea
+          wordWrap: "break-word", // ✅ Evita que el texto se desborde
+          maxWidth: "300px", // ✅ Limita el ancho del menú
+          overflow: "hidden",
+        }}
+      >
+        {messages[language].consulta}
+      </MenuItem>
+
+      <MenuItem
+        value={messages[language].reserva}
+        sx={{
+          whiteSpace: "normal",
+          wordWrap: "break-word",
+          maxWidth: "300px",
+          overflow: "hidden",
+        }}
+      >
+        {messages[language].reserva}
+      </MenuItem>
+
+      <MenuItem
+        value={messages[language].pago}
+        sx={{
+          whiteSpace: "normal",
+          wordWrap: "break-word",
+          maxWidth: "300px",
+          overflow: "hidden",
+        }}
+      >
+        {messages[language].pago}
+      </MenuItem>
+    </Select>
+  </>
+)}
+
 
           {/* Button to open WhatsApp */}
           {message && (

@@ -59,7 +59,6 @@ const Section = styled.div`
 `;
 
 const StickySection = styled.div`
-  position: -webkit-sticky; /* For Safari */
   position: sticky;
   top: 0;
   height: 100vh;
@@ -70,13 +69,16 @@ const StickySection = styled.div`
   box-shadow: 0 0 5px 2px rgba(0, 0, 0, 0.2),
     0 0 10px 4px rgba(34, 139, 34, 0.2), 0 0 15px 6px rgba(0, 0, 0, 0.2);
   border: 2px solid #d2b48c;
-  z-index: ${(props) => props.zIndex || 0};
+  z-index: ${(props) => props.zIndex || 1};
 `;
 
 const Container = styled.div`
   height: 300vh;
-  overflow: visible;
+  display: flex;
+  flex-direction: column;
 `;
+
+
 
 function App() {
   return (

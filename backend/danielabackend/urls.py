@@ -23,6 +23,9 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/', include('reservas.urls')),  # Conecta la API de reservas
     path('api/', include('testimonios.urls')),  # Conecta la API de testimonios
+    path('api/users/', include('users.urls')),  # Rutas de autenticación
+
+    
 ]
 
 if settings.DEBUG:

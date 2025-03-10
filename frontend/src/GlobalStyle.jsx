@@ -4,12 +4,18 @@ import "@fontsource/playfair-display";
 const GlobalStyle = createGlobalStyle`
   body {
     background-color: #9FB0A2;
+    overflow-x: hidden; /* Solo en body */
+    max-width: 100vw;
     margin: 0;
+    padding: 0;
     font-family: 'Playfair Display', serif;
     margin-top: 130px; /* Ajusta este valor según la altura del header */
   }
 
-  /* Estilos generales para todos los dispositivos */
+  html {
+    width: 100vw;
+  }
+
   * {
     box-sizing: border-box;
   }

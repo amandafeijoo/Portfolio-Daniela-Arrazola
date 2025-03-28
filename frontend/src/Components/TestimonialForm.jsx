@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { useSearchParams } from "react-router-dom";
+import { useSearchParams, useNavigate } from "react-router-dom";
 import { TextField, Button, Box, Typography, Paper } from "@mui/material";
 import styled from "styled-components";
 import Swal from "sweetalert2";
@@ -28,6 +28,7 @@ const TestimonialForm = () => {
   const [imagen, setImagen] = useState(null);
   const [reservaId, setReservaId] = useState(null);
   const [searchParams] = useSearchParams();
+  const navigate = useNavigate();
 
   useEffect(() => {
     const id = searchParams.get("reserva_id");
@@ -44,7 +45,7 @@ const TestimonialForm = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-  
+
     if (!reservaId) {
       Swal.fire({
         icon: "error",
@@ -54,7 +55,7 @@ const TestimonialForm = () => {
       });
       return;
     }
-  
+
     try {
       const formData = new FormData();
       formData.append("reserva_id", reservaId);
@@ -64,24 +65,32 @@ const TestimonialForm = () => {
       if (imagen) {
         formData.append("imagen", imagen);
       }
-  
-      const response = await fetch("http://localhost:8000/api/testimonios/crear/", {
-        method: "POST",
-        body: formData,
-      });
-  
+
+      const response = await fetch(
+        "http://localhost:8000/api/testimonios/crear/",
+        {
+          method: "POST",
+          body: formData,
+        }
+      );
+
       if (response.ok) {
-        Swal.fire({
+        await Swal.fire({
           icon: "success",
           title: "¡Gracias por tu testimonio!",
-          text: "Tu testimonio se ha enviado correctamente.",
+          text: "Tu testimonio ha sido enviado y está pendiente de aprobación.",
+          timer: 3000,
           confirmButtonColor: "#b07241",
         });
-  
+
+        // Limpiar campos
         setNombre("");
         setEmail("");
         setMensaje("");
         setImagen(null);
+
+        // Redirigir al inicio
+        navigate("/");
       } else {
         const errorData = await response.json();
         if (errorData.error === "Ya existe un testimonio para esta reserva") {
@@ -117,7 +126,6 @@ const TestimonialForm = () => {
       });
     }
   };
-  
 
   return (
     <Box
@@ -132,7 +140,11 @@ const TestimonialForm = () => {
       }}
     >
       <FormContainer elevation={3}>
-        <Typography variant="h5" fontWeight="bold" sx={{ mb: 2, color: "#4b3f2f" }}>
+        <Typography
+          variant="h5"
+          fontWeight="bold"
+          sx={{ mb: 2, color: "#4b3f2f" }}
+        >
           Deja tu Testimonio
         </Typography>
         <form onSubmit={handleSubmit}>
@@ -163,7 +175,6 @@ const TestimonialForm = () => {
             sx={{ mb: 2 }}
             required
           />
-          {/* Input para subir imagen */}
           <input
             type="file"
             accept="image/png, image/jpeg"
@@ -173,16 +184,25 @@ const TestimonialForm = () => {
           <Typography variant="body2" sx={{ mb: 2 }}>
             Sube tu foto (*opcional)
           </Typography>
-          {/* Vista previa y opción de eliminar la imagen */}
+
           {imagen && (
             <Box sx={{ mb: 2, textAlign: "center" }}>
               <Typography variant="body2">Imagen seleccionada:</Typography>
               <img
                 src={URL.createObjectURL(imagen)}
                 alt="Vista previa"
-                style={{ width: "100px", height: "auto", margin: "10px auto", display: "block" }}
+                style={{
+                  width: "100px",
+                  height: "auto",
+                  margin: "10px auto",
+                  display: "block",
+                }}
               />
-              <Button variant="outlined" color="error" onClick={() => setImagen(null)}>
+              <Button
+                variant="outlined"
+                color="error"
+                onClick={() => setImagen(null)}
+              >
                 Eliminar foto
               </Button>
             </Box>

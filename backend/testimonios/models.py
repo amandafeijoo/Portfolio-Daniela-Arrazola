@@ -1,18 +1,21 @@
 from django.db import models
+from django.utils import timezone 
+
 
 class Testimonio(models.Model):
     reserva = models.OneToOneField(
-        "reservas.Reserva",  # Referencia a Reserva sin importar el modelo directamente
+        "reservas.Reserva",
         on_delete=models.CASCADE,
         related_name="testimonio"
     )
     mensaje = models.TextField()
     imagen = models.ImageField(
-        upload_to='testimonios/',  # Carpeta donde se almacenarán las imágenes
-        blank=True,               # Permite que el campo quede vacío en formularios
-        null=True                 # Permite valores nulos en la base de datos
+        upload_to='testimonios/',
+        blank=True,
+        null=True
     )
-    aprobado = models.BooleanField(default=False)  # Permite que el administrador lo apruebe antes de mostrarse
+    aprobado = models.BooleanField(default=False)
+    created_at = models.DateTimeField(default=timezone.now)
 
     def __str__(self):
         return f"Testimonio de {self.reserva.nombre_completo} - {self.reserva.fecha_reserva}"

@@ -54,7 +54,7 @@ const ImageTextEffect = () => {
           style={{
             width: "100%",
             height: isMobile ? "auto" : "100%",
-            maxHeight: isMobile ? "220px" : "none", 
+            maxHeight: isMobile ? "220px" : "none",
             borderRadius: "15px",
             objectFit: "cover",
             boxShadow: "0 0 5px rgba(0, 0, 0, 0.8)",
@@ -93,6 +93,7 @@ const ImageTextEffect = () => {
               fontWeight: "500",
               padding: "8px 18px",
               textTransform: "none",
+              marginBottom: "620px",
               borderRadius: "30px",
               border: "2px solid rgb(211, 190, 151)",
               boxShadow: "0 4px 6px rgba(0, 0, 0, 0.1)",
@@ -127,7 +128,7 @@ const ImageTextEffect = () => {
         <Box
           sx={{
             background: "rgba(48, 84, 69, 0.3)",
-            marginRight: { xs: "0", md: "20px" }, 
+            marginRight: { xs: "0", md: "20px" },
             border: "2px solid #557c70",
             padding: { xs: "20px", md: "30px" },
             borderRadius: "15px",

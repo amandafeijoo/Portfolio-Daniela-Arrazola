@@ -4,7 +4,6 @@ import {
   Box,
   Typography,
   Button,
-  Paper,
   Divider,
   Table,
   TableHead,
@@ -15,25 +14,23 @@ import {
   Tooltip,
 } from "@mui/material";
 import {
-  FaCalendarAlt,
-  FaCheck,
   FaTimes,
-  FaTrash,
   FaUserCheck,
   FaExclamationCircle,
   FaHistory,
-  FaSignOutAlt
+  FaSignOutAlt,
 } from "react-icons/fa";
-import Calendar from "react-calendar";
 import "react-calendar/dist/Calendar.css";
 import styled from "styled-components";
 import Swal from "sweetalert2";
+import TestimoniosAdmin from "./TestimoniosAdmin";
+import CalendarioReservas from "./CalendarioReservas";
 
 const DashboardContainer = styled(Box)`
   padding: 40px;
   max-width: 1200px;
   margin: auto;
-  background-image: url("/images/contact.svg");
+  background-image: url("/images/adminfoto.svg");
   background-size: cover;
   background-position: center;
   border-radius: 15px;
@@ -48,7 +45,7 @@ const LogoutButton = styled(IconButton)`
   position: absolute;
   top: 20px;
   right: 20px;
-  background-color:rgb(100, 124, 105) !important;
+  background-color: rgb(100, 124, 105) !important;
   color: white !important;
   padding: 10px !important;
   border-radius: 50% !important;
@@ -58,66 +55,40 @@ const LogoutButton = styled(IconButton)`
     background-color: #8c5a34 !important;
   }
 `;
-const Section = styled(Paper)`
-  background: rgba(255, 255, 255, 0.85);
+const Section = styled(Box)`
+  background: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(6px);
   padding: 25px;
   border-radius: 12px;
   margin-top: 25px;
-  box-shadow: 0px 5px 12px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
 
   @media (max-width: 768px) {
-    padding: 15px; // Reduce el padding en tablet y móvil
+    padding: 15px;
   }
 `;
 
-const Card = styled(Box)`
-  background: white;
-  padding: 15px;
-  border-radius: 12px;
-  box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.15);
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-top: 10px;
 
-  @media (max-width: 600px) {
-    flex-direction: column; // Hace que los botones vayan abajo en móviles
-    text-align: center;
-    gap: 10px;
-  }
-`;
 
-const StyledButton = styled(Button)`
-  background-color: #b07241 !important;
-  color: white !important;
-  text-transform: none !important;
+
+
+const CancelButton = styled(Button)`
+  background-color: #cbbf9b !important; // Beige suave
+  color: #4b3f2f !important; // Marrón oscuro
   font-weight: bold !important;
   border-radius: 25px !important;
   padding: 8px 20px !important;
+  text-transform: none !important;
   display: flex !important;
   align-items: center !important;
   gap: 8px !important;
 
   &:hover {
-    background-color: #8c5a34 !important;
+    background-color: #b7aa85 !important;
   }
 
   @media (max-width: 600px) {
-    width: 100%; // Hace que los botones ocupen todo el ancho en móvil
-  }
-`;
-
-const StyledCalendar = styled(Calendar)`
-  border: none;
-  border-radius: 10px;
-  border: 6px solid rgb(211, 190, 151);
-  box-shadow: 0px 3px 8px rgba(0, 0, 0, 0.2);
-  background: white;
-  padding: 10px;
-  width: 100%;
-
-  @media (max-width: 600px) {
-    width: 90%; // Hace que el calendario sea más compacto en móviles
+    width: 100%;
   }
 `;
 
@@ -130,11 +101,7 @@ const AdminDashboard = () => {
   const [reservas, setReservas] = useState([]);
   const [reservasCanceladas, setReservasCanceladas] = useState([]);
   const [reservasEfectuadas, setReservasEfectuadas] = useState([]);
-  const [selectedDate, setSelectedDate] = useState(new Date());
   const [diasConReserva, setDiasConReserva] = useState({}); // ✅ Cambiar de array a objeto
-  const [testimoniosPendientes, setTestimoniosPendientes] = useState([]);
-  const [testimoniosAprobados, setTestimoniosAprobados] = useState([]);
-  const [testimoniosEliminados, setTestimoniosEliminados] = useState([]);
 
   const handleLogout = () => {
     Swal.fire({
@@ -173,42 +140,57 @@ const AdminDashboard = () => {
       .then((res) => res.json())
       .then((data) => {
         if (!Array.isArray(data)) {
-          console.error(
-            "Error: La API no devolvió una lista de reservas",
-            data
-          );
+          console.error("Error: La API no devolvió una lista de reservas", data);
           return;
         }
-
+  
         const now = new Date();
         const activas = [];
         const efectuadas = [];
         const canceladas = [];
-        const diasReserva = {}; // ✅ Usar un objeto en lugar de un Set()
-
+        const diasReserva = {};
+  
         data.forEach((reserva) => {
           const fechaReserva = new Date(reserva.fecha_reserva);
-          const fechaKey = fechaReserva.toISOString().split("T")[0]; // ✅ Formato YYYY-MM-DD
-
+          const fechaKey = fechaReserva.toISOString().split("T")[0];
+  
+          const [hours, minutes] = reserva.hora_reserva_formateada
+            ? reserva.hora_reserva_formateada.split(":").map(Number)
+            : [0, 0];
+  
+          const fechaHoraInicio = new Date(
+            fechaReserva.getFullYear(),
+            fechaReserva.getMonth(),
+            fechaReserva.getDate(),
+            hours,
+            minutes
+          );
+  
+          const fechaHoraFin = new Date(fechaHoraInicio.getTime() + 60 * 60 * 1000);
+  
           if (reserva.cancelada) {
             canceladas.push(reserva);
-            diasReserva[fechaKey] = "cancelada"; // ✅ Guardar estado
-          } else if (fechaReserva >= now) {
+            // Solo marcar como cancelada si aún no existe otro tipo
+            if (!diasReserva[fechaKey]) {
+              diasReserva[fechaKey] = "cancelada";
+            }
+          } else if (fechaHoraFin > now) {
             activas.push(reserva);
-            diasReserva[fechaKey] = "futura"; // ✅ Guardar estado
+            diasReserva[fechaKey] = "futura"; // tiene prioridad sobre cancelada
           } else {
             efectuadas.push(reserva);
-            diasReserva[fechaKey] = "pasada"; // ✅ Guardar estado
+            diasReserva[fechaKey] = "pasada"; // tiene prioridad sobre cancelada
           }
         });
-
+  
         setReservas(activas);
         setReservasEfectuadas(efectuadas);
         setReservasCanceladas(canceladas);
-        setDiasConReserva(diasReserva); // ✅ Actualizar el estado con el objeto de fechas
+        setDiasConReserva(diasReserva);
       })
       .catch((error) => console.error("Error obteniendo reservas:", error));
   }, []);
+  
 
   const handleCancelReserva = (id) => {
     fetch(`http://localhost:8000/api/reservas/${id}/cancelar/`, {
@@ -248,133 +230,41 @@ const AdminDashboard = () => {
       });
   };
 
-  const handleApproveTestimonial = (id) => {
-    fetch(`http://localhost:8000/api/testimonios/${id}/aprobar/`, {
-      method: "PATCH",
-    })
-      .then((response) => {
-        if (!response.ok) {
-          throw new Error("No se pudo aprobar el testimonio");
-        }
-        return response.json();
-      })
-      .then(() => {
-        setTestimoniosPendientes((prev) => prev.filter((t) => t.id !== id));
-        setTestimoniosAprobados((prev) => [
-          ...prev,
-          testimoniosPendientes.find((t) => t.id === id),
-        ]);
-
-        // ✅ Alerta de éxito
-        Swal.fire({
-          icon: "success",
-          title: "Testimonio aprobado",
-          text: "El testimonio ha sido aprobado correctamente.",
-          confirmButtonColor: "#b07241",
-        });
-      })
-      .catch((error) => {
-        console.error(error); // ✅ Evita el error de TypeScript
-        Swal.fire({
-          icon: "error",
-          title: "Error",
-          text: "No se pudo aprobar el testimonio. Inténtalo de nuevo.",
-          confirmButtonColor: "#d33",
-        });
-      });
-  };
-
-  const handleDeleteTestimonial = (id) => {
-    const testimonioAEliminar =
-      testimoniosPendientes.find((t) => t.id === id) ||
-      testimoniosAprobados.find((t) => t.id === id);
-
-    Swal.fire({
-      title: "¿Estás seguro?",
-      text: "Esta acción no se puede deshacer.",
-      icon: "warning",
-      showCancelButton: true,
-      confirmButtonColor: "#d33",
-      cancelButtonColor: "#3085d6",
-      confirmButtonText: "Sí, eliminar",
-      cancelButtonText: "Cancelar",
-    }).then((result) => {
-      if (result.isConfirmed) {
-        fetch(`http://localhost:8000/api/testimonios/${id}/eliminar/`, {
-          method: "DELETE",
-        })
-          .then((response) => {
-            if (!response.ok) {
-              throw new Error("No se pudo eliminar el testimonio.");
-            }
-            return response.json();
-          })
-          .then(() => {
-            setTestimoniosPendientes((prev) => prev.filter((t) => t.id !== id));
-            setTestimoniosAprobados((prev) => prev.filter((t) => t.id !== id));
-
-            if (testimonioAEliminar) {
-              setTestimoniosEliminados((prev) => [
-                ...prev,
-                testimonioAEliminar,
-              ]);
-            }
-
-            Swal.fire({
-              icon: "success",
-              title: "Testimonio eliminado",
-              text: "El testimonio ha sido eliminado correctamente.",
-              confirmButtonColor: "#b07241",
-            });
-          })
-          .catch((error) => {
-            Swal.fire({
-              icon: "error",
-              title: "Error",
-              text: "Hubo un problema al eliminar el testimonio.",
-              confirmButtonColor: "#d33",
-            });
-            console.error("Error eliminando testimonio:", error);
-          });
-      }
-    });
-  };
-
   return (
     <DashboardContainer>
       {/* 🔹 Botón de Logout con Tooltip */}
       <Box
-  sx={{
-    display: "flex",
-    justifyContent: { xs: "flex-end", sm: "flex-end" }, // 🔹 Derecha en todas las pantallas
-    alignItems: "center",
-    position: "absolute", // 🔹 Para moverlo con `top` y `right`
-    top: { xs: "10px", sm: "20px" }, // 🔹 Más arriba solo en móviles
-    right: { xs: "15px", sm: "30px" }, // 🔹 Más a la derecha en móviles
-    zIndex: 10, // 🔹 Para que siempre se vea encima de otros elementos
-  }}
->
-  <Tooltip title="Cerrar sesión">
-    <LogoutButton
-      onClick={handleLogout}
-      sx={{
-        fontSize: { xs: "0.9rem", sm: "1.2rem" }, // 🔹 Tamaño adaptable
-        padding: { xs: "6px", sm: "10px" }, // 🔹 Menos padding en móviles
-        borderRadius: "8px",
-      }}
-    >
-      <FaSignOutAlt size={18} />
-    </LogoutButton>
-  </Tooltip>
-</Box>
+        sx={{
+          display: "flex",
+          justifyContent: { xs: "flex-end", sm: "flex-end" }, // 🔹 Derecha en todas las pantallas
+          alignItems: "center",
+          position: "absolute", // 🔹 Para moverlo con `top` y `right`
+          top: { xs: "10px", sm: "20px" }, // 🔹 Más arriba solo en móviles
+          right: { xs: "15px", sm: "150px" }, // 🔹 Más a la derecha en móviles
+          zIndex: 10, // 🔹 Para que siempre se vea encima de otros elementos
+        }}
+      >
+        <Tooltip title="Cerrar sesión">
+          <LogoutButton
+            onClick={handleLogout}
+            sx={{
+              fontSize: { xs: "0.9rem", sm: "1.2rem" }, // 🔹 Tamaño adaptable
+              padding: { xs: "6px", sm: "10px" }, // 🔹 Menos padding en móviles
+              borderRadius: "8px",
+            }}
+          >
+            <FaSignOutAlt size={18} />
+          </LogoutButton>
+        </Tooltip>
+      </Box>
       <Typography
         variant="h4"
         fontWeight="bold"
         sx={{
           textAlign: "center",
-          mt:{ xs: 6, sm: 3, md: 4 }, // 📌 Menos margen en móviles
+          mt: { xs: 6, sm: 3, md: 4 }, // 📌 Menos margen en móviles
           mb: { xs: 2, sm: 3, md: 4 }, // 📌 Menos margen en móviles
-          color: "rgb(71, 53, 39)",
+          color: "rgb(42, 23, 8)",
           fontSize: { xs: "1.4rem", sm: "2rem", md: "2rem" }, // 📌 Tamaño adaptable
         }}
       >
@@ -382,32 +272,13 @@ const AdminDashboard = () => {
       </Typography>
 
       {/* 📅 Calendario de Reservas */}
-      <Section>
-        <Typography
-          variant="h5"
-          fontWeight="bold"
-          sx={{
-            mb: { xs: 1, sm: 2 }, // 📌 Reduce margen en móviles
-            color: "#4b3f2f",
-            fontSize: { xs: "1.2rem", sm: "1.5rem", md: "1.4rem" }, // 📌 Tamaño adaptable
-          }}
-        >
-          <FaCalendarAlt /> Calendario de Reservas
-        </Typography>
+    
+      <CalendarioReservas
+  reservasEfectuadas={[...reservas, ...reservasEfectuadas]} // ✅ Unificas ambas
+  diasConReserva={diasConReserva}
+/>
 
-        <StyledCalendar
-          onChange={setSelectedDate}
-          value={selectedDate}
-          tileClassName={({ date }) => {
-            const fechaKey = date.toISOString().split("T")[0]; // ✅ Convertir a formato YYYY-MM-DD
-            if (diasConReserva[fechaKey] === "cancelada")
-              return "cancelada-day";
-            if (diasConReserva[fechaKey] === "futura") return "futura-day";
-            if (diasConReserva[fechaKey] === "pasada") return "pasada-day";
-            return "";
-          }}
-        />
-      </Section>
+   
 
       <Divider sx={{ margin: "30px 0" }} />
 
@@ -418,7 +289,7 @@ const AdminDashboard = () => {
           fontWeight="bold"
           sx={{
             mb: { xs: 1, sm: 2 }, // 📌 Menos margen en móviles
-            color: "#4b3f2f",
+            color: "rgb(55, 30, 10)",
             fontSize: { xs: "1.2rem", sm: "1.5rem", md: "1.5rem" }, // 📌 Tamaño adaptable
           }}
         >
@@ -426,7 +297,7 @@ const AdminDashboard = () => {
         </Typography>
 
         {reservas.length === 0 ? (
-          <Typography color="gray">
+          <Typography color="rgb(40, 34, 29)">
             <FaExclamationCircle /> No hay reservas activas.
           </Typography>
         ) : (
@@ -448,20 +319,28 @@ const AdminDashboard = () => {
                 {reservas.map((reserva) => (
                   <TableRow key={reserva.id}>
                     <TableCell>{reserva.nombre_completo}</TableCell>
-                    <TableCell>{reserva.email}</TableCell>
+                    <TableCell>
+                      <a
+                        href={`mailto:${reserva.email}`}
+                        style={{
+                          color: "#4B3F2F",
+                          textDecoration: "underline",
+                        }}
+                      >
+                        {reserva.email}
+                      </a>
+                    </TableCell>
                     <TableCell>{reserva.fecha_reserva_formateada}</TableCell>
                     <TableCell>{reserva.hora_reserva_formateada}</TableCell>
                     <TableCell>{reserva.motivo_consulta}</TableCell>
                     <TableCell>{reserva.tipo_terapia}</TableCell>
                     <TableCell>{reserva.comentarios}</TableCell>
                     <TableCell>
-                      <Button
+                      <CancelButton
                         onClick={() => handleCancelReserva(reserva.id)}
-                        variant="contained"
-                        color="secondary"
                       >
                         <FaTimes /> Cancelar
-                      </Button>
+                      </CancelButton>
                     </TableCell>
                   </TableRow>
                 ))}
@@ -480,7 +359,7 @@ const AdminDashboard = () => {
           fontWeight="bold"
           sx={{
             mb: { xs: 1, sm: 2 }, // 📌 Menos margen en móviles
-            color: "#4b3f2f",
+            color: "rgb(55, 30, 10)",
             fontSize: { xs: "1.2rem", sm: "1.5rem", md: "1.5rem" }, // 📌 Tamaño adaptable
           }}
         >
@@ -488,7 +367,7 @@ const AdminDashboard = () => {
         </Typography>
 
         {reservasEfectuadas.length === 0 ? (
-          <Typography color="gray">
+          <Typography color="rgb(40, 34, 29)">
             <FaExclamationCircle /> No hay reservas efectuadas.
           </Typography>
         ) : (
@@ -516,7 +395,7 @@ const AdminDashboard = () => {
           fontWeight="bold"
           sx={{
             mb: { xs: 1, sm: 2 }, // 📌 Reduce margen en móviles
-            color: "#4b3f2f",
+            color: "rgb(55, 30, 10)",
             fontSize: { xs: "1.2rem", sm: "1.5rem", md: "1.5rem" }, // 📌 Tamaño adaptable
           }}
         >
@@ -524,7 +403,7 @@ const AdminDashboard = () => {
         </Typography>
 
         {reservasCanceladas.length === 0 ? (
-          <Typography color="gray">
+          <Typography color="rgb(40, 34, 29)">
             <FaExclamationCircle /> No hay reservas canceladas.
           </Typography>
         ) : (
@@ -554,107 +433,8 @@ const AdminDashboard = () => {
           </Box>
         )}
       </Section>
-
       <Divider sx={{ margin: "30px 0" }} />
-
-      {/* ✅ Testimonios Aprobados */}
-      <Section>
-        <Typography
-          variant="h5"
-          fontWeight="bold"
-          sx={{
-            mb: { xs: 1, sm: 2 }, // 📌 Margen más pequeño en móviles
-            color: "#4b3f2f",
-            fontSize: { xs: "1.2rem", sm: "1.5rem", md: "1.5rem" }, // 📌 Tamaño adaptable
-          }}
-        >
-          ✅ Testimonios Aprobados
-        </Typography>
-
-        {testimoniosAprobados.length === 0 ? (
-          <Typography color="gray">
-            <FaExclamationCircle /> No hay testimonios aprobados.
-          </Typography>
-        ) : (
-          testimoniosAprobados.map((testimonio) => (
-            <Card key={testimonio.id}>
-              <Typography>
-                {testimonio.nombre_cliente}: {testimonio.mensaje}
-              </Typography>
-            </Card>
-          ))
-        )}
-      </Section>
-
-      <Divider sx={{ margin: "30px 0" }} />
-
-      {/* 🕒 Testimonios Pendientes de Aprobación y Eliminados */}
-      <Section>
-        <Typography
-          variant="h5"
-          fontWeight="bold"
-          sx={{
-            mb: { xs: 1, sm: 2 }, // 📌 Reduce margen en móviles
-            color: "#4b3f2f",
-            fontSize: { xs: "1.2rem", sm: "1.5rem", md: "1.5rem" }, // 📌 Tamaño adaptable
-          }}
-        >
-          🕒 Testimonios Pendientes y Eliminados
-        </Typography>
-
-        {/* 🔹 Testimonios Pendientes */}
-        {testimoniosPendientes.length === 0 &&
-        testimoniosEliminados.length === 0 ? (
-          <Typography color="gray">
-            <FaExclamationCircle /> No hay testimonios pendientes ni eliminados.
-          </Typography>
-        ) : (
-          <>
-            {testimoniosPendientes.map((testimonio) => (
-              <Card key={testimonio.id}>
-                <Typography>
-                  {testimonio.nombre_cliente}: {testimonio.mensaje}
-                </Typography>
-                <StyledButton
-                  onClick={() => handleApproveTestimonial(testimonio.id)}
-                >
-                  <FaCheck /> Aprobar
-                </StyledButton>
-                <StyledButton
-                  onClick={() => handleDeleteTestimonial(testimonio.id)}
-                >
-                  <FaTrash /> Eliminar
-                </StyledButton>
-              </Card>
-            ))}
-
-            {/* 🔹 Testimonios Eliminados */}
-            {testimoniosEliminados.length > 0 && (
-              <>
-                <Divider sx={{ margin: "20px 0" }} />
-                <Typography
-                  variant="h6"
-                  fontWeight="bold"
-                  sx={{
-                    mb: { xs: 1, sm: 2 }, // 📌 Reduce margen en móviles
-                    color: "#8c5a34",
-                    fontSize: { xs: "1rem", sm: "1.3rem", md: "1.5rem" }, // 📌 Tamaño adaptable
-                  }}
-                >
-                  🗑️ Testimonios Eliminados
-                </Typography>
-                {testimoniosEliminados.map((testimonio) => (
-                  <Card key={testimonio.id} sx={{ backgroundColor: "#f5d0d0" }}>
-                    <Typography>
-                      {testimonio.nombre_cliente}: {testimonio.mensaje}
-                    </Typography>
-                  </Card>
-                ))}
-              </>
-            )}
-          </>
-        )}
-      </Section>
+      <TestimoniosAdmin />
     </DashboardContainer>
   );
 };

@@ -15,8 +15,7 @@ class Reserva(models.Model):
     email_enviado = models.BooleanField(default=False)  # ✅ Control para el envío de email
 
     class Meta:
-        unique_together = ("fecha_reserva", "hora_reserva")  # 🔹 Evita reservas duplicadas en la BD
-        ordering = ["fecha_reserva", "hora_reserva"]
+        ordering = ["fecha_reserva", "hora_reserva"]  # Solo dejamos el orden
 
     def clean(self):
         """

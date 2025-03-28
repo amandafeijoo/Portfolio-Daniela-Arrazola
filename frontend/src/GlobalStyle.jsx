@@ -4,12 +4,12 @@ import "@fontsource/playfair-display";
 const GlobalStyle = createGlobalStyle`
   body {
     background-color: #9FB0A2;
-    overflow-x: hidden; /* Solo en body */
+    overflow-x: hidden;
     max-width: 100vw;
     margin: 0;
     padding: 0;
     font-family: 'Playfair Display', serif;
-    margin-top: 130px; /* Ajusta este valor según la altura del header */
+    margin-top: 130px;
   }
 
   html {
@@ -20,11 +20,31 @@ const GlobalStyle = createGlobalStyle`
     box-sizing: border-box;
   }
 
+  .futura-day {
+    background-color: #a1ad7f !important;
+    color: white !important;
+    border-radius: 50%;
+  }
+
+  .pasada-day {
+    background-color: #d0c9c0 !important;
+    color: #333 !important;
+    border-radius: 50%;
+  }
+
+  /* 📌 Estilo personalizado para el día actual en el calendario */
+  .react-calendar__tile--now {
+    border: 2px solid #4b3f2f !important;
+    border-radius: 50%;
+    background: transparent !important;
+    color: #4b3f2f !important;
+    font-weight: bold;
+  }
+
   /* Estilos específicos para iPhone 15 y iPhone 15 Pro */
   @media (max-width: 430px) {
     body {
       font-size: 14px;
-      
     }
 
     .footer-container {
@@ -64,7 +84,7 @@ const GlobalStyle = createGlobalStyle`
 
 export default GlobalStyle;
 
+
 // background-color: #557C70;
 // background-color: #A1AD7F;
 // background-color: #9FB0A2;
-

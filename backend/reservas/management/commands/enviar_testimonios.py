@@ -9,10 +9,11 @@ class Command(BaseCommand):
 
     def handle(self, *args, **kwargs):
         # Calculamos la fecha de ayer
-        # fecha_ayer = now().date() - timedelta(days=1)
 
-        fecha_ayer = now().date()  # 🔥 TEMPORAL: Enviar correos a reservas de HOY
+        fecha_ayer = now().date() - timedelta(days=1)
 
+        # fecha_ayer = now().date()  # 🔥 TEMPORAL: Enviar correos a reservas de HOY
+        #/////// python manage.py enviar_testimonios//////////
 
         # Buscamos todas las reservas de ayer
         reservas_ayer = Reserva.objects.filter(fecha_reserva=fecha_ayer)

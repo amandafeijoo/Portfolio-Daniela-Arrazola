@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { TextField, MenuItem } from "@mui/material";
 import {
   LocalizationProvider,
@@ -8,8 +8,10 @@ import {
 import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
 import "@fontsource/playfair-display";
 import { styled } from "@mui/material/styles";
+import PropTypes from "prop-types";
 
-const StyledPickersDay = styled(PickersDay)(({ theme, isDisabled }) => ({
+// ✅ Estilo personalizado para los días deshabilitados
+const StyledPickersDay = styled(PickersDay)(({ isDisabled }) => ({
   ...(isDisabled && {
     backgroundColor: "#d2b48c !important",
     color: "rgba(0, 0, 0, 0.38) !important",
@@ -31,42 +33,45 @@ const Calendar = ({
   const [availableTimes, setAvailableTimes] = useState([]);
 
   const handleDateChange = (date) => {
-    setSelectedDate(date);
-    const day = date.getDay();
-    let times = [];
+    if (date) {
+      // ✅ Forzar la hora a las 12:00 para evitar errores por desfase de zona horaria (UTC)
+      date.setHours(12, 0, 0, 0);
+      setSelectedDate(date);
 
-    if (day >= 1 && day <= 4) {
-      // Monday to Thursday
-      times = [
-        "10:00",
-        "11:00",
-        "12:00",
-        "13:00",
-        "14:00",
-        "16:00",
-        "17:00",
-        "18:00",
-        "19:00",
-        "20:00",
-      ];
-    } else if (day === 5) {
-      // Friday
-      times = ["09:00", "10:00", "11:00", "12:00", "13:00", "14:00", "15:00"];
+      const day = date.getDay();
+      let times = [];
+
+      if (day >= 1 && day <= 4) {
+        // Lunes a Jueves
+        times = [
+          "10:00",
+          "11:00",
+          "12:00",
+          "13:00",
+          "14:00",
+          "16:00",
+          "17:00",
+          "18:00",
+          "19:00",
+          "20:00",
+        ];
+      } else if (day === 5) {
+        // Viernes
+        times = ["09:00", "10:00", "11:00", "12:00", "13:00", "14:00", "15:00"];
+      }
+
+      setAvailableTimes(times);
+      setSelectedTime("");
     }
-
-    setAvailableTimes(times);
-    setSelectedTime("");
   };
 
   const shouldDisableDate = (date) => {
     const day = date.getDay();
-    // Disable Saturday (6) and Sunday (0)
-    return day === 0 || day === 6;
+    return day === 0 || day === 6; // Deshabilitar domingos y sábados
   };
 
   const renderDay = (day, selectedDate, isInCurrentMonth, dayComponent) => {
     const isDisabled = shouldDisableDate(day);
-
     return <StyledPickersDay {...dayComponent.props} isDisabled={isDisabled} />;
   };
 
@@ -121,6 +126,14 @@ const Calendar = ({
       )}
     </LocalizationProvider>
   );
+};
+
+// ✅ PropTypes para evitar warnings y mejorar legibilidad
+Calendar.propTypes = {
+  selectedDate: PropTypes.instanceOf(Date),
+  setSelectedDate: PropTypes.func.isRequired,
+  selectedTime: PropTypes.string,
+  setSelectedTime: PropTypes.func.isRequired,
 };
 
 export default Calendar;

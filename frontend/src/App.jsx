@@ -62,6 +62,7 @@ const StickySection = styled.div`
   position: sticky;
   top: 0;
   height: 100vh;
+  width: 100%;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -69,13 +70,20 @@ const StickySection = styled.div`
   box-shadow: 0 0 5px 2px rgba(0, 0, 0, 0.2),
     0 0 10px 4px rgba(34, 139, 34, 0.2), 0 0 15px 6px rgba(0, 0, 0, 0.2);
   border: 2px solid #d2b48c;
-  z-index: ${(props) => props.zIndex || 1};
+  z-index: 10;
 `;
 
+
+
 const Container = styled.div`
-  height: 300vh;
+  min-height: 300vh;
   display: flex;
   flex-direction: column;
+  width: 100vw; /* 🔥 Corrige posible margen izquierdo */
+  max-width: 100vw;
+  margin: 0 auto;
+  padding: 0;
+  overflow-x: visible; /* 🔥 No usar hidden aquí */
 `;
 
 

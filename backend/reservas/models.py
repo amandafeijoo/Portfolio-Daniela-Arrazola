@@ -10,12 +10,12 @@ class Reserva(models.Model):
     tipo_terapia = models.CharField(max_length=50)
     comentarios = models.TextField(blank=True, null=True)
     privacidad_aceptada = models.BooleanField(default=False)
-    cancelada = models.BooleanField(default=False)  # ✅ Campo para marcar si está cancelada
+    cancelada = models.BooleanField(default=False)  
     created_at = models.DateTimeField(auto_now_add=True)
     email_enviado = models.BooleanField(default=False)  # ✅ Control para el envío de email
 
     class Meta:
-        ordering = ["fecha_reserva", "hora_reserva"]  # Solo dejamos el orden
+        ordering = ["fecha_reserva", "hora_reserva"]  
 
     def clean(self):
         """

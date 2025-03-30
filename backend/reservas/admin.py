@@ -13,7 +13,7 @@ class ReservaAdmin(admin.ModelAdmin):
         "created_at",
     )  # 📌 Campos que se mostrarán en la lista de reservas
 
-    list_filter = ("fecha_reserva", "tipo_terapia")  # 📌 Filtros en el panel lateral derecho
-    search_fields = ("nombre_completo", "email")  # 📌 Permite buscar por nombre y email
-    ordering = ("-fecha_reserva", "-hora_reserva")  # 📌 Ordena por fecha y hora más recientes
+    list_filter = ("fecha_reserva", "tipo_terapia")  
+    search_fields = ("nombre_completo", "email") 
+    ordering = ("-fecha_reserva", "-hora_reserva") 
 

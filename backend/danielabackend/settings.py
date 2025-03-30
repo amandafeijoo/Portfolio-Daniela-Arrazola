@@ -56,13 +56,18 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+
+    # Librerías
     'rest_framework', 
     'corsheaders',
+    'rest_framework_simplejwt.token_blacklist',  # ✅ Añade esto
+
+    # Tus apps
     'reservas',  
     'testimonios',
     'users',
-    
 ]
+
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',

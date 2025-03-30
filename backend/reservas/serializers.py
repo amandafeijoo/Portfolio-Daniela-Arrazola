@@ -59,7 +59,7 @@ class ReservaSerializer(serializers.ModelSerializer):
 
         today = date.today()
 
-        # 🧪 Debug temporal (puedes borrar esto después)
+        # 🧪 Debug temporal 
         print("📅 Fecha seleccionada:", selected_date)
         print("🕒 Hora seleccionada:", selected_time)
         print("📅 Hoy:", today)

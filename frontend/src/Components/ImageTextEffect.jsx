@@ -67,12 +67,10 @@ const ImageTextEffect = () => {
           muted
           playsInline // 🔹 Evita que el video se expanda a pantalla completa en iOS
         />
-
-        {/* Botón en la web y en móviles */}
         <Box
           sx={{
             position: "absolute",
-            bottom: { xs: "10px", md: "50px" }, // 🔹 En móviles queda igual, en la web sube
+            bottom: { xs: "10px", md: "50px" },
             left: "50%",
             transform: "translateX(-50%)",
             width: "80%",
@@ -105,7 +103,7 @@ const ImageTextEffect = () => {
               "&:active": {
                 transform: "scale(0.98)",
               },
-              display: "block", // 🔹 Asegura que el botón se vea en la web y móviles
+              display: "block",
             }}
             onClick={handleNavigate}
           >
@@ -121,7 +119,7 @@ const ImageTextEffect = () => {
         transition={{ duration: 1, delay: 0.3 }}
         sx={{
           maxWidth: { xs: "90%", md: "450px" },
-          margin: { xs: "0 auto", md: "0 auto 0 40px" }, // 🔹 Movido un poco a la derecha en la web
+          margin: { xs: "0 auto", md: "0 auto 0 40px" },
           textAlign: "center",
         }}
       >

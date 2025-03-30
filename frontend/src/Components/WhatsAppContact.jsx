@@ -85,18 +85,17 @@ const WhatsAppContact = () => {
           minWidth="250px"
           maxWidth="400px"
           width="90%"
-          position="fixed" 
+          position="fixed"
           transform="translateX(-50%)"
           zIndex="9999"
           boxShadow="0 0 5px 2px rgba(0, 0, 0, 0.3), 0 0 10px 4px rgba(34, 139, 34, 0.2), 0 0 15px 6px rgba(0, 0, 0, 0.2)"
           sx={{
-      width: { xs: "90%", sm: "85%", md: "400px" }, // Ancho responsivo
-      left: { xs: "20px", sm: "20px", md: "20%" },  // Móvil y tablet a la izquierda, centrado en escritorio
-      maxWidth: "400px",
-      minWidth: "250px",
-      overflow: "hidden",
-    }}
-  
+            width: { xs: "90%", sm: "85%", md: "400px" }, // Ancho responsivo
+            left: { xs: "20px", sm: "20px", md: "20%" }, // Móvil y tablet a la izquierda, centrado en escritorio
+            maxWidth: "400px",
+            minWidth: "250px",
+            overflow: "hidden",
+          }}
         >
           <Typography
             variant="h6"
@@ -152,97 +151,96 @@ const WhatsAppContact = () => {
           </Select>
 
           {/* Message Type Selector */}
-         {/* Message Type Selector */}
-{language && (
-  <>
-    <Typography
-      variant="body1"
-      mt={2}
-      sx={{ fontFamily: "Playfair Display" }}
-    >
-      <FontAwesomeIcon
-        icon={faCommentDots}
-        style={{ color: "#305445" }}
-      />{" "}
-      {language === "es"
-        ? "Selecciona tu consulta:"
-        : language === "no"
-        ? "Velg forespørselen din:"
-        : "Select your inquiry:"}
-    </Typography>
+          {/* Message Type Selector */}
+          {language && (
+            <>
+              <Typography
+                variant="body1"
+                mt={2}
+                sx={{ fontFamily: "Playfair Display" }}
+              >
+                <FontAwesomeIcon
+                  icon={faCommentDots}
+                  style={{ color: "#305445" }}
+                />{" "}
+                {language === "es"
+                  ? "Selecciona tu consulta:"
+                  : language === "no"
+                  ? "Velg forespørselen din:"
+                  : "Select your inquiry:"}
+              </Typography>
 
-    {/* 🔹 SELECT con opciones responsivas */}
-    <Select
-      fullWidth
-      value={message}
-      onChange={handleMessageChange}
-      displayEmpty
-      MenuProps={{
-        PaperProps: {
-          sx: {
-            maxWidth: "320px", // ✅ Evita que el menú sea más grande que el contenedor
-            overflow: "hidden",
-          },
-        },
-      }}
-      sx={{
-        width: "100%",
-        fontSize: { xs: "0.9rem", sm: "1rem" }, // ✅ Tamaño de texto responsivo
-        backgroundColor: "#fff",
-        borderRadius: "5px",
-      }}
-    >
-      {/* 🔹 Opción por defecto */}
-      <MenuItem value="">
-        <em>
-          {language === "es"
-            ? "Selecciona una opción"
-            : language === "no"
-            ? "Velg et alternativ"
-            : "Select an option"}
-        </em>
-      </MenuItem>
+              {/* 🔹 SELECT con opciones responsivas */}
+              <Select
+                fullWidth
+                value={message}
+                onChange={handleMessageChange}
+                displayEmpty
+                MenuProps={{
+                  PaperProps: {
+                    sx: {
+                      maxWidth: "320px", // ✅ Evita que el menú sea más grande que el contenedor
+                      overflow: "hidden",
+                    },
+                  },
+                }}
+                sx={{
+                  width: "100%",
+                  fontSize: { xs: "0.9rem", sm: "1rem" }, // ✅ Tamaño de texto responsivo
+                  backgroundColor: "#fff",
+                  borderRadius: "5px",
+                }}
+              >
+                {/* 🔹 Opción por defecto */}
+                <MenuItem value="">
+                  <em>
+                    {language === "es"
+                      ? "Selecciona una opción"
+                      : language === "no"
+                      ? "Velg et alternativ"
+                      : "Select an option"}
+                  </em>
+                </MenuItem>
 
-      {/* 🔹 Opciones de mensajes ajustadas correctamente */}
-      <MenuItem
-        value={messages[language].consulta}
-        sx={{
-          whiteSpace: "normal", // ✅ Permite saltos de línea
-          wordWrap: "break-word", // ✅ Evita que el texto se desborde
-          maxWidth: "300px", // ✅ Limita el ancho del menú
-          overflow: "hidden",
-        }}
-      >
-        {messages[language].consulta}
-      </MenuItem>
+                {/* 🔹 Opciones de mensajes ajustadas correctamente */}
+                <MenuItem
+                  value={messages[language].consulta}
+                  sx={{
+                    whiteSpace: "normal", // ✅ Permite saltos de línea
+                    wordWrap: "break-word", // ✅ Evita que el texto se desborde
+                    maxWidth: "300px", // ✅ Limita el ancho del menú
+                    overflow: "hidden",
+                  }}
+                >
+                  {messages[language].consulta}
+                </MenuItem>
 
-      <MenuItem
-        value={messages[language].reserva}
-        sx={{
-          whiteSpace: "normal",
-          wordWrap: "break-word",
-          maxWidth: "300px",
-          overflow: "hidden",
-        }}
-      >
-        {messages[language].reserva}
-      </MenuItem>
+                <MenuItem
+                  value={messages[language].reserva}
+                  sx={{
+                    whiteSpace: "normal",
+                    wordWrap: "break-word",
+                    maxWidth: "300px",
+                    overflow: "hidden",
+                  }}
+                >
+                  {messages[language].reserva}
+                </MenuItem>
 
-      <MenuItem
-        value={messages[language].pago}
-        sx={{
-          whiteSpace: "normal",
-          wordWrap: "break-word",
-          maxWidth: "300px",
-          overflow: "hidden",
-        }}
-      >
-        {messages[language].pago}
-      </MenuItem>
-    </Select>
-  </>
-)}
-
+                <MenuItem
+                  value={messages[language].pago}
+                  sx={{
+                    whiteSpace: "normal",
+                    wordWrap: "break-word",
+                    maxWidth: "300px",
+                    overflow: "hidden",
+                  }}
+                >
+                  {messages[language].pago}
+                </MenuItem>
+              </Select>
+            </>
+          )}
 
           {/* Button to open WhatsApp */}
           {message && (
@@ -283,4 +281,3 @@ const WhatsAppContact = () => {
 };
 
 export default WhatsAppContact;
-

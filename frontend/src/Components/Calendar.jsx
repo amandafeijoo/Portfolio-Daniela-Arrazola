@@ -10,7 +10,6 @@ import "@fontsource/playfair-display";
 import { styled } from "@mui/material/styles";
 import PropTypes from "prop-types";
 
-// ✅ Estilo personalizado para los días deshabilitados
 const StyledPickersDay = styled(PickersDay)(({ isDisabled }) => ({
   ...(isDisabled && {
     backgroundColor: "#d2b48c !important",

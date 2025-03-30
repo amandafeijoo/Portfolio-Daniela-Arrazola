@@ -5,35 +5,31 @@ import { FaCheck, FaTrash } from "react-icons/fa";
 import styled from "styled-components";
 import { format } from "date-fns";
 
-
-
 const TransparentBackground = styled.div`
-  background: rgba(211, 166, 166, 0.15); /* Fondo semitransparente */
-  backdrop-filter: blur(6px); /* Efecto de desenfoque */
-  border-radius: 8px; /* Bordes redondeados */
-  padding: 8px 16px; /* Espaciado interno */
-  display: inline-block; /* Ajustar al tamaño del contenido */
+  background: rgba(211, 166, 166, 0.15); 
+  backdrop-filter: blur(6px);
+  border-radius: 8px; 
+  padding: 8px 16px;
+  display: inline-block; 
 `;
 
 const StyledCard = styled(Card).attrs({
-    elevation: 0,            // ❌ Quita sombra por defecto
-    variant: "outlined",     // ✅ Evita el background white por defecto
-  })`
-    && {
-      background: linear-gradient(
-        135deg,
-        rgba(255, 255, 255, 0.15),
-        rgba(255, 255, 255, 0.05)
-      ) !important;
-      backdrop-filter: blur(6px);
-      border: 1px solid rgba(255, 255, 255, 0.3);
-      border-radius: 16px;
-      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
-      color: #4b3f2f;
-    }
-  `;
-  
-
+  elevation: 0, 
+  variant: "outlined", 
+})`
+  && {
+    background: linear-gradient(
+      135deg,
+      rgba(255, 255, 255, 0.15),
+      rgba(255, 255, 255, 0.05)
+    ) !important;
+    backdrop-filter: blur(6px);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    border-radius: 16px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+    color: #4b3f2f;
+  }
+`;
 
 const ApproveButton = styled(Button)`
   background-color: #a1ad7f !important;
@@ -47,7 +43,7 @@ const ApproveButton = styled(Button)`
   gap: 8px !important;
 
   &:hover {
-    background-color: #8b976f !important; 
+    background-color: #8b976f !important;
   }
 
   @media (max-width: 600px) {
@@ -183,19 +179,21 @@ const TestimoniosAdmin = () => {
     <>
       <Divider sx={{ margin: "30px 0" }} />
       <TransparentBackground>
-
-      <Typography
-        variant="h5"
-        fontWeight="bold"
-        sx={{ mb: 2, color: "rgb(55, 30, 10)" }}
-      >
-        ✅ Testimonios Aprobados
-      </Typography>
+        <Typography
+          variant="h5"
+          fontWeight="bold"
+          sx={{ mb: 2, color: "rgb(55, 30, 10)" }}
+        >
+          ✅ Testimonios Aprobados
+        </Typography>
       </TransparentBackground>
 
       {testimoniosAprobados.map((t) => (
-        <StyledCard key={t.id} style={{ padding: "16px", marginBottom: "16px" }}>
-        <Typography fontWeight="bold" color="#4b3f2f">
+        <StyledCard
+          key={t.id}
+          style={{ padding: "16px", marginBottom: "16px" }}
+        >
+          <Typography fontWeight="bold" color="#4b3f2f">
             {t.nombre_cliente}
           </Typography>
           <Typography variant="body2" color="rgb(100, 54, 17)">
@@ -209,18 +207,21 @@ const TestimoniosAdmin = () => {
       ))}
 
       <Divider sx={{ margin: "30px 0" }} />
-      <TransparentBackground> 
-      <Typography
-        variant="h5"
-        fontWeight="bold"
-        sx={{ mb: 2, color: "rgb(100, 54, 17)" }}
-      >
-        🕒 Testimonios Pendientes
-      </Typography>
+      <TransparentBackground>
+        <Typography
+          variant="h5"
+          fontWeight="bold"
+          sx={{ mb: 2, color: "rgb(100, 54, 17)" }}
+        >
+          🕒 Testimonios Pendientes
+        </Typography>
       </TransparentBackground>
       {testimoniosPendientes.map((t) => (
-        <StyledCard key={t.id} style={{ padding: "16px", marginBottom: "16px" }}>
-        <Typography fontWeight="bold" color="#4b3f2f">
+        <StyledCard
+          key={t.id}
+          style={{ padding: "16px", marginBottom: "16px" }}
+        >
+          <Typography fontWeight="bold" color="#4b3f2f">
             {t.nombre_cliente}
           </Typography>
           <Typography variant="body2" color="rgb(43, 23, 7)">

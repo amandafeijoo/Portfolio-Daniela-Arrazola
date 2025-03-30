@@ -144,7 +144,6 @@ const ImagenDaniela = () => {
       return () => {
         window.removeEventListener("resize", handleResize);
 
-        // 📌 Use the stored variables to prevent accessing a stale ref
         if (contenedor1) observer.unobserve(contenedor1);
         if (contenedor2) observer.unobserve(contenedor2);
       };
@@ -173,7 +172,7 @@ const ImagenDaniela = () => {
       >
         <div
           style={{
-            padding: isMobile ? "10px" : "20px", // 📌 Menos padding en móviles
+            padding: isMobile ? "10px" : "20px", 
             textAlign: "justify",
             background: "#f5eedc",
             borderRadius: "15px",
@@ -195,18 +194,18 @@ const ImagenDaniela = () => {
         sx={{
           backgroundColor: "rgb(211, 190, 151)",
           color: "rgb(92, 116, 101)",
-          fontSize: { xs: "1rem", sm: "1.2rem" }, // 📌 Texto más pequeño en móviles
+          fontSize: { xs: "1rem", sm: "1.2rem" }, 
           fontFamily: "Playfair Display",
           fontWeight: "500",
-          padding: { xs: "10px 20px", sm: "12px 24px" }, // 📌 Menos padding en móviles
+          padding: { xs: "10px 20px", sm: "12px 24px" },
           textTransform: "none",
           borderRadius: "30px",
           transition: "all 0.3s ease",
           border: "2px solid rgb(120, 150, 131)",
-          marginLeft: { xs: "auto", sm: "520px" }, // 📌 Centrado en móviles, margen en desktop
-          marginRight: { xs: "auto", sm: "0" }, // 📌 Asegurar que esté alineado correctamente
-          display: "block", // 📌 Evita problemas de alineación en móviles
-          marginTop: { xs: "10px", sm: "20px" }, // 📌 Menos espacio en móviles
+          marginLeft: { xs: "auto", sm: "520px" }, 
+          marginRight: { xs: "auto", sm: "0" },
+          display: "block", 
+          marginTop: { xs: "10px", sm: "20px" }, 
         }}
         onClick={() => navigate("/full-acerca")}
       >

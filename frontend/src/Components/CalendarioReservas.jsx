@@ -4,16 +4,18 @@ import styled from "styled-components";
 import { FaExclamationCircle, FaCalendarAlt, FaCircle } from "react-icons/fa";
 import PropTypes from "prop-types";
 import Calendar from "react-calendar";
-import 'react-calendar/dist/Calendar.css';
+import "react-calendar/dist/Calendar.css";
 
 // 👉 Función para formatear fecha en formato YYYY-MM-DD
 const normalizarFecha = (fecha) => {
   const f = new Date(fecha);
-  return `${f.getFullYear()}-${String(f.getMonth() + 1).padStart(2, "0")}-${String(f.getDate()).padStart(2, "0")}`;
+  return `${f.getFullYear()}-${String(f.getMonth() + 1).padStart(
+    2,
+    "0"
+  )}-${String(f.getDate()).padStart(2, "0")}`;
 };
 
 // 📦 Estilos del contenedor
-
 
 // 📦 Estilos del calendario
 const StyledCalendar = styled(Calendar)`
@@ -31,23 +33,22 @@ const StyledCalendar = styled(Calendar)`
 `;
 
 const StyledCard = styled(Card).attrs({
-    elevation: 0,            // ❌ Quita sombra por defecto
-    variant: "outlined",     // ✅ Evita el background white por defecto
-  })`
-    && {
-      background: linear-gradient(
-        135deg,
-        rgba(255, 255, 255, 0.15),
-        rgba(255, 255, 255, 0.05)
-      ) !important;
-      backdrop-filter: blur(6px);
-      border: 1px solid rgba(255, 255, 255, 0.3);
-      border-radius: 16px;
-      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
-      color: #4b3f2f;
-    }
-  `;
-  
+  elevation: 0, // ❌ Quita sombra por defecto
+  variant: "outlined", // ✅ Evita el background white por defecto
+})`
+  && {
+    background: linear-gradient(
+      135deg,
+      rgba(255, 255, 255, 0.15),
+      rgba(255, 255, 255, 0.05)
+    ) !important;
+    backdrop-filter: blur(6px);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    border-radius: 16px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+    color: #4b3f2f;
+  }
+`;
 
 // 📦 Leyenda de colores
 const LegendItem = ({ color, label }) => (
@@ -62,7 +63,10 @@ LegendItem.propTypes = {
   label: PropTypes.string.isRequired,
 };
 
-const CalendarioReservas = ({ reservasEfectuadas = [], diasConReserva = {} }) => {
+const CalendarioReservas = ({
+  reservasEfectuadas = [],
+  diasConReserva = {},
+}) => {
   const [selectedDate, setSelectedDate] = useState(new Date());
 
   const reservasDelDia = reservasEfectuadas.filter(
@@ -71,7 +75,7 @@ const CalendarioReservas = ({ reservasEfectuadas = [], diasConReserva = {} }) =>
   );
 
   return (
-<> 
+    <>
       <Typography
         variant="h5"
         fontWeight="bold"
@@ -79,7 +83,7 @@ const CalendarioReservas = ({ reservasEfectuadas = [], diasConReserva = {} }) =>
           mb: { xs: 1, sm: 2 },
           color: "rgb(55, 30, 10)",
           fontSize: { xs: "1.2rem", sm: "1.5rem", md: "1.4rem" },
-          textAlign: "center", // ✅ Centrar el texto
+          textAlign: "center",
         }}
       >
         <FaCalendarAlt /> Calendario de Reservas
@@ -122,17 +126,17 @@ const CalendarioReservas = ({ reservasEfectuadas = [], diasConReserva = {} }) =>
                 {reserva.hora_reserva_formateada}
               </Typography>
               <Typography variant="body2" color="rgb(55, 30, 10)">
-  <a
-    href={`mailto:${reserva.email}`}
-    style={{
-      color: "rgb(55, 30, 10)", // Cambia el color del enlace
-      textDecoration: "none", // Opcional: elimina el subrayado
-    }}
-  >
-    {reserva.email}
-  </a>{" "}
-  | {reserva.tipo_terapia}
-</Typography>
+                <a
+                  href={`mailto:${reserva.email}`}
+                  style={{
+                    color: "rgb(55, 30, 10)",
+                    textDecoration: "none",
+                  }}
+                >
+                  {reserva.email}
+                </a>{" "}
+                | {reserva.tipo_terapia}
+              </Typography>
               <Typography variant="body2">{reserva.motivo_consulta}</Typography>
               {reserva.comentarios && (
                 <Typography variant="body2" sx={{ mt: 1 }}>
@@ -147,7 +151,7 @@ const CalendarioReservas = ({ reservasEfectuadas = [], diasConReserva = {} }) =>
           </Typography>
         )}
       </Box>
-</>
+    </>
   );
 };
 
@@ -157,4 +161,3 @@ CalendarioReservas.propTypes = {
 };
 
 export default CalendarioReservas;
-

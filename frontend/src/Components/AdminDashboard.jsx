@@ -21,6 +21,7 @@ import {
   FaSignOutAlt,
 } from "react-icons/fa";
 import "react-calendar/dist/Calendar.css";
+import "@fontsource/playfair-display";
 import styled from "styled-components";
 import Swal from "sweetalert2";
 import TestimoniosAdmin from "./TestimoniosAdmin";
@@ -37,7 +38,7 @@ const DashboardContainer = styled(Box)`
   box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.3);
 
   @media (max-width: 768px) {
-    padding: 20px; // Ajusta el padding en tablet y móvil
+    padding: 20px;
   }
 `;
 
@@ -68,13 +69,9 @@ const Section = styled(Box)`
   }
 `;
 
-
-
-
-
 const CancelButton = styled(Button)`
-  background-color: #cbbf9b !important; // Beige suave
-  color: #4b3f2f !important; // Marrón oscuro
+  background-color: #cbbf9b !important;
+  color: #4b3f2f !important;
   font-weight: bold !important;
   border-radius: 25px !important;
   padding: 8px 20px !important;
@@ -101,21 +98,35 @@ const AdminDashboard = () => {
   const [reservas, setReservas] = useState([]);
   const [reservasCanceladas, setReservasCanceladas] = useState([]);
   const [reservasEfectuadas, setReservasEfectuadas] = useState([]);
-  const [diasConReserva, setDiasConReserva] = useState({}); // ✅ Cambiar de array a objeto
+  const [diasConReserva, setDiasConReserva] = useState({});
+  const handleLogout = async () => {
+    const refresh = localStorage.getItem("refreshToken");
 
-  const handleLogout = () => {
     Swal.fire({
       title: "¿Cerrar sesión?",
-      text: "Tu sesión se cerrará y necesitarás volver a iniciar sesión.",
+      text: "Tu sesión se cerrará y se invalidarán tus credenciales.",
       icon: "warning",
       showCancelButton: true,
       confirmButtonColor: "#b07241",
       cancelButtonColor: "#d33",
       confirmButtonText: "Sí, cerrar sesión",
       cancelButtonText: "Cancelar",
-    }).then((result) => {
+    }).then(async (result) => {
       if (result.isConfirmed) {
-        // 📌 Borrar tokens y redirigir
+        try {
+          await fetch("http://localhost:8000/api/logout/", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+            },
+            body: JSON.stringify({ refresh }),
+          });
+        } catch (error) {
+          console.error("Error al cerrar sesión", error);
+        }
+
+        // Limpiar tokens del localStorage
         localStorage.removeItem("accessToken");
         localStorage.removeItem("refreshToken");
         localStorage.removeItem("role");
@@ -123,16 +134,59 @@ const AdminDashboard = () => {
         Swal.fire({
           icon: "success",
           title: "Sesión cerrada",
-          text: "Has cerrado sesión correctamente.",
           timer: 2000,
           showConfirmButton: false,
         });
 
         setTimeout(() => {
-          navigate("/login"); // Redirige al login
+          navigate("/login");
         }, 2000);
       }
     });
+  };
+
+  const reenviarCorreo = async (reservaId) => {
+    const token = localStorage.getItem("accessToken"); 
+
+    try {
+      const response = await fetch(
+        "http://localhost:8000/api/testimonios/enviar-correo/",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`, 
+          },
+          body: JSON.stringify({ reserva_id: reservaId }),
+        }
+      );
+
+      const data = await response.json();
+
+      if (response.ok) {
+        Swal.fire({
+          icon: "success",
+          title: "Correo reenviado",
+          text: "El testimonio fue enviado correctamente.",
+          confirmButtonColor: "#b07241",
+        });
+      } else {
+        Swal.fire({
+          icon: "error",
+          title: "Error",
+          text: data?.error || "No se pudo reenviar el testimonio.",
+          confirmButtonColor: "#d33",
+        });
+      }
+    } catch (error) {
+      console.error("Error reenviando correo:", error);
+      Swal.fire({
+        icon: "error",
+        title: "Error inesperado",
+        text: "Hubo un problema al reenviar el correo.",
+        confirmButtonColor: "#d33",
+      });
+    }
   };
 
   useEffect(() => {
@@ -140,24 +194,27 @@ const AdminDashboard = () => {
       .then((res) => res.json())
       .then((data) => {
         if (!Array.isArray(data)) {
-          console.error("Error: La API no devolvió una lista de reservas", data);
+          console.error(
+            "Error: La API no devolvió una lista de reservas",
+            data
+          );
           return;
         }
-  
+
         const now = new Date();
         const activas = [];
         const efectuadas = [];
         const canceladas = [];
         const diasReserva = {};
-  
+
         data.forEach((reserva) => {
           const fechaReserva = new Date(reserva.fecha_reserva);
           const fechaKey = fechaReserva.toISOString().split("T")[0];
-  
+
           const [hours, minutes] = reserva.hora_reserva_formateada
             ? reserva.hora_reserva_formateada.split(":").map(Number)
             : [0, 0];
-  
+
           const fechaHoraInicio = new Date(
             fechaReserva.getFullYear(),
             fechaReserva.getMonth(),
@@ -165,24 +222,25 @@ const AdminDashboard = () => {
             hours,
             minutes
           );
-  
-          const fechaHoraFin = new Date(fechaHoraInicio.getTime() + 60 * 60 * 1000);
-  
+
+          const fechaHoraFin = new Date(
+            fechaHoraInicio.getTime() + 60 * 60 * 1000
+          );
+
           if (reserva.cancelada) {
             canceladas.push(reserva);
-            // Solo marcar como cancelada si aún no existe otro tipo
             if (!diasReserva[fechaKey]) {
               diasReserva[fechaKey] = "cancelada";
             }
           } else if (fechaHoraFin > now) {
             activas.push(reserva);
-            diasReserva[fechaKey] = "futura"; // tiene prioridad sobre cancelada
+            diasReserva[fechaKey] = "futura"; 
           } else {
             efectuadas.push(reserva);
-            diasReserva[fechaKey] = "pasada"; // tiene prioridad sobre cancelada
+            diasReserva[fechaKey] = "pasada"; 
           }
         });
-  
+
         setReservas(activas);
         setReservasEfectuadas(efectuadas);
         setReservasCanceladas(canceladas);
@@ -190,7 +248,6 @@ const AdminDashboard = () => {
       })
       .catch((error) => console.error("Error obteniendo reservas:", error));
   }, []);
-  
 
   const handleCancelReserva = (id) => {
     fetch(`http://localhost:8000/api/reservas/${id}/cancelar/`, {
@@ -203,15 +260,12 @@ const AdminDashboard = () => {
         return response.json();
       })
       .then((data) => {
-        // ✅ Actualizar el estado de las reservas
         setReservasCanceladas([...reservasCanceladas, data.reserva]);
         setReservas(reservas.filter((reserva) => reserva.id !== id));
 
-        // ✅ Agregar la fecha al calendario como cancelada
         const fechaKey = new Date(data.reserva.fecha_reserva).toDateString();
         setDiasConReserva((prev) => ({ ...prev, [fechaKey]: "cancelada" }));
 
-        // ✅ Mostrar alerta de éxito con SweetAlert2
         Swal.fire({
           icon: "success",
           title: "Reserva cancelada",
@@ -236,20 +290,20 @@ const AdminDashboard = () => {
       <Box
         sx={{
           display: "flex",
-          justifyContent: { xs: "flex-end", sm: "flex-end" }, // 🔹 Derecha en todas las pantallas
+          justifyContent: { xs: "flex-end", sm: "flex-end" },
           alignItems: "center",
-          position: "absolute", // 🔹 Para moverlo con `top` y `right`
-          top: { xs: "10px", sm: "20px" }, // 🔹 Más arriba solo en móviles
-          right: { xs: "15px", sm: "150px" }, // 🔹 Más a la derecha en móviles
-          zIndex: 10, // 🔹 Para que siempre se vea encima de otros elementos
+          position: "absolute", 
+          top: { xs: "10px", sm: "20px" }, 
+          right: { xs: "15px", sm: "150px" }, 
+          zIndex: 10, 
         }}
       >
         <Tooltip title="Cerrar sesión">
           <LogoutButton
             onClick={handleLogout}
             sx={{
-              fontSize: { xs: "0.9rem", sm: "1.2rem" }, // 🔹 Tamaño adaptable
-              padding: { xs: "6px", sm: "10px" }, // 🔹 Menos padding en móviles
+              fontSize: { xs: "0.9rem", sm: "1.2rem" }, 
+              padding: { xs: "6px", sm: "10px" },
               borderRadius: "8px",
             }}
           >
@@ -262,23 +316,21 @@ const AdminDashboard = () => {
         fontWeight="bold"
         sx={{
           textAlign: "center",
-          mt: { xs: 6, sm: 3, md: 4 }, // 📌 Menos margen en móviles
-          mb: { xs: 2, sm: 3, md: 4 }, // 📌 Menos margen en móviles
+          mt: { xs: 6, sm: 3, md: 4 }, 
+          mb: { xs: 2, sm: 3, md: 4 }, 
           color: "rgb(42, 23, 8)",
-          fontSize: { xs: "1.4rem", sm: "2rem", md: "2rem" }, // 📌 Tamaño adaptable
+          fontSize: { xs: "1.4rem", sm: "2rem", md: "2rem" },
         }}
       >
         <FaUserCheck /> Panel de Administración
       </Typography>
 
       {/* 📅 Calendario de Reservas */}
-    
-      <CalendarioReservas
-  reservasEfectuadas={[...reservas, ...reservasEfectuadas]} // ✅ Unificas ambas
-  diasConReserva={diasConReserva}
-/>
 
-   
+      <CalendarioReservas
+        reservasEfectuadas={[...reservas, ...reservasEfectuadas]} 
+        diasConReserva={diasConReserva}
+      />
 
       <Divider sx={{ margin: "30px 0" }} />
 
@@ -288,9 +340,9 @@ const AdminDashboard = () => {
           variant="h5"
           fontWeight="bold"
           sx={{
-            mb: { xs: 1, sm: 2 }, // 📌 Menos margen en móviles
+            mb: { xs: 1, sm: 2 }, 
             color: "rgb(55, 30, 10)",
-            fontSize: { xs: "1.2rem", sm: "1.5rem", md: "1.5rem" }, // 📌 Tamaño adaptable
+            fontSize: { xs: "1.2rem", sm: "1.5rem", md: "1.5rem" },
           }}
         >
           📌 Reservas Actuales
@@ -358,9 +410,9 @@ const AdminDashboard = () => {
           variant="h5"
           fontWeight="bold"
           sx={{
-            mb: { xs: 1, sm: 2 }, // 📌 Menos margen en móviles
+            mb: { xs: 1, sm: 2 },
             color: "rgb(55, 30, 10)",
-            fontSize: { xs: "1.2rem", sm: "1.5rem", md: "1.5rem" }, // 📌 Tamaño adaptable
+            fontSize: { xs: "1.2rem", sm: "1.5rem", md: "1.5rem" },
           }}
         >
           <FaHistory /> Reservas Efectuadas
@@ -373,12 +425,53 @@ const AdminDashboard = () => {
         ) : (
           <Box sx={{ overflowX: "auto" }}>
             <Table>
+              <TableHead>
+                <TableRow>
+                  <TableCell>Nombre</TableCell>
+                  <TableCell>Fecha</TableCell>
+                  <TableCell>Hora</TableCell>
+                  <TableCell>Email</TableCell>
+                  <TableCell>Acción</TableCell>
+                </TableRow>
+              </TableHead>
               <TableBody>
                 {reservasEfectuadas.map((reserva) => (
                   <TableRow key={reserva.id}>
                     <TableCell>{reserva.nombre_completo}</TableCell>
                     <TableCell>{reserva.fecha_reserva_formateada}</TableCell>
                     <TableCell>{reserva.hora_reserva_formateada}</TableCell>
+                    <TableCell>
+                      <a
+                        href={`mailto:${reserva.email}`}
+                        style={{
+                          color: "#4B3F2F",
+                          textDecoration: "underline",
+                        }}
+                      >
+                        {reserva.email}
+                      </a>
+                    </TableCell>
+                    <TableCell>
+                      <Button
+                        variant="outlined"
+                        size="small"
+                        onClick={() => reenviarCorreo(reserva.id)}
+                        sx={{
+                          borderColor: "#4B3F2F",
+                          color: "#4B3F2F",
+                          fontWeight: "bold",
+                          textTransform: "none",
+                          borderRadius: "25px",
+                          padding: "6px 16px",
+                          "&:hover": {
+                            backgroundColor: "#f5f0e6", 
+                            borderColor: "#8B6C42", 
+                          },
+                        }}
+                      >
+                        📧 Reenviar Testimonio
+                      </Button>
+                    </TableCell>
                   </TableRow>
                 ))}
               </TableBody>
@@ -394,9 +487,9 @@ const AdminDashboard = () => {
           variant="h5"
           fontWeight="bold"
           sx={{
-            mb: { xs: 1, sm: 2 }, // 📌 Reduce margen en móviles
+            mb: { xs: 1, sm: 2 }, 
             color: "rgb(55, 30, 10)",
-            fontSize: { xs: "1.2rem", sm: "1.5rem", md: "1.5rem" }, // 📌 Tamaño adaptable
+            fontSize: { xs: "1.2rem", sm: "1.5rem", md: "1.5rem" },
           }}
         >
           <FaTimes /> Reservas Canceladas

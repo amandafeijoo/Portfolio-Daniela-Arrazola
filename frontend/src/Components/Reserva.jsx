@@ -201,15 +201,10 @@ const Reserva = () => {
         return;
       }
 
-      // Preguntar al usuario si desea agregar la cita a su calendario
       const result = await Swal.fire({
         icon: "success",
         title: "¡Reserva exitosa!",
         text: "Tu cita ha sido reservada correctamente.",
-        // showCancelButton: true,
-        // confirmButtonText: "Sí, agregar",
-        // cancelButtonText: "No, gracias",
-        // confirmButtonColor: "#4A6F5E",
       });
 
       if (result.isConfirmed) {
@@ -221,14 +216,6 @@ const Reserva = () => {
         // Suponiendo que la cita dura 1 hora
         const endTime = new Date(startTime);
         endTime.setHours(endTime.getHours() + 1);
-
-        // setEvent({
-        //   title: `Cita de ${selectedConsultationType}`,
-        //   description: `Nombre: ${firstName}. Motivo: ${selectedOption}.`,
-        //   location: "Online/Presencial",
-        //   startTime: startTime.toISOString(),
-        //   endTime: endTime.toISOString(),
-        // });
       }
 
       // Resetear los campos del formulario
@@ -289,7 +276,7 @@ const Reserva = () => {
                 onChange={(e) => setEmail(e.target.value)}
                 fullWidth
                 margin="normal"
-                error={errors.email} // 📌 Aplica error si el campo está vacío
+                error={errors.email} 
                 helperText={
                   errors.email ? "Introduce un correo electrónico válido" : ""
                 }
@@ -308,7 +295,7 @@ const Reserva = () => {
                 onChange={(e) => setSelectedOption(e.target.value)}
                 fullWidth
                 margin="normal"
-                error={errors.selectedOption} // 📌 Aplica error si el campo está vacío
+                error={errors.selectedOption}
                 helperText={
                   errors.selectedOption ? "Este campo es obligatorio" : ""
                 }
@@ -327,7 +314,7 @@ const Reserva = () => {
                 onChange={(e) => setSelectedConsultationType(e.target.value)}
                 fullWidth
                 margin="normal"
-                error={errors.selectedConsultationType} // 📌 Aplica error si el campo está vacío
+                error={errors.selectedConsultationType} 
                 helperText={
                   errors.selectedConsultationType
                     ? "Este campo es obligatorio"
@@ -356,7 +343,7 @@ const Reserva = () => {
                     checked={privacyAccepted}
                     onChange={(e) => setPrivacyAccepted(e.target.checked)}
                     color="primary"
-                    error={errors.privacyAccepted} // 📌 Aplica error si el campo está vacío
+                    error={errors.privacyAccepted} 
                     helperText={
                       errors.privacyAccepted ? "Este campo es obligatorio" : ""
                     }
@@ -370,14 +357,8 @@ const Reserva = () => {
                   </Typography>
                 }
               />
-              {/* {event && (
-                <AddToCalendar
-                  event={event}
-                  buttonLabel="Agregar a mi calendario"
-                />
-              )} */}
               <Button
-                type="submit" // 📌 Esto hace que el botón ejecute handleSubmit automáticamente
+                type="submit" 
                 variant="contained"
                 sx={{
                   width: "100%",
@@ -404,7 +385,6 @@ const Reserva = () => {
           </Grid>
         </Grid>
       </BackgroundContainer>
-
       <InfoBoxesReserva />
     </>
   );

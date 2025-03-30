@@ -29,7 +29,7 @@ const FullAcercaContainer = styled.div`
 
   /* 📌 Ajuste específico para iPhone 15 (ancho máximo 320px) */
   @media (max-width: 320px) {
-    width: 100%; 
+    width: 100%;
     max-width: 110%;
     padding: 10px;
   }
@@ -80,9 +80,9 @@ const ContentContainer = styled.div`
 
 const TextContainer = styled.div`
   flex: 1;
-  width: 90%; /* ✅ Más ancho en móviles */
-  max-width: 700px; /* ✅ Evita que se vuelva demasiado estrecho */
-  font-size: clamp(1rem, 2vw, 1.2rem);
+  width: 90%;
+  max-width: 700px;
+  font-size: clamp(1rem, 2vw, 1.1rem);
   line-height: 1.6;
   color: #4b3f2f;
   font-family: "Playfair Display", serif;
@@ -176,17 +176,8 @@ const FullAcerca = () => {
             <br />
             <br />
             Quiero compartirte un pedacito de mi historia, porque creo que la
-            conexión genuina empieza desde la autenticidad.
-            <br />
-            Mi vida ha sido todo menos lineal, llena de momentos de reinvención.
-            <br />
-            Nací en Colombia, crecí en Noruega y, finalmente, elegí España para
-            cumplir mis sueños. En cada etapa, me tocó empezar de cero,
-            adaptarme a nuevas realidades y aprender a vivir en culturas muy
-            distintas. Aunque los retos fueron grandes, hoy agradezco este
-            recorrido que me ha dado visión única sobre el valor de las
-            transiciones y el crecimiento personal. Si alguna vez te has sentido
-            perdido o sin rumbo, quiero que sepas que yo también he estado allí.
+            conexión genuina empieza desde la autenticidad. Mi vida ha sido todo
+            menos lineal, llena de momentos de reinvención.
           </TextContainer>
           <VideoContainer>
             <Video autoPlay loop muted playsInline controlsList="nofullscreen">
@@ -204,6 +195,15 @@ const FullAcerca = () => {
             </Video>
           </VideoContainer>
           <TextContainer>
+            Nací en Colombia, crecí en Noruega y, finalmente, elegí España para
+            cumplir mis sueños. En cada etapa, me tocó empezar de cero,
+            adaptarme a nuevas realidades y aprender a vivir en culturas muy
+            distintas. Aunque los retos fueron grandes, hoy agradezco este
+            recorrido que me ha dado visión única sobre el valor de las
+            transiciones y el crecimiento personal. Si alguna vez te has sentido
+            perdido o sin rumbo, quiero que sepas que yo también he estado allí.
+            <br />
+            <br />
             Sabía que quería dejar una huella positiva, y fue así como decidí
             estudiar Criminología y Psicología, movida por la necesidad de
             acompañar a personas con realidades difíciles como el tráfico

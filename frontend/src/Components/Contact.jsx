@@ -1,6 +1,11 @@
 import { Box, Typography } from "@mui/material";
 import styled from "styled-components";
-import { FaPhoneAlt, FaEnvelope, FaMapMarkerAlt, FaClock } from "react-icons/fa";
+import {
+  FaPhoneAlt,
+  FaEnvelope,
+  FaMapMarkerAlt,
+  FaClock,
+} from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 import "@fontsource/playfair-display";
 import WhatsAppContact from "./WhatsAppContact";
@@ -75,11 +80,11 @@ const ContactInfo = styled(Box)`
 
 const InfoItem = styled.div`
   display: flex;
-  align-items: center; /* 📌 Asegura que todo se alinee en una sola línea */
-  gap: 8px; /* 📌 Espacio entre el icono y el texto */
+  align-items: center;
+  gap: 8px;
   margin-bottom: 15px;
   font-size: 1rem;
-  flex-wrap: nowrap; /* 📌 Evita que se rompa la línea en pantallas pequeñas */
+  flex-wrap: nowrap;
 
   svg {
     color: rgb(142, 122, 96);
@@ -91,10 +96,9 @@ const InfoItem = styled.div`
     text-decoration: none;
     display: flex;
     align-items: center;
-    gap: 8px; /* 📌 Espacio entre ícono y texto */
+    gap: 8px;
   }
 `;
-
 
 /* 🔹 Ajuste para el Video */
 const VideoContainer = styled(Box)`
@@ -119,10 +123,9 @@ const VideoContainer = styled(Box)`
   }
 `;
 
-/* 🔹 FAQ Box ahora debajo de la burbuja de pregunta dentro del video */
 const FAQBox = styled(Box)`
   position: absolute;
-  top: 70%; /* 🔥 Mueve la caja FAQ abajo en el video */
+  top: 70%;
   left: 50%;
   transform: translateX(-50%);
   background: white;
@@ -136,7 +139,7 @@ const FAQBox = styled(Box)`
 
   @media (max-width: 768px) {
     width: 90%;
-    margin-top:-10px;
+    margin-top: -10px;
   }
 `;
 
@@ -165,81 +168,80 @@ const ContactSection = () => {
           <WhatsAppContact />
         </WhatsAppContainer>
         <ContactInfo>
-  <Typography
-    variant="h5"
-    fontWeight="bold"
-    sx={{
-      marginBottom: 2,
-      fontSize: { xs: "1.2rem", sm: "1.5rem", md: "1.8rem" }, // 📌 Ajuste por pantalla
-    }}
-  >
-    CONTÁCTAME
-  </Typography>
+          <Typography
+            variant="h5"
+            fontWeight="bold"
+            sx={{
+              marginBottom: 2,
+              fontSize: { xs: "1.2rem", sm: "1.5rem", md: "1.8rem" },
+            }}
+          >
+            CONTÁCTAME
+          </Typography>
 
-  <InfoItem>
-    <a href="tel:+479831513">
-      <FaPhoneAlt />
-      <Typography
-        sx={{
-          fontSize: { xs: "0.9rem", sm: "1rem", md: "1.1rem" }, // 📌 Reduce en móvil
-        }}
-      >
-        +47 9831513
-      </Typography>
-    </a>
-  </InfoItem>
+          <InfoItem>
+            <a href="tel:+479831513">
+              <FaPhoneAlt />
+              <Typography
+                sx={{
+                  fontSize: { xs: "0.9rem", sm: "1rem", md: "1.1rem" },
+                }}
+              >
+                +47 9831513
+              </Typography>
+            </a>
+          </InfoItem>
 
-  <InfoItem>
-    <a href="mailto:danielaarrazolabenitez@gmail.com">
-      <FaEnvelope />
-      <Typography
-        sx={{
-          fontSize: { xs: "0.rem", sm: "1rem", md: "1.1rem" },
-        }}
-      >
-        danielaarrazolabenitez@gmail.com
-      </Typography>
-    </a>
-  </InfoItem>
+          <InfoItem>
+            <a href="mailto:danielaarrazolabenitez@gmail.com">
+              <FaEnvelope />
+              <Typography
+                sx={{
+                  fontSize: { xs: "0.rem", sm: "1rem", md: "1.1rem" },
+                }}
+              >
+                danielaarrazolabenitez@gmail.com
+              </Typography>
+            </a>
+          </InfoItem>
 
-  <InfoItem>
-    <FaMapMarkerAlt />
-    <Typography
-      sx={{
-        fontSize: { xs: "0.9rem", sm: "1rem", md: "1.1rem" },
-      }}
-    >
-      Madrid, España
-    </Typography>
-  </InfoItem>
+          <InfoItem>
+            <FaMapMarkerAlt />
+            <Typography
+              sx={{
+                fontSize: { xs: "0.9rem", sm: "1rem", md: "1.1rem" },
+              }}
+            >
+              Madrid, España
+            </Typography>
+          </InfoItem>
 
-  <Typography
-    fontWeight="bold"
-    sx={{
-      marginBottom: 1,
-      fontSize: { xs: "1rem", sm: "1.2rem", md: "1.3rem" },
-    }}
-  >
-    <FaClock /> Horario:
-  </Typography>
+          <Typography
+            fontWeight="bold"
+            sx={{
+              marginBottom: 1,
+              fontSize: { xs: "1rem", sm: "1.2rem", md: "1.3rem" },
+            }}
+          >
+            <FaClock /> Horario:
+          </Typography>
 
-  <Typography
-    sx={{
-      fontSize: { xs: "0.9rem", sm: "1rem", md: "1.1rem" },
-    }}
-  >
-    Lunes - Jueves: 10:00-14:00 y 16:00-20:00
-  </Typography>
+          <Typography
+            sx={{
+              fontSize: { xs: "0.9rem", sm: "1rem", md: "1.1rem" },
+            }}
+          >
+            Lunes - Jueves: 10:00-14:00 y 16:00-20:00
+          </Typography>
 
-  <Typography
-    sx={{
-      fontSize: { xs: "0.9rem", sm: "1rem", md: "1.1rem" },
-    }}
-  >
-    Viernes: 09:00-15:00
-  </Typography>
-</ContactInfo>
-
+          <Typography
+            sx={{
+              fontSize: { xs: "0.9rem", sm: "1rem", md: "1.1rem" },
+            }}
+          >
+            Viernes: 09:00-15:00
+          </Typography>
+        </ContactInfo>
       </ContactInfoContainer>
       {/* Sección del Video */}
       <VideoContainer onClick={() => navigate("/faq")}>
@@ -263,5 +265,3 @@ const ContactSection = () => {
 };
 
 export default ContactSection;
-
-

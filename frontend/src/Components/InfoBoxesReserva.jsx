@@ -38,8 +38,8 @@ const InfoBoxesReserva = () => {
       container
       spacing={2}
       sx={{
-        marginTop: { xs: 2, md: 9 }, 
-        marginBottom: { xs: 2, md: 8 }, 
+        marginTop: { xs: 2, md: 9 },
+        marginBottom: { xs: 2, md: 8 },
         display: "flex",
         flexWrap: isTablet ? "wrap" : "nowrap",
         justifyContent: "center",
@@ -96,7 +96,7 @@ const InfoBoxesReserva = () => {
             maxWidth: "100%",
             display: "flex",
             justifyContent: "center",
-            marginLeft: { xs: "-3%", sm: 0 }, 
+            marginLeft: { xs: "-3%", sm: 0 },
           }}
         >
           <Box

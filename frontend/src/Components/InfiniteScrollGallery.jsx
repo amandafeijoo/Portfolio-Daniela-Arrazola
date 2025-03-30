@@ -15,7 +15,6 @@ import "slick-carousel/slick/slick-theme.css";
 import "@fontsource/playfair-display";
 // import { FaCertificate } from "react-icons/fa";
 
-
 const StyledContainer = styled(Box)`
   border: 2px solid #d2b48c;
   border-radius: 8px;

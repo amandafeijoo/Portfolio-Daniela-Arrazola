@@ -126,7 +126,7 @@ const Header = () => {
     <>
       <Box
         sx={{
-          position: "fixed", 
+          position: "fixed",
           top: 0,
           left: 0,
           width: "100%",
@@ -135,7 +135,7 @@ const Header = () => {
           alignItems: "center",
           padding: "10px 20px",
           backgroundColor: "#557c70", // #557c70,#f5eedc,#4a6f5e
-          zIndex: 20000, 
+          zIndex: 20000,
           height: "100px",
           "@media (max-width: 600px)": {
             padding: "10px 10px",

@@ -68,6 +68,7 @@ const Testimonials = () => {
   }, []);
 
   return (
+    <>
     <StyledContainer>
       {" "}
       {/* ✅ Se agrega el StyledContainer */}
@@ -150,6 +151,23 @@ const Testimonials = () => {
         </Slider>
       )}
     </StyledContainer>
+    {testimonios.length > 0 && (
+      <Typography
+        variant="body2"
+        mt={4}
+        sx={{
+          fontFamily: "'Playfair Display', serif",
+          color: "#4b3f2f",
+          textAlign: "center",
+          fontStyle: "italic",
+          maxWidth: "700px",
+          margin: "0 auto",
+        }}
+      >
+        Los testimonios mostrados han sido voluntariamente enviados y autorizados por los usuarios.
+      </Typography>
+    )}
+    </>
   );
 };
 

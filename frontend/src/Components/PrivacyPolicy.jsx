@@ -403,6 +403,41 @@ const sections = [
       </>
     ),
   },
+  {
+    title: "🗣️ Testimonios y Consentimiento",
+    icon: faFileSignature,
+    content: (
+      <>
+        En <strong>danielapsicologia.com</strong>, después de recibir una sesión
+        de terapia, el usuario podrá recibir un enlace para dejar un testimonio
+        voluntario. Este testimonio puede incluir su nombre, su opinión sobre el
+        servicio recibido y, opcionalmente, una imagen.
+        <br />
+        <br />
+        ✅ Al rellenar y enviar el testimonio, el usuario otorga su{" "}
+        <strong>consentimiento expreso</strong> para que su comentario, junto con
+        su nombre y/o imagen, pueda ser publicado en la web{" "}
+        <strong>danielapsicologia.com</strong> con fines informativos y
+        promocionales.
+        <br />
+        <br />
+        🔒 En todo momento, el usuario puede solicitar la eliminación o
+        modificación de su testimonio enviando un correo a:{" "}
+        <strong>danielaarrazolabenitez@gmail.com</strong>
+        <br />
+        <br />
+        🛡️ Los testimonios no se publican de forma automática, sino que pasan por
+        un proceso de revisión manual por parte del equipo de{" "}
+        <strong>danielapsicologia.com</strong>. Solo serán publicados aquellos
+        testimonios que hayan sido autorizados y cuyo contenido sea adecuado.
+        <br />
+        <br />
+        📌 El envío del testimonio no implica obligación alguna de publicación, y
+        su consentimiento podrá ser revocado en cualquier momento.
+      </>
+    ),
+  }
+  
 ];
 
 const PrivacyPolicy = () => {

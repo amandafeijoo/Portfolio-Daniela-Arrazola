@@ -1,9 +1,10 @@
 from django.core.mail import send_mail
 from django.conf import settings
 
+
 def enviar_email_testimonio(email_cliente, nombre_cliente, reserva_id):
     enlace_testimonio = f"http://localhost:5173/testimonios?reserva_id={reserva_id}"  # 🔗 Link actualizado para Vite
-    
+
     mensaje = f"""
     Hola {nombre_cliente},
 
@@ -28,16 +29,16 @@ def enviar_email_testimonio(email_cliente, nombre_cliente, reserva_id):
         "Comparte tu experiencia - Daniela Arrazola Psicóloga Sanitaria",
         mensaje,
         settings.EMAIL_HOST_USER,
-        [email_cliente],  # 👈 Enviamos el email al cliente de la reserva
+        [email_cliente],
         fail_silently=False,
     )
 
 
 def enviar_email_confirmacion_reserva(reserva):
-    """confirmando su consulta psicológica en línea"""
+    """Envía email al cliente confirmando su consulta psicológica + copia a la psicóloga"""
     asunto = "Confirmación de su consulta psicológica en línea"
 
-    mensaje = (
+    mensaje_cliente = (
         f"Estimado/a {reserva.nombre_completo},\n\n"
         f"Le confirmamos que su consulta psicológica en línea ha sido agendada correctamente.\n\n"
         f"🗓 Fecha: {reserva.fecha_reserva}\n"
@@ -51,17 +52,39 @@ def enviar_email_confirmacion_reserva(reserva):
         "Atentamente,\n\n"
         "Daniela Arrázola\n"
         "Psicóloga Sanitaria\n"
-        "📧 Correo: [danielaarrazolabenitez@gmail.com]\n"
-        "📞 WhatsApp: [+47 983 15 132]\n"
+        "📧 Correo: danielaarrazolabenitez@gmail.com\n"
+        "📞 WhatsApp: +47 983 15 132\n"
+    )
+
+    # 📧 Enviar al cliente
+    send_mail(
+        asunto,
+        mensaje_cliente,
+        settings.EMAIL_HOST_USER,
+        [reserva.email],
+        fail_silently=False,
+    )
+
+    # 📥 Notificación a la psicóloga
+    mensaje_psicologa = (
+        f"📬 Nueva reserva desde la web:\n\n"
+        f"👤 Nombre: {reserva.nombre_completo}\n"
+        f"📧 Email: {reserva.email}\n"
+        f"🗓 Fecha: {reserva.fecha_reserva}\n"
+        f"🕒 Hora: {reserva.hora_reserva}\n"
+        f"💆‍♀️ Terapia: {reserva.tipo_terapia}\n"
+        f"💬 Motivo: {reserva.motivo_consulta}\n\n"
+        "Puedes ver más detalles en el panel de administración."
     )
 
     send_mail(
-        asunto,
-        mensaje,
+        "📬 Nueva reserva recibida",
+        mensaje_psicologa,
         settings.EMAIL_HOST_USER,
-        [reserva.email],  # Enviar al cliente
+        ["danielaarrazolabenitez@gmail.com"],
         fail_silently=False,
     )
+
 
 def enviar_email_cancelacion_reserva(reserva):
     asunto = "Cancelación de su consulta psicológica"
@@ -88,3 +111,4 @@ def enviar_email_cancelacion_reserva(reserva):
         [reserva.email],
         fail_silently=False,
     )
+

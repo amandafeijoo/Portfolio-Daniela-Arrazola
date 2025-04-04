@@ -2,9 +2,9 @@ from django.contrib import admin
 from .models import Testimonio
 
 class TestimonioAdmin(admin.ModelAdmin):
-    list_display = ("get_nombre_cliente", "get_email_cliente", "get_fecha_reserva", "aprobado")  # ✅ Columnas visibles
-    list_filter = ("aprobado",)  # ✅ Filtro para mostrar aprobados/no aprobados
-    search_fields = ("reserva__nombre_completo", "reserva__email")  # ✅ Permite buscar por nombre o email
+    list_display = ("get_nombre_cliente", "get_email_cliente", "get_fecha_reserva", "consentimiento", "aprobado")
+    list_filter = ("aprobado", "consentimiento") 
+    search_fields = ("reserva__nombre_completo", "reserva__email") 
 
     def get_nombre_cliente(self, obj):
         return obj.reserva.nombre_completo if obj.reserva else "Sin nombre"

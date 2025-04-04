@@ -8,6 +8,8 @@ import {
   Button,
   Checkbox,
   FormControlLabel,
+  FormHelperText,
+  FormGroup,
 } from "@mui/material";
 import Calendar from "./Calendar";
 import "@fontsource/playfair-display";
@@ -110,11 +112,9 @@ const Reserva = () => {
     return emailPattern.test(email);
   };
 
-  // 📌 Manejo del envío del formulario
-  const handleSubmit = async (e) => {
+  const handleCheckout = async (e) => {
     e.preventDefault();
-
-    // Validaciones en el frontend antes de enviar la solicitud
+  
     const newErrors = {
       firstName: firstName.trim() === "",
       email: email.trim() === "" || !validateEmail(email),
@@ -123,9 +123,9 @@ const Reserva = () => {
       selectedConsultationType: selectedConsultationType.trim() === "",
       privacyAccepted: !privacyAccepted,
     };
-
+  
     setErrors(newErrors);
-
+  
     if (Object.values(newErrors).some((error) => error)) {
       await Swal.fire({
         icon: "error",
@@ -135,108 +135,57 @@ const Reserva = () => {
       });
       return;
     }
-
-    // Datos a enviar al backend
+  
     const reservaData = {
+      tipo_terapia: selectedConsultationType,
       nombre_completo: firstName,
-      email: email,
+      email,
+      motivo_consulta: selectedOption,
       fecha_reserva: selectedDate.toISOString().split("T")[0],
       hora_reserva: selectedTime,
-      motivo_consulta: selectedOption,
-      tipo_terapia: selectedConsultationType,
       comentarios: comments,
-      privacidad_aceptada: privacyAccepted,
     };
-
+  
+    // ✅ DEBUG: Ver qué datos se están enviando
+    console.log("📤 Datos enviados al backend:", reservaData);
+  
     try {
-      const response = await fetch(
-        "http://localhost:8000/api/reservas/crear/",
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(reservaData),
-        }
-      );
-
+      const response = await fetch("https://eee0-2001-4649-7505-0-f584-761c-13ad-39c5.ngrok-free.app/api/pago/crear-sesion/", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(reservaData),
+      });
+  
       const data = await response.json();
-
-      if (!response.ok) {
-        if (data.errors) {
-          await Swal.fire({
-            icon: "error",
-            title: "Error en la reserva",
-            text: Object.values(data.errors).join("\n"),
-            confirmButtonColor: "#c0a080",
-          });
-        } else if (data.detail) {
-          await Swal.fire({
-            icon: "error",
-            title: "Error",
-            text: data.detail,
-            confirmButtonColor: "#c0a080",
-          });
-        } else {
-          await Swal.fire({
-            icon: "error",
-            title: "Error",
-            text: "Hubo un problema al realizar la reserva.",
-            confirmButtonColor: "#c0a080",
-          });
-        }
-        return;
-      }
-
-      if (
-        data.errors &&
-        data.errors.includes("Ya existe una reserva en esta fecha y hora.")
-      ) {
+      console.log("📦 Respuesta del backend:", data);
+  
+      if (response.ok && data.url) {
+        console.log("💳 Redirigiendo a Stripe Checkout:", data.url);
+        setTimeout(() => {
+          window.location.assign(data.url);
+        }, 300);
+      } else {
         await Swal.fire({
-          icon: "warning",
-          title: "Horario no disponible",
-          text: "Ya existe una reserva en esta fecha y hora. Por favor, elige otro horario.",
+          icon: "error",
+          title: "Error",
+          text: data.error || "No se pudo iniciar el pago.",
           confirmButtonColor: "#c0a080",
         });
-        return;
       }
-
-      const result = await Swal.fire({
-        icon: "success",
-        title: "¡Reserva exitosa!",
-        text: "Tu cita ha sido reservada correctamente.",
-      });
-
-      if (result.isConfirmed) {
-        //  el objeto event con la información del formulario
-        const startTime = new Date(selectedDate);
-        const [hours, minutes] = selectedTime.split(":");
-        startTime.setHours(hours, minutes);
-
-        // Suponiendo que la cita dura 1 hora
-        const endTime = new Date(startTime);
-        endTime.setHours(endTime.getHours() + 1);
-      }
-
-      // Resetear los campos del formulario
-      setFirstName("");
-      setEmail("");
-      setSelectedDate(null);
-      setSelectedTime("");
-      setSelectedOption("");
-      setSelectedConsultationType("");
-      setComments("");
-      setPrivacyAccepted(false);
     } catch (error) {
-      console.error("Error en la reserva:", error);
+      console.error("❌ Error con Stripe:", error);
       await Swal.fire({
         icon: "error",
         title: "Error del servidor",
-        text: "No se pudo procesar tu solicitud. Intenta de nuevo más tarde.",
+        text: "No se pudo conectar con el servidor de pagos.",
         confirmButtonColor: "#c0a080",
       });
     }
   };
+  
+  
 
   return (
     <>
@@ -247,7 +196,7 @@ const Reserva = () => {
           <Grid item xs={12} md={8}>
             <Box
               component="form"
-              onSubmit={handleSubmit}
+              onSubmit={handleCheckout}
               sx={{
                 p: { xs: 3, md: 4 },
                 backgroundColor: "#f5eedc",
@@ -276,7 +225,7 @@ const Reserva = () => {
                 onChange={(e) => setEmail(e.target.value)}
                 fullWidth
                 margin="normal"
-                error={errors.email} 
+                error={errors.email}
                 helperText={
                   errors.email ? "Introduce un correo electrónico válido" : ""
                 }
@@ -314,7 +263,7 @@ const Reserva = () => {
                 onChange={(e) => setSelectedConsultationType(e.target.value)}
                 fullWidth
                 margin="normal"
-                error={errors.selectedConsultationType} 
+                error={errors.selectedConsultationType}
                 helperText={
                   errors.selectedConsultationType
                     ? "Este campo es obligatorio"
@@ -337,28 +286,35 @@ const Reserva = () => {
                 multiline
                 rows={4}
               />
-              <FormControlLabel
-                control={
-                  <Checkbox
-                    checked={privacyAccepted}
-                    onChange={(e) => setPrivacyAccepted(e.target.checked)}
-                    color="primary"
-                    error={errors.privacyAccepted} 
-                    helperText={
-                      errors.privacyAccepted ? "Este campo es obligatorio" : ""
-                    }
-                  />
-                }
-                label={
-                  <Typography
-                    sx={{ fontFamily: "Playfair Display", fontStyle: "italic" }}
-                  >
-                    He leído y acepto las políticas de privacidad
-                  </Typography>
-                }
-              />
+              <FormGroup>
+                <FormControlLabel
+                  control={
+                    <Checkbox
+                      checked={privacyAccepted}
+                      onChange={(e) => setPrivacyAccepted(e.target.checked)}
+                      color="primary"
+                    />
+                  }
+                  label={
+                    <Typography
+                      sx={{
+                        fontFamily: "Playfair Display",
+                        fontStyle: "italic",
+                      }}
+                    >
+                      He leído y acepto las políticas de privacidad
+                    </Typography>
+                  }
+                />
+                {errors.privacyAccepted && (
+                  <FormHelperText error>
+                    Este campo es obligatorio
+                  </FormHelperText>
+                )}
+              </FormGroup>
               <Button
-                type="submit" 
+                type="button"
+                onClick={handleCheckout} // ✅ Llama a la función de Stripe
                 variant="contained"
                 sx={{
                   width: "100%",

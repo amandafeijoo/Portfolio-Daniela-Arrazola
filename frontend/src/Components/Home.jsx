@@ -24,31 +24,33 @@ const Home = () => {
       }}
     >
       <Box
-        component="video"
-        sx={{
-          position: "absolute",
-          top: 0,
-          left: 0,
-          width: "100%",
-          height: "100%",
-          objectFit: "cover",
-          zIndex: -1,
-          "@media (max-width: 600px)": {
-            height: "120%",
-            width: "100%",
-            objectFit: "contain",
-            top: "-10%",
-          },
-        }}
-        autoPlay
-        loop
-        muted
-        playsInline
-        preload="auto"
-      >
-        <source src="images/home1.mp4" type="video/mp4" />
-        Your browser does not support the video tag.
-      </Box>
+  component="video"
+  poster="/images/poster.jpg"
+  preload="metadata"
+  playsInline
+  autoPlay
+  muted
+  loop
+  sx={{
+    position: "absolute",
+    top: 0,
+    left: 0,
+    width: "100%",
+    height: "100%",
+    objectFit: "cover",
+    zIndex: -1,
+    "@media (max-width: 600px)": {
+      height: "120%",
+      width: "100%",
+      objectFit: "contain",
+      top: "-10%",
+    },
+  }}
+>
+  <source src="/images/home1.mp4" type="video/mp4" />
+  Your browser does not support the video tag.
+</Box>
+
       <Box
         sx={{
           position: "absolute",

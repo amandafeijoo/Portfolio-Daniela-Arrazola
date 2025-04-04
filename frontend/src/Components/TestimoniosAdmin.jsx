@@ -6,16 +6,16 @@ import styled from "styled-components";
 import { format } from "date-fns";
 
 const TransparentBackground = styled.div`
-  background: rgba(211, 166, 166, 0.15); 
+  background: rgba(211, 166, 166, 0.15);
   backdrop-filter: blur(6px);
-  border-radius: 8px; 
+  border-radius: 8px;
   padding: 8px 16px;
-  display: inline-block; 
+  display: inline-block;
 `;
 
 const StyledCard = styled(Card).attrs({
-  elevation: 0, 
-  variant: "outlined", 
+  elevation: 0,
+  variant: "outlined",
 })`
   && {
     background: linear-gradient(
@@ -202,6 +202,13 @@ const TestimoniosAdmin = () => {
           <Typography variant="body2" color="rgb(40, 34, 29)">
             🗓️ {format(new Date(t.created_at), "dd/MM/yyyy HH:mm")}
           </Typography>
+          <br />
+          <Typography variant="body2" color="rgb(70, 40, 20)">
+            {t.consentimiento
+              ? "✔️ Consentimiento otorgado"
+              : "❌ Sin consentimiento"}
+          </Typography>
+
           <Typography sx={{ mt: 1 }}>{t.mensaje}</Typography>
         </StyledCard>
       ))}
@@ -224,12 +231,19 @@ const TestimoniosAdmin = () => {
           <Typography fontWeight="bold" color="#4b3f2f">
             {t.nombre_cliente}
           </Typography>
-          <Typography variant="body2" color="rgb(43, 23, 7)">
+          <Typography variant="body2" color="rgb(100, 54, 17)">
             ✉️ {t.email_cliente}
           </Typography>
           <Typography variant="body2" color="rgb(40, 34, 29)">
             🗓️ {format(new Date(t.created_at), "dd/MM/yyyy HH:mm")}
           </Typography>
+          <br />
+          <Typography variant="body2" color="rgb(70, 40, 20)">
+            {t.consentimiento
+              ? "✔️ Consentimiento otorgado"
+              : "❌ Sin consentimiento"}
+          </Typography>
+
           <Typography sx={{ mt: 1 }}>{t.mensaje}</Typography>
 
           <ButtonGroup>

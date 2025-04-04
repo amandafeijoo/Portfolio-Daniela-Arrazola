@@ -1,8 +1,19 @@
 import { useState, useEffect } from "react";
 import { useSearchParams, useNavigate } from "react-router-dom";
-import { TextField, Button, Box, Typography, Paper } from "@mui/material";
+import {
+  TextField,
+  Button,
+  Box,
+  Typography,
+  Paper,
+  FormControl,
+  FormControlLabel,
+  Checkbox,
+  FormHelperText,
+} from "@mui/material";
 import styled from "styled-components";
 import Swal from "sweetalert2";
+import "@fontsource/playfair-display";
 
 const FormContainer = styled(Paper)`
   background: rgb(219, 193, 172);
@@ -28,6 +39,8 @@ const TestimonialForm = () => {
   const [imagen, setImagen] = useState(null);
   const [reservaId, setReservaId] = useState(null);
   const [searchParams] = useSearchParams();
+  const [consentimiento, setConsentimiento] = useState(false);
+
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -43,6 +56,10 @@ const TestimonialForm = () => {
     }
   };
 
+  const handleConsentimientoChange = (e) => {
+    setConsentimiento(e.target.checked);
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -56,12 +73,23 @@ const TestimonialForm = () => {
       return;
     }
 
+    if (!consentimiento) {
+      Swal.fire({
+        icon: "error",
+        title: "Consentimiento requerido",
+        text: "Debes aceptar los términos para enviar el testimonio.",
+        confirmButtonColor: "#b07241",
+      });
+      return;
+    }
+
     try {
       const formData = new FormData();
       formData.append("reserva_id", reservaId);
       formData.append("nombre_cliente", nombre);
       formData.append("email_cliente", email);
       formData.append("mensaje", mensaje);
+      formData.append("consentimiento", consentimiento);
       if (imagen) {
         formData.append("imagen", imagen);
       }
@@ -88,6 +116,7 @@ const TestimonialForm = () => {
         setEmail("");
         setMensaje("");
         setImagen(null);
+        setConsentimiento(false);
 
         // Redirigir al inicio
         navigate("/");
@@ -137,13 +166,18 @@ const TestimonialForm = () => {
         backgroundImage: 'url("/images/contact.svg")',
         backgroundSize: "cover",
         backgroundPosition: "center",
+        fontFamily: "'Playfair Display', serif",
       }}
     >
       <FormContainer elevation={3}>
         <Typography
           variant="h5"
           fontWeight="bold"
-          sx={{ mb: 2, color: "#4b3f2f" }}
+          sx={{
+            mb: 2,
+            color: "#4b3f2f",
+            fontFamily: "'Playfair Display', serif",
+          }}
         >
           Deja tu Testimonio
         </Typography>
@@ -153,7 +187,7 @@ const TestimonialForm = () => {
             fullWidth
             value={nombre}
             onChange={(e) => setNombre(e.target.value)}
-            sx={{ mb: 2 }}
+            sx={{ mb: 2, fontFamily: "'Playfair Display', serif" }}
             required
           />
           <TextField
@@ -162,7 +196,7 @@ const TestimonialForm = () => {
             fullWidth
             value={email}
             onChange={(e) => setEmail(e.target.value)}
-            sx={{ mb: 2 }}
+            sx={{ mb: 2, fontFamily: "'Playfair Display', serif" }}
             required
           />
           <TextField
@@ -172,7 +206,7 @@ const TestimonialForm = () => {
             rows={4}
             value={mensaje}
             onChange={(e) => setMensaje(e.target.value)}
-            sx={{ mb: 2 }}
+            sx={{ mb: 2, fontFamily: "'Playfair Display', serif" }}
             required
           />
           <input
@@ -181,12 +215,21 @@ const TestimonialForm = () => {
             onChange={handleFileChange}
             style={{ marginBottom: "15px" }}
           />
-          <Typography variant="body2" sx={{ mb: 2 }}>
+          <Typography
+            variant="body2"
+            sx={{ mb: 2, fontFamily: "'Playfair Display', serif" }}
+          >
             Sube tu foto (*opcional)
           </Typography>
 
           {imagen && (
-            <Box sx={{ mb: 2, textAlign: "center" }}>
+            <Box
+              sx={{
+                mb: 2,
+                textAlign: "center",
+                fontFamily: "'Playfair Display', serif",
+              }}
+            >
               <Typography variant="body2">Imagen seleccionada:</Typography>
               <img
                 src={URL.createObjectURL(imagen)}
@@ -207,6 +250,47 @@ const TestimonialForm = () => {
               </Button>
             </Box>
           )}
+          <FormControl required sx={{ alignItems: "flex-start", mt: 2 }}>
+            <FormControlLabel
+              control={
+                <Checkbox
+                  name="consentimiento"
+                  sx={{ color: " #8fa99e" }}
+                  checked={consentimiento}
+                  onChange={handleConsentimientoChange}
+                />
+              }
+              label={
+                <Typography
+                  variant="body2"
+                  sx={{
+                    color: "#4b3f2f",
+                    fontFamily: "'Playfair Display', serif",
+                    textAlign: "justify",
+                    fontSize: "14px",
+                    lineHeight: "1.5",
+                  }}
+                >
+                 He
+                  leído y acepto que mi testimonio, junto con mi nombre y, si lo
+                  incluyo, mi fotografía, pueda ser publicado en la web{" "}
+                  <strong>danielapsicologia.com</strong>. Entiendo que puedo
+                  solicitar su eliminación en cualquier momento.
+                </Typography>
+              }
+            />
+            <FormHelperText
+              sx={{
+                fontFamily: "'Playfair Display', serif",
+                fontSize: "12px",
+                color: "#4b3f2f",
+                pl: 4.5,
+              }}
+            >
+              (*Campo obligatorio)
+            </FormHelperText>
+          </FormControl>
+
           <StyledButton type="submit" variant="contained">
             Enviar Testimonio
           </StyledButton>

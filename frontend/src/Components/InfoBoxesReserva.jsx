@@ -66,6 +66,7 @@ const InfoBoxesReserva = () => {
             { src: "/images/VisaIcon.png", alt: "Visa" },
             { src: "/images/BizumIcon.svg", alt: "Bizum" },
             { src: "/images/MastercardIcon.svg", alt: "Paypal" },
+            {src: "/images/americanexpressicon.svg",alt: "American Express"},
           ],
         },
         {

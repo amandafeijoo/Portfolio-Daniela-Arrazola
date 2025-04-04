@@ -37,13 +37,15 @@ SECRET_KEY = 'django-insecure-y==0=0n*gb2#xez2y4cxk_(vhm1j$^d%lmm^2$)t_g(-vgc*^(
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['localhost', '127.0.0.1', '.ngrok-free.app']
 
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:5173",  # Agregar el puerto de Vite
     "http://127.0.0.1:5173",
 ]
 CORS_ALLOW_CREDENTIALS = True  # Permitir cookies de autenticación si es necesario
+
+CORS_ALLOW_ALL_ORIGINS = True
 
 
 
@@ -129,6 +131,7 @@ DATABASES = {
 }
 
 load_dotenv()  # Cargar las variables del archivo .env
+import stripe
 
 EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
 EMAIL_HOST = os.getenv("EMAIL_HOST")
@@ -138,6 +141,10 @@ EMAIL_HOST_USER = os.getenv("EMAIL_HOST_USER")
 EMAIL_HOST_PASSWORD = os.getenv("EMAIL_HOST_PASSWORD")
 ADMIN_USERNAME = os.getenv("ADMIN_USERNAME")
 ADMIN_PASSWORD = os.getenv("ADMIN_PASSWORD")
+STRIPE_SECRET_KEY = os.getenv("STRIPE_SECRET_KEY")
+STRIPE_PUBLISHABLE_KEY = os.getenv("STRIPE_PUBLISHABLE_KEY")
+STRIPE_WEBHOOK_SECRET = os.getenv("STRIPE_WEBHOOK_SECRET")
+
 
 # Password validation
 # https://docs.djangoproject.com/en/5.0/ref/settings/#auth-password-validators

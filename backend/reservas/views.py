@@ -7,9 +7,17 @@ from .models import Reserva
 from .serializers import ReservaSerializer
 from .utils.emails import enviar_email_confirmacion_reserva
 from .utils.emails import enviar_email_cancelacion_reserva 
-
+from django.http import HttpResponse
+import stripe
 from django.db import IntegrityError
 import threading
+from django.conf import settings
+from django.views.decorators.csrf import csrf_exempt
+from rest_framework.decorators import api_view, permission_classes
+from rest_framework.permissions import AllowAny
+import json
+
+
 
 # 👇 Función auxiliar para ejecutar en segundo plano
 def enviar_email_async(reserva):
@@ -79,4 +87,128 @@ def cancelar_reserva(request, reserva_id):
             {"error": "No se encontró la reserva."},
             status=status.HTTP_404_NOT_FOUND
         )
+    
 
+
+
+# pagos con Stripe 
+stripe.api_key = settings.STRIPE_SECRET_KEY
+
+
+@csrf_exempt
+@api_view(["POST", "OPTIONS"])
+@permission_classes([AllowAny])
+def crear_sesion_pago(request):
+    try:
+        data = request.data
+        print("📩 Datos recibidos del frontend:", data)
+
+        tipo_terapia = data.get("tipo_terapia")
+
+        precios = {
+            "Terapia Individual - 80€": 8000,
+            "Terapia de Pareja - 105€": 10500,
+            "Pack 4 Sesiones - 300€": 30000,
+        }
+
+        amount = precios.get(tipo_terapia)
+
+        if amount is None:
+            return Response({"error": "Tipo de terapia inválido"}, status=400)
+
+        session = stripe.checkout.Session.create(
+            payment_method_types=['card'],
+            line_items=[{
+                'price_data': {
+                    'currency': 'eur',
+                    'product_data': {
+                        'name': tipo_terapia,
+                    },
+                    'unit_amount': amount,
+                },
+                'quantity': 1,
+            }],
+            mode='payment',
+            success_url='http://localhost:5173/reserva-exitosa',
+            cancel_url='http://localhost:5173/reserva-cancelada',
+            payment_intent_data={  # 👈 Aquí va el metadata correcto
+                "metadata": {
+                    "nombre_completo": data.get("nombre_completo"),
+                    "email": data.get("email"),
+                    "tipo_terapia": tipo_terapia,
+                    "fecha_reserva": data.get("fecha_reserva"),
+                    "hora_reserva": data.get("hora_reserva"),
+                    "motivo_consulta": data.get("motivo_consulta"),
+                    "comentarios": data.get("comentarios"),
+                }
+            }
+        )
+
+        print("💳 URL de Stripe:", session.url)
+        return Response({'url': session.url})
+
+    except Exception as e:
+        print("❌ Error al crear sesión de Stripe:", str(e))
+        return Response({'error': str(e)}, status=500)
+
+
+ 
+
+@api_view(["POST"])
+def stripe_webhook(request):
+    print("📩 Webhook recibido en Django")
+    payload = request.body
+    sig_header = request.META.get("HTTP_STRIPE_SIGNATURE")
+    webhook_secret = settings.STRIPE_WEBHOOK_SECRET
+
+    try:
+        event = stripe.Webhook.construct_event(payload, sig_header, webhook_secret)
+        print("💥 Evento recibido completo:", json.dumps(event, indent=2))
+    except ValueError as e:
+        print("⚠️ Error en payload:", str(e))
+        return HttpResponse(status=400)
+    except stripe.error.SignatureVerificationError as e:
+        print("❌ Error de firma:", str(e))
+        return HttpResponse(status=400)
+
+    print("✅ Evento recibido:", event["type"])
+
+    if event["type"] == "checkout.session.completed":
+        session = event["data"]["object"]
+        print("🔬 Session completa:", json.dumps(session, indent=2))
+
+        # ✅ Recuperar metadata desde el payment_intent
+        payment_intent_id = session.get("payment_intent")
+        intent = stripe.PaymentIntent.retrieve(payment_intent_id)
+        metadata = intent.metadata
+
+        print("🔍 Metadata desde PaymentIntent:", metadata)
+
+        nombre = metadata.get("nombre_completo", "")
+        email = metadata.get("email", "")
+        tipo_terapia = metadata.get("tipo_terapia", "")
+        fecha_reserva = metadata.get("fecha_reserva", "")
+        hora_reserva = metadata.get("hora_reserva", "")
+        motivo_consulta = metadata.get("motivo_consulta", "")
+        comentarios = metadata.get("comentarios", "")
+
+        if nombre and email and tipo_terapia and fecha_reserva and hora_reserva:
+            try:
+                reserva = Reserva.objects.create(
+                    nombre_completo=nombre,
+                    email=email,
+                    tipo_terapia=tipo_terapia,
+                    fecha_reserva=fecha_reserva,
+                    hora_reserva=hora_reserva,
+                    motivo_consulta=motivo_consulta,
+                    comentarios=comentarios,
+                    cancelada=False,
+                )
+                print("✅ Reserva creada correctamente:", reserva)
+                enviar_email_confirmacion_reserva(reserva)
+            except Exception as e:
+                print("❌ Error al guardar reserva:", str(e))
+        else:
+            print("⚠️ Faltan datos en metadata. No se creó la reserva.")
+
+    return HttpResponse(status=200)

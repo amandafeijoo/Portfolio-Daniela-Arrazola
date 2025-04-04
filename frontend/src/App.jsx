@@ -3,6 +3,10 @@ import { lazy, Suspense } from "react";
 import styled from "styled-components";
 import GlobalStyle from "./GlobalStyle";
 import Header from "./Components/Header";
+import CookieConsent from "react-cookie-consent";
+import "@fontsource/playfair-display";
+
+
 
 // Importación de componentes con Lazy Loading
 const Home = lazy(() => import("./Components/Home"));
@@ -38,7 +42,9 @@ const AdminDashboard = lazy(() => import("./Components/AdminDashboard"));
 const LegalNotice = lazy(() => import("./Components/LegalNotice"));
 const CookiesPolicy = lazy(() => import("./Components/CookiesPolicy"));
 const Footer = lazy(() => import("./Components/Footer"));
-const TestimonialForm = lazy (()=> import ("./Components/TestimonialForm"));
+const TestimonialForm = lazy(() => import("./Components/TestimonialForm"));
+const ReservaExitosa = lazy(() => import("./Components/ReservaExitosa"));
+const ReservaCancelada = lazy(() => import("./Components/ReservaCancelada"));
 
 const Section = styled.div`
   margin: 20px 0;
@@ -73,8 +79,6 @@ const StickySection = styled.div`
   z-index: 10;
 `;
 
-
-
 const Container = styled.div`
   min-height: 300vh;
   display: flex;
@@ -85,8 +89,6 @@ const Container = styled.div`
   padding: 0;
   overflow-x: visible; /* 🔥 No usar hidden aquí */
 `;
-
-
 
 function App() {
   return (
@@ -141,14 +143,6 @@ function App() {
               </Section>
             }
           />
-          {/* <Route
-            path="/contacto"
-            element={
-              <Section>
-                <ContactForm />
-              </Section>
-            }
-          /> */}
           <Route
             path="/servicios"
             element={
@@ -341,11 +335,83 @@ function App() {
               </Section>
             }
           />
+          <Route
+            path="/reserva-exitosa"
+            element={
+              <Section>
+                <ReservaExitosa />
+              </Section>
+            }
+          />
+          <Route
+            path="/reserva-cancelada"
+            element={
+              <Section>
+                <ReservaCancelada />
+              </Section>
+            }
+          />
         </Routes>
       </Suspense>
       <Section>
         <Footer />
       </Section>
+
+       {/* Banner de Cookies */}
+       <CookieConsent
+  location="bottom"
+  cookieName="mi_consentimiento_cookies"
+  style={{
+    background: "rgb(138, 158, 142)", // fondo suave, verde salvia claro
+    border: "2px solid rgb(60, 75, 67)",
+
+    color: "#2e4036",       // texto oscuro pero no negro
+    fontFamily: "'Playfair Display', serif",
+    padding: "22px",
+    fontSize: "15px",
+    boxShadow: "0 -4px 12px rgba(0, 0, 0, 0.08)",
+  }}
+  buttonStyle={{
+    background: "transparent",
+    color: "#2e4036",
+    fontFamily: "'Playfair Display', serif",
+    border: "2px solid #2e4036",
+    borderRadius: "6px",
+    padding: "10px 18px",
+    marginLeft: "10px",
+    cursor: "pointer",
+  }}
+  declineButtonStyle={{
+    background: "transparent",
+    color: "#6e3c2b", // tono tierra cálido
+    fontFamily: "'Playfair Display', serif",
+    border: "2px solid #6e3c2b",
+    borderRadius: "6px",
+    padding: "10px 18px",
+    marginLeft: "10px",
+    cursor: "pointer",
+  }}
+  buttonText="Aceptar todas"
+  declineButtonText="Rechazar"
+  enableDeclineButton
+  expires={150}
+>
+  Usamos cookies propias y de terceros para analizar el tráfico y mejorar tu experiencia. Puedes aceptarlas, rechazarlas o configurarlas.
+  <a
+    href="/cookies-policy"
+    style={{
+      color: "#2e4036",
+      fontWeight: "bold",
+      marginLeft: "8px",
+      textDecoration: "underline dotted",
+      transition: "color 0.3s ease",
+    }}
+    onMouseOver={(e) => (e.target.style.color = "#6e3c2b")}
+    onMouseOut={(e) => (e.target.style.color = "#2e4036")}
+  >
+    Leer más
+  </a>
+</CookieConsent>
     </Router>
   );
 }

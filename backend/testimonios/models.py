@@ -15,6 +15,10 @@ class Testimonio(models.Model):
         null=True
     )
     aprobado = models.BooleanField(default=False)
+    consentimiento = models.BooleanField(
+        default=False,
+        help_text="Indica si el usuario ha dado su consentimiento para publicar el testimonio."
+    )
     created_at = models.DateTimeField(default=timezone.now)
 
     def __str__(self):

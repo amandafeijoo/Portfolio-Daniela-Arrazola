@@ -67,11 +67,48 @@ const ImageTextEffect = () => {
           muted
           playsInline // 🔹 Evita que el video se expanda a pantalla completa en iOS
         />
+      </motion.div>
+
+      {/* Contenedor de Texto - Movido un poco a la derecha */}
+      <motion.div
+        initial={{ opacity: 0, x: 50 }}
+        animate={{ opacity: 1, x: 0 }}
+        transition={{ duration: 1, delay: 0.3 }}
+        sx={{
+          maxWidth: { xs: "90%", md: "450px" },
+          margin: { xs: "0 auto", md: "0 auto 0 40px" },
+          textAlign: "center",
+        }}
+      >
         <Box
+          sx={{
+            background: "rgba(48, 84, 69, 0.3)",
+            marginRight: { xs: "0", md: "20px" },
+            border: "2px solid #557c70",
+            padding: { xs: "20px", md: "30px" },
+            borderRadius: "15px",
+            color: "#4b3f2f",
+            boxShadow:
+              "0 4px 8px rgba(210, 180, 140, 0.9), 0 6px 20px rgba(0, 0, 0, 0.19)",
+          }}
+        >
+          <Typography
+            variant="h4"
+            sx={{
+              color: "rgba(48, 84, 69, 0.6)",
+              fontWeight: "bold",
+              mb: 2,
+              fontFamily: "Playfair Display, serif",
+              fontSize: { xs: "1.6rem", md: "2.5rem" },
+            }}
+          >
+            Terapia
+          </Typography>
+          <Box
           sx={{
             position: "absolute",
             bottom: { xs: "10px", md: "50px" },
-            left: "50%",
+            left: "74%",
             transform: "translateX(-50%)",
             width: "80%",
             display: "flex",
@@ -110,43 +147,6 @@ const ImageTextEffect = () => {
             Reservar una cita
           </Button>
         </Box>
-      </motion.div>
-
-      {/* Contenedor de Texto - Movido un poco a la derecha */}
-      <motion.div
-        initial={{ opacity: 0, x: 50 }}
-        animate={{ opacity: 1, x: 0 }}
-        transition={{ duration: 1, delay: 0.3 }}
-        sx={{
-          maxWidth: { xs: "90%", md: "450px" },
-          margin: { xs: "0 auto", md: "0 auto 0 40px" },
-          textAlign: "center",
-        }}
-      >
-        <Box
-          sx={{
-            background: "rgba(48, 84, 69, 0.3)",
-            marginRight: { xs: "0", md: "20px" },
-            border: "2px solid #557c70",
-            padding: { xs: "20px", md: "30px" },
-            borderRadius: "15px",
-            color: "#4b3f2f",
-            boxShadow:
-              "0 4px 8px rgba(210, 180, 140, 0.9), 0 6px 20px rgba(0, 0, 0, 0.19)",
-          }}
-        >
-          <Typography
-            variant="h4"
-            sx={{
-              color: "rgba(48, 84, 69, 0.6)",
-              fontWeight: "bold",
-              mb: 2,
-              fontFamily: "Playfair Display, serif",
-              fontSize: { xs: "1.6rem", md: "2.5rem" },
-            }}
-          >
-            Terapia
-          </Typography>
           <Typography
             variant="body1"
             sx={{

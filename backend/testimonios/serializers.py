@@ -21,5 +21,6 @@ class TestimonioSerializer(serializers.ModelSerializer):
             "mensaje",
             "aprobado",
             "imagen",
+            "consentimiento",
             "created_at", 
         ]

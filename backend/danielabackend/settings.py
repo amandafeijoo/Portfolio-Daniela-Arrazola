@@ -47,6 +47,9 @@ CORS_ALLOW_CREDENTIALS = True  # Permitir cookies de autenticación si es necesa
 
 CORS_ALLOW_ALL_ORIGINS = True
 
+ALLOWED_HOSTS = ['*']
+
+
 
 
 # Application definition

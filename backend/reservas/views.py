@@ -154,9 +154,14 @@ def crear_sesion_pago(request):
 
  
 
+stripe.api_key = settings.STRIPE_SECRET_KEY
+
+@csrf_exempt
 @api_view(["POST"])
 def stripe_webhook(request):
     print("📩 Webhook recibido en Django")
+    print("🔐 Usando clave secreta:", stripe.api_key)  # 👈 DEBUG de clave
+
     payload = request.body
     sig_header = request.META.get("HTTP_STRIPE_SIGNATURE")
     webhook_secret = settings.STRIPE_WEBHOOK_SECRET
@@ -170,30 +175,33 @@ def stripe_webhook(request):
     except stripe.error.SignatureVerificationError as e:
         print("❌ Error de firma:", str(e))
         return HttpResponse(status=400)
+    except Exception as e:
+        print("❌ Error inesperado en el webhook:", str(e))
+        return HttpResponse(status=500)
 
     print("✅ Evento recibido:", event["type"])
 
     if event["type"] == "checkout.session.completed":
-        session = event["data"]["object"]
-        print("🔬 Session completa:", json.dumps(session, indent=2))
+        try:
+            session = event["data"]["object"]
+            print("🔬 Session completa:", json.dumps(session, indent=2))
 
-        # ✅ Recuperar metadata desde el payment_intent
-        payment_intent_id = session.get("payment_intent")
-        intent = stripe.PaymentIntent.retrieve(payment_intent_id)
-        metadata = intent.metadata
+            payment_intent_id = session.get("payment_intent")
+            print("🔍 ID del PaymentIntent recibido:", payment_intent_id)
 
-        print("🔍 Metadata desde PaymentIntent:", metadata)
+            intent = stripe.PaymentIntent.retrieve(payment_intent_id)
+            metadata = intent.metadata
+            print("🔍 Metadata desde PaymentIntent:", metadata)
 
-        nombre = metadata.get("nombre_completo", "")
-        email = metadata.get("email", "")
-        tipo_terapia = metadata.get("tipo_terapia", "")
-        fecha_reserva = metadata.get("fecha_reserva", "")
-        hora_reserva = metadata.get("hora_reserva", "")
-        motivo_consulta = metadata.get("motivo_consulta", "")
-        comentarios = metadata.get("comentarios", "")
+            nombre = metadata.get("nombre_completo", "")
+            email = metadata.get("email", "")
+            tipo_terapia = metadata.get("tipo_terapia", "")
+            fecha_reserva = metadata.get("fecha_reserva", "")
+            hora_reserva = metadata.get("hora_reserva", "")
+            motivo_consulta = metadata.get("motivo_consulta", "")
+            comentarios = metadata.get("comentarios", "")
 
-        if nombre and email and tipo_terapia and fecha_reserva and hora_reserva:
-            try:
+            if nombre and email and tipo_terapia and fecha_reserva and hora_reserva:
                 reserva = Reserva.objects.create(
                     nombre_completo=nombre,
                     email=email,
@@ -206,9 +214,11 @@ def stripe_webhook(request):
                 )
                 print("✅ Reserva creada correctamente:", reserva)
                 enviar_email_confirmacion_reserva(reserva)
-            except Exception as e:
-                print("❌ Error al guardar reserva:", str(e))
-        else:
-            print("⚠️ Faltan datos en metadata. No se creó la reserva.")
+            else:
+                print("⚠️ Faltan datos en metadata. No se creó la reserva.")
+
+        except Exception as e:
+            print("❌ Error interno al procesar el evento:", str(e))
+            return HttpResponse(status=500)
 
     return HttpResponse(status=200)

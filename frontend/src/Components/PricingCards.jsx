@@ -46,17 +46,7 @@ const PricingCards = () => {
     <Box
       sx={{
         position: "relative",
-        display: isDesktop ? "flex" : "grid",
-        flexDirection: isDesktop ? "row" : "column",
-        gridTemplateColumns: {
-          xs: "1fr",
-          sm: "repeat(2, 1fr)",
-          md: "repeat(3, 1fr)",
-        },
-        justifyContent: "center",
-        alignItems: "center",
-        gap: "20px",
-        padding: "40px 15px",
+        padding: "60px 15px 40px",
         minHeight: "75vh",
         width: "100%",
         maxWidth: "1200px",
@@ -65,7 +55,7 @@ const PricingCards = () => {
         overflow: "hidden",
       }}
     >
-      {/* Video de fondo ajustado */}
+      {/* 🎥 Video de fondo */}
       <Box
         sx={{
           position: "absolute",
@@ -99,82 +89,118 @@ const PricingCards = () => {
         </video>
       </Box>
 
-      {plans.map((plan, index) => (
-        <motion.div
-          key={index}
-          whileHover={{ scale: 1.03 }}
-          transition={{ duration: 0.3 }}
-          style={{
-            background: "rgba(255, 255, 255, 0.9)",
-            border: "2px solid #c2a97c",
-            padding: isMobile ? "20px" : "40px",
-            borderRadius: "15px",
-            boxShadow: "4px 4px 10px rgba(0, 0, 0, 0.1)",
-            textAlign: "center",
-            width: "100%",
-            maxWidth: isMobile ? "90vw" : isTablet ? "320px" : "350px",
-            color: "#4b3f2f",
-            zIndex: 2,
-            margin: "0 auto",
+      {/* 🧾 Título */}
+      <Typography
+        variant="h3"
+        align="center"
+        sx={{
+          fontFamily: "Playfair Display",
+          fontWeight: "bold",
+          color: "#2c2c2c",
+          mb: 5,
+          zIndex: 2,
+          position: "relative",
+        }}
+      >
+        Precios
+      </Typography>
+
+      {/* 💳 Tarjetas de planes */}
+      <Box
+        sx={{
+          display: isDesktop ? "flex" : "grid",
+          flexDirection: isDesktop ? "row" : "column",
+          gridTemplateColumns: {
+            xs: "1fr",
+            sm: "repeat(2, 1fr)",
+            md: "repeat(3, 1fr)",
+          },
+          justifyContent: "center",
+          alignItems: "center",
+          gap: "20px",
+          zIndex: 2,
+        }}
+      >
+        {plans.map((plan, index) => (
+          <motion.div
+            key={index}
+            whileHover={{ scale: 1.03 }}
+            transition={{ duration: 0.3 }}
+            style={{
+              background: "rgba(255, 255, 255, 0.9)",
+              border: "2px solid #c2a97c",
+              padding: isMobile ? "20px" : "40px",
+              borderRadius: "15px",
+              boxShadow: "4px 4px 10px rgba(0, 0, 0, 0.1)",
+              textAlign: "center",
+              width: "100%",
+              maxWidth: isMobile ? "90vw" : isTablet ? "320px" : "350px",
+              color: "#4b3f2f",
+              margin: "0 auto",
+              zIndex: 2,
+              display: "flex",
+              flexDirection: "column",
+              justifyContent: "space-between",
+              minHeight: "270px", // 👈 Ajusta este valor si quieres más altura
+            }}
+          >
+            <Typography
+              variant="h5"
+              fontWeight="bold"
+              sx={{
+                fontFamily: "Playfair Display",
+                fontSize: { xs: "1.3rem", md: "1.8rem" },
+              }}
+            >
+              {plan.title}
+            </Typography>
+            <Typography
+              variant="h3"
+              fontWeight="bold"
+              sx={{
+                color: "#355E3B",
+                fontFamily: "Playfair Display",
+                fontSize: { xs: "1.8rem", md: "2.2rem" },
+                marginBottom: "10px",
+              }}
+            >
+              {plan.price}
+            </Typography>
+            <Typography
+              variant="body1"
+              sx={{
+                fontSize: { xs: "0.9rem", md: "1rem" },
+                fontFamily: "Playfair Display",
+                opacity: 0.8,
+              }}
+            >
+              {plan.description}
+            </Typography>
+          </motion.div>
+        ))}
+      </Box>
+
+      {/* 👉 Botón único abajo */}
+      <Box sx={{ mt: 5, textAlign: "center", zIndex: 2, position: "relative" }}>
+        <Button
+          variant="contained"
+          sx={{
+            backgroundColor: "#4A6F5E",
+            px: 4,
+            py: 1.5,
+            borderRadius: "25px",
+            fontFamily: "Playfair Display",
+            fontSize: "1.1rem",
+            boxShadow: "0 4px 10px rgba(0,0,0,0.2)",
+            "&:hover": {
+              backgroundColor: "#3b5e50",
+            },
           }}
+          onClick={handleNavigate}
         >
-          <Typography
-            variant="h5"
-            fontWeight="bold"
-            sx={{
-              fontFamily: "Playfair Display",
-              fontSize: { xs: "1.3rem", md: "1.8rem" },
-            }}
-          >
-            {plan.title}
-          </Typography>
-          <Typography
-            variant="h3"
-            fontWeight="bold"
-            sx={{
-              color: "#355E3B",
-              fontFamily: "Playfair Display",
-              fontSize: { xs: "1.8rem", md: "2.2rem" },
-              marginBottom: "10px",
-            }}
-          >
-            {plan.price}
-          </Typography>
-          <Typography
-            variant="body1"
-            sx={{
-              fontSize: { xs: "0.9rem", md: "1rem" },
-              fontFamily: "Playfair Display",
-              opacity: 0.8,
-              marginBottom: "20px",
-            }}
-          >
-            {plan.description}
-          </Typography>
-          <Button
-            variant="contained"
-            sx={{
-              backgroundColor: "#c2a97c",
-              color: "#ffffff",
-              border: "2px solid #8c6b52",
-              borderRadius: "25px",
-              padding: isMobile ? "8px 18px" : "12px 24px",
-              textTransform: "none",
-              fontFamily: "Playfair Display",
-              fontSize: { xs: "1rem", md: "1.1rem" },
-              transition: "all 0.3s ease",
-              "&:hover": {
-                backgroundColor: "rgb(111, 151, 140)",
-                color: "#f5eedc",
-                border: "2px solid #f5eedc",
-              },
-            }}
-            onClick={handleNavigate}
-          >
-            Reservar una cita
-          </Button>
-        </motion.div>
-      ))}
+          Reservar una cita
+        </Button>
+      </Box>
     </Box>
   );
 };

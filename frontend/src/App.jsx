@@ -400,7 +400,7 @@ function App() {
   <a
     href="/cookies-policy"
     style={{
-      color: "#2e4036",
+      color: "#2c2c2c",
       fontWeight: "bold",
       marginLeft: "8px",
       textDecoration: "underline dotted",

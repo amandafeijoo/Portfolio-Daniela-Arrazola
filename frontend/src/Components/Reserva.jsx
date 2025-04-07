@@ -150,7 +150,7 @@ const Reserva = () => {
     console.log("📤 Datos enviados al backend:", reservaData);
   
     try {
-      const response = await fetch("https://eee0-2001-4649-7505-0-f584-761c-13ad-39c5.ngrok-free.app/api/pago/crear-sesion/", {
+      const response = await fetch("https://855a-2001-4649-7505-0-f584-761c-13ad-39c5.ngrok-free.app/api/pago/crear-sesion/", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

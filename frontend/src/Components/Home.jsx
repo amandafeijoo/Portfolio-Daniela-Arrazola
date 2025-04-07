@@ -47,8 +47,10 @@ const Home = () => {
     },
   }}
 >
-  <source src="/images/home1.mp4" type="video/mp4" />
-  Your browser does not support the video tag.
+ <source
+    src="https://res.cloudinary.com/dmz3r3lb3/video/upload/v1743869669/home1_oyzcno.mp4"
+    type="video/mp4"
+  />  Your browser does not support the video tag.
 </Box>
 
       <Box

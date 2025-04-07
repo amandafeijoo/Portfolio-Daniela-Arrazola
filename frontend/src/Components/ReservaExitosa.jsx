@@ -1,7 +1,6 @@
-import { Box, Button } from "@mui/material";
+import { Box, Button, Alert } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import "@fontsource/playfair-display";
-
 
 const ReservaExitosa = () => {
   const navigate = useNavigate();
@@ -10,24 +9,40 @@ const ReservaExitosa = () => {
     <Box
       sx={{
         minHeight: "100vh",
-        backgroundColor: "#84978b", // 💚 Fondo en verde suave
+        backgroundColor: "#84978b", // 💚 Fondo verde suave
         display: "flex",
         alignItems: "center",
         justifyContent: "center",
         padding: 2,
       }}
     >
+    
       <Box
         sx={{
           position: "relative",
           width: { xs: "90%", sm: "70%", md: "40%" },
           borderRadius: "20px",
           boxShadow: "0 10px 30px rgba(0,0,0,0.2)",
-          overflow: "hidden", // 🔐 Asegura que el botón no sobresalga
+          overflow: "hidden",
           textAlign: "center",
           backgroundColor: "#fff",
         }}
       >
+       {/* Alerta informativa */}
+       <Alert
+          severity="info"
+          sx={{
+            mt: 2,
+            mx: 2,
+            fontFamily: "Playfair Display, serif",
+            fontSize: "17px",
+            borderRadius: "10px",
+            
+          }}
+        >
+          Hemos enviado un correo de confirmación de tu reserva. 
+          Revisa también tu carpeta de spam o correo no deseado. ✉️
+        </Alert>
         <img
           src="/images/reservaok.svg"
           alt="Reserva Exitosa"
@@ -36,7 +51,6 @@ const ReservaExitosa = () => {
             display: "block",
           }}
         />
-
         <Box
           sx={{
             position: "absolute",
@@ -50,7 +64,7 @@ const ReservaExitosa = () => {
             sx={{
               backgroundColor: "#4A6F5E",
               px: 3,
-              fontFamily: "Playfair Display serif",
+              fontFamily: "Playfair Display, serif",
               borderRadius: "12px",
               boxShadow: "0 4px 10px rgba(0,0,0,0.2)",
               "&:hover": {
@@ -68,3 +82,4 @@ const ReservaExitosa = () => {
 };
 
 export default ReservaExitosa;
+

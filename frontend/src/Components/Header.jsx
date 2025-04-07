@@ -234,7 +234,7 @@ const Header = () => {
           >
             <Box
               component="img"
-              src="/images/logo.svg"
+              src="publicidad/images/logo.svg"
               alt="Logo Daniela"
               onClick={handleClick}
               sx={{

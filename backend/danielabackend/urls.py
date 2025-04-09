@@ -18,15 +18,20 @@ from django.contrib import admin
 from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
+from django.views.generic import TemplateView
+from django.urls import re_path
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('api/', include('reservas.urls')),  # Conecta la API de reservas
-    path('api/', include('testimonios.urls')),  # Conecta la API de testimonios
-    path('api/users/', include('users.urls')),  # Rutas de autenticación
-
-    
+    path('api/', include('reservas.urls')),
+    path('api/', include('testimonios.urls')),
+    path('api/users/', include('users.urls')),
 ]
 
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+
+# Para que React se sirva correctamente en producción
+urlpatterns += [
+    re_path(r'^.*$', TemplateView.as_view(template_name="index.html")),
+]

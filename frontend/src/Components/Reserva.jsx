@@ -119,6 +119,7 @@ const Reserva = () => {
       firstName: firstName.trim() === "",
       email: email.trim() === "" || !validateEmail(email),
       selectedDate: !selectedDate,
+      selectedTime: !selectedTime, // Asegúrate de validar también la hora
       selectedOption: selectedOption.trim() === "",
       selectedConsultationType: selectedConsultationType.trim() === "",
       privacyAccepted: !privacyAccepted,
@@ -136,21 +137,58 @@ const Reserva = () => {
       return;
     }
   
+    // ✅ Validar disponibilidad antes de continuar
+    const fechaISO = selectedDate.toISOString().split("T")[0];
+  
+    try {
+      const disponibilidadResponse = await fetch("https://72ae-2001-4649-7505-0-e519-f0b0-e22e-d0c9.ngrok-free.app/api/verificar-disponibilidad/", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          fecha_reserva: fechaISO,
+          hora_reserva: selectedTime,
+        }),
+      });
+  
+      const disponibilidadData = await disponibilidadResponse.json();
+  
+      if (!disponibilidadData.disponible) {
+        await Swal.fire({
+          icon: "error",
+          title: "Horario no disponible",
+          text: "Ya existe una reserva para esta fecha y hora. Por favor, elige otro horario.",
+          confirmButtonColor: "#c0a080",
+        });
+        return;
+      }
+    } catch (error) {
+      console.error("Error al verificar disponibilidad:", error);
+      await Swal.fire({
+        icon: "error",
+        title: "Error de servidor",
+        text: "No se pudo verificar la disponibilidad. Intenta de nuevo más tarde.",
+        confirmButtonColor: "#c0a080",
+      });
+      return;
+    }
+  
     const reservaData = {
       tipo_terapia: selectedConsultationType,
       nombre_completo: firstName,
       email,
       motivo_consulta: selectedOption,
-      fecha_reserva: selectedDate.toISOString().split("T")[0],
+      fecha_reserva: fechaISO,
       hora_reserva: selectedTime,
       comentarios: comments,
     };
   
-    // ✅ DEBUG: Ver qué datos se están enviando
+    // ✅ Enviar a Stripe si todo está correcto
     console.log("📤 Datos enviados al backend:", reservaData);
   
     try {
-      const response = await fetch("https://855a-2001-4649-7505-0-f584-761c-13ad-39c5.ngrok-free.app/api/pago/crear-sesion/", {
+      const response = await fetch("https://72ae-2001-4649-7505-0-e519-f0b0-e22e-d0c9.ngrok-free.app/api/pago/crear-sesion/", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -184,8 +222,8 @@ const Reserva = () => {
       });
     }
   };
-  
-  
+    
+
 
   return (
     <>

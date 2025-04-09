@@ -88,6 +88,23 @@ def cancelar_reserva(request, reserva_id):
             status=status.HTTP_404_NOT_FOUND
         )
     
+    
+@api_view(["POST"])
+@permission_classes([AllowAny])
+def verificar_disponibilidad(request):
+    fecha = request.data.get("fecha_reserva")
+    hora = request.data.get("hora_reserva")
+
+    if not fecha or not hora:
+        return Response({"error": "Fecha y hora requeridas"}, status=400)
+
+    ya_reservado = Reserva.objects.filter(
+        fecha_reserva=fecha,
+        hora_reserva=hora,
+        cancelada=False
+    ).exists()
+
+    return Response({"disponible": not ya_reservado})
 
 
 

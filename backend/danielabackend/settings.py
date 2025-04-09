@@ -14,6 +14,9 @@ from pathlib import Path
 import os
 from dotenv import load_dotenv
 from datetime import timedelta
+import dj_database_url
+from whitenoise.storage import CompressedManifestStaticFilesStorage
+
 
 SIMPLE_JWT = {
     "ACCESS_TOKEN_LIFETIME": timedelta(hours=1),  # Token válido por 1 hora
@@ -29,26 +32,38 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 
 # Quick-start development settings - unsuitable for production
+
 # See https://docs.djangoproject.com/en/5.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-y==0=0n*gb2#xez2y4cxk_(vhm1j$^d%lmm^2$)t_g(-vgc*^('
+
+# SECRET_KEY = os.getenv("SECRET_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
 
-ALLOWED_HOSTS = ['localhost', '127.0.0.1', '.ngrok-free.app']
+# DEBUG = os.getenv("DEBUG", "False") == "True"
 
-CORS_ALLOWED_ORIGINS = [
-    "http://localhost:5173",  # Agregar el puerto de Vite
-    "http://127.0.0.1:5173",
-]
-CORS_ALLOW_CREDENTIALS = True  # Permitir cookies de autenticación si es necesario
+# ALLOWED_HOSTS = ['localhost', '127.0.0.1', '.ngrok-free.app']
+# ALLOWED_HOSTS = ['*']
 
-CORS_ALLOW_ALL_ORIGINS = True
+# ALLOWED_HOSTS = os.getenv("ALLOWED_HOSTS", "*").split(",")
 
-ALLOWED_HOSTS = ['*']
 
+# CORS_ALLOWED_ORIGINS = [
+#     "http://localhost:5173",  # Agregar el puerto de Vite
+#     "http://127.0.0.1:5173",
+# ]
+# CORS_ALLOW_CREDENTIALS = True  # Permitir cookies de autenticación si es necesario
+
+# CORS_ALLOW_ALL_ORIGINS = True
+
+
+SECRET_KEY = os.getenv("SECRET_KEY")
+DEBUG = os.getenv("DEBUG", "False") == "True"
+ALLOWED_HOSTS = os.getenv("ALLOWED_HOSTS", "*").split(",")
+
+CORS_ALLOW_ALL_ORIGINS = True  # o usa CORS_ALLOWED_ORIGINS si prefieres limitarlo
+CORS_ALLOW_CREDENTIALS = True
 
 
 
@@ -76,6 +91,7 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'corsheaders.middleware.CorsMiddleware',  # 📌 Permitir CORS
     'django.middleware.common.CommonMiddleware',
@@ -122,16 +138,22 @@ WSGI_APPLICATION = 'danielabackend.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
 
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql',
+#         'NAME': 'danieladb',
+#         'USER': 'mandy',
+#         'PASSWORD': '1234dabz',
+#         'HOST': 'localhost',
+#         'PORT': '5432',
+#     }
+# }
+
+
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'danieladb',
-        'USER': 'mandy',
-        'PASSWORD': '1234dabz',
-        'HOST': 'localhost',
-        'PORT': '5432',
-    }
+    'default': dj_database_url.config(default=os.getenv("DATABASE_URL"))
 }
+
 
 load_dotenv()  # Cargar las variables del archivo .env
 import stripe
@@ -182,9 +204,19 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.0/howto/static-files/
 
+# STATIC_URL = '/static/'
+# MEDIA_URL = '/media/'
+# MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
+
 STATIC_URL = '/static/'
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field

@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { useRef } from "react";
 import {
   Container,
   Box,
@@ -57,7 +58,7 @@ const Image = () => (
     }}
   >
     <img
-      src="/images/9.svg"
+      src="https://res.cloudinary.com/dmz3r3lb3/image/upload/v1744102764/9_yq19jo.png"
       alt="Service Image"
       width="100%"
       style={{ borderRadius: "inherit" }}
@@ -75,18 +76,35 @@ const Service9 = () => {
   const handleChange = () => {
     setExpanded(!expanded);
   };
-  useEffect(() => {
-    window.scrollTo(0, 0);
-  }, []);
 
   const navigate = useNavigate();
   const location = useLocation();
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("sm")); 
 
+  // 📌 Identificar el índice actual
   const currentIndex = services.findIndex(
     (service) => service.path === location.pathname
   );
+
+  // 📌 Referencias a los Tabs
+  const tabRefs = useRef([]);
+
+  // 📌 Al montar componente, subir arriba
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
+  // 📌 Scroll automático al tab activo
+  useEffect(() => {
+    if (tabRefs.current[currentIndex]) {
+      tabRefs.current[currentIndex].scrollIntoView({
+        behavior: "smooth",
+        inline: "center",
+        block: "nearest",
+      });
+    }
+  }, [currentIndex]);
 
   return (
     <>
@@ -115,8 +133,12 @@ const Service9 = () => {
             },
           }}
         >
-          {services.map((service) => (
-            <Tab key={service.path} label={service.name} />
+           {services.map((service, index) => (
+            <Tab
+              key={service.path}
+              label={service.name}
+              ref={(el) => (tabRefs.current[index] = el)}
+            />
           ))}
         </Tabs>
         <Box

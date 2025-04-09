@@ -90,6 +90,7 @@ const PricingCards = () => {
       </Box>
 
       {/* 🧾 Título */}
+      
       <Typography
         variant="h3"
         align="center"
@@ -135,13 +136,10 @@ const PricingCards = () => {
               textAlign: "center",
               width: "100%",
               maxWidth: isMobile ? "90vw" : isTablet ? "320px" : "350px",
+              minHeight: "300px",
               color: "#4b3f2f",
               margin: "0 auto",
               zIndex: 2,
-              display: "flex",
-              flexDirection: "column",
-              justifyContent: "space-between",
-              minHeight: "270px", // 👈 Ajusta este valor si quieres más altura
             }}
           >
             <Typography
@@ -181,6 +179,7 @@ const PricingCards = () => {
       </Box>
 
       {/* 👉 Botón único abajo */}
+
       <Box sx={{ mt: 5, textAlign: "center", zIndex: 2, position: "relative" }}>
         <Button
           variant="contained"
@@ -206,3 +205,4 @@ const PricingCards = () => {
 };
 
 export default PricingCards;
+

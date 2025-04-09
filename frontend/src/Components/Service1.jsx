@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { useRef } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import {
   Box,
@@ -70,6 +71,9 @@ const Image = () => (
 );
 
 const Service1 = () => {
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
   const [expanded, setExpanded] = useState(true);
   const handleChange = () => {
     setExpanded(!expanded);
@@ -80,13 +84,26 @@ const Service1 = () => {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("sm")); // 📌 Detección de móvil
 
-  const currentIndex = services.findIndex(
-    (service) => service.path === location.pathname
-  );
+ // 📌 Identificar el índice actual
+ const currentIndex = services.findIndex(
+  (service) => service.path === location.pathname
+);
 
-  useEffect(() => {
-    window.scrollTo(0, 0);
-  }, []);
+// 📌 Referencias a los Tabs
+const tabRefs = useRef([]);
+
+
+// 📌 Scroll automático al tab activo
+useEffect(() => {
+  if (tabRefs.current[currentIndex]) {
+    tabRefs.current[currentIndex].scrollIntoView({
+      behavior: "smooth",
+      inline: "center",
+      block: "nearest",
+    });
+  }
+}, [currentIndex]);
+
 
   return (
     <>
@@ -117,8 +134,12 @@ const Service1 = () => {
             },
           }}
         >
-          {services.map((service) => (
-            <Tab key={service.path} label={service.name} />
+        {services.map((service, index) => (
+            <Tab
+              key={service.path}
+              label={service.name}
+              ref={(el) => (tabRefs.current[index] = el)}
+            />
           ))}
         </Tabs>
         <Box

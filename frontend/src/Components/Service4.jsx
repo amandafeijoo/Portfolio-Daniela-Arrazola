@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
+import { useRef } from "react"; 
 import {
   Container,
   Box,
@@ -57,7 +58,7 @@ const Image = () => (
     }}
   >
     <img
-      src="/images/4.svg"
+      src="https://res.cloudinary.com/dmz3r3lb3/image/upload/v1744063571/4_sam5ik.png"
       alt="Service Image"
       width="100%"
       style={{ borderRadius: "inherit" }}
@@ -70,24 +71,42 @@ const Image = () => (
 );
 
 const Service4 = () => {
+
   const [expanded, setExpanded] = useState(true);
+  const handleChange = () => {
+    setExpanded(!expanded);
+  };
 
   const navigate = useNavigate();
   const location = useLocation();
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("sm")); // 📌 Detección de móvil
 
-  const currentIndex = services.findIndex(
-    (service) => service.path === location.pathname
-  );
+// 📌 Identificar el índice actual
+const currentIndex = services.findIndex(
+  (service) => service.path === location.pathname
+);
 
-  const handleChange = () => {
-    setExpanded(!expanded);
-  };
-  useEffect(() => {
-    window.scrollTo(0, 0);
-  }, []);
+// 📌 Referencias a los Tabs
+const tabRefs = useRef([]);
 
+// 📌 Al montar componente, subir arriba
+useEffect(() => {
+  window.scrollTo(0, 0);
+}, []);
+
+// 📌 Scroll automático al tab activo
+useEffect(() => {
+  if (tabRefs.current[currentIndex]) {
+    tabRefs.current[currentIndex].scrollIntoView({
+      behavior: "smooth",
+      inline: "center",
+      block: "nearest",
+    });
+  }
+}, [currentIndex]);
+
+  
   return (
     <>
       <Container>
@@ -115,8 +134,12 @@ const Service4 = () => {
             },
           }}
         >
-          {services.map((service) => (
-            <Tab key={service.path} label={service.name} />
+           {services.map((service, index) => (
+            <Tab
+              key={service.path}
+              label={service.name}
+              ref={(el) => (tabRefs.current[index] = el)}
+            />
           ))}
         </Tabs>
         <Box

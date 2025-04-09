@@ -51,6 +51,7 @@ const ContenedorPrincipal1 = styled.div`
     rgba(245, 245, 220, 0.7) 0%
   );
   transition: transform 1.5s ease-out;
+  will-change: transform;
 
   &.visible {
     transform: translateY(0);
@@ -87,6 +88,12 @@ const ContenedorPrincipal2 = styled.div`
   z-index: 1;
   background-color: rgba(255, 255, 255, 0.2);
   transition: transform 1.5s ease-out;
+  will-change: transform;
+  will-change: transform;
+  backface-visibility: hidden;
+  transform-style: preserve-3d;
+  contain: layout style paint;
+
 
   &.visible {
     transform: translateY(0);
@@ -135,7 +142,7 @@ const ImagenDaniela = () => {
             }
           });
         },
-        { threshold: 0.5 }
+        { threshold: 0.4 }
       );
 
       if (contenedor1) observer.observe(contenedor1);

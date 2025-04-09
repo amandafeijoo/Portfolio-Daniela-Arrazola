@@ -1,3 +1,4 @@
+import { useEffect, useRef, useState } from "react";
 import { Box, Button, Typography } from "@mui/material";
 import { motion } from "framer-motion";
 import { useNavigate } from "react-router-dom";
@@ -5,6 +6,22 @@ import "@fontsource/playfair-display";
 
 const Home = () => {
   const navigate = useNavigate();
+  const videoRef = useRef();
+  const [visible, setVisible] = useState(false);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setVisible(true);
+        }
+      },
+      { threshold: 0.25 }
+    );
+
+    if (videoRef.current) observer.observe(videoRef.current);
+    return () => observer.disconnect();
+  }, []);
 
   const handleNavigateReservar = () => {
     navigate("/reserva");
@@ -12,6 +29,7 @@ const Home = () => {
 
   return (
     <Box
+      ref={videoRef}
       sx={{
         position: "relative",
         width: "100%",
@@ -19,40 +37,58 @@ const Home = () => {
         overflow: "hidden",
         "@media (max-width: 600px)": {
           height: "35vh",
-          top: "-10",
         },
       }}
     >
-      <Box
-  component="video"
-  poster="/images/poster.jpg"
-  preload="metadata"
-  playsInline
-  autoPlay
-  muted
-  loop
-  sx={{
-    position: "absolute",
-    top: 0,
-    left: 0,
-    width: "100%",
-    height: "100%",
-    objectFit: "cover",
-    zIndex: -1,
-    "@media (max-width: 600px)": {
-      height: "120%",
-      width: "100%",
-      objectFit: "contain",
-      top: "-10%",
-    },
-  }}
->
- <source
-    src="https://res.cloudinary.com/dmz3r3lb3/video/upload/v1743869669/home1_oyzcno.mp4"
-    type="video/mp4"
-  />  Your browser does not support the video tag.
-</Box>
+      {visible ? (
+        <Box
+          component="video"
+          poster="/images/poster.jpg"
+          preload="none"
+          playsInline
+          autoPlay
+          muted
+          loop
+          sx={{
+            position: "absolute",
+            top: 0,
+            left: 0,
+            width: "100%",
+            height: "100%",
+            objectFit: "cover",
+            zIndex: -1,
+            opacity: 0.99, // 🔄 para evitar que sea LCP
+            "@media (max-width: 600px)": {
+              height: "120%",
+              width: "100%",
+              objectFit: "contain",
+              top: "-10%",
+            },
+          }}
+        >
+          <source
+            src="images/home.mp4"
+            type="video/mp4"
+          />
+        </Box>
+      ) : (
+        <Box
+          component="img"
+          src="/images/poster.jpg"
+          alt="Fondo naturaleza"
+          sx={{
+            position: "absolute",
+            top: 0,
+            left: 0,
+            width: "100%",
+            height: "100%",
+            objectFit: "cover",
+            zIndex: -1,
+          }}
+        />
+      )}
 
+      {/* Texto + botón */}
       <Box
         sx={{
           position: "absolute",
@@ -65,7 +101,6 @@ const Home = () => {
           },
         }}
       >
-        {/* Flecha animada con framer-motion */}
         <motion.div
           animate={{ y: [0, 5, 0] }}
           transition={{ repeat: Infinity, duration: 1.5 }}
@@ -106,3 +141,4 @@ const Home = () => {
 };
 
 export default Home;
+

@@ -15,7 +15,7 @@ const ContactContainer = styled(Box)`
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  background-image: url("/images/contact.svg");
+  background-image: url("https://res.cloudinary.com/dmz3r3lb3/image/upload/v1744035312/Historia_de_Instagram_Lista_de_Precios_de_Joyas_Elegante_Negro_y_Beige_V%C3%ADdeo_deb0tk.png");
   background-size: cover;
   background-position: center;
   background-color: #e8ddce;

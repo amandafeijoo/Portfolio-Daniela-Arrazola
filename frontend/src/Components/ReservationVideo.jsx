@@ -111,7 +111,8 @@ const ReservationVideo = () => {
 
       {/* 📌 Video sin cortes */}
       <Video autoPlay loop muted playsInline controlsList="nofullscreen">
-        <source src="/images/reserva.mp4" type="video/mp4" />
+        <source src="/images/reserva.mp4" 
+        type="video/mp4" />
         Tu navegador no soporta el video.
       </Video>
     </VideoContainer>

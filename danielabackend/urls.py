@@ -14,12 +14,35 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
+# from django.contrib import admin
+# from django.urls import path, include
+# from django.conf import settings
+# from django.conf.urls.static import static
+# from django.views.generic import TemplateView
+# from django.urls import re_path
+
+# urlpatterns = [
+#     path('admin/', admin.site.urls),
+#     path('api/', include('reservas.urls')),
+#     path('api/', include('testimonios.urls')),
+#     path('api/users/', include('users.urls')),
+# ]
+
+# if settings.DEBUG:
+#     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+
+# # Para que React se sirva correctamente en producción
+# urlpatterns += [
+#     re_path(r'^.*$', TemplateView.as_view(template_name="index.html")),
+# ]
+
+
 from django.contrib import admin
-from django.urls import path, include
+from django.urls import path, include, re_path
 from django.conf import settings
 from django.conf.urls.static import static
 from django.views.generic import TemplateView
-from django.urls import re_path
+from django.views.static import serve
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -28,10 +51,19 @@ urlpatterns = [
     path('api/users/', include('users.urls')),
 ]
 
+# Sirve archivos estáticos y media en producción
+if not settings.DEBUG:
+    urlpatterns += [
+        re_path(r'^static/(?P<path>.*)$', serve, {'document_root': settings.STATIC_ROOT}),
+        re_path(r'^media/(?P<path>.*)$', serve, {'document_root': settings.MEDIA_ROOT}),
+    ]
+
+# Esto debe ir al final y solo debe aplicarse a rutas que no sean static/media
+urlpatterns += [
+    re_path(r'^(?!static|media).*$', TemplateView.as_view(template_name="index.html")),
+]
+
+# Para desarrollo local con DEBUG = True
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
-
-# Para que React se sirva correctamente en producción
-urlpatterns += [
-    re_path(r'^.*$', TemplateView.as_view(template_name="index.html")),
-]
+    urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

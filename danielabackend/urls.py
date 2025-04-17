@@ -41,8 +41,17 @@ from django.contrib import admin
 from django.urls import path, include, re_path
 from django.conf import settings
 from django.conf.urls.static import static
-from django.views.generic import TemplateView
 from django.views.static import serve
+from django.http import HttpResponse
+import os
+
+# Vista que sirve el index.html desde staticfiles
+def serve_react(request):
+    try:
+        with open(os.path.join(settings.BASE_DIR, 'staticfiles', 'index.html')) as f:
+            return HttpResponse(f.read())
+    except FileNotFoundError:
+        return HttpResponse("index.html no encontrado", status=404)
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -58,12 +67,12 @@ if not settings.DEBUG:
         re_path(r'^media/(?P<path>.*)$', serve, {'document_root': settings.MEDIA_ROOT}),
     ]
 
-# Esto debe ir al final y solo debe aplicarse a rutas que no sean static/media
+# Redirige cualquier ruta que no sea media/static/api/admin a index.html (React SPA)
 urlpatterns += [
-    re_path(r'^(?!static|media).*$', TemplateView.as_view(template_name="index.html")),
+    re_path(r'^(?!static|media|api|admin).*$', serve_react),
 ]
 
-# Para desarrollo local con DEBUG = True
+# En entorno de desarrollo (DEBUG=True)
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
     urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

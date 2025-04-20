@@ -4,6 +4,8 @@ import { motion } from "framer-motion";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import "@fontsource/playfair-display";
+import { img } from "../utils/imagePath"; // ajusta la ruta si el archivo está en otro lugar
+
 
 const ContenedorPadre = styled.div`
   position: relative;
@@ -167,11 +169,12 @@ const ImagenDaniela = () => {
         ref={contenedor1Ref}
         className={!isMobile ? "hidden" : ""}
       >
-        <img
-          src="/images/daniela1.svg"
-          alt="Daniela"
-          style={{ width: "100%", borderRadius: "15px" }}
-        />
+       <img
+  src={img("daniela1.svg")}
+  alt="Daniela"
+  style={{ width: "100%", borderRadius: "15px" }}
+/>
+
       </ContenedorPrincipal1>
       <ContenedorPrincipal2
         ref={contenedor2Ref}

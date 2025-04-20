@@ -1,6 +1,8 @@
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import "@fontsource/playfair-display";
+import { img } from '../utils/imagePath'; // ajusta la ruta si estás en otra carpeta
+
 
 const Container = styled.div`
   position: relative;
@@ -232,8 +234,8 @@ const AcercaDe = () => {
         </StyledP>
       </TextContainer>
       <ReadMoreButton onClick={handleReadMore}>Leer más</ReadMoreButton>
-      <ProfileImage src="images/profile.svg" alt="Daniela" />
-    </Container>
+      <ProfileImage src={img('profile.svg')} alt="Daniela" />
+      </Container>
   );
 };
 

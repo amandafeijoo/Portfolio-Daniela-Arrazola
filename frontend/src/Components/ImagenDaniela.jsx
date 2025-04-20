@@ -4,7 +4,7 @@ import { motion } from "framer-motion";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import "@fontsource/playfair-display";
-import { img } from "../utils/imagePath"; // ajusta la ruta si el archivo está en otro lugar
+import { img } from "../utils/imagePath"; 
 
 
 const ContenedorPadre = styled.div`

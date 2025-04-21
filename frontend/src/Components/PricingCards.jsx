@@ -4,8 +4,6 @@ import {
   Box,
   Typography,
   Button,
-  useTheme,
-  useMediaQuery,
 } from "@mui/material";
 import { motion } from "framer-motion";
 import "@fontsource/playfair-display";
@@ -33,27 +31,20 @@ const PricingCards = () => {
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
-  const navigate = useNavigate();
-  const theme = useTheme();
-  const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
-  const isTablet = useMediaQuery(theme.breakpoints.between("sm", "md"));
-  const isDesktop = useMediaQuery(theme.breakpoints.up("md"));
 
-  const handleNavigate = () => {
-    navigate("/reserva");
-  };
+  const navigate = useNavigate();
+  const handleNavigate = () => navigate("/reserva");
 
   return (
     <Box
       sx={{
         position: "relative",
         padding: "60px 15px 40px",
-        minHeight: "75vh",
         width: "100%",
         maxWidth: "1200px",
         margin: "0 auto",
-        borderRadius: "15px",
         overflow: "hidden",
+        zIndex: 1,
       }}
     >
       {/* 🎥 Video de fondo */}
@@ -64,11 +55,10 @@ const PricingCards = () => {
           left: "50%",
           transform: "translateX(-50%)",
           width: "100%",
-          height: isMobile ? "800px" : "100%",
+          height: { xs: "500px", sm: "600px", md: "100%" },
           maxWidth: "100vw",
           overflow: "hidden",
           zIndex: -1,
-          borderRadius: isMobile ? "10px" : "0",
         }}
       >
         <video
@@ -91,7 +81,6 @@ const PricingCards = () => {
       </Box>
 
       {/* 🧾 Título */}
-
       <Typography
         variant="h3"
         align="center"
@@ -100,8 +89,8 @@ const PricingCards = () => {
           fontWeight: "bold",
           color: "#2c2c2c",
           mb: 5,
-          zIndex: 2,
           position: "relative",
+          zIndex: 2,
         }}
       >
         Precios
@@ -110,17 +99,17 @@ const PricingCards = () => {
       {/* 💳 Tarjetas de planes */}
       <Box
         sx={{
-          display: isDesktop ? "flex" : "grid",
-          flexDirection: isDesktop ? "row" : "column",
+          display: "grid",
           gridTemplateColumns: {
             xs: "1fr",
             sm: "repeat(2, 1fr)",
             md: "repeat(3, 1fr)",
           },
-          justifyContent: "center",
-          alignItems: "center",
+          justifyItems: "center",
+          alignItems: "stretch",
           gap: "20px",
           zIndex: 2,
+          position: "relative",
         }}
       >
         {plans.map((plan, index) => (
@@ -131,16 +120,14 @@ const PricingCards = () => {
             style={{
               background: "rgba(255, 255, 255, 0.9)",
               border: "2px solid #c2a97c",
-              padding: isMobile ? "20px" : "40px",
+              padding: "30px",
               borderRadius: "15px",
               boxShadow: "4px 4px 10px rgba(0, 0, 0, 0.1)",
               textAlign: "center",
               width: "100%",
-              maxWidth: isMobile ? "90vw" : isTablet ? "320px" : "350px",
+              maxWidth: "300px",
               minHeight: "300px",
               color: "#4b3f2f",
-              margin: "0 auto",
-              zIndex: 2,
             }}
           >
             <Typography
@@ -180,7 +167,6 @@ const PricingCards = () => {
       </Box>
 
       {/* 👉 Botón único abajo */}
-
       <Box sx={{ mt: 5, textAlign: "center", zIndex: 2, position: "relative" }}>
         <Button
           variant="contained"

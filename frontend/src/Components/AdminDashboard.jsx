@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { img } from "../utils/imagePath";
 import {
   Box,
   Typography,
@@ -31,7 +32,7 @@ const DashboardContainer = styled(Box)`
   padding: 40px;
   max-width: 1200px;
   margin: auto;
-  background-image: url("/images/adminfoto.svg");
+  background-image: url(${img("adminfoto.svg")});
   background-size: cover;
   background-position: center;
   border-radius: 15px;

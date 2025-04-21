@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { useSearchParams, useNavigate } from "react-router-dom";
+import { img } from "../utils/imagePath";
 import {
   TextField,
   Button,
@@ -163,7 +164,7 @@ const TestimonialForm = () => {
         justifyContent: "center",
         alignItems: "center",
         minHeight: "100vh",
-        backgroundImage: 'url("/images/contact.svg")',
+        backgroundImage: `url(${img("contact.svg")})`,
         backgroundSize: "cover",
         backgroundPosition: "center",
         fontFamily: "'Playfair Display', serif",
@@ -271,9 +272,8 @@ const TestimonialForm = () => {
                     lineHeight: "1.5",
                   }}
                 >
-                 He
-                  leído y acepto que mi testimonio, junto con mi nombre y, si lo
-                  incluyo, mi fotografía, pueda ser publicado en la web{" "}
+                  He leído y acepto que mi testimonio, junto con mi nombre y, si
+                  lo incluyo, mi fotografía, pueda ser publicado en la web{" "}
                   <strong>danielapsicologia.com</strong>. Entiendo que puedo
                   solicitar su eliminación en cualquier momento.
                 </Typography>

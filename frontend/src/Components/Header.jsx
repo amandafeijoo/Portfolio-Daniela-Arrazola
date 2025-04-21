@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { img } from "../utils/imagePath"; // ajusta la ruta si hace falta
 import {
   FaInstagram,
   FaFacebook,
@@ -234,7 +235,7 @@ const Header = () => {
           >
             <Box
               component="img"
-              src="publicidad/images/logo.svg"
+              src={img("logo.svg")}
               alt="Logo Daniela"
               onClick={handleClick}
               sx={{
@@ -245,10 +246,10 @@ const Header = () => {
                   md: "130px",
                   lg: "150px",
                   xl: "180px",
-                }, // 🔥 Ajuste dinámico según el dispositivo
+                },
                 height: "auto",
                 objectFit: "contain",
-                pointerEvents: "auto", // ✅ Solo la imagen recibe los clics
+                pointerEvents: "auto",
                 cursor: "pointer",
               }}
             />

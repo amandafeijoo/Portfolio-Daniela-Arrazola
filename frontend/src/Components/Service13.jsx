@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import { useRef } from "react";
+import { img } from "../utils/imagePath";
 import {
   Container,
   Box,
@@ -45,7 +46,7 @@ const services = [
 const Image = () => (
   <Box
     sx={{
-      width: { xs: "100%", sm: "80%", md: "72%" }, 
+      width: { xs: "100%", sm: "80%", md: "72%" },
       marginBottom: 2,
       boxShadow:
         "0 0 5px 2px rgba(0, 0, 0, 0.7), 0 0 10px 4px rgba(34, 139, 34, 0.2), 0 0 15px 6px rgba(0, 0, 0, 0.2)",
@@ -56,13 +57,13 @@ const Image = () => (
     }}
   >
     <img
-      src="https://res.cloudinary.com/dmz3r3lb3/image/upload/v1744103364/13_z1grdg.png"
+      src={img("13.svg")}
       alt="Service Image"
       width="100%"
       style={{ borderRadius: "inherit" }}
       onError={(e) => {
         e.target.onerror = null;
-        e.target.src = "/images/placeholder.png";
+        e.target.src = img("placeholder.png"); // 🧠 usa también la función 'img'
       }}
     />
   </Box>
@@ -81,31 +82,31 @@ const Service13 = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const theme = useTheme();
-  const isMobile = useMediaQuery(theme.breakpoints.down("sm")); 
+  const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
 
-// 📌 Identificar el índice actual
-const currentIndex = services.findIndex(
-  (service) => service.path === location.pathname
-);
+  // 📌 Identificar el índice actual
+  const currentIndex = services.findIndex(
+    (service) => service.path === location.pathname
+  );
 
-// 📌 Referencias a los Tabs
-const tabRefs = useRef([]);
+  // 📌 Referencias a los Tabs
+  const tabRefs = useRef([]);
 
-// 📌 Al montar componente, subir arriba
-useEffect(() => {
-  window.scrollTo(0, 0);
-}, []);
+  // 📌 Al montar componente, subir arriba
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
 
-// 📌 Scroll automático al tab activo
-useEffect(() => {
-  if (tabRefs.current[currentIndex]) {
-    tabRefs.current[currentIndex].scrollIntoView({
-      behavior: "smooth",
-      inline: "center",
-      block: "nearest",
-    });
-  }
-}, [currentIndex]);
+  // 📌 Scroll automático al tab activo
+  useEffect(() => {
+    if (tabRefs.current[currentIndex]) {
+      tabRefs.current[currentIndex].scrollIntoView({
+        behavior: "smooth",
+        inline: "center",
+        block: "nearest",
+      });
+    }
+  }, [currentIndex]);
 
   return (
     <>
@@ -134,7 +135,7 @@ useEffect(() => {
             },
           }}
         >
-            {services.map((service, index) => (
+          {services.map((service, index) => (
             <Tab
               key={service.path}
               label={service.name}
@@ -144,14 +145,14 @@ useEffect(() => {
         </Tabs>
         <Box
           sx={{
-            width: "100%", 
-            maxWidth: "1200px", 
+            width: "100%",
+            maxWidth: "1200px",
             margin: { xs: 1, sm: 2 },
-            padding: { xs: 1, sm: 4, md: 6 }, 
+            padding: { xs: 1, sm: 4, md: 6 },
             border: "2px solid #d2b48c",
-            borderRadius: { xs: 1, sm: 2 }, 
+            borderRadius: { xs: 1, sm: 2 },
             boxShadow: {
-              xs: "0 0 3px 1px rgba(0, 0, 0, 0.2)", 
+              xs: "0 0 3px 1px rgba(0, 0, 0, 0.2)",
               sm: "0 0 5px 2px rgba(0, 0, 0, 0.3), 0 0 10px 4px rgba(34, 139, 34, 0.2), 0 0 15px 6px rgba(0, 0, 0, 0.2)",
             },
             backgroundColor: "#f5eedc",
@@ -192,7 +193,7 @@ useEffect(() => {
                 }}
               >
                 <Typography
-                  variant={isMobile ? "h6" : "h5"} // 
+                  variant={isMobile ? "h6" : "h5"} //
                   component="h2"
                   sx={{ fontFamily: "Playfair Display" }}
                 >

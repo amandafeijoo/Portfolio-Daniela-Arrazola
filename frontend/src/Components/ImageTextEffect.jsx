@@ -9,6 +9,7 @@ import { useEffect } from "react";
 import { motion } from "framer-motion";
 import { useNavigate } from "react-router-dom";
 import "@fontsource/playfair-display";
+import { img } from "../utils/imagePath";
 
 const ImageTextEffect = () => {
   useEffect(() => {
@@ -49,7 +50,7 @@ const ImageTextEffect = () => {
         }}
       >
         <motion.video
-          src="/images/terapias.mp4"
+          src={img("terapias.mp4")}
           alt="Terapias Video"
           style={{
             width: "100%",
@@ -105,48 +106,48 @@ const ImageTextEffect = () => {
             Terapia
           </Typography>
           <Box
-          sx={{
-            position: "absolute",
-            bottom: { xs: "10px", md: "50px" },
-            left: "74%",
-            transform: "translateX(-50%)",
-            width: "80%",
-            display: "flex",
-            justifyContent: "center",
-          }}
-        >
-          <Button
-            variant="contained"
-            component={motion.button}
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
             sx={{
-              backgroundColor: "rgb(120, 150, 131)",
-              color: "#f5eedc",
-              fontSize: "1rem",
-              fontFamily: "Playfair Display",
-              fontWeight: "500",
-              padding: "8px 18px",
-              textTransform: "none",
-              marginBottom: "620px",
-              borderRadius: "30px",
-              border: "2px solid rgb(211, 190, 151)",
-              boxShadow: "0 4px 6px rgba(0, 0, 0, 0.1)",
-              transition: "all 0.3s ease-in-out",
-              "&:hover": {
-                backgroundColor: "#6F8979",
-                boxShadow: "0 6px 10px rgba(0, 0, 0, 0.15)",
-              },
-              "&:active": {
-                transform: "scale(0.98)",
-              },
-              display: "block",
+              position: "absolute",
+              bottom: { xs: "10px", md: "50px" },
+              left: "74%",
+              transform: "translateX(-50%)",
+              width: "80%",
+              display: "flex",
+              justifyContent: "center",
             }}
-            onClick={handleNavigate}
           >
-            Reservar una cita
-          </Button>
-        </Box>
+            <Button
+              variant="contained"
+              component={motion.button}
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              sx={{
+                backgroundColor: "rgb(120, 150, 131)",
+                color: "#f5eedc",
+                fontSize: "1rem",
+                fontFamily: "Playfair Display",
+                fontWeight: "500",
+                padding: "8px 18px",
+                textTransform: "none",
+                marginBottom: "620px",
+                borderRadius: "30px",
+                border: "2px solid rgb(211, 190, 151)",
+                boxShadow: "0 4px 6px rgba(0, 0, 0, 0.1)",
+                transition: "all 0.3s ease-in-out",
+                "&:hover": {
+                  backgroundColor: "#6F8979",
+                  boxShadow: "0 6px 10px rgba(0, 0, 0, 0.15)",
+                },
+                "&:active": {
+                  transform: "scale(0.98)",
+                },
+                display: "block",
+              }}
+              onClick={handleNavigate}
+            >
+              Reservar una cita
+            </Button>
+          </Box>
           <Typography
             variant="body1"
             sx={{

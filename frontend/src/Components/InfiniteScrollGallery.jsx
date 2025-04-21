@@ -13,6 +13,8 @@ import Swal from "sweetalert2";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import "@fontsource/playfair-display";
+import { img } from "../utils/imagePath";
+
 // import { FaCertificate } from "react-icons/fa";
 
 const StyledContainer = styled(Box)`
@@ -39,36 +41,37 @@ const StyledContainer = styled(Box)`
 `;
 
 const images = [
-  { src: "/images/servicios1.svg" },
-  { src: "/images/s1image.svg", path: "/service1" },
-  { src: "images/servicios2.svg" },
-  { src: "images/servicios18.svg" },
-  { src: "/images/s2image.svg", path: "/service2" },
-  { src: "images/servicios3.svg" },
-  { src: "/images/s3image.svg", path: "/service3" },
-  { src: "images/servicios4.svg" },
-  { src: "/images/s4image.svg", path: "/service4" },
-  { src: "images/servicios5.svg" },
-  { src: "/images/s5image.svg", path: "/service5" },
-  { src: "images/servicios6.svg" },
-  { src: "/images/s6image.svg", path: "/service6" },
-  { src: "images/servicios7.svg" },
-  { src: "images/servicios15.svg" },
-  { src: "/images/s7image.svg", path: "/service7" },
-  { src: "images/servicios8.svg" },
-  { src: "/images/s8image.svg", path: "/service8" },
-  { src: "images/servicios9.svg" },
-  { src: "images/servicios16.svg" },
-  { src: "/images/s9image.svg", path: "/service9" },
-  { src: "images/servicios18.svg" },
-  { src: "/images/s10image.svg", path: "/service10" },
-  { src: "images/servicios11.svg" },
-  { src: "/images/s11image.svg", path: "/service11" },
-  { src: "images/servicios12.svg" },
-  { src: "/images/s12image.svg", path: "/service12" },
-  { src: "images/servicios13.svg" },
-  { src: "/images/s13image.svg", path: "/service13" },
+  { src: img("servicios1.svg") },
+  { src: img("s1image.svg"), path: "/service1" },
+  { src: img("servicios2.svg") },
+  { src: img("servicios18.svg") },
+  { src: img("s2image.svg"), path: "/service2" },
+  { src: img("servicios3.svg") },
+  { src: img("s3image.svg"), path: "/service3" },
+  { src: img("servicios4.svg") },
+  { src: img("s4image.svg"), path: "/service4" },
+  { src: img("servicios5.svg") },
+  { src: img("s5image.svg"), path: "/service5" },
+  { src: img("servicios6.svg") },
+  { src: img("s6image.svg"), path: "/service6" },
+  { src: img("servicios7.svg") },
+  { src: img("servicios15.svg") },
+  { src: img("s7image.svg"), path: "/service7" },
+  { src: img("servicios8.svg") },
+  { src: img("s8image.svg"), path: "/service8" },
+  { src: img("servicios9.svg") },
+  { src: img("servicios16.svg") },
+  { src: img("s9image.svg"), path: "/service9" },
+  { src: img("servicios18.svg") },
+  { src: img("s10image.svg"), path: "/service10" },
+  { src: img("servicios11.svg") },
+  { src: img("s11image.svg"), path: "/service11" },
+  { src: img("servicios12.svg") },
+  { src: img("s12image.svg"), path: "/service12" },
+  { src: img("servicios13.svg") },
+  { src: img("s13image.svg"), path: "/service13" },
 ];
+
 
 const getRandomSize = (index, isMobile, isTablet) => {
   const mobileSizes = [

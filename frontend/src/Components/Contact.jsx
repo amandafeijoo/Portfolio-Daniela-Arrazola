@@ -9,6 +9,8 @@ import {
 import { useNavigate } from "react-router-dom";
 import "@fontsource/playfair-display";
 import WhatsAppContact from "./WhatsAppContact";
+import { img } from "../utils/imagePath";
+
 
 const ContactContainer = styled(Box)`
   display: flex;
@@ -247,7 +249,7 @@ const ContactSection = () => {
       <VideoContainer onClick={() => navigate("/faq")}>
         <QuestionBubble>¿Cuánto tiempo debo hacer terapia?</QuestionBubble>
         <video autoPlay loop muted playsInline preload="metadata">
-          <source src="/images/contact.mp4" type="video/mp4" loading="lazy" />
+        <source src={img("contact.mp4")} type="video/mp4" loading="lazy" />
           Tu navegador no soporta el video.
         </video>
         <FAQBox>

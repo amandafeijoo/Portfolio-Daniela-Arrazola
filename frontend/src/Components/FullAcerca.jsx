@@ -1,6 +1,8 @@
 import styled, { keyframes } from "styled-components";
 import { useEffect } from "react";
 import "@fontsource/playfair-display";
+import { img } from "../utils/imagePath";
+
 
 const moveAnimation = keyframes`
   0% { transform: translateY(0); }
@@ -181,7 +183,7 @@ const FullAcerca = () => {
           </TextContainer>
           <VideoContainer>
             <Video autoPlay loop muted playsInline controlsList="nofullscreen">
-              <source src="/images/acerca1.1.mp4" type="video/mp4" />
+            <source src={img("acerca1.1.mp4")} type="video/mp4" />
             </Video>
           </VideoContainer>
         </ContentContainer>
@@ -191,7 +193,7 @@ const FullAcerca = () => {
         <ContentContainer>
           <VideoContainer>
             <Video autoPlay loop muted playsInline controlsList="nofullscreen">
-              <source src="/images/acerca3.mp4" type="video/mp4" />
+            <source src={img("acerca3.mp4")} type="video/mp4" />
             </Video>
           </VideoContainer>
           <TextContainer>
@@ -235,7 +237,7 @@ const FullAcerca = () => {
           </TextContainer>
           <VideoContainer>
             <Video autoPlay loop muted playsInline controlsList="nofullscreen">
-              <source src="/images/acerca2.2.mp4" type="video/mp4" />
+            <source src={img("acerca2.2.mp4")} type="video/mp4" />
             </Video>
           </VideoContainer>
         </ContentContainer>

@@ -6,6 +6,8 @@ import Swal from "sweetalert2";
 import { motion } from "framer-motion";
 import styled from "styled-components";
 import "@fontsource/playfair-display";
+import { img } from "../utils/imagePath";
+
 
 // 📌 Contenedor principal
 const LoginContainer = styled(Box)`
@@ -13,7 +15,7 @@ const LoginContainer = styled(Box)`
   justify-content: center;
   align-items: center;
   height: 100vh;
-  background-image: url("/images/contact.svg");
+  background-image: url(${img("contact.svg")});
   background-size: cover;
   background-position: center;
   background-color: rgba(232, 221, 206, 0.9);

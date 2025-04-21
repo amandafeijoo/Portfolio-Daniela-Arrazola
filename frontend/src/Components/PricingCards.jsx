@@ -9,6 +9,7 @@ import {
 } from "@mui/material";
 import { motion } from "framer-motion";
 import "@fontsource/playfair-display";
+import { img } from "../utils/imagePath";
 
 const plans = [
   {
@@ -81,16 +82,16 @@ const PricingCards = () => {
             height: "100%",
             objectFit: "cover",
             opacity: 0.6,
-            border: "2px solidrgb(67, 60, 54)",
+            border: "2px solid rgb(67, 60, 54)",
             boxShadow: "4px 4px 10px rgba(0, 0, 0, 0.9)",
           }}
         >
-          <source src="/images/Precios-4.mp4" type="video/mp4" />
+          <source src={img("Precios-4.mp4")} type="video/mp4" />
         </video>
       </Box>
 
       {/* 🧾 Título */}
-      
+
       <Typography
         variant="h3"
         align="center"
@@ -205,4 +206,3 @@ const PricingCards = () => {
 };
 
 export default PricingCards;
-

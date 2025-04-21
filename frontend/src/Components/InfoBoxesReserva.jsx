@@ -8,6 +8,7 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useNavigate } from "react-router-dom";
+import { img } from "../utils/imagePath";
 
 const InfoBoxesReserva = () => {
   useEffect(() => {
@@ -62,11 +63,11 @@ const InfoBoxesReserva = () => {
           bg: "rgba(255, 255, 255, 0.7)",
           color: "#654828",
           paymentIcons: [
-            { src: "/images/VippsIcon.svg", alt: "Vipps" },
-            { src: "/images/VisaIcon.png", alt: "Visa" },
-            { src: "/images/BizumIcon.svg", alt: "Bizum" },
-            { src: "/images/MastercardIcon.svg", alt: "Paypal" },
-            {src: "/images/americanexpressicon.svg",alt: "American Express"},
+            { src: img("VippsIcon.svg"), alt: "Vipps" },
+            { src: img("VisaIcon.png"), alt: "Visa" },
+            { src: img("BizumIcon.svg"), alt: "Bizum" },
+            { src: img("MastercardIcon.svg"), alt: "Mastercard" },
+            { src: img("americanexpressicon.svg"), alt: "American Express" },
           ],
         },
         {

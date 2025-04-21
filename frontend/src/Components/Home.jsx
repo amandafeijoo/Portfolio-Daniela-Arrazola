@@ -3,6 +3,8 @@ import { Box, Button, Typography } from "@mui/material";
 import { motion } from "framer-motion";
 import { useNavigate } from "react-router-dom";
 import "@fontsource/playfair-display";
+import { img } from "../utils/imagePath";
+
 
 const Home = () => {
   const navigate = useNavigate();
@@ -43,7 +45,7 @@ const Home = () => {
       {visible ? (
         <Box
           component="video"
-          poster="/images/poster.jpg"
+          poster={img("poster.jpg")}
           preload="none"
           playsInline
           autoPlay
@@ -66,15 +68,12 @@ const Home = () => {
             },
           }}
         >
-          <source
-            src="images/home.mp4"
-            type="video/mp4"
-          />
+          <source src={img("home.mp4")} type="video/mp4" />
         </Box>
       ) : (
         <Box
           component="img"
-          src="/images/poster.jpg"
+          src={img("poster.jpg")}
           alt="Fondo naturaleza"
           sx={{
             position: "absolute",

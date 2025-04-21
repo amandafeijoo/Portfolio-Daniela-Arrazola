@@ -1,6 +1,8 @@
 import styled, { keyframes } from "styled-components";
 import { useNavigate } from "react-router-dom";
 import WhatsAppContact from "./WhatsAppContact";
+import { img } from "../utils/imagePath";
+
 
 // 📌 Animación flotante
 const floatAnimation = keyframes`
@@ -105,14 +107,13 @@ const ReservationVideo = () => {
           <WhatsAppContact />
         </FloatingButton>
         <FloatingButton onClick={handleFaqClick}>
-          <img src="/images/faq.svg" alt="FAQ" />
+        <img src={img("faq.svg")} alt="FAQ" />
         </FloatingButton>
       </FloatingContainer>
 
       {/* 📌 Video sin cortes */}
       <Video autoPlay loop muted playsInline controlsList="nofullscreen">
-        <source src="/images/reserva.mp4" 
-        type="video/mp4" />
+      <source src={img("reserva.mp4")} type="video/mp4" />
         Tu navegador no soporta el video.
       </Video>
     </VideoContainer>

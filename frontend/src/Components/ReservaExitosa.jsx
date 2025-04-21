@@ -1,6 +1,7 @@
 import { Box, Button, Alert } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import "@fontsource/playfair-display";
+import { img } from "../utils/imagePath";
 
 const ReservaExitosa = () => {
   const navigate = useNavigate();
@@ -16,7 +17,6 @@ const ReservaExitosa = () => {
         padding: 2,
       }}
     >
-    
       <Box
         sx={{
           position: "relative",
@@ -28,8 +28,8 @@ const ReservaExitosa = () => {
           backgroundColor: "#fff",
         }}
       >
-       {/* Alerta informativa */}
-       <Alert
+        {/* Alerta informativa */}
+        <Alert
           severity="info"
           sx={{
             mt: 2,
@@ -37,14 +37,13 @@ const ReservaExitosa = () => {
             fontFamily: "Playfair Display, serif",
             fontSize: "17px",
             borderRadius: "10px",
-            
           }}
         >
-          Hemos enviado un correo de confirmación de tu reserva. 
-          Revisa también tu carpeta de spam o correo no deseado. ✉️
+          Hemos enviado un correo de confirmación de tu reserva. Revisa también
+          tu carpeta de spam o correo no deseado. ✉️
         </Alert>
         <img
-          src="/images/reservaok.svg"
+          src={img("reservaok.svg")}
           alt="Reserva Exitosa"
           style={{
             width: "100%",
@@ -82,4 +81,3 @@ const ReservaExitosa = () => {
 };
 
 export default ReservaExitosa;
-

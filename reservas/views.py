@@ -146,8 +146,8 @@ def crear_sesion_pago(request):
                 'quantity': 1,
             }],
             mode='payment',
-            success_url='http://localhost:5173/reserva-exitosa',
-            cancel_url='http://localhost:5173/reserva-cancelada',
+            success_url = f"{settings.FRONTEND_URL}/reserva-exitosa",
+            cancel_url = f"{settings.FRONTEND_URL}/reserva-cancelada",
             payment_intent_data={  # 👈 Aquí va el metadata correcto
                 "metadata": {
                     "nombre_completo": data.get("nombre_completo"),

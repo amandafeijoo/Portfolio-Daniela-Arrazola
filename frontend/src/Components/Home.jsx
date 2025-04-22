@@ -5,8 +5,10 @@ import { useNavigate } from "react-router-dom";
 import "@fontsource/playfair-display";
 import { img } from "../utils/imagePath";
 
-
 const Home = () => {
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
   const navigate = useNavigate();
   const videoRef = useRef();
   const [visible, setVisible] = useState(false);
@@ -140,4 +142,3 @@ const Home = () => {
 };
 
 export default Home;
-

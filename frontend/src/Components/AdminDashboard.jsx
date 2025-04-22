@@ -115,7 +115,7 @@ const AdminDashboard = () => {
     }).then(async (result) => {
       if (result.isConfirmed) {
         try {
-          await fetch("http://localhost:8000/api/logout/", {
+          await fetch(`${import.meta.env.VITE_API_URL}/api/logout/`, {
             method: "POST",
             headers: {
               "Content-Type": "application/json",
@@ -147,16 +147,16 @@ const AdminDashboard = () => {
   };
 
   const reenviarCorreo = async (reservaId) => {
-    const token = localStorage.getItem("accessToken"); 
+    const token = localStorage.getItem("accessToken");
 
     try {
       const response = await fetch(
-        "http://localhost:8000/api/testimonios/enviar-correo/",
+        `${import.meta.env.VITE_API_URL}/api/testimonios/enviar-correo/`,
         {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
-            Authorization: `Bearer ${token}`, 
+            Authorization: `Bearer ${token}`,
           },
           body: JSON.stringify({ reserva_id: reservaId }),
         }
@@ -191,7 +191,7 @@ const AdminDashboard = () => {
   };
 
   useEffect(() => {
-    fetch("http://localhost:8000/api/reservas/")
+    fetch(`${import.meta.env.VITE_API_URL}/api/reservas/`)
       .then((res) => res.json())
       .then((data) => {
         if (!Array.isArray(data)) {
@@ -235,10 +235,10 @@ const AdminDashboard = () => {
             }
           } else if (fechaHoraFin > now) {
             activas.push(reserva);
-            diasReserva[fechaKey] = "futura"; 
+            diasReserva[fechaKey] = "futura";
           } else {
             efectuadas.push(reserva);
-            diasReserva[fechaKey] = "pasada"; 
+            diasReserva[fechaKey] = "pasada";
           }
         });
 
@@ -251,7 +251,7 @@ const AdminDashboard = () => {
   }, []);
 
   const handleCancelReserva = (id) => {
-    fetch(`http://localhost:8000/api/reservas/${id}/cancelar/`, {
+    fetch(`${import.meta.env.VITE_API_URL}/api/reservas/${id}/cancelar/`, {
       method: "PATCH",
     })
       .then((response) => {
@@ -293,17 +293,17 @@ const AdminDashboard = () => {
           display: "flex",
           justifyContent: { xs: "flex-end", sm: "flex-end" },
           alignItems: "center",
-          position: "absolute", 
-          top: { xs: "10px", sm: "20px" }, 
-          right: { xs: "15px", sm: "150px" }, 
-          zIndex: 10, 
+          position: "absolute",
+          top: { xs: "10px", sm: "20px" },
+          right: { xs: "15px", sm: "150px" },
+          zIndex: 10,
         }}
       >
         <Tooltip title="Cerrar sesión">
           <LogoutButton
             onClick={handleLogout}
             sx={{
-              fontSize: { xs: "0.9rem", sm: "1.2rem" }, 
+              fontSize: { xs: "0.9rem", sm: "1.2rem" },
               padding: { xs: "6px", sm: "10px" },
               borderRadius: "8px",
             }}
@@ -317,8 +317,8 @@ const AdminDashboard = () => {
         fontWeight="bold"
         sx={{
           textAlign: "center",
-          mt: { xs: 6, sm: 3, md: 4 }, 
-          mb: { xs: 2, sm: 3, md: 4 }, 
+          mt: { xs: 6, sm: 3, md: 4 },
+          mb: { xs: 2, sm: 3, md: 4 },
           color: "rgb(42, 23, 8)",
           fontSize: { xs: "1.4rem", sm: "2rem", md: "2rem" },
         }}
@@ -329,7 +329,7 @@ const AdminDashboard = () => {
       {/* 📅 Calendario de Reservas */}
 
       <CalendarioReservas
-        reservasEfectuadas={[...reservas, ...reservasEfectuadas]} 
+        reservasEfectuadas={[...reservas, ...reservasEfectuadas]}
         diasConReserva={diasConReserva}
       />
 
@@ -341,7 +341,7 @@ const AdminDashboard = () => {
           variant="h5"
           fontWeight="bold"
           sx={{
-            mb: { xs: 1, sm: 2 }, 
+            mb: { xs: 1, sm: 2 },
             color: "rgb(55, 30, 10)",
             fontSize: { xs: "1.2rem", sm: "1.5rem", md: "1.5rem" },
           }}
@@ -465,8 +465,8 @@ const AdminDashboard = () => {
                           borderRadius: "25px",
                           padding: "6px 16px",
                           "&:hover": {
-                            backgroundColor: "#f5f0e6", 
-                            borderColor: "#8B6C42", 
+                            backgroundColor: "#f5f0e6",
+                            borderColor: "#8B6C42",
                           },
                         }}
                       >
@@ -488,7 +488,7 @@ const AdminDashboard = () => {
           variant="h5"
           fontWeight="bold"
           sx={{
-            mb: { xs: 1, sm: 2 }, 
+            mb: { xs: 1, sm: 2 },
             color: "rgb(55, 30, 10)",
             fontSize: { xs: "1.2rem", sm: "1.5rem", md: "1.5rem" },
           }}

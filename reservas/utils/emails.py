@@ -3,7 +3,7 @@ from django.conf import settings
 
 
 def enviar_email_testimonio(email_cliente, nombre_cliente, reserva_id):
-    enlace_testimonio = f"http://localhost:5173/testimonios?reserva_id={reserva_id}"  # 🔗 Link actualizado para Vite
+    enlace_testimonio = f"{settings.FRONTEND_URL}/testimonios?reserva_id={reserva_id}"
 
     mensaje = f"""
     Hola {nombre_cliente},

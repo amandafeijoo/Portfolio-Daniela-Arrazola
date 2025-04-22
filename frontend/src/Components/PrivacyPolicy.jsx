@@ -414,10 +414,9 @@ const sections = [
         voluntario. Este testimonio puede incluir su nombre, su opinión sobre el
         servicio recibido y, opcionalmente, una imagen.
         <br />
-        <br />
-        ✅ Al rellenar y enviar el testimonio, el usuario otorga su{" "}
-        <strong>consentimiento expreso</strong> para que su comentario, junto con
-        su nombre y/o imagen, pueda ser publicado en la web{" "}
+        <br />✅ Al rellenar y enviar el testimonio, el usuario otorga su{" "}
+        <strong>consentimiento expreso</strong> para que su comentario, junto
+        con su nombre y/o imagen, pueda ser publicado en la web{" "}
         <strong>danielapsicologia.com</strong> con fines informativos y
         promocionales.
         <br />
@@ -427,24 +426,23 @@ const sections = [
         <strong>danielaarrazolabenitez@gmail.com</strong>
         <br />
         <br />
-        🛡️ Los testimonios no se publican de forma automática, sino que pasan por
-        un proceso de revisión manual por parte del equipo de{" "}
+        🛡️ Los testimonios no se publican de forma automática, sino que pasan
+        por un proceso de revisión manual por parte del equipo de{" "}
         <strong>danielapsicologia.com</strong>. Solo serán publicados aquellos
         testimonios que hayan sido autorizados y cuyo contenido sea adecuado.
         <br />
         <br />
-        📌 El envío del testimonio no implica obligación alguna de publicación, y
-        su consentimiento podrá ser revocado en cualquier momento.
+        📌 El envío del testimonio no implica obligación alguna de publicación,
+        y su consentimiento podrá ser revocado en cualquier momento.
       </>
     ),
-  }
-  
+  },
 ];
 
 const PrivacyPolicy = () => {
-    useEffect(() => {
-      window.scrollTo(0, 0);
-    }, []);
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
   return (
     <Box
       sx={{

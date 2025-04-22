@@ -45,6 +45,10 @@ const TestimonialForm = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
+  useEffect(() => {
     const id = searchParams.get("reserva_id");
     if (id) {
       setReservaId(id);

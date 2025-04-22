@@ -15,7 +15,6 @@ import "slick-carousel/slick/slick-theme.css";
 import "@fontsource/playfair-display";
 import { img } from "../utils/imagePath";
 
-// import { FaCertificate } from "react-icons/fa";
 
 const StyledContainer = styled(Box)`
   border: 2px solid #d2b48c;
@@ -71,7 +70,6 @@ const images = [
   { src: img("servicios13.svg") },
   { src: img("s13image.svg"), path: "/service13" },
 ];
-
 
 const getRandomSize = (index, isMobile, isTablet) => {
   const mobileSizes = [

@@ -1,9 +1,13 @@
+import { useEffect } from "react";
 import { Box, Button, Alert } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import "@fontsource/playfair-display";
 import { img } from "../utils/imagePath";
 
 const ReservaExitosa = () => {
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
   const navigate = useNavigate();
 
   return (

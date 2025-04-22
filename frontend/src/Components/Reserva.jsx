@@ -111,22 +111,21 @@ const Reserva = () => {
     const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     return emailPattern.test(email);
   };
-
   const handleCheckout = async (e) => {
     e.preventDefault();
-  
+
     const newErrors = {
       firstName: firstName.trim() === "",
       email: email.trim() === "" || !validateEmail(email),
       selectedDate: !selectedDate,
-      selectedTime: !selectedTime, // Asegúrate de validar también la hora
+      selectedTime: !selectedTime,
       selectedOption: selectedOption.trim() === "",
       selectedConsultationType: selectedConsultationType.trim() === "",
       privacyAccepted: !privacyAccepted,
     };
-  
+
     setErrors(newErrors);
-  
+
     if (Object.values(newErrors).some((error) => error)) {
       await Swal.fire({
         icon: "error",
@@ -136,24 +135,26 @@ const Reserva = () => {
       });
       return;
     }
-  
-    // ✅ Validar disponibilidad antes de continuar
+
     const fechaISO = selectedDate.toISOString().split("T")[0];
-  
+
     try {
-      const disponibilidadResponse = await fetch("https://72ae-2001-4649-7505-0-e519-f0b0-e22e-d0c9.ngrok-free.app/api/verificar-disponibilidad/", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          fecha_reserva: fechaISO,
-          hora_reserva: selectedTime,
-        }),
-      });
-  
+      const disponibilidadResponse = await fetch(
+        `${import.meta.env.VITE_API_URL}/api/verificar-disponibilidad/`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            fecha_reserva: fechaISO,
+            hora_reserva: selectedTime,
+          }),
+        }
+      );
+
       const disponibilidadData = await disponibilidadResponse.json();
-  
+
       if (!disponibilidadData.disponible) {
         await Swal.fire({
           icon: "error",
@@ -173,7 +174,7 @@ const Reserva = () => {
       });
       return;
     }
-  
+
     const reservaData = {
       tipo_terapia: selectedConsultationType,
       nombre_completo: firstName,
@@ -183,27 +184,23 @@ const Reserva = () => {
       hora_reserva: selectedTime,
       comentarios: comments,
     };
-  
-    // ✅ Enviar a Stripe si todo está correcto
-    console.log("📤 Datos enviados al backend:", reservaData);
-  
+
     try {
-      const response = await fetch("https://72ae-2001-4649-7505-0-e519-f0b0-e22e-d0c9.ngrok-free.app/api/pago/crear-sesion/", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(reservaData),
-      });
-  
+      const response = await fetch(
+        `${import.meta.env.VITE_API_URL}/api/pago/crear-sesion/`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(reservaData),
+        }
+      );
+
       const data = await response.json();
-      console.log("📦 Respuesta del backend:", data);
-  
+
       if (response.ok && data.url) {
-        console.log("💳 Redirigiendo a Stripe Checkout:", data.url);
-        setTimeout(() => {
-          window.location.assign(data.url);
-        }, 300);
+        window.location.assign(data.url); // Redirige a Stripe Checkout
       } else {
         await Swal.fire({
           icon: "error",
@@ -222,8 +219,6 @@ const Reserva = () => {
       });
     }
   };
-    
-
 
   return (
     <>

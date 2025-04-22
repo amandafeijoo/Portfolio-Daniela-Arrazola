@@ -65,7 +65,7 @@ const Image = () => (
       style={{ borderRadius: "inherit" }}
       onError={(e) => {
         e.target.onerror = null;
-        e.target.src = img("placeholder.png"); 
+        e.target.src = img("placeholder.png");
       }}
     />
   </Box>

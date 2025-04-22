@@ -3,7 +3,6 @@ import { useNavigate } from "react-router-dom";
 import WhatsAppContact from "./WhatsAppContact";
 import { img } from "../utils/imagePath";
 
-
 // 📌 Animación flotante
 const floatAnimation = keyframes`
   0% { transform: translateY(0px); }
@@ -18,7 +17,7 @@ const VideoContainer = styled.div`
   align-items: center;
   justify-content: center;
   width: 100%;
-  max-width: 900px; 
+  max-width: 900px;
   margin: auto;
   padding: 20px;
 
@@ -39,8 +38,6 @@ const FloatingContainer = styled.div`
   justify-content: center;
   gap: 15px;
   margin-bottom: 20px;
-
-
 `;
 
 // 📌 Botón flotante con animación
@@ -107,13 +104,13 @@ const ReservationVideo = () => {
           <WhatsAppContact />
         </FloatingButton>
         <FloatingButton onClick={handleFaqClick}>
-        <img src={img("faq.svg")} alt="FAQ" />
+          <img src={img("faq.svg")} alt="FAQ" />
         </FloatingButton>
       </FloatingContainer>
 
       {/* 📌 Video sin cortes */}
       <Video autoPlay loop muted playsInline controlsList="nofullscreen">
-      <source src={img("reserva.mp4")} type="video/mp4" />
+        <source src={img("reserva.mp4")} type="video/mp4" />
         Tu navegador no soporta el video.
       </Video>
     </VideoContainer>

@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { Box, Typography } from "@mui/material";
 import styled from "styled-components";
 import {
@@ -10,7 +11,6 @@ import { useNavigate } from "react-router-dom";
 import "@fontsource/playfair-display";
 import WhatsAppContact from "./WhatsAppContact";
 import { img } from "../utils/imagePath";
-
 
 const ContactContainer = styled(Box)`
   display: flex;
@@ -161,6 +161,9 @@ const QuestionBubble = styled(Box)`
 `;
 
 const ContactSection = () => {
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
   const navigate = useNavigate();
   return (
     <ContactContainer>
@@ -249,7 +252,7 @@ const ContactSection = () => {
       <VideoContainer onClick={() => navigate("/faq")}>
         <QuestionBubble>¿Cuánto tiempo debo hacer terapia?</QuestionBubble>
         <video autoPlay loop muted playsInline preload="metadata">
-        <source src={img("contact.mp4")} type="video/mp4" loading="lazy" />
+          <source src={img("contact.mp4")} type="video/mp4" loading="lazy" />
           Tu navegador no soporta el video.
         </video>
         <FAQBox>

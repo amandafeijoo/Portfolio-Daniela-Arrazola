@@ -4,8 +4,7 @@ import { motion } from "framer-motion";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import "@fontsource/playfair-display";
-import { img } from "../utils/imagePath"; 
-
+import { img } from "../utils/imagePath";
 
 const ContenedorPadre = styled.div`
   position: relative;
@@ -96,7 +95,6 @@ const ContenedorPrincipal2 = styled.div`
   transform-style: preserve-3d;
   contain: layout style paint;
 
-
   &.visible {
     transform: translateY(0);
   }
@@ -169,12 +167,11 @@ const ImagenDaniela = () => {
         ref={contenedor1Ref}
         className={!isMobile ? "hidden" : ""}
       >
-       <img
-  src={img("daniela1.svg")}
-  alt="Daniela"
-  style={{ width: "100%", borderRadius: "15px" }}
-/>
-
+        <img
+          src={img("daniela1.svg")}
+          alt="Daniela"
+          style={{ width: "100%", borderRadius: "15px" }}
+        />
       </ContenedorPrincipal1>
       <ContenedorPrincipal2
         ref={contenedor2Ref}
@@ -182,7 +179,7 @@ const ImagenDaniela = () => {
       >
         <div
           style={{
-            padding: isMobile ? "10px" : "20px", 
+            padding: isMobile ? "10px" : "20px",
             textAlign: "justify",
             background: "#f5eedc",
             borderRadius: "15px",
@@ -204,7 +201,7 @@ const ImagenDaniela = () => {
         sx={{
           backgroundColor: "rgb(211, 190, 151)",
           color: "rgb(92, 116, 101)",
-          fontSize: { xs: "1rem", sm: "1.2rem" }, 
+          fontSize: { xs: "1rem", sm: "1.2rem" },
           fontFamily: "Playfair Display",
           fontWeight: "500",
           padding: { xs: "10px 20px", sm: "12px 24px" },
@@ -212,10 +209,10 @@ const ImagenDaniela = () => {
           borderRadius: "30px",
           transition: "all 0.3s ease",
           border: "2px solid rgb(120, 150, 131)",
-          marginLeft: { xs: "auto", sm: "520px" }, 
+          marginLeft: { xs: "auto", sm: "520px" },
           marginRight: { xs: "auto", sm: "0" },
-          display: "block", 
-          marginTop: { xs: "10px", sm: "20px" }, 
+          display: "block",
+          marginTop: { xs: "10px", sm: "20px" },
         }}
         onClick={() => navigate("/full-acerca")}
       >

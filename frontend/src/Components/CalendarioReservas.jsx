@@ -15,7 +15,6 @@ const normalizarFecha = (fecha) => {
   )}-${String(f.getDate()).padStart(2, "0")}`;
 };
 
-// 📦 Estilos del contenedor
 
 // 📦 Estilos del calendario
 const StyledCalendar = styled(Calendar)`

@@ -70,7 +70,6 @@ const ImageTextEffect = () => {
         />
       </motion.div>
 
-      {/* Contenedor de Texto - Movido un poco a la derecha */}
       <motion.div
         initial={{ opacity: 0, x: 50 }}
         animate={{ opacity: 1, x: 0 }}
@@ -108,8 +107,8 @@ const ImageTextEffect = () => {
           <Box
             sx={{
               position: "absolute",
-              bottom: { xs: "10px", md: "50px" },
-              left: "74%",
+              bottom: { xs: "-110px", md: "50px" }, // más abajo en móvil
+              left: { xs: "70%", md: "74%" }, // más a la izquierda en móvil
               transform: "translateX(-50%)",
               width: "80%",
               display: "flex",

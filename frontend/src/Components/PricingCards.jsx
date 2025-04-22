@@ -4,6 +4,8 @@ import {
   Box,
   Typography,
   Button,
+  useTheme,
+  useMediaQuery,
 } from "@mui/material";
 import { motion } from "framer-motion";
 import "@fontsource/playfair-display";
@@ -33,20 +35,24 @@ const PricingCards = () => {
   }, []);
 
   const navigate = useNavigate();
-  const handleNavigate = () => {
-    navigate("/reserva");
-  };
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
+  const isTablet = useMediaQuery(theme.breakpoints.between("sm", "md"));
+  const isDesktop = useMediaQuery(theme.breakpoints.up("md"));
+
+  const handleNavigate = () => navigate("/reserva");
 
   return (
     <Box
       sx={{
         position: "relative",
         padding: "60px 15px 40px",
+        minHeight: "75vh",
         width: "100%",
         maxWidth: "1200px",
         margin: "0 auto",
-        minHeight: "100vh",
-        zIndex: 1,
+        borderRadius: "15px",
+        overflow: "hidden",
       }}
     >
       {/* 🎥 Video de fondo */}
@@ -57,12 +63,12 @@ const PricingCards = () => {
           left: "50%",
           transform: "translateX(-50%)",
           width: "100%",
-          height: "100%",
-          minHeight: "100%",
+          height: isMobile ? "100vh" : "100%",
+          minHeight: isMobile ? "100vh" : undefined,
           maxWidth: "100vw",
           overflow: "hidden",
           zIndex: -1,
-          borderRadius: { xs: "10px", sm: "0" },
+          borderRadius: isMobile ? "10px" : "0",
         }}
       >
         <video
@@ -95,6 +101,12 @@ const PricingCards = () => {
           mb: 5,
           zIndex: 2,
           position: "relative",
+          fontSize: {
+            xs: "2rem",
+            sm: "2.5rem",
+            md: "2rem",
+            lg: "3rem",
+          },
         }}
       >
         Precios
@@ -103,36 +115,44 @@ const PricingCards = () => {
       {/* 💳 Tarjetas de planes */}
       <Box
         sx={{
-          display: "grid",
+          display: isDesktop ? "flex" : "grid",
+          flexDirection: isDesktop ? "row" : "column",
           gridTemplateColumns: {
             xs: "1fr",
             sm: "repeat(2, 1fr)",
             md: "repeat(3, 1fr)",
           },
-          justifyItems: "center",
-          alignItems: "stretch",
+          justifyContent: "center",
+          alignItems: "center",
           gap: "20px",
           zIndex: 2,
-          position: "relative",
         }}
       >
         {plans.map((plan, index) => (
-          <Box
+          <motion.div
             key={index}
-            component={motion.div}
             whileHover={{ scale: 1.03 }}
             transition={{ duration: 0.3 }}
-            sx={{
+            style={{
+              display: "flex",
+              flexDirection: "column",
+              justifyContent: "center",
+              alignItems: "center",
               background: "rgba(255, 255, 255, 0.9)",
               border: "2px solid #c2a97c",
-              padding: { xs: "20px", sm: "30px", md: "40px" },
+              paddingTop: isMobile ? "25px" : "40px",
+              paddingBottom: isMobile ? "25px" : "40px",
+              paddingLeft: "15px",
+              paddingRight: "15px",
               borderRadius: "15px",
               boxShadow: "4px 4px 10px rgba(0, 0, 0, 0.1)",
               textAlign: "center",
               width: "100%",
-              maxWidth: { xs: "85vw", sm: "260px", md: "300px" },
-              minHeight: { xs: "220px", sm: "260px", md: "300px" },
+              maxWidth: isMobile ? "75vw" : isTablet ? "300px" : "350px",
+              minHeight: isMobile ? "145px" : "330px", // un poco más de altura ** agranda o hace mas pequeno el video
               color: "#4b3f2f",
+              margin: "0 auto",
+              zIndex: 2,
             }}
           >
             <Typography
@@ -140,7 +160,7 @@ const PricingCards = () => {
               fontWeight="bold"
               sx={{
                 fontFamily: "Playfair Display",
-                fontSize: { xs: "1.1rem", sm: "1.3rem", md: "1.6rem" },
+                fontSize: { xs: "0.95rem", md: "1.8rem" },
               }}
             >
               {plan.title}
@@ -151,8 +171,8 @@ const PricingCards = () => {
               sx={{
                 color: "#355E3B",
                 fontFamily: "Playfair Display",
-                fontSize: { xs: "1.5rem", sm: "1.8rem", md: "2.2rem" },
-                marginBottom: "10px",
+                fontSize: { xs: "1.2rem", md: "2.2rem" },
+                marginBottom: { xs: "4px", md: "10px" },
               }}
             >
               {plan.price}
@@ -160,35 +180,28 @@ const PricingCards = () => {
             <Typography
               variant="body1"
               sx={{
-                fontSize: { xs: "0.85rem", sm: "0.95rem", md: "1rem" },
+                fontSize: { xs: "0.7rem", md: "1rem" },
                 fontFamily: "Playfair Display",
                 opacity: 0.8,
               }}
             >
               {plan.description}
             </Typography>
-          </Box>
+          </motion.div>
         ))}
       </Box>
 
       {/* 👉 Botón único abajo */}
-      <Box
-        sx={{
-          mt: 5,
-          textAlign: "center",
-          zIndex: 2,
-          position: "relative",
-        }}
-      >
+      <Box sx={{ mt: 5, textAlign: "center", zIndex: 2, position: "relative" }}>
         <Button
           variant="contained"
           sx={{
             backgroundColor: "#4A6F5E",
-            px: 4,
-            py: 1.5,
+            px: { xs: 3, sm: 4 },
+            py: { xs: 1, sm: 1.5 },
             borderRadius: "25px",
             fontFamily: "Playfair Display",
-            fontSize: "1.1rem",
+            fontSize: { xs: "0.9rem", sm: "1.1rem" },
             boxShadow: "0 4px 10px rgba(0,0,0,0.2)",
             "&:hover": {
               backgroundColor: "#3b5e50",

@@ -1,13 +1,19 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { Box, Typography, TextField, Button, IconButton, InputAdornment } from "@mui/material";
+import {
+  Box,
+  Typography,
+  TextField,
+  Button,
+  IconButton,
+  InputAdornment,
+} from "@mui/material";
 import { Visibility, VisibilityOff } from "@mui/icons-material";
 import Swal from "sweetalert2";
 import { motion } from "framer-motion";
 import styled from "styled-components";
 import "@fontsource/playfair-display";
 import { img } from "../utils/imagePath";
-
 
 // 📌 Contenedor principal
 const LoginContainer = styled(Box)`
@@ -60,14 +66,16 @@ const Login = () => {
     e.preventDefault();
 
     try {
-      const response = await fetch(`${import.meta.env.VITE_API_URL}/api/users/login/`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ username, password }),
-      });
-      
+      const response = await fetch(
+        `${import.meta.env.VITE_API_URL}/api/users/login/`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ username, password }),
+        }
+      );
 
       if (response.ok) {
         const data = await response.json();
@@ -198,5 +206,3 @@ const Login = () => {
 };
 
 export default Login;
-
-

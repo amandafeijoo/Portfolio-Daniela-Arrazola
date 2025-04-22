@@ -48,7 +48,7 @@ const services = [
 const Image = () => (
   <Box
     sx={{
-      width: { xs: "100%", sm: "80%", md: "72%" }, // 📌 Ajuste responsive
+      width: { xs: "100%", sm: "80%", md: "72%" },
       marginBottom: 2,
       boxShadow:
         "0 0 5px 2px rgba(0, 0, 0, 0.7), 0 0 10px 4px rgba(34, 139, 34, 0.2), 0 0 15px 6px rgba(0, 0, 0, 0.2)",
@@ -65,7 +65,7 @@ const Image = () => (
       style={{ borderRadius: "inherit" }}
       onError={(e) => {
         e.target.onerror = null;
-        e.target.src = img("placeholder.png"); // 🧠 usa también la función 'img'
+        e.target.src = img("placeholder.png");
       }}
     />
   </Box>

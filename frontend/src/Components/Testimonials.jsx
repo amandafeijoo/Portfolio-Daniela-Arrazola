@@ -125,17 +125,23 @@ const Testimonials = () => {
                     }}
                   />
 
-                  <Typography
-                    variant="h6"
-                    fontStyle="italic"
-                    mb={1}
-                    sx={{
-                      fontFamily: "Playfair Display",
-                      color: "rgba(48, 84, 69, 0.6)",
-                    }}
-                  >
-                    &quot;{testimonio.mensaje}&quot;
-                  </Typography>
+<Typography
+  variant="body1" // o usa directamente un fontSize
+  fontStyle="italic"
+  mb={1}
+  sx={{
+    fontFamily: "Playfair Display",
+    color: "rgba(48, 84, 69, 0.6)",
+    fontSize: { xs: "0.95rem", sm: "1.05rem", md: "1.1rem" }, // ajusta según gusto
+    lineHeight: 1.6,
+    maxWidth: "1000px",
+    margin: "0 auto",
+    textAlign: "justify",
+  }}
+>
+  &quot;{testimonio.mensaje}&quot;
+</Typography>
+
                   <Typography
                     variant="subtitle1"
                     fontWeight="bold"

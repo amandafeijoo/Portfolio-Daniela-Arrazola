@@ -24,7 +24,14 @@ const FormContainer = styled(Paper)`
   margin: auto;
   box-shadow: 0px 5px 12px rgba(0, 0, 0, 0.2);
   text-align: center;
+
+  @media (max-width: 600px) {
+    background: transparent; /* 👈 Se elimina el fondo en móviles */
+    box-shadow: none;      
+    padding: 15px;
+  }
 `;
+
 
 const StyledButton = styled(Button)`
   background-color: #b07241 !important;

@@ -38,13 +38,16 @@ def enviar_email_confirmacion_reserva(reserva):
     """Envía email al cliente confirmando su consulta psicológica + copia a la psicóloga"""
     asunto = "Confirmación de su consulta psicológica en línea"
 
+    comentarios = f"\n📝 Comentarios: {reserva.comentarios}\n" if reserva.comentarios else ""
+
     mensaje_cliente = (
         f"Estimado/a {reserva.nombre_completo},\n\n"
         f"Le confirmamos que su consulta psicológica en línea ha sido agendada correctamente.\n\n"
         f"🗓 Fecha: {reserva.fecha_reserva}\n"
         f"🕒 Hora: {reserva.hora_reserva} (Hora local)\n"
         f"📌 Motivo de la consulta: {reserva.motivo_consulta}\n"
-        f"💆‍♂️ Tipo de terapia: {reserva.tipo_terapia}\n\n"
+        f"💆‍♂️ Tipo de terapia: {reserva.tipo_terapia}\n"
+        f"{comentarios}\n"
         "En breve recibirá un correo con el enlace de acceso a la reunión de terapia.\n\n"
         "Le recomiendo conectarse 5 minutos antes para verificar su conexión y asegurarse de un inicio puntual.\n\n"
         "Si necesita reprogramar o cancelar su sesión, por favor avísar con antelación.\n\n"
@@ -73,7 +76,8 @@ def enviar_email_confirmacion_reserva(reserva):
         f"🗓 Fecha: {reserva.fecha_reserva}\n"
         f"🕒 Hora: {reserva.hora_reserva}\n"
         f"💆‍♀️ Terapia: {reserva.tipo_terapia}\n"
-        f"💬 Motivo: {reserva.motivo_consulta}\n\n"
+        f"💬 Motivo: {reserva.motivo_consulta}\n"
+        f"{comentarios}"
         "Puedes ver más detalles en el panel de administración."
     )
 
@@ -84,7 +88,6 @@ def enviar_email_confirmacion_reserva(reserva):
         ["danielaarrazolabenitez@gmail.com"],
         fail_silently=False,
     )
-
 
 def enviar_email_cancelacion_reserva(reserva):
     asunto = "Cancelación de su consulta psicológica"

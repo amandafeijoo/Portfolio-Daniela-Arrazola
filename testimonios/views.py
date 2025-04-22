@@ -54,7 +54,7 @@ def enviar_correo_testimonio(request):
     except Reserva.DoesNotExist:
         return Response({"error": "Reserva no encontrada"}, status=status.HTTP_404_NOT_FOUND)
 
-    enlace_testimonio = f"http://localhost:5173/testimonios?reserva_id={reserva.id}"
+    enlace_testimonio = f"{settings.FRONTEND_URL}/testimonios?reserva_id={reserva.id}"
 
     mensaje = f"""
     Hola {reserva.nombre_completo},
@@ -84,6 +84,7 @@ def enviar_correo_testimonio(request):
     )
 
     return Response({"message": "Correo enviado correctamente"}, status=status.HTTP_200_OK)
+
 
 @api_view(["GET"])
 def listar_testimonios(request):

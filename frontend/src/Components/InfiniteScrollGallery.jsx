@@ -31,6 +31,7 @@ const StyledContainer = styled(Box)`
     padding: 20px;
     margin: 0px auto;
     max-width: 95%;
+    min-height: 550px; /* 💡 solo se aplica en móvil */
   }
 
   @media (max-width: 960px) {

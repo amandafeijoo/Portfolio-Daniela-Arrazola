@@ -162,9 +162,10 @@ const Header = () => {
         >
           <IconButton
             sx={{
-              color: " #f5eedc",
+              color: "rgb(213, 195, 151)",
               "@media (max-width: 600px)": {
-                fontSize: "1.2em",
+                fontSize: "1em",
+                right: "-3.5px",
               },
             }}
             href="https://facebook.com"
@@ -175,9 +176,10 @@ const Header = () => {
           </IconButton>
           <IconButton
             sx={{
-              color: "#f5eedc",
+              color: "rgb(213, 195, 151)",
               "@media (max-width: 600px)": {
-                fontSize: "1.2em",
+                fontSize: "1em",
+                right: "-3.5px",
               },
             }}
             href="https://www.linkedin.com/in/daniela-a-9b2845199/"
@@ -188,9 +190,10 @@ const Header = () => {
           </IconButton>
           <IconButton
             sx={{
-              color: "#f5eedc",
+              color: "rgb(213, 195, 151)",
               "@media (max-width: 600px)": {
-                fontSize: "1.2em",
+                fontSize: "1em",
+                right: "-3.5px",
               },
             }}
             href="https://www.instagram.com/psicoarrazola?igsh=Y3l4NzI2cGRsMGx4"

@@ -33,7 +33,9 @@ const PricingCards = () => {
   }, []);
 
   const navigate = useNavigate();
-  const handleNavigate = () => navigate("/reserva");
+  const handleNavigate = () => {
+    navigate("/reserva");
+  };
 
   return (
     <Box
@@ -43,7 +45,7 @@ const PricingCards = () => {
         width: "100%",
         maxWidth: "1200px",
         margin: "0 auto",
-        overflow: "hidden",
+        minHeight: "100vh",
         zIndex: 1,
       }}
     >
@@ -55,10 +57,12 @@ const PricingCards = () => {
           left: "50%",
           transform: "translateX(-50%)",
           width: "100%",
-          height: { xs: "500px", sm: "600px", md: "100%" },
+          height: "100%",
+          minHeight: "100%",
           maxWidth: "100vw",
           overflow: "hidden",
           zIndex: -1,
+          borderRadius: { xs: "10px", sm: "0" },
         }}
       >
         <video
@@ -89,8 +93,8 @@ const PricingCards = () => {
           fontWeight: "bold",
           color: "#2c2c2c",
           mb: 5,
-          position: "relative",
           zIndex: 2,
+          position: "relative",
         }}
       >
         Precios
@@ -113,20 +117,21 @@ const PricingCards = () => {
         }}
       >
         {plans.map((plan, index) => (
-          <motion.div
+          <Box
             key={index}
+            component={motion.div}
             whileHover={{ scale: 1.03 }}
             transition={{ duration: 0.3 }}
-            style={{
+            sx={{
               background: "rgba(255, 255, 255, 0.9)",
               border: "2px solid #c2a97c",
-              padding: "30px",
+              padding: { xs: "20px", sm: "30px", md: "40px" },
               borderRadius: "15px",
               boxShadow: "4px 4px 10px rgba(0, 0, 0, 0.1)",
               textAlign: "center",
               width: "100%",
-              maxWidth: "300px",
-              minHeight: "300px",
+              maxWidth: { xs: "85vw", sm: "260px", md: "300px" },
+              minHeight: { xs: "220px", sm: "260px", md: "300px" },
               color: "#4b3f2f",
             }}
           >
@@ -135,7 +140,7 @@ const PricingCards = () => {
               fontWeight="bold"
               sx={{
                 fontFamily: "Playfair Display",
-                fontSize: { xs: "1.3rem", md: "1.8rem" },
+                fontSize: { xs: "1.1rem", sm: "1.3rem", md: "1.6rem" },
               }}
             >
               {plan.title}
@@ -146,7 +151,7 @@ const PricingCards = () => {
               sx={{
                 color: "#355E3B",
                 fontFamily: "Playfair Display",
-                fontSize: { xs: "1.8rem", md: "2.2rem" },
+                fontSize: { xs: "1.5rem", sm: "1.8rem", md: "2.2rem" },
                 marginBottom: "10px",
               }}
             >
@@ -155,19 +160,26 @@ const PricingCards = () => {
             <Typography
               variant="body1"
               sx={{
-                fontSize: { xs: "0.9rem", md: "1rem" },
+                fontSize: { xs: "0.85rem", sm: "0.95rem", md: "1rem" },
                 fontFamily: "Playfair Display",
                 opacity: 0.8,
               }}
             >
               {plan.description}
             </Typography>
-          </motion.div>
+          </Box>
         ))}
       </Box>
 
       {/* 👉 Botón único abajo */}
-      <Box sx={{ mt: 5, textAlign: "center", zIndex: 2, position: "relative" }}>
+      <Box
+        sx={{
+          mt: 5,
+          textAlign: "center",
+          zIndex: 2,
+          position: "relative",
+        }}
+      >
         <Button
           variant="contained"
           sx={{

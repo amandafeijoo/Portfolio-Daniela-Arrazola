@@ -39,10 +39,12 @@ const Testimonials = () => {
   useEffect(() => {
     const fetchTestimonios = async () => {
       try {
-        const response = await fetch("http://localhost:8000/api/testimonios/");
+        const response = await fetch(
+          `${import.meta.env.VITE_API_URL}/api/testimonios/`
+        );
         const data = await response.json();
 
-        console.log("Respuesta API:", data); // 🔥 Verifica lo que devuelve la API
+        console.log("Respuesta API:", data);
 
         if (!data || !Array.isArray(data.aprobados)) {
           console.error(
@@ -69,104 +71,108 @@ const Testimonials = () => {
 
   return (
     <>
-    <StyledContainer>
-      {" "}
-      {/* ✅ Se agrega el StyledContainer */}
-      <Typography
-        variant="h4"
-        fontWeight="bold"
-        mb={2}
-        sx={{ fontFamily: "Playfair Display", color: "rgba(48, 84, 69, 0.6)" }}
-      >
-        Testimonios
-      </Typography>
-      <Box
-        sx={{
-          borderBottom: "2px solid #8b6b3e",
-          width: "80px",
-          margin: "auto",
-          mb: 3,
-        }}
-      />
-      {testimonios.length === 0 ? (
-        <Typography color="gray">No hay testimonios aún.</Typography>
-      ) : (
-        <Slider {...settings}>
-          {testimonios.map((testimonio) => (
-            <motion.div
-              key={testimonio.id}
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5 }}
-            >
-              <Box
-                sx={{
-                  textAlign: "center",
-                  padding: { xs: "10px", sm: "20px" },
-                }}
+      <StyledContainer>
+        {" "}
+        {/* ✅ Se agrega el StyledContainer */}
+        <Typography
+          variant="h4"
+          fontWeight="bold"
+          mb={2}
+          sx={{
+            fontFamily: "Playfair Display",
+            color: "rgba(48, 84, 69, 0.6)",
+          }}
+        >
+          Testimonios
+        </Typography>
+        <Box
+          sx={{
+            borderBottom: "2px solid #8b6b3e",
+            width: "80px",
+            margin: "auto",
+            mb: 3,
+          }}
+        />
+        {testimonios.length === 0 ? (
+          <Typography color="gray">No hay testimonios aún.</Typography>
+        ) : (
+          <Slider {...settings}>
+            {testimonios.map((testimonio) => (
+              <motion.div
+                key={testimonio.id}
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5 }}
               >
-                <Avatar
-                  src={
-                    testimonio.imagen
-                      ? `http://localhost:8000${testimonio.imagen}`
-                      : "/images/default-avatar.png"
-                  }
-                  alt={testimonio.nombre_cliente}
+                <Box
                   sx={{
-                    width: { xs: 60, sm: 80 },
-                    height: { xs: 60, sm: 80 },
-                    margin: "auto",
-                    mb: 2,
+                    textAlign: "center",
+                    padding: { xs: "10px", sm: "20px" },
                   }}
-                />
+                >
+                  <Avatar
+                    src={
+                      testimonio.imagen
+                        ? `${import.meta.env.VITE_API_URL}${testimonio.imagen}`
+                        : "/images/default-avatar.png"
+                    }
+                    alt={testimonio.nombre_cliente}
+                    sx={{
+                      width: { xs: 60, sm: 80 },
+                      height: { xs: 60, sm: 80 },
+                      margin: "auto",
+                      mb: 2,
+                    }}
+                  />
 
-                <Typography
-                  variant="h6"
-                  fontStyle="italic"
-                  mb={1}
-                  sx={{
-                    fontFamily: "Playfair Display",
-                    color: "rgba(48, 84, 69, 0.6)",
-                  }}
-                >
-                  &quot;{testimonio.mensaje}&quot;
-                </Typography>
-                <Typography
-                  variant="subtitle1"
-                  fontWeight="bold"
-                  sx={{
-                    fontFamily: "Playfair Display",
-                    color: "rgba(48, 84, 69, 0.6)",
-                  }}
-                >
-                  — {testimonio.nombre_cliente}{" "}
-                  <span style={{ color: "#c0a080", fontSize: "14px" }}>
-                    {" "}
-                    <FaCertificate /> Verificado
-                  </span>
-                </Typography>
-              </Box>
-            </motion.div>
-          ))}
-        </Slider>
+                  <Typography
+                    variant="h6"
+                    fontStyle="italic"
+                    mb={1}
+                    sx={{
+                      fontFamily: "Playfair Display",
+                      color: "rgba(48, 84, 69, 0.6)",
+                    }}
+                  >
+                    &quot;{testimonio.mensaje}&quot;
+                  </Typography>
+                  <Typography
+                    variant="subtitle1"
+                    fontWeight="bold"
+                    sx={{
+                      fontFamily: "Playfair Display",
+                      color: "rgba(48, 84, 69, 0.6)",
+                    }}
+                  >
+                    — {testimonio.nombre_cliente}{" "}
+                    <span style={{ color: "#c0a080", fontSize: "14px" }}>
+                      {" "}
+                      <FaCertificate /> Verificado
+                    </span>
+                  </Typography>
+                </Box>
+              </motion.div>
+            ))}
+          </Slider>
+        )}
+      </StyledContainer>
+      {testimonios.length > 0 && (
+        <Typography
+          variant="body2"
+          mt={4}
+          sx={{
+            fontFamily: "'Playfair Display', serif",
+            color: "#4b3f2f",
+            textAlign: "center",
+            fontStyle: "italic",
+            maxWidth: "700px",
+            margin: "0 auto",
+          }}
+        >
+          Los testimonios mostrados han sido voluntariamente enviados y
+          autorizados por los usuarios.
+        </Typography>
       )}
-    </StyledContainer>
-    {testimonios.length > 0 && (
-      <Typography
-        variant="body2"
-        mt={4}
-        sx={{
-          fontFamily: "'Playfair Display', serif",
-          color: "#4b3f2f",
-          textAlign: "center",
-          fontStyle: "italic",
-          maxWidth: "700px",
-          margin: "0 auto",
-        }}
-      >
-        Los testimonios mostrados han sido voluntariamente enviados y autorizados por los usuarios.
-      </Typography>
-    )}
     </>
   );
 };

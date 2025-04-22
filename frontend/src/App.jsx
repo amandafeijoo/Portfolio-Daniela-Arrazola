@@ -77,11 +77,6 @@ const StickySection = styled.div`
     0 0 10px 4px rgba(34, 139, 34, 0.2), 0 0 15px 6px rgba(0, 0, 0, 0.2);
   border: 2px solid #d2b48c;
   z-index: 10;
-
-  @media (max-width: 768px) {
-    position: relative;
-    height: auto;
-  }
 `;
 
 const Container = styled.div`

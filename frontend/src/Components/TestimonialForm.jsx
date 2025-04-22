@@ -96,7 +96,7 @@ const TestimonialForm = () => {
       }
 
       const response = await fetch(
-        "http://localhost:8000/api/testimonios/crear/",
+        `${import.meta.env.VITE_API_URL}/api/testimonios/crear/`,
         {
           method: "POST",
           body: formData,

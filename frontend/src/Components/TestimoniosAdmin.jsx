@@ -88,7 +88,7 @@ const TestimoniosAdmin = () => {
   const [testimoniosAprobados, setTestimoniosAprobados] = useState([]);
 
   useEffect(() => {
-    fetch("http://localhost:8000/api/testimonios/")
+    fetch(`${import.meta.env.VITE_API_URL}/api/testimonios/`)
       .then((res) => res.json())
       .then((data) => {
         setTestimoniosAprobados(data.aprobados || []);
@@ -100,7 +100,7 @@ const TestimoniosAdmin = () => {
   }, []);
 
   const handleApproveTestimonial = (id) => {
-    fetch(`http://localhost:8000/api/testimonios/${id}/aprobar/`, {
+    fetch(`${import.meta.env.VITE_API_URL}/api/testimonios/${id}/aprobar/`, {
       method: "PATCH",
     })
       .then((response) => {
@@ -143,9 +143,12 @@ const TestimoniosAdmin = () => {
       cancelButtonText: "Cancelar",
     }).then((result) => {
       if (result.isConfirmed) {
-        fetch(`http://localhost:8000/api/testimonios/${id}/eliminar/`, {
-          method: "DELETE",
-        })
+        fetch(
+          `${import.meta.env.VITE_API_URL}/api/testimonios/${id}/eliminar/`,
+          {
+            method: "DELETE",
+          }
+        )
           .then((response) => {
             if (!response.ok) {
               throw new Error("No se pudo eliminar el testimonio.");

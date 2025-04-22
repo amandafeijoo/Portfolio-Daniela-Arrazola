@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import {
   Box,
   Typography,
@@ -208,6 +209,9 @@ establecidas.`,
 ];
 
 const LegalNotice = () => {
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
   return (
     <Box
       sx={{

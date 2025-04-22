@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import {
   Box,
   Typography,
@@ -441,6 +442,9 @@ const sections = [
 ];
 
 const PrivacyPolicy = () => {
+    useEffect(() => {
+      window.scrollTo(0, 0);
+    }, []);
   return (
     <Box
       sx={{

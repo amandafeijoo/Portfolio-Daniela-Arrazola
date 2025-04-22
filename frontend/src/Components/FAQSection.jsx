@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import {
   Box,
   Typography,
@@ -96,6 +97,9 @@ const faqs = [
 ];
 
 const FAQSection = () => {
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
   const [expanded, setExpanded] = useState(false);
 
   const handleChange = (panel) => (_, isExpanded) => {

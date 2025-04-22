@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import {
   Box,
   Typography,
@@ -124,6 +125,9 @@ preferencias?redirectslug=habilitar-y-deshabilitar-cookies-que-los-sitios-we&amp
 ];
 
 const CookiesPolicy = () => {
+    useEffect(() => {
+        window.scrollTo(0, 0);
+      }, []);
   return (
     <Box
       sx={{

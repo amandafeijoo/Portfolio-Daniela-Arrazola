@@ -72,7 +72,7 @@ const Footer = () => {
       </FooterLinks>
 
       <FooterText variant="body2">
-        © {new Date().getFullYear()} Creado por Webcode-Art | Daniela Arrazola
+        © {new Date().getFullYear()} Creado por webcode-art.com | Daniela Arrázola
       </FooterText>
     </FooterContainer>
   );

@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { img } from "../utils/imagePath"; 
+import { img } from "../utils/imagePath";
 import {
   FaInstagram,
   FaFacebook,
@@ -595,7 +595,8 @@ const Header = () => {
                   color: "#305445",
                 }}
               >
-                © 2025 Daniela Arrázola
+                © {new Date().getFullYear()} Creado por webcode-art.com |
+                Daniela Arrazola
               </Typography>
             </Box>
           </Menu>

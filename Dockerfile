@@ -11,8 +11,8 @@ RUN pip install --upgrade pip && pip install -r requirements.txt
 # Copia el resto del proyecto
 COPY . .
 
-# Recolecta archivos estáticos
-RUN python manage.py collectstatic --noinput
+# ⚠️ aun no esta línea:
+# RUN python manage.py collectstatic --noinput
 
 # Puerto en el que correrá Gunicorn
 EXPOSE 8080

@@ -27,11 +27,10 @@ const FormContainer = styled(Paper)`
 
   @media (max-width: 600px) {
     background: transparent; /* 👈 Se elimina el fondo en móviles */
-    box-shadow: none;      
+    box-shadow: none;
     padding: 15px;
   }
 `;
-
 
 const StyledButton = styled(Button)`
   background-color: #b07241 !important;
@@ -175,7 +174,10 @@ const TestimonialForm = () => {
         justifyContent: "center",
         alignItems: "center",
         minHeight: "100vh",
-        backgroundImage: `url(${img("contact.svg")})`,
+        backgroundImage: {
+          xs: "none", // 👈 elimina la imagen en móviles
+          sm: `url(${img("contact.svg")})`,
+        },
         backgroundSize: "cover",
         backgroundPosition: "center",
         fontFamily: "'Playfair Display', serif",

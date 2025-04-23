@@ -14,17 +14,24 @@ WORKDIR /app
 COPY requirements.txt ./
 RUN pip install --upgrade pip && pip install -r requirements.txt
 
-# Copiar el resto del código
+# Copiar todo el proyecto
 COPY . .
 
-# 🛠️ Construir el frontend (con opción para evitar conflictos de dependencias)
+# 👉 Copiar manualmente el archivo de entorno del frontend al lugar correcto
+COPY frontend/.env /app/frontend/.env
+
+# 🛠️ Construir el frontend (React + Vite)
 WORKDIR /app/frontend
+
+# 👉 Verificamos que el .env esté bien copiado
+RUN echo "📦 .env para Vite:" && cat .env
+
 RUN npm install --legacy-peer-deps && npm run build
 
 # Volver al backend
 WORKDIR /app
 
-# Copiar el build generado al directorio de archivos estáticos
+# Copiar el build generado al directorio de archivos estáticos de Django
 RUN mkdir -p staticfiles && \
     cp -r frontend_build/assets staticfiles/ && \
     cp -r frontend_build/images staticfiles/ && \

@@ -50,8 +50,14 @@ const ImageTextEffect = () => {
         }}
       >
         <motion.video
-          src={img("terapias.mp4")}
-          alt="Terapias Video"
+          poster={img("poster-terapia.jpg")} // ✅ Imagen mostrada mientras se carga el video
+          preload="none" // ✅ Optimiza la carga
+          autoPlay
+          loop
+          muted
+          playsInline
+          whileHover={{ scale: 1.05 }}
+          whileTap={{ scale: 0.95 }}
           style={{
             width: "100%",
             height: isMobile ? "auto" : "100%",
@@ -60,14 +66,9 @@ const ImageTextEffect = () => {
             objectFit: "cover",
             boxShadow: "0 0 5px rgba(0, 0, 0, 0.8)",
           }}
-          whileHover={{ scale: 1.05 }}
-          whileTap={{ scale: 0.95 }}
-          loading="lazy"
-          autoPlay
-          loop
-          muted
-          playsInline // 🔹 Evita que el video se expanda a pantalla completa en iOS
-        />
+        >
+          <source src={img("terapias.mp4")} type="video/mp4" />
+        </motion.video>
       </motion.div>
 
       <motion.div

@@ -1,6 +1,6 @@
 FROM python:3.11-slim
 
-# Instala Node.js y dependencias #
+# Instala Node.js y dependencias
 RUN apt-get update && apt-get install -y curl gnupg && \
     curl -fsSL https://deb.nodesource.com/setup_20.x | bash - && \
     apt-get install -y nodejs && \
@@ -14,7 +14,9 @@ RUN pip install --upgrade pip && pip install -r requirements.txt
 COPY . .
 
 WORKDIR /app/frontend
-RUN npm install --legacy-peer-deps && npm run build
+
+# 👇 Aquí pasamos la variable de entorno para el build
+RUN VITE_API_URL=https://web-production-70fa.up.railway.app npm install --legacy-peer-deps && npm run build
 
 WORKDIR /app
 RUN mkdir -p staticfiles && \

@@ -1,37 +1,37 @@
 # Imagen base de Python
 FROM python:3.11-slim
 
-# Actualizar y preparar para instalar dependencias
+# Actualizar e instalar Node.js y otras dependencias necesarias
 RUN apt-get update && apt-get install -y curl gnupg && \
     curl -fsSL https://deb.nodesource.com/setup_18.x | bash - && \
     apt-get install -y nodejs && \
     apt-get clean && rm -rf /var/lib/apt/lists/*
 
-# Crear directorio de trabajo
+# Establecer directorio de trabajo
 WORKDIR /app
 
 # Instalar dependencias de Python
 COPY requirements.txt ./
 RUN pip install --upgrade pip && pip install -r requirements.txt
 
-# Copiar todo el proyecto
+# Copiar el resto del código
 COPY . .
 
-# 🛠️ Construir el frontend
+# 🛠️ Construir el frontend (con opción para evitar conflictos de dependencias)
 WORKDIR /app/frontend
-RUN npm install && npm run build
+RUN npm install --legacy-peer-deps && npm run build
 
 # Volver al backend
 WORKDIR /app
 
-# Copiar frontend build al staticfiles
+# Copiar el build generado al directorio de archivos estáticos
 RUN mkdir -p staticfiles && \
     cp -r frontend_build/assets staticfiles/ && \
     cp -r frontend_build/images staticfiles/ && \
     cp frontend_build/index.html staticfiles/
 
-# Exponer puerto
+# Exponer el puerto para Gunicorn
 EXPOSE 8080
 
-# Iniciar con Gunicorn
+# Comando para arrancar el servidor
 CMD gunicorn danielabackend.wsgi:application --bind 0.0.0.0:8080

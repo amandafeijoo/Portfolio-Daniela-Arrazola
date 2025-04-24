@@ -83,7 +83,7 @@ const ButtonGroup = styled.div`
     gap: 8px;
   }
 `;
-// solo 
+
 const TestimoniosAdmin = () => {
   const [testimoniosPendientes, setTestimoniosPendientes] = useState([]);
   const [testimoniosAprobados, setTestimoniosAprobados] = useState([]);

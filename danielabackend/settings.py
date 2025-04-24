@@ -60,7 +60,12 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 SECRET_KEY = os.getenv("SECRET_KEY")
 DEBUG = os.getenv("DEBUG", "False") == "True"
-ALLOWED_HOSTS = os.getenv("ALLOWED_HOSTS", "*").split(",")
+ALLOWED_HOSTS = os.getenv("ALLOWED_HOSTS", "web-production-70fa.up.railway.app").split(",")
+
+CSRF_TRUSTED_ORIGINS = [
+    "https://web-production-70fa.up.railway.app"
+]
+
 
 CORS_ALLOW_ALL_ORIGINS = True  # o usa CORS_ALLOWED_ORIGINS si prefieres limitarlo
 CORS_ALLOW_CREDENTIALS = True

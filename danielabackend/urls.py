@@ -37,6 +37,49 @@ Including another URLconf
 # ]
 
 
+# from django.contrib import admin
+# from django.urls import path, include, re_path
+# from django.conf import settings
+# from django.conf.urls.static import static
+# from django.views.static import serve
+# from django.http import HttpResponse
+# import os
+
+# # Vista que sirve el index.html desde staticfiles
+# def serve_react(request):
+#     try:
+#         with open(os.path.join(settings.BASE_DIR, 'staticfiles', 'index.html')) as f:
+#             return HttpResponse(f.read())
+#     except FileNotFoundError:
+#         return HttpResponse("index.html no encontrado", status=404)
+
+# urlpatterns = [
+#     path('admin/', admin.site.urls),
+#     path('api/', include('reservas.urls')),
+#     path('api/', include('testimonios.urls')),
+#     path('api/users/', include('users.urls')),
+# ]
+
+# # Sirve archivos estáticos y media en producción
+# if not settings.DEBUG:
+#     urlpatterns += [
+#         re_path(r'^static/(?P<path>.*)$', serve, {'document_root': settings.STATIC_ROOT}),
+#         re_path(r'^media/(?P<path>.*)$', serve, {'document_root': settings.MEDIA_ROOT}),
+#     ]
+
+# # Redirige cualquier ruta que no sea media/static/api/admin a index.html (React SPA)
+# urlpatterns += [
+#     re_path(r'^(?!static|media|api|admin).*$', serve_react),
+# ]
+
+# # En entorno de desarrollo (DEBUG=True)
+# if settings.DEBUG:
+#     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+#     urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+
+
+
+
 from django.contrib import admin
 from django.urls import path, include, re_path
 from django.conf import settings
@@ -53,6 +96,7 @@ def serve_react(request):
     except FileNotFoundError:
         return HttpResponse("index.html no encontrado", status=404)
 
+# Rutas principales
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/', include('reservas.urls')),
@@ -60,19 +104,19 @@ urlpatterns = [
     path('api/users/', include('users.urls')),
 ]
 
-# Sirve archivos estáticos y media en producción
+# Archivos estáticos y media en producción
 if not settings.DEBUG:
     urlpatterns += [
         re_path(r'^static/(?P<path>.*)$', serve, {'document_root': settings.STATIC_ROOT}),
         re_path(r'^media/(?P<path>.*)$', serve, {'document_root': settings.MEDIA_ROOT}),
     ]
 
-# Redirige cualquier ruta que no sea media/static/api/admin a index.html (React SPA)
+# 🔧 Catch-all que sirve React (SPA) – ¡con fix para no excluir /admin-dashboard!
 urlpatterns += [
-    re_path(r'^(?!static|media|api|admin).*$', serve_react),
+    re_path(r'^(?!static|media|api|admin/).*$', serve_react),
 ]
 
-# En entorno de desarrollo (DEBUG=True)
+# Archivos estáticos en desarrollo (DEBUG=True)
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
     urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

@@ -33,15 +33,17 @@ const settings = {
   arrows: false,
 };
 
+const API_URL = import.meta.env.VITE_API_URL || "https://web-production-70fa.up.railway.app";
+
+
 const Testimonials = () => {
   const [testimonios, setTestimonios] = useState([]);
 
   useEffect(() => {
     const fetchTestimonios = async () => {
       try {
-        const response = await fetch(
-          `${import.meta.env.VITE_API_URL}/api/testimonios/`
-        );
+        const response = await fetch(`${API_URL}/api/testimonios/`);
+
         const data = await response.json();
 
         console.log("Respuesta API:", data);
@@ -111,11 +113,7 @@ const Testimonials = () => {
                   }}
                 >
                   <Avatar
-                    src={
-                      testimonio.imagen
-                        ? `${import.meta.env.VITE_API_URL}${testimonio.imagen}`
-                        : "/images/default-avatar.png"
-                    }
+                    src={testimonio.imagen ? `${API_URL}${testimonio.imagen}` : "/images/default-avatar.png"}
                     alt={testimonio.nombre_cliente}
                     sx={{
                       width: { xs: 60, sm: 80 },

@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import { API_URL } from "../utils/config";
 import { Box, Typography, Avatar } from "@mui/material";
 import { motion } from "framer-motion";
 import Slider from "react-slick";
@@ -33,6 +32,9 @@ const settings = {
   autoplaySpeed: 5000,
   arrows: false,
 };
+
+const API_URL =
+  import.meta.env.VITE_API_URL || "https://web-production-70fa.up.railway.app";
 
 const Testimonials = () => {
   const [testimonios, setTestimonios] = useState([]);

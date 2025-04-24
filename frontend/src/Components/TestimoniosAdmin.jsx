@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { API_URL } from "../utils/config";
 import { Typography, Divider, Card, Button } from "@mui/material";
 import Swal from "sweetalert2";
 import { FaCheck, FaTrash } from "react-icons/fa";
@@ -88,8 +89,8 @@ const TestimoniosAdmin = () => {
   const [testimoniosAprobados, setTestimoniosAprobados] = useState([]);
 
   useEffect(() => {
-    fetch(`${import.meta.env.VITE_API_URL}/api/testimonios/`)
-      .then((res) => res.json())
+    fetch(`${API_URL}/api/testimonios/`)
+    .then((res) => res.json())
       .then((data) => {
         setTestimoniosAprobados(data.aprobados || []);
         setTestimoniosPendientes(data.pendientes || []);
@@ -100,7 +101,7 @@ const TestimoniosAdmin = () => {
   }, []);
 
   const handleApproveTestimonial = (id) => {
-    fetch(`${import.meta.env.VITE_API_URL}/api/testimonios/${id}/aprobar/`, {
+   fetch(`${API_URL}/api/testimonios/${id}/aprobar/`, {
       method: "PATCH",
     })
       .then((response) => {
@@ -143,8 +144,7 @@ const TestimoniosAdmin = () => {
       cancelButtonText: "Cancelar",
     }).then((result) => {
       if (result.isConfirmed) {
-        fetch(
-          `${import.meta.env.VITE_API_URL}/api/testimonios/${id}/eliminar/`,
+       fetch(`${API_URL}/api/testimonios/${id}/eliminar/`,
           {
             method: "DELETE",
           }

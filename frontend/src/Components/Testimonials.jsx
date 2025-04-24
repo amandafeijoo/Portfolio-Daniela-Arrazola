@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { API_URL } from "../utils/config";
 import { Box, Typography, Avatar } from "@mui/material";
 import { motion } from "framer-motion";
 import Slider from "react-slick";
@@ -32,9 +33,6 @@ const settings = {
   autoplaySpeed: 5000,
   arrows: false,
 };
-
-const API_URL = import.meta.env.VITE_API_URL || "https://web-production-70fa.up.railway.app";
-
 
 const Testimonials = () => {
   const [testimonios, setTestimonios] = useState([]);
@@ -113,7 +111,11 @@ const Testimonials = () => {
                   }}
                 >
                   <Avatar
-                    src={testimonio.imagen ? `${API_URL}${testimonio.imagen}` : "/images/default-avatar.png"}
+                    src={
+                      testimonio.imagen
+                        ? `${API_URL}${testimonio.imagen}`
+                        : "/images/default-avatar.png"
+                    }
                     alt={testimonio.nombre_cliente}
                     sx={{
                       width: { xs: 60, sm: 80 },
@@ -123,22 +125,22 @@ const Testimonials = () => {
                     }}
                   />
 
-<Typography
-  variant="body1" // o usa directamente un fontSize
-  fontStyle="italic"
-  mb={1}
-  sx={{
-    fontFamily: "Playfair Display",
-    color: "rgba(48, 84, 69, 0.6)",
-    fontSize: { xs: "0.95rem", sm: "1.05rem", md: "1.1rem" }, // ajusta según gusto
-    lineHeight: 1.6,
-    maxWidth: "1000px",
-    margin: "0 auto",
-    textAlign: "justify",
-  }}
->
-  &quot;{testimonio.mensaje}&quot;
-</Typography>
+                  <Typography
+                    variant="body1" // o usa directamente un fontSize
+                    fontStyle="italic"
+                    mb={1}
+                    sx={{
+                      fontFamily: "Playfair Display",
+                      color: "rgba(48, 84, 69, 0.6)",
+                      fontSize: { xs: "0.95rem", sm: "1.05rem", md: "1.1rem" }, // ajusta según gusto
+                      lineHeight: 1.6,
+                      maxWidth: "1000px",
+                      margin: "0 auto",
+                      textAlign: "justify",
+                    }}
+                  >
+                    &quot;{testimonio.mensaje}&quot;
+                  </Typography>
 
                   <Typography
                     variant="subtitle1"

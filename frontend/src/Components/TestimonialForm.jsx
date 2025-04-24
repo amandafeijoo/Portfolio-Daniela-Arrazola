@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { useSearchParams, useNavigate } from "react-router-dom";
 import { img } from "../utils/imagePath";
+import { API_URL } from "../utils/config";
 import {
   TextField,
   Button,
@@ -106,12 +107,13 @@ const TestimonialForm = () => {
       }
 
       const response = await fetch(
-        `${import.meta.env.VITE_API_URL}/api/testimonios/crear/`,
+        `${API_URL}/api/testimonios/crear/`,
         {
           method: "POST",
           body: formData,
         }
       );
+      
 
       if (response.ok) {
         await Swal.fire({

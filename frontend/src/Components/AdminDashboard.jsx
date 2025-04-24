@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { img } from "../utils/imagePath";
+import { API_URL } from "../utils/config";
 import {
   Box,
   Typography,
@@ -115,7 +116,7 @@ const AdminDashboard = () => {
     }).then(async (result) => {
       if (result.isConfirmed) {
         try {
-          await fetch(`${import.meta.env.VITE_API_URL}/api/logout/`, {
+          await fetch(`${API_URL}/api/logout/`, {
             method: "POST",
             headers: {
               "Content-Type": "application/json",
@@ -150,8 +151,7 @@ const AdminDashboard = () => {
     const token = localStorage.getItem("accessToken");
 
     try {
-      const response = await fetch(
-        `${import.meta.env.VITE_API_URL}/api/testimonios/enviar-correo/`,
+      const response = await fetch(`${API_URL}/api/testimonios/enviar-correo/`,
         {
           method: "POST",
           headers: {
@@ -191,8 +191,8 @@ const AdminDashboard = () => {
   };
 
   useEffect(() => {
-    fetch(`${import.meta.env.VITE_API_URL}/api/reservas/`)
-      .then((res) => res.json())
+    fetch(`${API_URL}/api/reservas/`)
+    .then((res) => res.json())
       .then((data) => {
         if (!Array.isArray(data)) {
           console.error(
@@ -251,7 +251,7 @@ const AdminDashboard = () => {
   }, []);
 
   const handleCancelReserva = (id) => {
-    fetch(`${import.meta.env.VITE_API_URL}/api/reservas/${id}/cancelar/`, {
+    fetch(`${API_URL}/api/reservas/${id}/cancelar/`, {
       method: "PATCH",
     })
       .then((response) => {
@@ -263,10 +263,10 @@ const AdminDashboard = () => {
       .then((data) => {
         setReservasCanceladas([...reservasCanceladas, data.reserva]);
         setReservas(reservas.filter((reserva) => reserva.id !== id));
-
+  
         const fechaKey = new Date(data.reserva.fecha_reserva).toDateString();
         setDiasConReserva((prev) => ({ ...prev, [fechaKey]: "cancelada" }));
-
+  
         Swal.fire({
           icon: "success",
           title: "Reserva cancelada",
@@ -284,6 +284,7 @@ const AdminDashboard = () => {
         });
       });
   };
+  
 
   return (
     <DashboardContainer>

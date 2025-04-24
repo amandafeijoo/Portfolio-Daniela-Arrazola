@@ -11,7 +11,7 @@ WORKDIR /app
 COPY requirements.txt ./
 RUN pip install --upgrade pip && pip install -r requirements.txt
 
-# Copiar el resto del código
+## Copiar el resto del código
 COPY . .
 
 WORKDIR /app/frontend

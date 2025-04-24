@@ -11,13 +11,18 @@ WORKDIR /app
 COPY requirements.txt ./
 RUN pip install --upgrade pip && pip install -r requirements.txt
 
+# Copiar el resto del código
 COPY . .
 
 WORKDIR /app/frontend
 
-# 👇 Aquí pasamos la variable de entorno para el build
-RUN VITE_API_URL=https://web-production-70fa.up.railway.app npm install --legacy-peer-deps && npm run build
+# 1️⃣ Instala dependencias sin build
+RUN npm install --legacy-peer-deps
 
+# 2️⃣ Pasa la variable directamente para que Vite la use al hacer el build
+RUN VITE_API_URL=https://web-production-70fa.up.railway.app npm run build
+
+# Volver al backend y mover archivos estáticos
 WORKDIR /app
 RUN mkdir -p staticfiles && \
     cp -r frontend_build/assets staticfiles/ && \

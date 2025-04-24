@@ -6,23 +6,26 @@ import "@fontsource/playfair-display";
 import { img } from "../utils/imagePath";
 
 const Home = () => {
+  const navigate = useNavigate();
+  const videoRef = useRef();
+  const [loadVideo, setLoadVideo] = useState(false);
+  const [videoLoaded, setVideoLoaded] = useState(false);
+
+  // Scroll al inicio
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
-  const navigate = useNavigate();
-  const videoRef = useRef();
-  const [visible, setVisible] = useState(false);
 
+  // Carga el video solo si está en pantalla
   useEffect(() => {
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
-          setVisible(true);
+          setLoadVideo(true);
         }
       },
       { threshold: 0.25 }
     );
-
     if (videoRef.current) observer.observe(videoRef.current);
     return () => observer.disconnect();
   }, []);
@@ -44,7 +47,7 @@ const Home = () => {
         },
       }}
     >
-      {visible ? (
+      {loadVideo ? (
         <Box
           component="video"
           poster={img("poster.jpg")}
@@ -53,6 +56,7 @@ const Home = () => {
           autoPlay
           muted
           loop
+          onCanPlay={() => setVideoLoaded(true)}
           sx={{
             position: "absolute",
             top: 0,
@@ -61,7 +65,8 @@ const Home = () => {
             height: "100%",
             objectFit: "cover",
             zIndex: -1,
-            opacity: 0.99, // 🔄 para evitar que sea LCP
+            opacity: videoLoaded ? 1 : 0,
+            transition: "opacity 0.5s ease-in-out",
             "@media (max-width: 600px)": {
               height: "120%",
               width: "100%",
@@ -70,7 +75,10 @@ const Home = () => {
             },
           }}
         >
-          <source src={img("home.mp4")} type="video/mp4" />
+          <source
+            src="https://res.cloudinary.com/dhikp5azp/video/upload/f_auto,q_auto:eco,w_1920,h_1080,c_fill/v1745534943/Cada_preocupaci%C3%B3n_es_solo_una_parte_del_paisaje-7_nnkd5l.mp4"
+            type="video/mp4"
+          />
         </Box>
       ) : (
         <Box
@@ -142,3 +150,4 @@ const Home = () => {
 };
 
 export default Home;
+

@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { API_URL } from "../utils/config";
 import {
   Grid,
   Box,
@@ -140,7 +141,7 @@ const Reserva = () => {
 
     try {
       const disponibilidadResponse = await fetch(
-        `${import.meta.env.VITE_API_URL}/api/verificar-disponibilidad/`,
+        `${API_URL}/api/verificar-disponibilidad/`,
         {
           method: "POST",
           headers: {
@@ -187,7 +188,7 @@ const Reserva = () => {
 
     try {
       const response = await fetch(
-        `${import.meta.env.VITE_API_URL}/api/pago/crear-sesion/`,
+        `${API_URL}/api/pago/crear-sesion/`,
         {
           method: "POST",
           headers: {

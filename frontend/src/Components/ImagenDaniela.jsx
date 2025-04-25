@@ -4,7 +4,7 @@ import { motion } from "framer-motion";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import "@fontsource/playfair-display";
-import { img } from "../utils/imagePath";
+// import { img } from "../utils/imagePath";
 
 const ContenedorPadre = styled.div`
   position: relative;
@@ -168,9 +168,10 @@ const ImagenDaniela = () => {
         className={!isMobile ? "hidden" : ""}
       >
         <img
-          src={img("daniela1.svg")}
+          src="https://res.cloudinary.com/dhikp5azp/image/upload/f_auto,q_auto,w_1600/v1745573398/Copia_de_Sin_t%C3%ADtulo_Post_de_Instagram_ru5dfx.png"
           alt="Daniela"
           style={{ width: "100%", borderRadius: "15px" }}
+          loading="lazy"
         />
       </ContenedorPrincipal1>
       <ContenedorPrincipal2

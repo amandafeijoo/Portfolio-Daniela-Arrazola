@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Box, Typography } from "@mui/material";
 import styled from "styled-components";
 import {
@@ -10,14 +10,13 @@ import {
 import { useNavigate } from "react-router-dom";
 import "@fontsource/playfair-display";
 import WhatsAppContact from "./WhatsAppContact";
-import { img } from "../utils/imagePath";
 
 const ContactContainer = styled(Box)`
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  background-image: url("https://res.cloudinary.com/dmz3r3lb3/image/upload/v1744035312/Historia_de_Instagram_Lista_de_Precios_de_Joyas_Elegante_Negro_y_Beige_V%C3%ADdeo_deb0tk.png");
+  background-image: url("https://res.cloudinary.com/dhikp5azp/image/upload/f_auto,q_auto,w_1600/v1745570838/Historia_de_Instagram_Lista_de_Precios_de_Joyas_Elegante_Negro_y_Beige_V%C3%ADdeo_qxuzag_di9opo.jpg");
   background-size: cover;
   background-position: center;
   background-color: #e8ddce;
@@ -161,10 +160,25 @@ const QuestionBubble = styled(Box)`
 `;
 
 const ContactSection = () => {
+  const navigate = useNavigate();
+  const videoRef = useRef();
+  const [loadVideo, setLoadVideo] = useState(false);
+
   useEffect(() => {
     window.scrollTo(0, 0);
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) setLoadVideo(true);
+      },
+      { threshold: 0.2 }
+    );
+
+    if (videoRef.current) observer.observe(videoRef.current);
+    return () => observer.disconnect();
   }, []);
-  const navigate = useNavigate();
+
+
   return (
     <ContactContainer>
       {/* Sección de Contacto con Iconos arriba */}
@@ -248,13 +262,25 @@ const ContactSection = () => {
           </Typography>
         </ContactInfo>
       </ContactInfoContainer>
-      {/* Sección del Video */}
-      <VideoContainer onClick={() => navigate("/faq")}>
+       {/* Sección de Video */}
+      <VideoContainer onClick={() => navigate("/faq")} ref={videoRef}>
         <QuestionBubble>¿Cuánto tiempo debo hacer terapia?</QuestionBubble>
-        <video autoPlay loop muted playsInline preload="metadata">
-          <source src={img("contact.mp4")} type="video/mp4" loading="lazy" />
-          Tu navegador no soporta el video.
-        </video>
+        {loadVideo && (
+          <video
+            autoPlay
+            loop
+            muted
+            playsInline
+            preload="none"
+            poster="https://res.cloudinary.com/dhikp5azp/image/upload/f_auto,q_auto,w_800/v1745570838/Historia_de_Instagram_Lista_de_Precios_de_Joyas_Elegante_Negro_y_Beige_V%C3%ADdeo_qxuzag_di9opo.jpg"
+          >
+            <source
+              src="https://res.cloudinary.com/dhikp5azp/video/upload/f_auto,q_auto,w_800/v1745570161/Work_wholeheartedly_and_you_will_get_good_results.-6_cs9hlf.mp4"
+              type="video/mp4"
+            />
+            Tu navegador no soporta el video.
+          </video>
+        )}
         <FAQBox>
           <Typography fontSize="1.1rem" fontWeight="bold">
             Preguntas Frecuentes

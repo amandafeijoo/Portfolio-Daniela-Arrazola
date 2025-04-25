@@ -5,38 +5,19 @@ import {
   useTheme,
   useMediaQuery,
 } from "@mui/material";
-import { useEffect, useRef, useState } from "react";
+import { useEffect } from "react";
 import { motion } from "framer-motion";
 import { useNavigate } from "react-router-dom";
 import "@fontsource/playfair-display";
 import { img } from "../utils/imagePath";
 
 const ImageTextEffect = () => {
-  const navigate = useNavigate();
-  const theme = useTheme();
-  const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
-
-  const videoRef = useRef();
-  const [loadVideo, setLoadVideo] = useState(false);
-  const [videoLoaded, setVideoLoaded] = useState(false);
-
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
-
-  // Lazy load del video
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setLoadVideo(true);
-        }
-      },
-      { threshold: 0.25 }
-    );
-    if (videoRef.current) observer.observe(videoRef.current);
-    return () => observer.disconnect();
-  }, []);
+  const navigate = useNavigate();
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
 
   const handleNavigate = () => {
     navigate("/reserva");
@@ -67,47 +48,27 @@ const ImageTextEffect = () => {
           maxWidth: "450px",
           margin: "0 auto",
         }}
-        ref={videoRef}
       >
-        {loadVideo ? (
-          <motion.video
-            poster={img("poster-terapia.jpg")}
-            preload="none"
-            autoPlay
-            loop
-            muted
-            playsInline
-            onCanPlay={() => setVideoLoaded(true)}
-            style={{
-              width: "100%",
-              height: isMobile ? "auto" : "100%",
-              maxHeight: isMobile ? "220px" : "none",
-              borderRadius: "15px",
-              objectFit: "cover",
-              boxShadow: "0 0 5px rgba(0, 0, 0, 0.8)",
-              opacity: videoLoaded ? 1 : 0,
-              transition: "opacity 0.5s ease-in-out",
-            }}
-          >
-            <source
-              src="https://res.cloudinary.com/dhikp5azp/video/upload/f_auto,q_auto:eco,w_1080,h_1080,c_fill/v1745568637/Elegant_Video_Instagram_Story_V%C3%ADdeo_para_m%C3%B3viles_zvvtlm.mp4"
-              type="video/mp4"
-            />
-          </motion.video>
-        ) : (
-          <Box
-            component="img"
-            src={img("poster-terapia.jpg")}
-            alt="Vista previa del video"
-            sx={{
-              width: "100%",
-              height: "auto",
-              borderRadius: "15px",
-              objectFit: "cover",
-              boxShadow: "0 0 5px rgba(0, 0, 0, 0.8)",
-            }}
-          />
-        )}
+        <motion.video
+          poster={img("poster-terapia.jpg")} // ✅ Imagen mostrada mientras se carga el video
+          preload="none" // ✅ Optimiza la carga
+          autoPlay
+          loop
+          muted
+          playsInline
+          whileHover={{ scale: 1.05 }}
+          whileTap={{ scale: 0.95 }}
+          style={{
+            width: "100%",
+            height: isMobile ? "auto" : "100%",
+            maxHeight: isMobile ? "220px" : "none",
+            borderRadius: "15px",
+            objectFit: "cover",
+            boxShadow: "0 0 5px rgba(0, 0, 0, 0.8)",
+          }}
+        >
+          <source src={img("terapias.mp4")} type="video/mp4" />
+        </motion.video>
       </motion.div>
 
       <motion.div
@@ -163,7 +124,7 @@ const ImageTextEffect = () => {
               sx={{
                 backgroundColor: "rgb(120, 150, 131)",
                 color: "#f5eedc",
-                fontSize: "0.6rem",
+                fontSize: "1rem",
                 fontFamily: "Playfair Display",
                 fontWeight: "500",
                 padding: "8px 18px",

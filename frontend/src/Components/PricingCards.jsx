@@ -1,4 +1,5 @@
 import { useNavigate } from "react-router-dom";
+import { useRef, useState } from "react";
 import { useEffect } from "react";
 import {
   Box,
@@ -9,7 +10,6 @@ import {
 } from "@mui/material";
 import { motion } from "framer-motion";
 import "@fontsource/playfair-display";
-import { img } from "../utils/imagePath";
 
 const plans = [
   {
@@ -39,6 +39,22 @@ const PricingCards = () => {
   const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
   const isTablet = useMediaQuery(theme.breakpoints.between("sm", "md"));
   const isDesktop = useMediaQuery(theme.breakpoints.up("md"));
+  const videoRef = useRef();
+  const [loadVideo, setLoadVideo] = useState(false);
+  const [videoLoaded, setVideoLoaded] = useState(false);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setLoadVideo(true);
+        }
+      },
+      { threshold: 0.2 }
+    );
+    if (videoRef.current) observer.observe(videoRef.current);
+    return () => observer.disconnect();
+  }, []);
 
   const handleNavigate = () => navigate("/reserva");
 
@@ -57,6 +73,7 @@ const PricingCards = () => {
     >
       {/* 🎥 Video de fondo */}
       <Box
+        ref={videoRef}
         sx={{
           position: "absolute",
           top: 0,
@@ -71,25 +88,31 @@ const PricingCards = () => {
           borderRadius: isMobile ? "10px" : "0",
         }}
       >
-        <video
-          autoPlay
-          loop
-          muted
-          playsInline
-          preload="auto"
-          style={{
-            width: "100%",
-            height: "100%",
-            objectFit: "cover",
-            opacity: 0.6,
-            border: "2px solid rgb(67, 60, 54)",
-            boxShadow: "4px 4px 10px rgba(0, 0, 0, 0.9)",
-          }}
-        >
-          <source src={img("Precios-4.mp4")} type="video/mp4" />
-        </video>
+        {loadVideo ? (
+          <video
+            autoPlay
+            loop
+            muted
+            playsInline
+            preload="none"
+            onCanPlay={() => setVideoLoaded(true)}
+            style={{
+              width: "100%",
+              height: "100%",
+              objectFit: "cover",
+              opacity: videoLoaded ? 0.6 : 0,
+              border: "2px solid rgb(67, 60, 54)",
+              boxShadow: "4px 4px 10px rgba(0, 0, 0, 0.9)",
+              transition: "opacity 0.5s ease-in-out",
+            }}
+          >
+            <source
+              src="https://res.cloudinary.com/dhikp5azp/video/upload/f_auto,q_auto:eco,w_1920,h_1080,c_fill/v1745569413/Precios-5_y637ya.mp4"
+              type="video/mp4"
+            />
+          </video>
+        ) : null}
       </Box>
-
       {/* 🧾 Título */}
       <Typography
         variant="h3"

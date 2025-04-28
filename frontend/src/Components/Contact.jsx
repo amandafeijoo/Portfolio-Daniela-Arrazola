@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect } from "react";
 import { Box, Typography } from "@mui/material";
 import styled from "styled-components";
 import {
@@ -161,22 +161,11 @@ const QuestionBubble = styled(Box)`
 
 const ContactSection = () => {
   const navigate = useNavigate();
-  const videoRef = useRef();
-  const [loadVideo, setLoadVideo] = useState(false);
 
   useEffect(() => {
     window.scrollTo(0, 0);
-
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) setLoadVideo(true);
-      },
-      { threshold: 0.2 }
-    );
-
-    if (videoRef.current) observer.observe(videoRef.current);
-    return () => observer.disconnect();
   }, []);
+  
 
 
   return (
@@ -263,34 +252,35 @@ const ContactSection = () => {
         </ContactInfo>
       </ContactInfoContainer>
        {/* Sección de Video */}
-      <VideoContainer onClick={() => navigate("/faq")} ref={videoRef}>
-        <QuestionBubble>¿Cuánto tiempo debo hacer terapia?</QuestionBubble>
-        {loadVideo && (
-          <video
-            autoPlay
-            loop
-            muted
-            playsInline
-            preload="none"
-            poster="https://res.cloudinary.com/dhikp5azp/image/upload/f_auto,q_auto,w_800/v1745570838/Historia_de_Instagram_Lista_de_Precios_de_Joyas_Elegante_Negro_y_Beige_V%C3%ADdeo_qxuzag_di9opo.jpg"
-          >
-            <source
-              src="https://res.cloudinary.com/dhikp5azp/video/upload/f_auto,q_auto,w_800/v1745570161/Work_wholeheartedly_and_you_will_get_good_results.-6_cs9hlf.mp4"
-              type="video/mp4"
-            />
-            Tu navegador no soporta el video.
-          </video>
-        )}
-        <FAQBox>
-          <Typography fontSize="1.1rem" fontWeight="bold">
-            Preguntas Frecuentes
-          </Typography>
-          <Typography fontSize="0.9rem">
-            Aquí puedes ver las preguntas más comunes sobre la terapia.
-          </Typography>
-          <button onClick={() => navigate("/faq")}>Ir a FAQ</button>
-        </FAQBox>
-      </VideoContainer>
+       <VideoContainer onClick={() => navigate("/faq")}>
+  <QuestionBubble>¿Cuánto tiempo debo hacer terapia?</QuestionBubble>
+
+  <video
+    autoPlay
+    loop
+    muted
+    playsInline
+    preload="none"
+    poster="https://res.cloudinary.com/dhikp5azp/image/upload/f_auto,q_auto,w_800/v1745570838/Historia_de_Instagram_Lista_de_Precios_de_Joyas_Elegante_Negro_y_Beige_V%C3%ADdeo_qxuzag_di9opo.jpg"
+  >
+    <source
+      src="https://res.cloudinary.com/dhikp5azp/video/upload/f_auto,q_auto,w_800/v1745570161/Work_wholeheartedly_and_you_will_get_good_results.-6_cs9hlf.mp4"
+      type="video/mp4"
+    />
+    Tu navegador no soporta el video.
+  </video>
+
+  <FAQBox>
+    <Typography fontSize="1.1rem" fontWeight="bold">
+      Preguntas Frecuentes
+    </Typography>
+    <Typography fontSize="0.9rem">
+      Aquí puedes ver las preguntas más comunes sobre la terapia.
+    </Typography>
+    <button onClick={() => navigate("/faq")}>Ir a FAQ</button>
+  </FAQBox>
+</VideoContainer>
+
     </ContactContainer>
   );
 };

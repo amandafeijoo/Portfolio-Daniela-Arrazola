@@ -1,7 +1,8 @@
 import styled, { keyframes } from "styled-components";
 import { useEffect } from "react";
 import "@fontsource/playfair-display";
-import { img } from "../utils/imagePath";
+// import { img } from "../utils/imagePath";
+import LazyVideo from "./LazyVideo";
 
 const moveAnimation = keyframes`
   0% { transform: translateY(0); }
@@ -132,28 +133,39 @@ const VideoContainer = styled.div`
   }
 `;
 
-const Video = styled.video`
-  width: 100%;
-  max-width: 400px;
-  border-radius: 10px;
-  box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.3);
-  border: 2px solid #d2b48c;
-  object-fit: cover;
+// const Video = styled.video`
+//   width: 100%;
+//   max-width: 400px;
+//   border-radius: 10px;
+//   box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.3);
+//   border: 2px solid #d2b48c;
+//   object-fit: cover;
 
-  /* 🔹 Evita que los videos se expandan en pantalla completa en móviles */
-  &:focus {
-    outline: none;
-  }
+//   /* 🔹 Evita que los videos se expandan en pantalla completa en móviles */
+//   &:focus {
+//     outline: none;
+//   }
 
-  @media (max-width: 768px) {
-    max-width: 100%; /* ✅ Asegura que no sean demasiado pequeños */
-    height: auto;
-  }
-`;
+//   @media (max-width: 768px) {
+//     max-width: 100%; /* ✅ Asegura que no sean demasiado pequeños */
+//     height: auto;
+//   }
+// `;
 
 const FullAcerca = () => {
   useEffect(() => {
     window.scrollTo(0, 0);
+
+    // ✅ Preload de imágenes de posters
+    const preloadImages = [
+      "https://res.cloudinary.com/dhikp5azp/image/upload/v1745837351/1_kqva3a.jpg",
+      "https://res.cloudinary.com/dhikp5azp/image/upload/v1745837363/2_sfnqys.jpg",
+      "https://res.cloudinary.com/dhikp5azp/image/upload/v1745837401/3_plceyf.jpg",
+    ];
+    preloadImages.forEach((src) => {
+      const img = new Image();
+      img.src = src;
+    });
   }, []);
 
   return (
@@ -168,22 +180,21 @@ const FullAcerca = () => {
             humanidad: Sé lo que es enfrentarse a días difíciles, sentir que no
             puedes con todo y, aun así, buscar una forma de avanzar. Inicié mi
             camino profesional en Criminología con especialidad en Seguridad
-            Privada y titulada como Detective Privado. Sin embargo, fue la
-            Psicología la que me mostró algo aún más poderoso: la capacidad que
-            todos tenemos de sanar, crecer y transformarnos. No tienes que
-            hacerlo solo, yo te acompaño a alcanzar el equilibrio que necesitas,
-            brindándote un espacio en donde puedas sentirte escuchado y
-            comprendido.
+            Privada y titulada como Detective Privado.
             <br />
             <br />
-            Quiero compartirte un pedacito de mi historia, porque creo que la
-            conexión genuina empieza desde la autenticidad. Mi vida ha sido todo
-            menos lineal, llena de momentos de reinvención.
+            Sin embargo, fue la Psicología la que me mostró algo aún más
+            poderoso: la capacidad que todos tenemos de sanar, crecer y
+            transformarnos. No tienes que hacerlo solo, yo te acompaño a
+            alcanzar el equilibrio que necesitas, brindándote un espacio en
+            donde puedas sentirte escuchado y comprendido.
           </TextContainer>
+
           <VideoContainer>
-            <Video autoPlay loop muted playsInline controlsList="nofullscreen">
-              <source src={img("acerca1.1.mp4")} type="video/mp4" />
-            </Video>
+            <LazyVideo
+              src="https://res.cloudinary.com/dhikp5azp/video/upload/f_auto,q_auto/v1745574336/ACERCA_DE_M_I_c7iho4.mp4"
+              poster="https://res.cloudinary.com/dhikp5azp/image/upload/v1745837351/1_kqva3a.jpg"
+            />
           </VideoContainer>
         </ContentContainer>
       </Section>
@@ -191,28 +202,27 @@ const FullAcerca = () => {
       <Section>
         <ContentContainer>
           <VideoContainer>
-            <Video autoPlay loop muted playsInline controlsList="nofullscreen">
-              <source src={img("acerca3.mp4")} type="video/mp4" />
-            </Video>
+            <LazyVideo
+              src="https://res.cloudinary.com/dhikp5azp/video/upload/f_auto,q_auto/v1745574797/ACERCA_DE_M_I-2_ymdkct.mp4"
+              poster="https://res.cloudinary.com/dhikp5azp/image/upload/v1745837363/2_sfnqys.jpg"
+            />
           </VideoContainer>
           <TextContainer>
+            Quiero compartirte un pedacito de mi historia, porque creo que la
+            conexión genuina empieza desde la autenticidad. Mi vida ha sido todo
+            menos lineal, llena de momentos de reinvención.
+            <br />
+            <br />
             Nací en Colombia, crecí en Noruega y, finalmente, elegí España para
             cumplir mis sueños. En cada etapa, me tocó empezar de cero,
             adaptarme a nuevas realidades y aprender a vivir en culturas muy
             distintas. Aunque los retos fueron grandes, hoy agradezco este
             recorrido que me ha dado visión única sobre el valor de las
-            transiciones y el crecimiento personal. Si alguna vez te has sentido
-            perdido o sin rumbo, quiero que sepas que yo también he estado allí.
+            transiciones y el crecimiento personal.
             <br />
             <br />
-            Sabía que quería dejar una huella positiva, y fue así como decidí
-            estudiar Criminología y Psicología, movida por la necesidad de
-            acompañar a personas con realidades difíciles como el tráfico
-            humano, especialmente en mujeres y niñas. Sin embargo, decidí
-            inclinarme por la psicología, la cual me ha enseñado que cada
-            persona tiene una historia, pero también el poder de escribir nuevas
-            páginas. Después de 10 años de formación, mi misión es clara: quiero
-            que quienes lleguen a mí se vayan mejor de lo que llegaron.
+            Si alguna vez te has sentido perdido o sin rumbo, quiero que sepas
+            que yo también he estado allí.
           </TextContainer>
         </ContentContainer>
       </Section>
@@ -220,24 +230,35 @@ const FullAcerca = () => {
       <Section2>
         <ContentContainer>
           <TextContainer>
+            Sabía que quería dejar una huella positiva, y fue así como decidí
+            estudiar Criminología y Psicología, movida por la necesidad de
+            acompañar a personas con realidades difíciles como el tráfico
+            humano, especialmente en mujeres y niñas.
+            <br />
+            <br />
+            Sin embargo, decidí inclinarme por la psicología, la cual me ha
+            enseñado que cada persona tiene una historia, pero también el poder
+            de escribir nuevas páginas. Después de 10 años de formación, mi
+            misión es clara: quiero que quienes lleguen a mí se vayan mejor de
+            lo que llegaron.
+            <br />
+            <br />
             El verde es el color de este proyecto porque representa dos partes
             fundamentales de mi historia: la belleza de la naturaleza noruega y
             la fuerza de las esmeraldas colombianas. Para mí, el verde es
             sinónimo de vida, crecimiento y conexión.
             <br />
-            Cuando no trabajo me encontrarás disfrutando del sol y de los
-            paisajes naturales, también bailando diferentes ritmos
-            latinoamericanos, visitando algún rincón del mundo o disfrutando de
-            increíbles experiencias gastronómicas.
             <br />
             Gracias a mi historia de vida y a mis constantes viajes entre ambos
             países, puedo ofrecerte terapia en los dos idiomas: noruego y
             español.
           </TextContainer>
+
           <VideoContainer>
-            <Video autoPlay loop muted playsInline controlsList="nofullscreen">
-              <source src={img("acerca2.2.mp4")} type="video/mp4" />
-            </Video>
+            <LazyVideo
+              src="https://res.cloudinary.com/dhikp5azp/video/upload/f_auto,q_auto/v1745574902/ACERCA_DE_M_I-4_ftv8ti.mp4"
+              poster="https://res.cloudinary.com/dhikp5azp/image/upload/v1745837401/3_plceyf.jpg"
+            />
           </VideoContainer>
         </ContentContainer>
       </Section2>

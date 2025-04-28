@@ -27,6 +27,7 @@
     "i18next": "^24.2.2",
     "i18next-browser-languagedetector": "^8.0.4",
     "i18next-http-backend": "^3.0.2",
+    "prop-types": "^15.8.1",
     "react": "^18.3.1",
     "react-add-to-calendar": "^0.1.5",
     "react-calendar": "^5.1.0",

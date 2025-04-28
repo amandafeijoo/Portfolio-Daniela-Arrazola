@@ -110,9 +110,10 @@ const ReservationVideo = () => {
 
       {/* 📌 Video sin cortes */}
       <Video autoPlay loop muted playsInline controlsList="nofullscreen">
-        <source src={img("reserva.mp4")} type="video/mp4" />
-        Tu navegador no soporta el video.
-      </Video>
+  <source src="https://res.cloudinary.com/dhikp5azp/video/upload/v1745578131/5-2_cg1eez.mp4" type="video/mp4" />
+  Tu navegador no soporta el video.
+</Video>
+
     </VideoContainer>
   );
 };

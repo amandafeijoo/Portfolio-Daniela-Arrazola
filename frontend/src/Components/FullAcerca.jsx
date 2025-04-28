@@ -1,7 +1,7 @@
 import styled, { keyframes } from "styled-components";
 import { useEffect } from "react";
 import "@fontsource/playfair-display";
-// import { img } from "../utils/imagePath";
+import { img } from "../utils/imagePath";
 import LazyVideo from "./LazyVideo";
 
 const moveAnimation = keyframes`
@@ -133,24 +133,24 @@ const VideoContainer = styled.div`
   }
 `;
 
-// const Video = styled.video`
-//   width: 100%;
-//   max-width: 400px;
-//   border-radius: 10px;
-//   box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.3);
-//   border: 2px solid #d2b48c;
-//   object-fit: cover;
+const Video = styled.video`
+  width: 100%;
+  max-width: 400px;
+  border-radius: 10px;
+  box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.3);
+  border: 2px solid #d2b48c;
+  object-fit: cover;
 
-//   /* 🔹 Evita que los videos se expandan en pantalla completa en móviles */
-//   &:focus {
-//     outline: none;
-//   }
+  /* 🔹 Evita que los videos se expandan en pantalla completa en móviles */
+  &:focus {
+    outline: none;
+  }
 
-//   @media (max-width: 768px) {
-//     max-width: 100%; /* ✅ Asegura que no sean demasiado pequeños */
-//     height: auto;
-//   }
-// `;
+  @media (max-width: 768px) {
+    max-width: 100%; /* ✅ Asegura que no sean demasiado pequeños */
+    height: auto;
+  }
+`;
 
 const FullAcerca = () => {
   useEffect(() => {
@@ -191,10 +191,9 @@ const FullAcerca = () => {
           </TextContainer>
 
           <VideoContainer>
-            <LazyVideo
-              src="https://res.cloudinary.com/dhikp5azp/video/upload/f_auto,q_auto/v1745574336/ACERCA_DE_M_I_c7iho4.mp4"
-              poster="https://res.cloudinary.com/dhikp5azp/image/upload/v1745837351/1_kqva3a.jpg"
-            />
+          <Video>
+          <source src={img("acerca1.1.mp4")} type="video/mp4" />
+          </Video>
           </VideoContainer>
         </ContentContainer>
       </Section>

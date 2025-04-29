@@ -8,7 +8,7 @@ import "@fontsource/playfair-display";
 
 const ContenedorPadre = styled.div`
   position: relative;
-  width: 65%;
+  width: 70%;
   min-height: 750px;
   height: auto;
   margin: 0 auto;
@@ -31,7 +31,7 @@ const ContenedorPadre = styled.div`
 
 const ContenedorPrincipal1 = styled.div`
   position: relative;
-  width: 45%;
+  width: 55%;
   margin: 0 auto;
   margin-top: 20px;
   margin-bottom: 40px;

@@ -508,7 +508,10 @@ const Header = () => {
               Contacto
             </MenuItem>
             <MenuItem
-              onClick={handleReservaClick}
+              onClick={() => {
+                handleReservaClick();
+                handleMenuClose(); // 🔥 Cierra el menú después de navegar
+              }}
               sx={{
                 fontSize: "1.5em",
                 fontFamily: "Playfair Display",
@@ -520,6 +523,7 @@ const Header = () => {
             >
               Reserva
             </MenuItem>
+
             <Divider />
             <Box display="flex" justifyContent="center" mt={1} mb={1}>
               <IconButton

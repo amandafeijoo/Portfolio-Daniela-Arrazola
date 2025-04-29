@@ -167,7 +167,7 @@ DATABASES = {
 }
 
 
-load_dotenv()  # Cargar las variables del archivo .env
+load_dotenv()  
 import stripe
 
 EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
@@ -246,3 +246,8 @@ DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+
+# 🔧 Forzar DEBUG si estás en Railway para ver el error real
+if os.getenv("RAILWAY_ENVIRONMENT"):
+    DEBUG = True

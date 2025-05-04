@@ -115,7 +115,7 @@ const Testimonials = () => {
                   <Avatar
                     src={
                       testimonio.imagen
-                        ? `${API_URL}${testimonio.imagen}`
+                        ? testimonio.imagen // ✅ Cloudinary ya devuelve la URL completa
                         : "/images/default-avatar.png"
                     }
                     alt={testimonio.nombre_cliente}

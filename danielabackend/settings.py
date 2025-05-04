@@ -248,6 +248,8 @@ DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 
-# 🔧 Forzar DEBUG si estás en Railway para ver el error real
+# 🔧 Forzar DEBUG  en Railway para ver admin 
 if os.getenv("RAILWAY_ENVIRONMENT"):
     DEBUG = True
+
+# https://web-production-70fa.up.railway.app/admin/login/

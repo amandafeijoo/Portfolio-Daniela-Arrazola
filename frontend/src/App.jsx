@@ -69,6 +69,7 @@ const StickySection = styled.div`
   top: 0;
   height: 100vh;
   width: 100%;
+  /* overflow:hidden; */
   display: flex;
   align-items: center;
   justify-content: center;
@@ -83,11 +84,19 @@ const Container = styled.div`
   min-height: 300vh;
   display: flex;
   flex-direction: column;
-  width: 100vw; /* 🔥 Corrige posible margen izquierdo */
-  max-width: 100vw;
+  width: 100%; 
+  /* max-width: 100vw; */
   margin: 0 auto;
   padding: 0;
-  overflow-x: visible; /* 🔥 No usar hidden aquí */
+  /* overflow-x: hidden; */
+
+`;
+
+const MainWrapper = styled.main`
+  padding-top: 100px; /* deja hueco para el Header */
+  width: 100%;
+  /* overflow-x: hidden; */
+
 `;
 
 function App() {
@@ -95,6 +104,7 @@ function App() {
     <Router>
       <GlobalStyle />
       <Header />
+      <MainWrapper>
       <Suspense fallback={<div>Loading...</div>}>
         <Routes>
           <Route
@@ -353,6 +363,7 @@ function App() {
           />
         </Routes>
       </Suspense>
+      </MainWrapper>
       <Section>
         <Footer />
       </Section>
@@ -413,6 +424,7 @@ function App() {
   </a>
 </CookieConsent>
     </Router>
+    
   );
 }
 

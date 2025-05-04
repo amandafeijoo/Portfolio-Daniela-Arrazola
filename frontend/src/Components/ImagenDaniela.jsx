@@ -31,7 +31,7 @@ const ContenedorPadre = styled.div`
 
 const ContenedorPrincipal1 = styled.div`
   position: relative;
-  width: 55%;
+  width: 50%;
   margin: 0 auto;
   margin-top: 20px;
   margin-bottom: 40px;

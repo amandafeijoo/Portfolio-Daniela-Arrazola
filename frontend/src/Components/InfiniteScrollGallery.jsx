@@ -17,10 +17,20 @@ import { img } from "../utils/imagePath";
 
 
 const StyledContainer = styled(Box)`
+  /* 1) Forzar que ocupe todo el ancho de su padre */
+  width: 100%;
+  box-sizing: border-box;
+
+  /* 2) Recortar cualquier hijo que se salga lateralmente */
+  overflow: hidden;
+
+  /* 3) Tus estilos existentes */
   border: 2px solid #d2b48c;
   border-radius: 8px;
-  box-shadow: 0 0 5px 2px rgba(0, 0, 0, 0.3),
-    0 0 10px 4px rgba(34, 139, 34, 0.2), 0 0 15px 6px rgba(0, 0, 0, 0.2);
+  box-shadow: 
+    0 0 5px 2px rgba(0,0,0,0.3),
+    0 0 10px 4px rgba(34,139,34,0.2),
+    0 0 15px 6px rgba(0,0,0,0.2);
   background-color: #f5eedc;
   padding: 30px;
   margin: 20px auto;
@@ -29,16 +39,16 @@ const StyledContainer = styled(Box)`
 
   @media (max-width: 600px) {
     padding: 20px;
-    margin: 0px auto;
+    margin: 0 auto;
     max-width: 95%;
-    min-height: 550px; /* 💡 solo se aplica en móvil */
+    min-height: 550px;
   }
-
   @media (max-width: 960px) {
     padding: 25px;
     margin: 8px auto;
   }
 `;
+
 
 const images = [
   { src: img("servicios1.svg") },
@@ -192,22 +202,31 @@ const InfiniteScrollGallery = () => {
           ↓
         </Typography>
       </motion.div>
+      <div
+      style={{
+        position: 'relative',
+        width: '100%',       // ocupa el ancho completo de StyledContainer
+        overflow: 'hidden',  // recorta cualquier hijo que se salga
+      }}
+    >
       <Box
         sx={{
-          overflow: "hidden",
-          display: "grid",
+          width: '100%',         // asegura 100%
+          boxSizing: 'border-box',
+          display: 'grid',
           gridTemplateColumns: {
-            xs: "repeat(1, 1fr)", // 1 imagen por fila en móviles
-            sm: "repeat(2, 1fr)", // 2 en tablets pequeñas
-            md: "repeat(3, 1fr)", // 3 en tablets grandes
-            lg: "repeat(6, 1fr)", // 6 en pantallas grandes
+            xs: 'repeat(1, 1fr)',
+            sm: 'repeat(2, 1fr)',
+            md: 'repeat(3, 1fr)',
+            lg: 'repeat(6, 1fr)',
           },
-          alignItems: "center",
-          padding: "20px",
-          minHeight: "200px", // Para evitar desbordamientos en móviles
+          alignItems: 'center',
+          padding: '20px',
+          minHeight: '200px',
+          /* ya no necesitamos overflow aquí */
         }}
       >
-        <motion.div style={{ display: "flex" }} animate={controls}>
+        <motion.div style={{ display: 'flex' }} animate={controls}>
           {[...images, ...images].map((img, index) => {
             const size = getRandomSize(index, isMobile, isTablet);
             return (
@@ -218,11 +237,11 @@ const InfiniteScrollGallery = () => {
                 style={{
                   width: size.width,
                   height: size.height,
-                  objectFit: "cover",
-                  borderRadius: "4px",
-                  margin: "4px",
-                  border: "2px solid #d2b48c",
-                  cursor: img.path ? "pointer" : "default",
+                  objectFit: 'cover',
+                  borderRadius: '4px',
+                  margin: '4px',
+                  border: '2px solid #d2b48c',
+                  cursor: img.path ? 'pointer' : 'default',
                 }}
                 onClick={() => handleImageClick(img.path)}
               />
@@ -230,6 +249,7 @@ const InfiniteScrollGallery = () => {
           })}
         </motion.div>
       </Box>
+    </div>
       {/* Botón para solicitud de cita urgente */}
       <Box sx={{ textAlign: "center", mt: 2 }}>
         <Button

@@ -18,7 +18,7 @@ import {
   useTheme,
 } from "@mui/material";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
-import { img } from "../utils/imagePath";
+// import { img } from "../utils/imagePath";
 import "@fontsource/playfair-display";
 import Reserva from "./Reserva";
 
@@ -59,14 +59,11 @@ const Image = () => (
     }}
   >
     <img
-      src={img("2.svg")}
-      alt="Service Image"
+      src="  https://res.cloudinary.com/dhikp5azp/image/upload//f_auto,q_auto,w_800/v1746012631/2_u0dr3m.png"
+      alt="Regulación emocional"
+      loading="lazy"
       width="100%"
-      style={{ borderRadius: "inherit" }}
-      onError={(e) => {
-        e.target.onerror = null;
-        e.target.src = img("placeholder.png");
-      }}
+      style={{ borderRadius: "inherit", display: "block" }}
     />
   </Box>
 );

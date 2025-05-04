@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import { useRef } from "react";
-import { img } from "../utils/imagePath";
+// import { img } from "../utils/imagePath";
 import {
   Container,
   Box,
@@ -57,14 +57,11 @@ const Image = () => (
     }}
   >
     <img
-      src={img("13.svg")}
-      alt="Service Image"
+      src="https://res.cloudinary.com/dhikp5azp/image/upload/f_auto,q_auto,w_800/v1746012630/13_jrezf9.png"
+      alt="Trastornos de la conducta alimentaria"
+      loading="lazy"
       width="100%"
-      style={{ borderRadius: "inherit" }}
-      onError={(e) => {
-        e.target.onerror = null;
-        e.target.src = img("placeholder.png"); 
-      }}
+      style={{ borderRadius: "inherit", display: "block" }}
     />
   </Box>
 );

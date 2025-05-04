@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import { useRef } from "react";
-import { img } from "../utils/imagePath";
+// import { img } from "../utils/imagePath";
 import {
   Container,
   Box,
@@ -58,16 +58,14 @@ const Image = () => (
       animation: `${moveAnimation} 3s infinite`,
     }}
   >
-    <img
-      src={img("5.svg")}
-      alt="Service Image"
-      width="100%"
-      style={{ borderRadius: "inherit" }}
-      onError={(e) => {
-        e.target.onerror = null;
-        e.target.src = img("placeholder.png");
-      }}
-    />
+   <img
+  src="https://res.cloudinary.com/dhikp5azp/image/upload/f_auto,q_auto,w_800/v1746012631/5_e2qrf8.png"
+  alt="Conflictos interpersonales"
+  loading="lazy"
+  width="100%"
+  style={{ borderRadius: "inherit", display: "block" }}
+/>
+
   </Box>
 );
 

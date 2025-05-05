@@ -1,8 +1,8 @@
-import styled, { keyframes } from "styled-components";
+// src/components/FullAcerca.jsx
 import { useEffect } from "react";
+import styled, { keyframes } from "styled-components";
 import "@fontsource/playfair-display";
-import { img } from "../utils/imagePath";
-import LazyVideo from "./LazyVideo";
+import { Typography, Box } from "@mui/material";
 
 const moveAnimation = keyframes`
   0% { transform: translateY(0); }
@@ -23,17 +23,14 @@ const FullAcercaContainer = styled.div`
   max-width: 1400px;
   margin: auto;
 
-  /* 📌 Ajuste para móviles */
   @media (max-width: 768px) {
     padding: 15px;
     width: 95%;
   }
-
-  /* 📌 Ajuste específico para iPhone 15 (ancho máximo 320px) */
   @media (max-width: 320px) {
+    padding: 10px;
     width: 100%;
     max-width: 110%;
-    padding: 10px;
   }
 `;
 
@@ -96,35 +93,30 @@ const TextContainer = styled.div`
   box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.3);
   margin: auto;
 
-  /* 📌 Ajuste para móviles */
   @media (max-width: 768px) {
     width: 100%;
     max-width: 90%;
     padding: 18px;
   }
-
-  /* 📌 Ajuste específico para iPhone 15 Pro */
   @media (max-width: 393px) {
-    width: 130%; /* 📌 Ocupa más espacio en iPhone 15 Pro */
+    width: 130%;
     max-width: 230%;
     font-size: 1rem;
     line-height: 1.7;
     margin-left: -33px;
     padding: 18px;
   }
-
-  /* 📌 Ajuste para la web */
   @media (min-width: 1024px) {
     max-width: 700px;
     padding: 25px;
   }
 `;
 
-const VideoContainer = styled.div`
+const MediaContainer = styled.div`
   flex: 1;
   display: flex;
   justify-content: center;
-  width: 100%; /* ✅ Más responsivo */
+  width: 100%;
   padding: 10px;
   animation: ${moveAnimation} 3s infinite;
 
@@ -133,38 +125,52 @@ const VideoContainer = styled.div`
   }
 `;
 
-const Video = styled.video`
-  width: 100%;
-  max-width: 400px;
-  border-radius: 10px;
-  box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.3);
-  border: 2px solid #d2b48c;
-  object-fit: cover;
+// Componente para imagen responsiva Cloudinary
+import PropTypes from "prop-types";
 
-  /* 🔹 Evita que los videos se expandan en pantalla completa en móviles */
-  &:focus {
-    outline: none;
-  }
+function ResponsiveImage({ publicId, alt }) {
+  const base = `https://res.cloudinary.com/dhikp5azp/image/upload`;
+  const flags = `f_auto,q_auto,dpr_auto`;
+  const widths = [320, 640, 960, 1280];
+  const srcSet = widths
+    .map((w) => `${base}/${flags},w_${w}/${publicId}.png ${w}w`)
+    .join(", ");
 
-  @media (max-width: 768px) {
-    max-width: 100%; /* ✅ Asegura que no sean demasiado pequeños */
-    height: auto;
-  }
-`;
+  return (
+    <img
+      src={`${base}/${flags},w_640/${publicId}.png`}
+      srcSet={srcSet}
+      sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 640px"
+      loading="lazy"
+      alt={alt}
+      style={{
+        width: "60%",
+        height: "auto",
+        borderRadius: "15px",
+        boxShadow: [
+          "0 0 5px 2px rgba(0, 0, 0, 0.3)",
+          "0 0 10px 4px rgba(34, 139, 34, 0.2)",
+          "0 0 15px 6px rgba(0, 0, 0, 0.5)",
+        ].join(", "),
+      }}
+    />
+  );
+}
+
+// Removed duplicate ResponsiveImage.propTypes declaration
 
 const FullAcerca = () => {
   useEffect(() => {
     window.scrollTo(0, 0);
-
-    // ✅ Preload de imágenes de posters
-    const preloadImages = [
-      "https://res.cloudinary.com/dhikp5azp/image/upload/v1745837351/1_kqva3a.jpg",
-      "https://res.cloudinary.com/dhikp5azp/image/upload/v1745837363/2_sfnqys.jpg",
-      "https://res.cloudinary.com/dhikp5azp/image/upload/v1745837401/3_plceyf.jpg",
+    // Preload
+    const imgs = [
+      "v1746407263/1_oy23bt",
+      "v1746407262/3_khk7e6",
+      "v1746407261/2_jvx6dl",
     ];
-    preloadImages.forEach((src) => {
-      const img = new Image();
-      img.src = src;
+    imgs.forEach((id) => {
+      const i = new Image();
+      i.src = `https://res.cloudinary.com/dhikp5azp/image/upload/f_auto,q_auto,w_640/${id}.png`;
     });
   }, []);
 
@@ -175,94 +181,212 @@ const FullAcerca = () => {
       <Section>
         <ContentContainer>
           <TextContainer>
-            La vida no viene con un manual, y como tú, yo también estoy en
-            constante aprendizaje. Mi mayor impulso como terapeuta es mi propia
-            humanidad: Sé lo que es enfrentarse a días difíciles, sentir que no
-            puedes con todo y, aun así, buscar una forma de avanzar. Inicié mi
-            camino profesional en Criminología con especialidad en Seguridad
-            Privada y titulada como Detective Privado.
-            <br />
-            <br />
-            Sin embargo, fue la Psicología la que me mostró algo aún más
-            poderoso: la capacidad que todos tenemos de sanar, crecer y
-            transformarnos. No tienes que hacerlo solo, yo te acompaño a
-            alcanzar el equilibrio que necesitas, brindándote un espacio en
-            donde puedas sentirte escuchado y comprendido.
-          </TextContainer>
+            {/* Título grande */}
+            <Typography
+              component="h3"
+              sx={{
+                fontFamily: "Playfair Display",
+                fontWeight: 700,
+                fontSize: { xs: "1.5rem", sm: "2rem", md: "1.5rem" },
+                textAlign: "left",
+                mb: 2,
+              }}
+            >
+              Sobre mí
+            </Typography>
 
-          <VideoContainer>
-          <Video>
-          <source src={img("acerca1.1.mp4")} type="video/mp4" />
-          </Video>
-          </VideoContainer>
+            {/* Texto descriptivo */}
+            <Typography
+              component="p"
+              sx={{
+                fontFamily: "Playfair Display",
+                fontSize: { xs: "0.95rem", sm: "1rem" },
+                lineHeight: 1.6,
+              }}
+            >
+              La vida no viene con un manual, y como tú, yo también estoy en
+              constante aprendizaje. Mi mayor impulso como terapeuta es mi
+              propia humanidad: Nací en Colombia, crecí en Noruega y elegí
+              España como mi hogar. Cada país dejó algo en mí, me invitó a
+              soltar lo conocido y también me obligó a empezar de nuevo. Aprendí
+              a cambiar de idioma, de casa, de piel. Me adapté, me esforcé por
+              encajar, y sin darme cuenta, fui dejando partes de mí en el
+              intento. Hasta que comprendí que poner límites no me aleja de los
+              demás, me acerca a mí misma. Desde entonces, los límites se
+              convirtieron en un puente hacia mi autenticidad. Me han ayudado a
+              vivir con coherencia, a cuidar mi bienestar emocional y a
+              enseñarle al mundo cómo deseo ser tratada. Por eso hoy, desde mi
+              experiencia y formación como psicóloga especializada en límites y
+              regulación emocional, acompaño a personas que se han perdido de
+              tanto dar, ceder o callar. A quienes desean aprender a decir
+              “hasta aquí”, pero no saben cómo hacerlo sin culpa, sin miedo o
+              sin dañar sus relaciones.
+            </Typography>
+          </TextContainer>
+          <MediaContainer>
+            <ResponsiveImage
+              publicId="v1746407263/1_oy23bt"
+              alt="Primera imagen ilustrativa"
+            />
+          </MediaContainer>
         </ContentContainer>
       </Section>
 
       <Section>
         <ContentContainer>
-          <VideoContainer>
-            <LazyVideo
-              src="https://res.cloudinary.com/dhikp5azp/video/upload/f_auto,q_auto/v1745574797/ACERCA_DE_M_I-2_ymdkct.mp4"
-              poster="https://res.cloudinary.com/dhikp5azp/image/upload/v1745837363/2_sfnqys.jpg"
+          {/* Imagen a la izquierda (o arriba en móvil) */}
+          <MediaContainer>
+            <ResponsiveImage
+              publicId="v1746407262/3_khk7e6"
+              alt="Segunda imagen ilustrativa"
             />
-          </VideoContainer>
+          </MediaContainer>
+
+          {/* Texto con dos bloques de título + párrafo */}
           <TextContainer>
-            Quiero compartirte un pedacito de mi historia, porque creo que la
-            conexión genuina empieza desde la autenticidad. Mi vida ha sido todo
-            menos lineal, llena de momentos de reinvención.
-            <br />
-            <br />
-            Nací en Colombia, crecí en Noruega y, finalmente, elegí España para
-            cumplir mis sueños. En cada etapa, me tocó empezar de cero,
-            adaptarme a nuevas realidades y aprender a vivir en culturas muy
-            distintas. Aunque los retos fueron grandes, hoy agradezco este
-            recorrido que me ha dado visión única sobre el valor de las
-            transiciones y el crecimiento personal.
-            <br />
-            <br />
-            Si alguna vez te has sentido perdido o sin rumbo, quiero que sepas
-            que yo también he estado allí.
+            {/* Título principal */}
+            <Typography
+              component="h3"
+              sx={{
+                fontFamily: "Playfair Display",
+                fontWeight: 700,
+                fontSize: { xs: "1.5rem", sm: "2rem", md: "1.5rem" },
+                textAlign: "left",
+                mb: 2,
+              }}
+            >
+              De lo forense a lo emocional
+            </Typography>
+
+            {/* Párrafo descriptivo */}
+            <Typography
+              component="p"
+              sx={{
+                fontFamily: "Playfair Display",
+                fontSize: { xs: "0.95rem", sm: "1rem" },
+                lineHeight: 1.6,
+                mb: 3,
+              }}
+            >
+              Mi trayectoria comenzó en el mundo de la Criminología, con
+              especialidad en Seguridad Privada y formación como Detective
+              Privado. Aunque mi camino evolucionó hacia la psicología, esa base
+              me dio herramientas valiosas para entender al ser humano desde
+              múltiples perspectivas.
+            </Typography>
+
+            {/* Segundo título */}
+            <Typography
+              component="h3"
+              sx={{
+                fontFamily: "Playfair Display",
+                fontWeight: 700,
+                fontSize: { xs: "1.5rem", sm: "2rem", md: "1.5rem" },
+                textAlign: "left",
+                mb: 2,
+              }}
+            >
+              Una vida con propósito, dentro y fuera de consulta
+            </Typography>
+
+            {/* Segundo párrafo */}
+            <Typography
+              component="p"
+              sx={{
+                fontFamily: "Playfair Display",
+                fontSize: { xs: "0.95rem", sm: "1rem" },
+                lineHeight: 1.6,
+              }}
+            >
+              Me considero una persona extrovertida y profundamente sensible.
+              Esa mezcla de energía y sensibilidad es lo que me permite conectar
+              de forma auténtica, tanto conmigo misma como con quienes acompaño
+              en terapia.
+              <br />
+              <br />
+              Tengo una curiosidad infinita por aprender, crecer y nutrirme de
+              experiencias que amplíen mi visión del mundo. Porque para mí, el
+              desarrollo personal no es solo un concepto: es un estilo de vida.
+            </Typography>
           </TextContainer>
         </ContentContainer>
       </Section>
 
       <Section2>
         <ContentContainer>
+          {/* Texto a la izquierda (o arriba en móvil) */}
           <TextContainer>
-            Sabía que quería dejar una huella positiva, y fue así como decidí
-            estudiar Criminología y Psicología, movida por la necesidad de
-            acompañar a personas con realidades difíciles como el tráfico
-            humano, especialmente en mujeres y niñas.
-            <br />
-            <br />
-            Sin embargo, decidí inclinarme por la psicología, la cual me ha
-            enseñado que cada persona tiene una historia, pero también el poder
-            de escribir nuevas páginas. Después de 10 años de formación, mi
-            misión es clara: quiero que quienes lleguen a mí se vayan mejor de
-            lo que llegaron.
-            <br />
-            <br />
-            El verde es el color de este proyecto porque representa dos partes
-            fundamentales de mi historia: la belleza de la naturaleza noruega y
-            la fuerza de las esmeraldas colombianas. Para mí, el verde es
-            sinónimo de vida, crecimiento y conexión.
-            <br />
-            <br />
-            Gracias a mi historia de vida y a mis constantes viajes entre ambos
-            países, puedo ofrecerte terapia en los dos idiomas: noruego y
-            español.
+            {/* Título en negrita y responsivo */}
+            <Typography
+              component="h3"
+              sx={{
+                fontFamily: "Playfair Display",
+                fontWeight: 700,
+                fontSize: { xs: "1.5rem", sm: "2rem", md: "1.5rem" },
+                textAlign: "Left",
+                mb: 2,
+              }}
+            >
+              Mi tiempo libre
+            </Typography>
+
+            {/* Lista de actividades */}
+            <Box
+              component="ul"
+              sx={{
+                pl: 3,
+                mb: 3,
+                "& li": {
+                  fontFamily: "Playfair Display",
+                  fontSize: { xs: "0.95rem", sm: "1rem" },
+                  lineHeight: 1.6,
+                  mb: 1,
+                },
+              }}
+            >
+              <li>Disfrutando del sol y los paisajes naturales</li>
+              <li>Bailando ritmos latinoamericanos</li>
+              <li>Descubriendo nuevos rincones del mundo</li>
+              <li>
+                Viviendo experiencias gastronómicas que despierten los sentidos
+              </li>
+            </Box>
+
+            {/* Párrafo final */}
+            <Typography
+              component="p"
+              sx={{
+                fontFamily: "Playfair Display",
+                fontSize: { xs: "0.95rem", sm: "1rem" },
+                lineHeight: 1.6,
+              }}
+            >
+              El verde esmeralda es más que un color para mí: es el símbolo de
+              mi historia y mis raíces. Representa la belleza natural de Noruega
+              y la fuerza vital de las esmeraldas colombianas. En mi trabajo
+              como psicóloga, este verde se convierte en vida, conexión y
+              crecimiento. Son los valores que me guían al acompañarte en tu
+              proceso terapéutico, para que también tú puedas florecer desde tu
+              esencia.
+            </Typography>
           </TextContainer>
 
-          <VideoContainer>
-            <LazyVideo
-              src="https://res.cloudinary.com/dhikp5azp/video/upload/f_auto,q_auto/v1745574902/ACERCA_DE_M_I-4_ftv8ti.mp4"
-              poster="https://res.cloudinary.com/dhikp5azp/image/upload/v1745837401/3_plceyf.jpg"
+          {/* Imagen a la derecha (o abajo en móvil) */}
+          <MediaContainer>
+            <ResponsiveImage
+              publicId="v1746407261/2_jvx6dl"
+              alt="Tercera imagen ilustrativa"
             />
-          </VideoContainer>
+          </MediaContainer>
         </ContentContainer>
       </Section2>
     </FullAcercaContainer>
   );
+};
+
+ResponsiveImage.propTypes = {
+  publicId: PropTypes.string.isRequired,
+  alt: PropTypes.string.isRequired,
 };
 
 export default FullAcerca;

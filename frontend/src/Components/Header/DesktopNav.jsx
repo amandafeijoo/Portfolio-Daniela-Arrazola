@@ -1,9 +1,9 @@
 // src/components/Header/DesktopNav.jsx
-import  { useState } from 'react';
-import PropTypes from 'prop-types';
-import { Box, Button, Menu, MenuItem } from '@mui/material';
-import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
-import { mainLinks, servicesLinks } from './navConfig';
+import { useState } from "react";
+import PropTypes from "prop-types";
+import { Box, Button, Menu, MenuItem } from "@mui/material";
+import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
+import { mainLinks, servicesLinks } from "./navConfig";
 
 export default function DesktopNav({ handlers }) {
   const [anchorEl, setAnchorEl] = useState(null);
@@ -11,13 +11,13 @@ export default function DesktopNav({ handlers }) {
   const closeServices = () => setAnchorEl(null);
 
   const navBtnSx = {
-    color: 'inherit',
+    color: "inherit",
     mx: 2,
-    textTransform: 'none',
-    fontSize: { xs: '0.9rem', md: '0,5rem' },
-    '&:hover': {
-      color: 'rgb(247, 236, 220)',
-      backgroundColor: 'rgba(255,255,255,0.15)',
+    textTransform: "none",
+    fontSize: { xs: "0.9rem", md: "0,5rem" },
+    "&:hover": {
+      color: "rgb(247, 236, 220)",
+      backgroundColor: "rgba(255,255,255,0.15)",
     },
   };
 
@@ -25,16 +25,16 @@ export default function DesktopNav({ handlers }) {
     <Box
       component="nav"
       sx={{
-        position: 'fixed',
-        top: '100px',
+        position: "fixed",
+        top: "100px",
         left: 0,
-        width: '100%',
-        display: { xs: 'none', md: 'flex' },
-        justifyContent: 'center',
-        alignItems: 'center',
-        color: 'rgb(52, 75, 68)',
-        bgcolor: 'rgb(146, 162, 149)',
-        height: '60px',
+        width: "100%",
+        display: { xs: "none", md: "flex" },
+        justifyContent: "center",
+        alignItems: "center",
+        color: "rgb(52, 75, 68)",
+        bgcolor: "rgb(146, 162, 149)",
+        height: "60px",
         zIndex: 1999,
       }}
     >
@@ -45,7 +45,11 @@ export default function DesktopNav({ handlers }) {
       ))}
 
       {/* Dropdown Servicios */}
-      <Button sx={navBtnSx} endIcon={<ArrowDropDownIcon />} onClick={openServices}>
+      <Button
+        sx={navBtnSx}
+        endIcon={<ArrowDropDownIcon />}
+        onClick={openServices}
+      >
         SERVICIOS
       </Button>
       <Menu
@@ -53,6 +57,18 @@ export default function DesktopNav({ handlers }) {
         open={Boolean(anchorEl)}
         onClose={closeServices}
         MenuListProps={{ onMouseLeave: closeServices }}
+        PaperProps={{
+          sx: {
+            marginTop: "12px",
+            backgroundColor: "#f5f0e5", // Beige claro
+            border: "2px solid #c2a97c",
+            borderRadius: "10px",
+            boxShadow: "0px 6px 12px rgba(0,0,0,0.2)",
+            padding: "5px 0",
+          },
+        }}
+        anchorOrigin={{ vertical: "bottom", horizontal: "left" }}
+        transformOrigin={{ vertical: "top", horizontal: "left" }}
       >
         {servicesLinks.map(({ label, handler }) => (
           <MenuItem
@@ -60,6 +76,15 @@ export default function DesktopNav({ handlers }) {
             onClick={() => {
               handlers[handler]();
               closeServices();
+            }}
+            sx={{
+              fontFamily: "Playfair Display",
+              fontSize: "1rem",
+              padding: "10px 20px",
+              color: "#4b3f2f",
+              "&:hover": {
+                backgroundColor: "#e8ddce",
+              },
             }}
           >
             {label}
@@ -73,9 +98,9 @@ export default function DesktopNav({ handlers }) {
         onClick={handlers.handleReservaClick}
         sx={{
           ...navBtnSx,
-          borderColor: '#f5eedc',
-          color: '#f5eedc',
-          '&:hover': { backgroundColor: 'rgba(213,195,151,0.2)' },
+          borderColor: "#f5eedc",
+          color: "#f5eedc",
+          "&:hover": { backgroundColor: "rgba(213,195,151,0.2)" },
         }}
       >
         RESERVA

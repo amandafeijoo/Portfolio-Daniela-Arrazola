@@ -3,6 +3,7 @@ import { lazy, Suspense } from "react";
 import styled from "styled-components";
 import GlobalStyle from "./GlobalStyle";
 import Header from "./Components/Header";
+import HeroSocialLinks from './Components/HeroSocialLinks';
 import CookieConsent from "react-cookie-consent";
 import "@fontsource/playfair-display";
 
@@ -93,7 +94,7 @@ const Container = styled.div`
 `;
 
 const MainWrapper = styled.main`
-  padding-top: 100px; /* deja hueco para el Header */
+  padding-top: 155px; /* deja hueco para el Header */
   width: 100%;
   /* overflow-x: hidden; */
 
@@ -104,6 +105,7 @@ function App() {
     <Router>
       <GlobalStyle />
       <Header />
+      <HeroSocialLinks /> 
       <MainWrapper>
       <Suspense fallback={<div>Loading...</div>}>
         <Routes>

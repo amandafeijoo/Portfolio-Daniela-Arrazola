@@ -56,6 +56,7 @@ const ImageTextEffect = () => {
             width: "100%",
             maxWidth: "450px",
             margin: "0 auto",
+
           }}
         >
           <motion.video
@@ -65,15 +66,14 @@ const ImageTextEffect = () => {
             loop
             muted
             playsInline
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
             style={{
               width: "100%",
               height: isMobile ? "auto" : "100%",
-              maxHeight: isMobile ? "220px" : "none",
+              maxHeight: isMobile ? "190px" : "620px", // ✅ controla altura según dispositivo
               borderRadius: "15px",
               objectFit: "cover",
-              boxShadow: "0 0 5px rgba(0, 0, 0, 0.8)",
+              border: "2px solid rgb(211, 190, 151)",
+              boxShadow: "0 0 9px rgba(0, 0, 0, 0.8)",
             }}
           >
             <source src={img("terapias.mp4")} type="video/mp4" />
@@ -146,7 +146,7 @@ const ImageTextEffect = () => {
               boxShadow:
                 "0 4px 8px rgba(210, 180, 140, 0.9), 0 6px 20px rgba(0, 0, 0, 0.19)",
               position: "relative", 
-              maxWidth: { xs: "100%", md: "450px" }, 
+              maxWidth: { xs: "105%", md: "750px" }, 
             }}
           >
             <Typography
@@ -156,7 +156,7 @@ const ImageTextEffect = () => {
                 fontWeight: "bold",
                 mb: 2,
                 fontFamily: "Playfair Display, serif",
-                fontSize: { xs: "1.6rem", md: "2.5rem" },
+                fontSize: { xs: "1.4rem", md: "2.5rem" },
               }}
             >
               Terapia
@@ -167,6 +167,7 @@ const ImageTextEffect = () => {
                 fontSize: { xs: "0.8rem", md: "1rem" },
                 textAlign: "justify",
                 fontFamily: "Playfair Display, serif",
+                paddingBottom: isMobile ? "90px" : "0", // 👈 añade esto
               }}
             >
               La terapia no solo te enseña a gestionar dificultades personales,

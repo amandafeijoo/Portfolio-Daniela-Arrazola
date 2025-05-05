@@ -122,7 +122,7 @@ const PricingCards = () => {
           fontFamily: "Playfair Display",
           fontWeight: "bold",
           color: "#2c2c2c",
-          mb: 5,
+          mb: 8,
           zIndex: 2,
           position: "relative",
           fontSize: {
@@ -172,8 +172,9 @@ const PricingCards = () => {
               boxShadow: "4px 4px 10px rgba(0, 0, 0, 0.1)",
               textAlign: "center",
               width: "100%",
-              maxWidth: isMobile ? "75vw" : isTablet ? "300px" : "350px",
-              minHeight: isMobile ? "145px" : "330px", // un poco más de altura ** agranda o hace mas pequeno el video
+       maxWidth: isMobile ? "75vw" : isTablet ? "300px" : "350px",
+minHeight: isMobile ? "145px" : isTablet ? "300px" : "260px",
+
               color: "#4b3f2f",
               margin: "0 auto",
               zIndex: 2,

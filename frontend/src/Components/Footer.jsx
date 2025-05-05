@@ -54,9 +54,9 @@ const Footer = () => {
   return (
     <FooterContainer>
       <FooterLinks>
-        <Link onClick={() => handleNavigate("/terms")}>
+        {/* <Link onClick={() => handleNavigate("/terms")}>
           Términos y Condiciones
-        </Link>
+        </Link> */}
         <Divider orientation="vertical" flexItem sx={{ bgcolor: "#557c70" }} />
         <Link onClick={() => handleNavigate("/privacy-policy")}>
           Política de Privacidad
@@ -69,11 +69,24 @@ const Footer = () => {
         </Link>
         <Divider orientation="vertical" flexItem sx={{ bgcolor: "#557c70" }} />
         <Link onClick={() => handleNavigate("/faq")}>Preguntas Frecuentes</Link>
+        <Divider orientation="vertical" flexItem sx={{ bgcolor: "#557c70" }} />
+
       </FooterLinks>
 
       <FooterText variant="body2">
-        © {new Date().getFullYear()} Creado por webcode-art.com | Daniela Arrázola
-      </FooterText>
+  © {new Date().getFullYear()}{' '}
+  Creado por{' '}
+  <a
+    href="https://webcode-art.com"
+    target="_blank"
+    rel="noopener noreferrer"
+    style={{ color: 'inherit', textDecoration: 'underline' }}
+  >
+    webcode-art.com
+  </a>{' '}
+  | Daniela Arrázola
+</FooterText>
+
     </FooterContainer>
   );
 };

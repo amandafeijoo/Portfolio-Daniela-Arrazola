@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import { Button } from "@mui/material";
+import { Button, Box, Typography } from "@mui/material";
 import { motion } from "framer-motion";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
@@ -8,107 +8,85 @@ import "@fontsource/playfair-display";
 
 const ContenedorPadre = styled.div`
   position: relative;
-  width: 70%;
+  width: 85%;
   min-height: 750px;
-  height: auto;
-  margin: 0 auto;
-  margin-top: 40px;
-  margin-bottom: 40px;
+  margin: 40px auto;
   padding: 40px;
   border: 2px solid #d2b48c;
   border-radius: 8px;
-  box-shadow: 0 0 5px 2px rgba(0, 0, 0, 0.3),
-    0 0 10px 4px rgba(34, 139, 34, 0.2), 0 0 15px 6px rgba(0, 0, 0, 0.2);
+  overflow: hidden;
   background-color: #f5eedc;
+  box-shadow: 0 0 5px 2px rgba(0, 0, 0, 0.3),
+    0 0 10px 4px rgba(34, 139, 34, 0.2), 0 0 15px 6px rgba(0, 0, 0, 0.5);
 
-  @media (max-width: 768px) {
-    width: 90%;
-    min-height: 500px;
-    margin-bottom: 80px;
+  /* TABLET */
+  @media (max-width: 1024px) and (min-width: 769px) {
+    width: 95%;
     padding: 30px;
+    min-height: 650px;
+  }
+
+  /* MOBILE */
+  @media (max-width: 768px) {
+    width: 100%;
+    padding: 20px;
+    min-height: 700px;
+    margin-bottom: 20px;
   }
 `;
 
 const ContenedorPrincipal1 = styled.div`
   position: relative;
-  width: 50%;
-  margin: 0 auto;
-  margin-top: 20px;
-  margin-bottom: 40px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  overflow: hidden;
-  border-radius: 15px;
+  width: 40%;
+  margin: 50px auto 40px 80px;
   border: 3px solid #d2b48c;
-  box-shadow: 0 0 5px 2px rgba(0, 0, 0, 0.7),
-    0 0 10px 4px rgba(34, 139, 34, 0.2), 0 0 15px 6px rgba(0, 0, 0, 0.2);
-  background: linear-gradient(
-    135deg,
-    rgba(245, 245, 220, 0.7) 2%,
-    rgba(34, 139, 34, 0.2) 100%,
-    rgba(46, 139, 87, 0.7) 75%,
-    rgba(245, 245, 220, 0.7) 0%
-  );
+  border-radius: 15px;
+  overflow: hidden;
   transition: transform 1.5s ease-out;
-  will-change: transform;
-
-  &.visible {
-    transform: translateY(0);
+  box-shadow: 0 0 5px 2px rgba(0, 0, 0, 0.3),
+    0 0 10px 4px rgba(34, 139, 34, 0.2), 0 0 15px 6px rgba(0, 0, 0, 0.5);
+  /* TABLET: un poco más ancho y centrado */
+  @media (max-width: 1024px) and (min-width: 769px) {
+    width: 60%;
+    margin: 40px auto;
   }
-  &.hidden {
-    transform: translateY(200px);
-  }
 
+  /* MOBILE */
   @media (max-width: 768px) {
     width: 100%;
-    margin-bottom: 20px;
-    transform: none !important; /* 📌 Desactiva la animación en móviles */
+    margin: 20px auto;
+    transform: none !important;
   }
 `;
 
 const ContenedorPrincipal2 = styled.div`
   position: absolute;
-  top: 0;
-  left: 80px;
-  width: 40%;
-  margin: 0 auto;
-  padding: 40px;
-  height: auto;
-  margin-top: 350px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  overflow: hidden;
+  top: 150px;
+  right: 120px;
+  width: 35%;
+  padding: 10px;
+  border: 3px solid #a1ad7f;
   border-radius: 15px;
-  border: 3px solid #d2b48c;
-  box-shadow: 0 0 5px 2px rgba(0, 0, 0, 0.7),
-    0 0 10px 4px rgba(34, 139, 34, 0.2), 0 0 15px 6px rgba(0, 0, 0, 0.2);
-  z-index: 1;
   background-color: rgba(255, 255, 255, 0.2);
   transition: transform 1.5s ease-out;
-  will-change: transform;
-  will-change: transform;
-  backface-visibility: hidden;
-  transform-style: preserve-3d;
-  contain: layout style paint;
+  box-shadow: 0 0 5px 2px rgba(0, 0, 0, 0.3),
+    0 0 15px 6px rgba(0, 0, 0, 0.2);
 
-  &.visible {
-    transform: translateY(0);
-  }
-  &.hidden {
-    transform: translateY(-200px);
+  /* TABLET: movemos un poco hacia la izquierda y hacemos más ancho */
+  @media (max-width: 1024px) and (min-width: 769px) {
+    top: 140px;
+    right: 40px;
+    width: 50%;
   }
 
+  /* MOBILE */
   @media (max-width: 768px) {
     position: relative;
-    width: 100%;
-    margin-top: 20px;
+    top: 20px;
     left: 0;
+    width: 100%;
     padding: 20px;
-    transform: none !important; /* 📌 Desactiva la animación en móviles */
+    transform: none !important;
   }
 `;
 
@@ -168,7 +146,7 @@ const ImagenDaniela = () => {
         className={!isMobile ? "hidden" : ""}
       >
         <img
-          src="https://res.cloudinary.com/dhikp5azp/image/upload/f_auto,q_auto,w_1600/v1745573398/Copia_de_Sin_t%C3%ADtulo_Post_de_Instagram_ru5dfx.png"
+          src="https://res.cloudinary.com/dhikp5azp/image/upload/f_auto,q_auto,w_1600/v1746396624/BAF17E77-9F94-4A6A-A2BD-790A98334D42_1_105_c_n2rcpc.jpg"
           alt="Daniela"
           style={{ width: "100%", borderRadius: "15px" }}
           loading="lazy"
@@ -184,41 +162,81 @@ const ImagenDaniela = () => {
             textAlign: "justify",
             background: "#f5eedc",
             borderRadius: "15px",
+            fontFamily: '"Playfair Display", serif', // ◀ aquí
+            lineHeight: 1.6,
+            color: "rgb(75, 60, 45)",
           }}
         >
-          Hola, soy Daniela Arrázola, y si estás aquí, es posible que estés
-          buscando una forma de sentirte mejor, de entenderte más o de superar
-          un momento difícil. Déjame decirte que no estás solo. Como psicóloga,
-          mi misión es crear un espacio seguro, sin juicios y sin prisas donde
-          podamos trabajar juntos.
-        </div>
-      </ContenedorPrincipal2>
+          {/* ─── Título en negrita ─── */}
+          <Typography
+            component="h2"
+            sx={{
+              fontFamily: "Playfair Display",
+              fontWeight: 600,
+              fontSize: { xs: "1.3rem", sm: "1.5rem" },
+              mb: 1,
+              textAlign: { xs: "center", sm: "center" },
+              lineHeight: 1.2,
+            }}
+          >
+            ¿Te sientes emocionalmente agotado?
+          </Typography>
 
-      <Button
-        variant="contained"
-        component={motion.button}
-        whileHover={!isMobile ? { scale: 1.1 } : {}}
-        whileTap={!isMobile ? { scale: 0.95 } : {}}
-        sx={{
-          backgroundColor: "rgb(211, 190, 151)",
-          color: "rgb(92, 116, 101)",
-          fontSize: { xs: "1rem", sm: "1.2rem" },
-          fontFamily: "Playfair Display",
-          fontWeight: "500",
-          padding: { xs: "10px 20px", sm: "12px 24px" },
-          textTransform: "none",
-          borderRadius: "30px",
-          transition: "all 0.3s ease",
-          border: "2px solid rgb(120, 150, 131)",
-          marginLeft: { xs: "auto", sm: "520px" },
-          marginRight: { xs: "auto", sm: "0" },
-          display: "block",
-          marginTop: { xs: "10px", sm: "20px" },
-        }}
-        onClick={() => navigate("/full-acerca")}
-      >
-        Leer más sobre mí
-      </Button>
+          {/* ─── Texto principal ─── */}
+          <Typography
+            component="p"
+            sx={{
+              fontFamily: "Playfair Display",
+              fontSize: { xs: "0.95rem", sm: "1rem" },
+              mb: 2,
+            }}
+          >
+            Hola, soy Daniela, psicóloga especializada en límites y regulación
+            emocional. Si estás aquí, puede que estés cansado de cuidar a todos
+            menos a ti, que te cueste decir “no” sin culpa o que te sientas
+            desconectado de lo que antes te hacía bien. Quizás estás atravesando
+            ansiedad, tristeza, confusión o simplemente el deseo profundo de
+            recuperar tu bienestar emocional. En este espacio terapéutico,
+            caminamos juntos a tu ritmo. Te acompaño a reconectar contigo, a
+            poner palabras a lo que duele y a construir relaciones más sanas
+            contigo y con los demás. No estás solo. Aquí empieza tu proceso de
+            volver a ti. Conoce más sobre mí y cómo puedo acompañarte en tu
+            proceso
+          </Typography>
+        </div>
+
+        {/* ─── Botón dentro de un Box responsive ─── */}
+        {/* ─── Botón dentro de un Box responsive ─── */}
+        <Box
+          sx={{
+            width: { xs: "100%", md: "auto" }, // 100% en movil, auto en escritorio
+            display: "flex",
+            justifyContent: { xs: "center", md: "center" }, // centrado en xs, al final en md+
+            mt: { xs: 2, md: 1 },
+          }}
+        >
+          <Button
+            variant="contained"
+            component={motion.button}
+            whileHover={!isMobile ? { scale: 1.1 } : {}}
+            whileTap={!isMobile ? { scale: 0.95 } : {}}
+            sx={{
+              backgroundColor: "rgb(211, 190, 151)",
+              color: "rgb(92, 116, 101)",
+              fontFamily: "Playfair Display",
+              textTransform: "none",
+              borderRadius: "30px",
+              border: "2px solid rgb(120, 150, 131)",
+              fontSize: { xs: "1rem", sm: "1rem" },
+              px: { xs: 3, sm: 3 },
+              py: { xs: 1.5, sm: 1 },
+            }}
+            onClick={() => navigate("/full-acerca")}
+          >
+            Leer más
+          </Button>
+        </Box>
+      </ContenedorPrincipal2>
     </ContenedorPadre>
   );
 };

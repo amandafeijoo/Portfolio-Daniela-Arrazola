@@ -28,10 +28,13 @@ const ContenedorPadre = styled.div`
 
   /* MOBILE */
   @media (max-width: 768px) {
-    width: 100%;
-    padding: 20px;
-    min-height: 700px;
-    margin-bottom: 20px;
+    width: 100%; /* ✅ en lugar de 100vw */
+    padding: 0;
+    margin: 0;
+    border: none;
+    border-radius: 0;
+    box-shadow: none;
+    overflow-x: hidden; /* ✅ Evita que se desborde horizontalmente */
   }
 `;
 
@@ -53,7 +56,7 @@ const ContenedorPrincipal1 = styled.div`
 
   /* MOBILE */
   @media (max-width: 768px) {
-    width: 100%;
+    width: 70%;
     margin: 20px auto;
     transform: none !important;
   }
@@ -61,7 +64,7 @@ const ContenedorPrincipal1 = styled.div`
 
 const ContenedorPrincipal2 = styled.div`
   position: absolute;
-  top: 150px;
+  top: 120px;
   right: 120px;
   width: 35%;
   padding: 10px;
@@ -69,8 +72,7 @@ const ContenedorPrincipal2 = styled.div`
   border-radius: 15px;
   background-color: rgba(255, 255, 255, 0.2);
   transition: transform 1.5s ease-out;
-  box-shadow: 0 0 5px 2px rgba(0, 0, 0, 0.3),
-    0 0 15px 6px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 0 5px 2px rgba(0, 0, 0, 0.3), 0 0 15px 6px rgba(0, 0, 0, 0.2);
 
   /* TABLET: movemos un poco hacia la izquierda y hacemos más ancho */
   @media (max-width: 1024px) and (min-width: 769px) {
@@ -82,11 +84,14 @@ const ContenedorPrincipal2 = styled.div`
   /* MOBILE */
   @media (max-width: 768px) {
     position: relative;
-    top: 20px;
+    top: 0;
     left: 0;
     width: 100%;
     padding: 20px;
-    transform: none !important;
+    border: none;
+    border-radius: 0;
+    box-shadow: none;
+    background-color: transparent;
   }
 `;
 
@@ -158,10 +163,10 @@ const ImagenDaniela = () => {
       >
         <div
           style={{
-            padding: isMobile ? "10px" : "20px",
+            background: isMobile ? "transparent" : "#f5eedc",
+            borderRadius: isMobile ? "0px" : "15px",
+            padding: isMobile ? "20px" : "30px",
             textAlign: "justify",
-            background: "#f5eedc",
-            borderRadius: "15px",
             fontFamily: '"Playfair Display", serif', // ◀ aquí
             lineHeight: 1.6,
             color: "rgb(75, 60, 45)",
@@ -174,7 +179,7 @@ const ImagenDaniela = () => {
               fontFamily: "Playfair Display",
               fontWeight: 600,
               fontSize: { xs: "1.3rem", sm: "1.5rem" },
-              mb: 1,
+              mb: 2,
               textAlign: { xs: "center", sm: "center" },
               lineHeight: 1.2,
             }}

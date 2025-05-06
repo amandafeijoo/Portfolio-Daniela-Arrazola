@@ -144,7 +144,7 @@ function ResponsiveImage({ publicId, alt }) {
       loading="lazy"
       alt={alt}
       style={{
-        width: "60%",
+        width: "65%",
         height: "auto",
         borderRadius: "15px",
         boxShadow: [
@@ -160,8 +160,11 @@ function ResponsiveImage({ publicId, alt }) {
 // Removed duplicate ResponsiveImage.propTypes declaration
 
 const FullAcerca = () => {
+
   useEffect(() => {
-    window.scrollTo(0, 0);
+    window.scrollTo(0, 0)
+  }, []);
+
     // Preload
     const imgs = [
       "v1746407263/1_oy23bt",
@@ -172,7 +175,7 @@ const FullAcerca = () => {
       const i = new Image();
       i.src = `https://res.cloudinary.com/dhikp5azp/image/upload/f_auto,q_auto,w_640/${id}.png`;
     });
-  }, []);
+
 
   return (
     <FullAcercaContainer>
@@ -187,7 +190,7 @@ const FullAcerca = () => {
               sx={{
                 fontFamily: "Playfair Display",
                 fontWeight: 700,
-                fontSize: { xs: "1.5rem", sm: "2rem", md: "1.5rem" },
+                fontSize: { xs: "1.5rem", sm: "2rem", md: "1.7rem" },
                 textAlign: "left",
                 mb: 2,
               }}
@@ -200,7 +203,7 @@ const FullAcerca = () => {
               component="p"
               sx={{
                 fontFamily: "Playfair Display",
-                fontSize: { xs: "0.95rem", sm: "1rem" },
+                fontSize: { xs: "0.95rem", sm: "1.1rem" },
                 lineHeight: 1.6,
               }}
             >
@@ -250,7 +253,7 @@ const FullAcerca = () => {
               sx={{
                 fontFamily: "Playfair Display",
                 fontWeight: 700,
-                fontSize: { xs: "1.5rem", sm: "2rem", md: "1.5rem" },
+                fontSize: { xs: "1.5rem", sm: "2rem", md: "1.7rem" },
                 textAlign: "left",
                 mb: 2,
               }}
@@ -263,7 +266,7 @@ const FullAcerca = () => {
               component="p"
               sx={{
                 fontFamily: "Playfair Display",
-                fontSize: { xs: "0.95rem", sm: "1rem" },
+                fontSize: { xs: "0.95rem", sm: "1.1rem" },
                 lineHeight: 1.6,
                 mb: 3,
               }}
@@ -281,7 +284,7 @@ const FullAcerca = () => {
               sx={{
                 fontFamily: "Playfair Display",
                 fontWeight: 700,
-                fontSize: { xs: "1.5rem", sm: "2rem", md: "1.5rem" },
+                fontSize: { xs: "1.5rem", sm: "2rem", md: "1.7rem" },
                 textAlign: "left",
                 mb: 2,
               }}
@@ -294,7 +297,7 @@ const FullAcerca = () => {
               component="p"
               sx={{
                 fontFamily: "Playfair Display",
-                fontSize: { xs: "0.95rem", sm: "1rem" },
+                fontSize: { xs: "0.95rem", sm: "1.1rem" },
                 lineHeight: 1.6,
               }}
             >
@@ -338,7 +341,7 @@ const FullAcerca = () => {
                 mb: 3,
                 "& li": {
                   fontFamily: "Playfair Display",
-                  fontSize: { xs: "0.95rem", sm: "1rem" },
+                  fontSize: { xs: "0.95rem", sm: "1.1rem" },
                   lineHeight: 1.6,
                   mb: 1,
                 },
@@ -357,7 +360,7 @@ const FullAcerca = () => {
               component="p"
               sx={{
                 fontFamily: "Playfair Display",
-                fontSize: { xs: "0.95rem", sm: "1rem" },
+                fontSize: { xs: "0.95rem", sm: "1.1rem" },
                 lineHeight: 1.6,
               }}
             >

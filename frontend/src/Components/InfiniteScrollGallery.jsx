@@ -51,13 +51,24 @@ const StyledContainer = styled(Box)`
 
 
 const images = [
-  { src: img("servicios1.svg") },
   { src: img("s1image.svg"), path: "/service1" },
-  { src: img("servicios2.svg") },
-  { src: img("servicios18.svg") },
+  { src: "https://res.cloudinary.com/dhikp5azp/image/upload/f_auto,q_auto,w_300/v1746450458/ANSIEDAD_DEPRESI%C3%93N_axetxe.jpg", path: "/service1" },
   { src: img("s2image.svg"), path: "/service2" },
-  { src: img("servicios3.svg") },
+
+  // { src: img("servicios2.svg") },
+  // { src: img("servicios18.svg") },
+  
+  // {  ilustrativa imagen 
+  //   src: "https://res.cloudinary.com/dhikp5azp/image/upload/f_auto,q_auto,w_300/v1746486490/Post_de_Instagram_Terapia_Emocional_Doodle_Crudo_y4d6kf.png",
+  //   path: "/service2"
+  // },
+
+  // { src: img("servicios3.svg") },
+  {src: "https:///res.cloudinary.com/dhikp5azp/image/upload/f_auto,q_auto,w_300/v1746450462/REG.EMOCIONAL_ohzlyi.jpg",
+    path: "/service2"
+  },
   { src: img("s3image.svg"), path: "/service3" },
+  
   { src: img("servicios4.svg") },
   { src: img("s4image.svg"), path: "/service4" },
   { src: img("servicios5.svg") },
@@ -65,12 +76,12 @@ const images = [
   { src: img("servicios6.svg") },
   { src: img("s6image.svg"), path: "/service6" },
   { src: img("servicios7.svg") },
-  { src: img("servicios15.svg") },
+  // { src: img("servicios15.svg") },
   { src: img("s7image.svg"), path: "/service7" },
   { src: img("servicios8.svg") },
   { src: img("s8image.svg"), path: "/service8" },
   { src: img("servicios9.svg") },
-  { src: img("servicios16.svg") },
+  // { src: img("servicios16.svg") },
   { src: img("s9image.svg"), path: "/service9" },
   { src: img("servicios18.svg") },
   { src: img("s10image.svg"), path: "/service10" },
@@ -82,7 +93,14 @@ const images = [
   { src: img("s13image.svg"), path: "/service13" },
 ];
 
-const getRandomSize = (index, isMobile, isTablet) => {
+const getRandomSize = (index, isMobile, isTablet, isText = false) => {
+  if (isText) {
+    return {
+      width: isMobile ? "140px" : isTablet ? "160px" : "220px",
+      height: isMobile ? "160px" : isTablet ? "180px" : "260px",
+    };
+  }
+
   const mobileSizes = [
     { width: "110px", height: "140px" },
     { width: "140px", height: "120px" },
@@ -107,13 +125,9 @@ const getRandomSize = (index, isMobile, isTablet) => {
     { width: "240px", height: "360px" },
   ];
 
-  if (isMobile) {
-    return mobileSizes[index % mobileSizes.length]; // Si es móvil, usa tamaños pequeños
-  } else if (isTablet) {
-    return tabletSizes[index % tabletSizes.length]; // Si es tablet, usa tamaños intermedios
-  } else {
-    return desktopSizes[index % desktopSizes.length]; // Si es escritorio, usa los tamaños grandes
-  }
+  if (isMobile) return mobileSizes[index % mobileSizes.length];
+  if (isTablet) return tabletSizes[index % tabletSizes.length];
+  return desktopSizes[index % desktopSizes.length];
 };
 
 const InfiniteScrollGallery = () => {
@@ -153,7 +167,7 @@ const InfiniteScrollGallery = () => {
       x: ["0%", "-100%"],
       transition: {
         ease: "linear",
-        duration: isMobile ? 280 : 380, // Animación más rápida en móviles
+        duration: isMobile ? 280 : 580, //******* */ Animación más rápida en móviles/////***** */
         repeat: Infinity,
       },
     });
@@ -227,27 +241,45 @@ const InfiniteScrollGallery = () => {
         }}
       >
         <motion.div style={{ display: 'flex' }} animate={controls}>
-          {[...images, ...images].map((img, index) => {
-            const size = getRandomSize(index, isMobile, isTablet);
-            return (
-              <motion.img
-                key={index}
-                src={img.src}
-                alt="Gallery"
-                style={{
-                  width: size.width,
-                  height: size.height,
-                  objectFit: 'cover',
-                  borderRadius: '4px',
-                  margin: '4px',
-                  border: '2px solid #d2b48c',
-                  cursor: img.path ? 'pointer' : 'default',
-                }}
-                onClick={() => handleImageClick(img.path)}
-              />
-            );
-          })}
-        </motion.div>
+  {[...images, ...images].map((img, index) => {
+    const isText = Boolean(img.path); // ✅ detecta si es una imagen de texto
+    const size = getRandomSize(index, isMobile, isTablet, isText);
+
+    return (
+      <Box
+        key={index}
+        sx={{
+          width: size.width,
+          height: size.height,
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          border: '2px solid #d2b48c',
+          borderRadius: '6px',
+          margin: '4px',
+          overflow: 'hidden',
+          backgroundColor: isText ? '#6f8e7c' : 'transparent',
+          cursor: isText ? 'pointer' : 'default',
+          boxShadow: isText ? '0 2px 4px rgba(0,0,0,0.1)' : 'none',
+        }}
+        onClick={() => handleImageClick(img.path)}
+      >
+        <motion.img
+          src={img.src}
+          alt="Gallery"
+          style={{
+            width: '100%',
+            height: '100%',
+            objectFit: 'cover', // ✅ Siempre "cover"
+            padding: isText ? '0' : '2px', // menos padding visual para las de texto
+            borderRadius: '4px',
+          }}
+        />
+      </Box>
+    );
+  })}
+</motion.div>
+
       </Box>
     </div>
       {/* Botón para solicitud de cita urgente */}

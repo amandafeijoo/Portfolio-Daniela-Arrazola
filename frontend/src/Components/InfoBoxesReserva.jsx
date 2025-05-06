@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useRef } from "react";
 import { Grid, Box, Typography, useMediaQuery } from "@mui/material";
 import {
   faCreditCard,
@@ -11,163 +11,193 @@ import { useNavigate } from "react-router-dom";
 import { img } from "../utils/imagePath";
 
 const InfoBoxesReserva = () => {
-  useEffect(() => {
-    window.scrollTo(0, 0);
-  }, []);
   const navigate = useNavigate();
-  const [scrollY, setScrollY] = useState(0);
-  const [direction, setDirection] = useState("down");
+  const carouselRef = useRef(null);
 
-  const isMobile = useMediaQuery("(max-width: 600px)");
-  const isTablet = useMediaQuery("(max-width: 960px)");
-
-  useEffect(() => {
-    const handleScroll = () => {
-      const currentScrollY = window.scrollY;
-      setDirection(currentScrollY > scrollY ? "down" : "up");
-      setScrollY(currentScrollY);
-    };
-
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, [scrollY]);
+  const isMobile = useMediaQuery("(max-width:600px)");
+  const isTablet = useMediaQuery("(max-width:960px)");
 
   const handleNavigate = () => navigate("/preguntas-frecuentes");
 
+  const handleWheel = (e) => {
+    if (!isMobile && !isTablet && carouselRef.current) {
+      e.preventDefault();
+      carouselRef.current.scrollLeft += e.deltaY;
+    }
+  };
+
+  const items = [
+    {
+      icon: faClock,
+      title: "Duración por sesión",
+      text: "⏱ 45-50 minutos",
+      bg: "rgb(220, 209, 193)",
+      color: "#654828",
+    },
+    {
+      icon: faCreditCard,
+      title: "Métodos de pago",
+      text: "Opciones de terapia disponibles (individual, pareja, paquete de 4 sesiones).",
+      bg: "rgba(255, 255, 255, 0.7)",
+      color: "#654828",
+      paymentIcons: [
+        { src: img("VippsIcon.svg"), alt: "Vipps" },
+        { src: img("VisaIcon.png"), alt: "Visa" },
+        { src: img("BizumIcon.svg"), alt: "Bizum" },
+        { src: img("MastercardIcon.svg"), alt: "Mastercard" },
+        { src: img("americanexpressicon.svg"), alt: "American Express" },
+        { src: img("paypal.svg"), alt: "Paypal" },
+      ],
+    },
+    {
+      icon: faQuestionCircle,
+      title: "¿Tienes dudas sobre la terapia, el pago o cancelaciones?",
+      text: "Consulta nuestras preguntas frecuentes sobre reservas, métodos de pago y sesiones.",
+      bg: "rgb(220, 209, 193)",
+      color: "#654828",
+      link: "Preguntas frecuentes",
+    },
+    {
+      icon: faVideo,
+      title: "¿En qué plataforma realizamos la consulta online?",
+      text: "A través de la plataforma online Zoom.",
+      bg: "rgba(255, 255, 255, 0.7)",
+      color: "#654828",
+    },
+  ];
+
   return (
-    <Grid
-      container
-      spacing={2}
+    <Box
+      ref={carouselRef}
+      onWheel={handleWheel}
       sx={{
-        marginTop: { xs: 2, md: 9 },
-        marginBottom: { xs: 2, md: 8 },
-        display: "flex",
-        flexWrap: isTablet ? "wrap" : "nowrap",
-        justifyContent: "center",
-        alignItems: "center",
-        overflowX: isTablet ? "auto" : "visible",
+        width: "100%",
+        overflowX: "scroll",
+        py: { xs: 2, md: 8 },
+        "&::-webkit-scrollbar": { height: 6 },
+        "&::-webkit-scrollbar-thumb": {
+          backgroundColor: "#ccc",
+          borderRadius: 3,
+        },
       }}
     >
-      {[
-        {
-          icon: faClock,
-          title: "Duración por sesión",
-          text: "⏱ 60 minutos por sesión.",
-          bg: "rgb(220, 209, 193)",
-          color: "#654828",
-        },
-        {
-          icon: faCreditCard,
-          title: "Métodos de pago",
-          text: "Opciones de terapia disponibles (individual, pareja, paquete de 4 sesiones).",
-          bg: "rgba(255, 255, 255, 0.7)",
-          color: "#654828",
-          paymentIcons: [
-            { src: img("VippsIcon.svg"), alt: "Vipps" },
-            { src: img("VisaIcon.png"), alt: "Visa" },
-            { src: img("BizumIcon.svg"), alt: "Bizum" },
-            { src: img("MastercardIcon.svg"), alt: "Mastercard" },
-            { src: img("americanexpressicon.svg"), alt: "American Express" },
-          ],
-        },
-        {
-          icon: faQuestionCircle,
-          title: "¿Tienes dudas sobre la terapia, el pago o cancelaciones?",
-          text: "Consulta nuestras preguntas frecuentes sobre reservas, métodos de pago y sesiones.",
-          bg: "rgb(220, 209, 193)",
-          color: "#654828",
-          link: "Preguntas frecuentes",
-        },
-        {
-          icon: faVideo,
-          title: "¿En qué plataforma realizamos la consulta online?",
-          text: "A través de la plataforma online Zoom.",
-          bg: "rgba(255, 255, 255, 0.7)",
-          color: "#654828",
-        },
-      ].map((item, index) => (
-        <Grid
-          item
-          xs={12}
-          sm={6}
-          md={3}
-          key={index}
-          sx={{
-            flex: "0 0 auto",
-            minWidth: { xs: "100%", sm: 400, md: 400 },
-            maxWidth: "100%",
-            display: "flex",
-            justifyContent: "center",
-            marginLeft: { xs: "-3%", sm: 0 },
-          }}
-        >
-          <Box
-            sx={{
-              width: "100%",
-              p: 3,
-              height: 280,
-              background: item.bg,
-              borderRadius: "25px",
-              border: item.bg.includes("rgb") ? "2px solid #d2b48c" : "none",
-              boxShadow:
-                "0 0 5px 2px rgba(0, 0, 0, 0.7), 0 0 10px 4px rgba(34, 139, 34, 0.2), 0 0 15px 6px rgba(0, 0, 0, 0.2)",
-              overflow: "hidden",
-              fontFamily: "Playfair Display",
-              textAlign: "center",
-              color: item.color,
-              transform:
-                isMobile || isTablet
-                  ? "none"
-                  : direction === "down"
-                  ? "translateX(-100px)"
-                  : "translateX(100px)",
-              transition: "transform 0.5s ease",
-            }}
-          >
-            <FontAwesomeIcon
-              icon={item.icon}
-              size="3x"
-              style={{ color: "rgb(182, 155, 120)" }}
-            />
-            <Typography variant="h6" sx={{ fontWeight: "bold", marginTop: 1 }}>
-              {item.title}
-            </Typography>
-            <Typography>{item.text}</Typography>
-            {item.paymentIcons && (
+      <Grid
+        container
+        spacing={2}
+        sx={{
+          display: "flex",
+          flexWrap: "nowrap",
+          justifyContent: "flex-start",
+          alignItems: "center",
+        }}
+      >
+        {items.map((item, i) => {
+          const isFirst = i === 0;
+          const isLast = i === items.length - 1;
+
+          return (
+            <Grid
+              item
+              key={i}
+              sx={{
+                flex: "0 0 auto",
+                maxWidth: { xs: 180, sm: 220, md: 300 },
+                minWidth: { xs: 300, sm: 220, md: 470 },
+                pr: 2,
+              }}
+            >
               <Box
                 sx={{
                   display: "flex",
-                  justifyContent: "space-around",
-                  marginTop: 2,
+                  flexDirection: "column",
+                  alignItems: "center",
+                  height: { xs: 278, sm: 200, md: 290 },
+                  width: "100%",
+                  p: 2,
+                  background: item.bg,
+                  borderRadius: "20px",
+                  border: item.bg.includes("#") ? "2px solid #d2b48c" : "none",
+                  boxShadow:
+                    "0 0 5px 2px rgba(0,0,0,0.7), 0 0 10px 4px rgba(34,139,34,0.2), 0 0 15px 6px rgba(0,0,0,0.2)",
+                  textAlign: "center",
+                  color: item.color,
+                  fontFamily: "Playfair Display",
+                  overflow: "hidden",
                 }}
               >
-                {item.paymentIcons.map((icon, i) => (
-                  <img
-                    key={i}
-                    src={icon.src}
-                    alt={icon.alt}
-                    style={{ height: 25 }}
+                <Box sx={{ mt: { xs: 1, sm: 1.5, md: 2 } }}>
+                  <FontAwesomeIcon
+                    icon={item.icon}
+                    size="3x"
+                    style={{ color: "rgb(182,155,120)" }}
                   />
-                ))}
+                </Box>
+
+                <Typography
+                  variant="h6"
+                  sx={{
+                    fontWeight: "bold",
+                    fontSize: { xs: "1rem", sm: "1.1rem", md: "1.1rem" },
+                    mt: isFirst || isLast ? 5 : 4,
+                  }}
+                >
+                  {item.title}
+                </Typography>
+
+                <Typography
+                  sx={{
+                    fontSize: { xs: "0.75rem", sm: "0.85rem", md: "0.9rem" },
+                    mt: isFirst || isLast ? 1 : 0.5,
+                  }}
+                >
+                  {item.text}
+                </Typography>
+
+                {item.paymentIcons && (
+                  <Box
+                    sx={{
+                      display: "flex",
+                      flexWrap: "wrap",
+                      justifyContent: "center",
+                      gap: 2,
+                      mt: 2,
+                    }}
+                  >
+                    {item.paymentIcons.map((ico, j) => (
+                      <Box
+                        key={j}
+                        component="img"
+                        src={ico.src}
+                        alt={ico.alt}
+                        sx={{
+                          width: { xs: 40, sm: 48, md: 56 },
+                          height: { xs: 40, sm: 48, md: 56 },
+                          objectFit: "contain",
+                        }}
+                      />
+                    ))}
+                  </Box>
+                )}
+
+                {item.link && (
+                  <Typography
+                    onClick={handleNavigate}
+                    sx={{
+                      cursor: "pointer",
+                      textDecoration: "underline",
+                      fontWeight: "bold",
+                      mt: 1,
+                    }}
+                  >
+                    {item.link}
+                  </Typography>
+                )}
               </Box>
-            )}
-            {item.link && (
-              <Typography
-                sx={{
-                  cursor: "pointer",
-                  textDecoration: "underline",
-                  fontWeight: "bold",
-                  marginTop: 1,
-                }}
-                onClick={handleNavigate}
-              >
-                {item.link}
-              </Typography>
-            )}
-          </Box>
-        </Grid>
-      ))}
-    </Grid>
+            </Grid>
+          );
+        })}
+      </Grid>
+    </Box>
   );
 };
 

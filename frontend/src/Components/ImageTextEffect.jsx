@@ -27,10 +27,12 @@ const ImageTextEffect = () => {
     <Box
       sx={{
         width: "100%", // 🖐️ ancho total pantalla
-        backgroundColor: "#f5eedc", 
+        backgroundColor: "#f5eedc",
         display: "flex",
         justifyContent: "center",
-      }}
+        // ─── Aquí metemos el colchón ───
+      pb: { xs: "120px", md: 0 },  // 120px en móvil, 0 en escritorio
+    }}
     >
       <Box
         sx={{
@@ -40,8 +42,8 @@ const ImageTextEffect = () => {
           minHeight: "100vh",
           padding: { xs: "20px", md: "40px" },
           gap: "5px",
-          maxWidth: "1200px", 
-          width: "100%", 
+          maxWidth: "1200px",
+          width: "100%",
         }}
       >
         {/* Contenedor del Video */}
@@ -56,7 +58,6 @@ const ImageTextEffect = () => {
             width: "100%",
             maxWidth: "450px",
             margin: "0 auto",
-
           }}
         >
           <motion.video
@@ -145,8 +146,8 @@ const ImageTextEffect = () => {
               color: "#4b3f2f",
               boxShadow:
                 "0 4px 8px rgba(210, 180, 140, 0.9), 0 6px 20px rgba(0, 0, 0, 0.19)",
-              position: "relative", 
-              maxWidth: { xs: "105%", md: "750px" }, 
+              position: "relative",
+              maxWidth: { xs: "105%", md: "750px" },
             }}
           >
             <Typography
@@ -156,37 +157,83 @@ const ImageTextEffect = () => {
                 fontWeight: "bold",
                 mb: 2,
                 fontFamily: "Playfair Display, serif",
-                fontSize: { xs: "1.4rem", md: "2.5rem" },
+                fontSize: { xs: "1.5rem", md: "2.5rem" },
               }}
             >
               Terapia
             </Typography>
             <Typography
-              variant="body1"
+              variant="h5"
+              component="h2"
               sx={{
-                fontSize: { xs: "0.8rem", md: "1rem" },
-                textAlign: "justify",
                 fontFamily: "Playfair Display, serif",
-                paddingBottom: isMobile ? "90px" : "0", // 👈 añade esto
+                fontWeight: 600,
+                fontSize: { xs: "0.9rem", md: "1.3rem" },
+                textAlign: "center",
+                mb: 2,
               }}
             >
-              La terapia no solo te enseña a gestionar dificultades personales,
-              sino también un espacio donde te acompaño a priorizar lo que
-              realmente importa: tu bienestar. Cada persona tiene su propio
-              ritmo y su propia historia, mi compromiso como profesional es
-              respetarlos. Es un momento para ti, con una oportunidad única para
-              conocerte y atender tus propias necesidades. Desde ese lugar
-              aprenderás a tomar decisiones más conscientes e informadas.
-              <br />
-              Imagina que tu bienestar es un rompecabezas: tus pensamientos,
-              emociones, entorno, historia de vida y hábitos se conectan para
-              influir en cómo te sientes. Con el enfoque Cognitivo Conductual,
-              trabajaremos juntos en identificar y ajustar esas piezas que te
-              permitirán sentirte mejor contigo mismo. Te ofrezco herramientas
-              prácticas basadas en evidencia científica que realmente funcionan
-              en tu día a día. No necesitas “estar preparado”, solo estar
-              comprometido y ser paciente con tu propio proceso.
+              ¿Estás listo para mejorar tu bienestar?
             </Typography>
+
+            <Typography
+              variant="body1"
+              sx={{
+                fontFamily: "Playfair Display, serif",
+                fontSize: { xs: "0.8rem", md: "1rem" },
+                textAlign: "justify",
+                mb: 2,
+              }}
+            >
+              La terapia no solo te ayuda a gestionar dificultades, sino que te
+              brinda un espacio único para conocer y atender tus necesidades.{" "}
+              <Box component="span" sx={{ fontWeight: 700 }}>
+                Cada persona tiene su propio ritmo
+              </Box>
+              , y mi compromiso es acompañarte respetando tu proceso.
+            </Typography>
+
+            <Typography
+              variant="body1"
+              sx={{
+                fontFamily: "Playfair Display, serif",
+                fontSize: { xs: "0.8rem", md: "1rem" },
+                textAlign: "justify",
+                mb: 2,
+              }}
+            >
+              <Box component="span" sx={{ fontWeight: 700 }}>
+                Imagina tu bienestar como un rompecabezas:
+              </Box>{" "}
+              tus pensamientos, emociones y hábitos se conectan para formar cómo
+              te sientes. Con el enfoque Cognitivo Conductual, ajustaremos las
+              piezas claves para que logres una vida más equilibrada. Te ofrezco
+              herramientas prácticas, basadas en{" "}
+              <Box component="span" sx={{ fontWeight: 700 }}>
+                evidencia científica
+              </Box>
+              , para aplicar en tu día a día.
+            </Typography>
+
+            <Typography
+              variant="body1"
+              sx={{
+                fontFamily: "Playfair Display, serif",
+                fontSize: { xs: "0.8rem", md: "1rem" },
+                textAlign: "justify",
+                mb: 2,
+              }}
+            >
+              <Box component="span" sx={{ fontWeight: 700 }}>
+                No tienes que estar “listo”
+              </Box>
+              , solo comprometido con tu proceso.{" "}
+              <Box component="span" sx={{ fontWeight: 700 }}>
+                Agenda una consulta conmigo
+              </Box>{" "}
+              y comienza a tomar el control de tu bienestar.
+            </Typography>
+
             {/* BOTÓN SOLO VISIBLE EN WEB */}
             <Box
               sx={{

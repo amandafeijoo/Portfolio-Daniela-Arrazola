@@ -335,7 +335,7 @@ const Service6 = () => {
           </Box>
         </Box>
       </Container>
-      <Box sx={{ marginBottom: 10, marginTop: 15 }}>
+      <Box sx={{ marginBottom: 10, marginTop: 2 }}>
         <Reserva />
       </Box>
     </>

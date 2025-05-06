@@ -97,6 +97,7 @@ const MainWrapper = styled.main`
   padding-top: 155px; /* deja hueco para el Header */
   width: 100%;
   /* overflow-x: hidden; */
+  
 
 `;
 

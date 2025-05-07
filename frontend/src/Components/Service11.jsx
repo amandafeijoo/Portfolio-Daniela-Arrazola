@@ -58,7 +58,7 @@ const Image = () => (
       animation: `${moveAnimation} 3s infinite`,
     }}
   >
-      <img
+    <img
       src="https://res.cloudinary.com/dhikp5azp/image/upload/f_auto,q_auto,w_800/v1746012630/11_seay1d.png"
       alt="Trastorno Obsesivo Compulsivo"
       loading="lazy"
@@ -197,8 +197,8 @@ const Service11 = () => {
                     component="h2"
                     sx={{ fontFamily: "Playfair Display" }}
                   >
-                    Imagina que tu mente es como un castillo con una alarma
-                    defectuosa.
+                    ¿Sientes que tu mente está atrapada en un ciclo de
+                    pensamientos irracionales?
                   </Typography>
                 </AccordionSummary>
                 <AccordionDetails>
@@ -211,91 +211,98 @@ const Service11 = () => {
                       lineHeight: 1.6,
                     }}
                   >
-                    Se activa constantemente, aunque no haya peligro real. Así
-                    es el TOC: una alerta que se dispara con pensamientos
-                    intrusivos que generan ansiedad (obsesiones) y acciones que
-                    parecen la única forma de calmarla (compulsiones).
-                  </Typography>
-                  <Typography
-                    variant="body1"
-                    sx={{
-                      color: "#4b3f2f",
-                      fontFamily: "Playfair Display",
-                      textAlign: "justify",
-                      lineHeight: 1.6,
-                      marginTop: 2,
-                    }}
-                  >
-                    El Trastorno Obsesivo-Compulsivo no se trata de ser
-                    meticuloso, `maniático` o `perfeccionista`. Es una lucha
-                    constante con pensamientos que se repiten y acciones que
-                    parecen inevitables. Es sentir que, si no haces `X`, algo
-                    malo puede pasar.
-                  </Typography>
-                  <Typography
-                    variant="body1"
-                    sx={{
-                      color: "#4b3f2f",
-                      fontFamily: "Playfair Display",
-                      textAlign: "justify",
-                      lineHeight: 1.6,
-                      marginTop: 2,
-                    }}
-                  >
-                    La buena noticia es que existe tratamiento, la terapia ha
-                    demostrado ser altamente efectiva y es por eso que podemos
-                    trabajar juntos en:
+                    El Trastorno Obsesivo-Compulsivo (TOC) no se trata de ser
+                    perfeccionista o maniático, sino de una constante batalla
+                    interna con
+                    <Box component="span" sx={{ fontWeight: "bold", mr: 0.5 }}>
+                      {" "}
+                      pensamientos intrusivos
+                    </Box>
+                    (obsesiones) que generan
+                    <Box component="span" sx={{ fontWeight: "bold", mr: 0.5 }}>
+                      {" "}
+                      ansiedad y acciones repetitivas
+                    </Box>
+                    (compulsiones) que parecen la única forma de calmarla.{" "}
+                    <br /> <br />
+                    Es como tener una alarma en tu mente que se activa sin razón
+                    real, generando un miedo irracional de que algo malo suceda
+                    si no realizas ciertas acciones.
+                    <Box component="span" sx={{ fontWeight: "bold", mr: 0.5 }}>
+                      {" "}
+                      Pero no estás solo en esta lucha.
+                    </Box>
+                    <br /> <br />
+                    La
+                    <Box component="span" sx={{ fontWeight: "bold", mr: 0.5 }}>
+                      {" "}
+                      buena noticia
+                    </Box>
+                    es que el tratamiento es efectivo. La terapia es una
+                    herramienta probada que puede ayudarte a superar el TOC.
+                    <br /> <br />
+                    <Box component="span" sx={{ fontWeight: "bold", mr: 0.5 }}>
+                      {" "}
+                      Juntos podemos trabajar en:
+                    </Box>
                   </Typography>
                   <List>
-                    <ListItem
-                      sx={{
-                        backgroundColor: "#fff",
-                        margin: 1,
-                        borderRadius: 1,
-                        boxShadow: 1,
-                      }}
-                    >
-                      <ListItemText
-                        primary="Identificar las obsesiones para aprender a reducir su impacto"
+                    {[
+                      {
+                        primary: "Identificar las obsesiones,",
+                        secondary:
+                          "aprendiendo a reducir su impacto en tu vida diaria.",
+                      },
+                      {
+                        primary: "Romper el ciclo de compulsiones,",
+                        secondary:
+                          "con técnicas respaldadas por la ciencia y la práctica.",
+                      },
+                      {
+                        primary:
+                          "Adquirir herramientas para que tomes el control de tus emociones y acciones,",
+                        secondary: "reduciendo su poder sobre ti.",
+                      },
+                    ].map(({ primary, secondary }, i) => (
+                      <ListItem
+                        key={i}
                         sx={{
-                          color: "#4b3f2f",
-                          fontFamily: "Playfair Display",
+                          backgroundColor: "#fff",
+                          margin: 1,
+                          borderRadius: 1,
+                          boxShadow: 1,
                         }}
-                      />
-                    </ListItem>
-                    <ListItem
-                      sx={{
-                        backgroundColor: "#fff",
-                        margin: 1,
-                        borderRadius: 1,
-                        boxShadow: 1,
-                      }}
-                    >
-                      <ListItemText
-                        primary="Romper el ciclo de compulsiones con técnicas respaldadas por la ciencia."
-                        sx={{
-                          color: "#4b3f2f",
-                          fontFamily: "Playfair Display",
-                        }}
-                      />
-                    </ListItem>
-                    <ListItem
-                      sx={{
-                        backgroundColor: "#fff",
-                        margin: 1,
-                        borderRadius: 1,
-                        boxShadow: 1,
-                      }}
-                    >
-                      <ListItemText
-                        primary="Adquirir herramientas para que tú tomes el control sobre tus emociones y acciones"
-                        sx={{
-                          color: "#4b3f2f",
-                          fontFamily: "Playfair Display",
-                        }}
-                      />
-                    </ListItem>
+                      >
+                        <ListItemText
+                          disableTypography
+                          primary={
+                            <>
+                              <Typography
+                                component="span"
+                                sx={{
+                                  fontWeight: "bold",
+                                  color: "#4b3f2f",
+                                  fontFamily: "Playfair Display",
+                                }}
+                              >
+                                {primary}
+                              </Typography>{" "}
+                              <Typography
+                                component="span"
+                                sx={{
+                                  color: "#4b3f2f",
+                                  fontFamily: "Playfair Display",
+                                }}
+                              >
+                                {secondary}
+                              </Typography>
+                            </>
+                          }
+                        />
+                      </ListItem>
+                    ))}
                   </List>
+
                   <Typography
                     variant="body1"
                     sx={{
@@ -305,9 +312,21 @@ const Service11 = () => {
                       lineHeight: 1.6,
                     }}
                   >
-                    Si vives con TOC, no tienes que seguir luchando en silencio.
+                    Si vives con TOC,
+                    <Box component="span" sx={{ fontWeight: "bold", mr: 0.5 }}>
+                      {" "}
+                      no tienes que seguir luchando en silencio.{" "}
+                    </Box>
                     Hay una salida, y aunque el cambio no será inmediato, cada
-                    paso que tomes te acercará a un mayor nivel de bienestar.
+                    paso que tomes te acercará a un mayor bienestar y control
+                    sobre tu vida.
+                    <br />
+                    <br />
+                    <Box component="span" sx={{ fontWeight: "bold", mr: 0.5 }}>
+                      {" "}
+                      Agenda tu sesión ahora y da el primer paso para recuperar
+                      tu paz y bienestar.
+                    </Box>
                   </Typography>
                 </AccordionDetails>
               </Accordion>

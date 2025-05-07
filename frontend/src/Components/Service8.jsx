@@ -58,7 +58,7 @@ const Image = () => (
       animation: `${moveAnimation} 3s infinite`,
     }}
   >
-     <img
+    <img
       src="https://res.cloudinary.com/dhikp5azp/image/upload/f_auto,q_auto,w_800/v1746012630/8_uxwhgp.png"
       alt="Productividad y gestión del tiempo"
       loading="lazy"
@@ -194,7 +194,7 @@ const Service8 = () => {
                     component="h2"
                     sx={{ fontFamily: "Playfair Display" }}
                   >
-                    El tiempo es uno de los recursos más valiosos que tenemos.
+                    ¿Sientes que el tiempo se te escapa de las manos?
                   </Typography>
                 </AccordionSummary>
                 <AccordionDetails>
@@ -207,103 +207,81 @@ const Service8 = () => {
                       lineHeight: 1.6,
                     }}
                   >
-                    El tiempo es uno de los recursos más valiosos que tenemos y
-                    también uno de los más difíciles de gestionar. Nos
-                    presionamos para hacer más, ser más productivos, cumplir
-                    expectativas ajenas y, en el proceso, nos olvidamos de
-                    nosotros mismos.
+                    La presión por ser productivo y cumplir con las expectativas
+                    externas puede llevarnos a olvidarnos de lo más importante:
+                    nuestro bienestar. La lucha constante contra el reloj nos
+                    consume, pero
+                    <Box component="span" sx={{ fontWeight: "bold", mr: 0.5 }}>
+                      {" "}
+                      ¿y si, en lugar de pelear contra el tiempo, aprendiéramos
+                      a hacerlo nuestro aliado?
+                    </Box>
+                    <br /> <br />
+                    En terapia, te ayudo a tomar el control de tu tiempo de una
+                    forma más equilibrada y saludable. Trabajaremos juntos para:
                   </Typography>
-                  <Typography
-                    variant="body1"
-                    sx={{
-                      color: "#4b3f2f",
-                      fontFamily: "Playfair Display",
-                      textAlign: "justify",
-                      lineHeight: 1.6,
-                      marginTop: 2,
-                    }}
-                  >
-                    Pero, ¿qué pasaría si en lugar de luchar contra el tiempo,
-                    aprendes a hacerlo tu aliado?
-                  </Typography>
-                  <Typography
-                    variant="body1"
-                    sx={{
-                      color: "#4b3f2f",
-                      fontFamily: "Playfair Display",
-                      textAlign: "justify",
-                      lineHeight: 1.6,
-                      marginTop: 2,
-                    }}
-                  >
-                    En sesión trabajamos juntos para:
-                  </Typography>
+
                   <List>
-                    <ListItem
-                      sx={{
-                        backgroundColor: "#fff",
-                        margin: 1,
-                        borderRadius: 1,
-                        boxShadow: 1,
-                      }}
-                    >
-                      <ListItemText
-                        primary="Comprender por qué procrastinas y cómo influyen el estrés, la autoexigencia o el miedo al fracaso."
+                    {[
+                      {
+                        primary: "Entender las raíces de la procrastinación,",
+                        secondary:
+                          "como el estrés, la autoexigencia y el miedo al fracaso.",
+                      },
+                      {
+                        primary: "Organizar tu vida sin sobrecargarte,",
+                        secondary: "respetando tus límites y energía.",
+                      },
+                      {
+                        primary: "Definir objetivos realistas,",
+                        secondary:
+                          "dejándote de comparar con los logros ajenos y enfocándote en tu propio ritmo.",
+                      },
+                      {
+                        primary: "Romper el ciclo de la procrastinación,",
+                        secondary:
+                          "para que puedas disfrutar de tus logros sin la culpa que te frena.",
+                      },
+                    ].map(({ primary, secondary }, i) => (
+                      <ListItem
+                        key={i}
                         sx={{
-                          color: "#4b3f2f",
-                          fontFamily: "Playfair Display",
+                          backgroundColor: "#fff",
+                          margin: 1,
+                          borderRadius: 1,
+                          boxShadow: 1,
                         }}
-                      />
-                    </ListItem>
-                    <ListItem
-                      sx={{
-                        backgroundColor: "#fff",
-                        margin: 1,
-                        borderRadius: 1,
-                        boxShadow: 1,
-                      }}
-                    >
-                      <ListItemText
-                        primary="Organizar tu vida sin agobiarte, respetando tu energía y tu bienestar."
-                        sx={{
-                          color: "#4b3f2f",
-                          fontFamily: "Playfair Display",
-                        }}
-                      />
-                    </ListItem>
-                    <ListItem
-                      sx={{
-                        backgroundColor: "#fff",
-                        margin: 1,
-                        borderRadius: 1,
-                        boxShadow: 1,
-                      }}
-                    >
-                      <ListItemText
-                        primary="Definir objetivos realistas y dejar de compararte con los tiempos y logros de los demás."
-                        sx={{
-                          color: "#4b3f2f",
-                          fontFamily: "Playfair Display",
-                        }}
-                      />
-                    </ListItem>
-                    <ListItem
-                      sx={{
-                        backgroundColor: "#fff",
-                        margin: 1,
-                        borderRadius: 1,
-                        boxShadow: 1,
-                      }}
-                    >
-                      <ListItemText
-                        primary="Romper el ciclo de la procrastinación, para que dejes de sentir culpa y puedas disfrutar de tus logros."
-                        sx={{
-                          color: "#4b3f2f",
-                          fontFamily: "Playfair Display",
-                        }}
-                      />
-                    </ListItem>
+                      >
+                        <ListItemText
+                          disableTypography
+                          primary={
+                            <>
+                              <Typography
+                                component="span"
+                                sx={{
+                                  fontWeight: "bold",
+                                  color: "#4b3f2f",
+                                  fontFamily: "Playfair Display",
+                                }}
+                              >
+                                {primary}
+                              </Typography>{" "}
+                              <Typography
+                                component="span"
+                                sx={{
+                                  color: "#4b3f2f",
+                                  fontFamily: "Playfair Display",
+                                }}
+                              >
+                                {secondary}
+                              </Typography>
+                            </>
+                          }
+                        />
+                      </ListItem>
+                    ))}
                   </List>
+
                   <Typography
                     variant="body1"
                     sx={{
@@ -313,11 +291,24 @@ const Service8 = () => {
                       lineHeight: 1.6,
                     }}
                   >
-                    El tiempo no es tu enemigo, y la productividad no define tu
-                    valor. No eres tus pendientes, ni tus listas de tareas, ni
-                    el ritmo acelerado del mundo. Te extiendo mi mano para
-                    enseñarte a disfrutar del proceso, sin que la exigencia te
-                    robe la paz.
+                    <Box component="span" sx={{ fontWeight: "bold", mr: 0.5 }}>
+                      {" "}
+                      El tiempo no es tu enemigo,
+                    </Box>
+                    y la productividad no determina tu valor como persona. No
+                    eres tus pendientes ni el ritmo frenético del mundo.
+                    <Box component="span" sx={{ fontWeight: "bold", mr: 0.5 }}>
+                      {" "}
+                      Te extiendo mi mano para enseñarte a disfrutar del proceso
+                    </Box>
+                    , sin que la exigencia te robe la paz.
+                    <br /> <br />
+                    <Box component="span" sx={{ fontWeight: "bold", mr: 0.5 }}>
+                      {" "}
+                      Agenda una sesión hoy
+                    </Box>
+                    y empieza a manejar tu tiempo de forma equilibrada, logrando
+                    tus objetivos sin estrés ni presión.
                   </Typography>
                 </AccordionDetails>
               </Accordion>

@@ -193,7 +193,7 @@ const Service7 = () => {
                     component="h2"
                     sx={{ fontFamily: "Playfair Display" }}
                   >
-                    Cuando hablar no es suficiente y gritar no funciona
+                    ¿La crianza te está superando?
                   </Typography>
                 </AccordionSummary>
                 <AccordionDetails>
@@ -207,145 +207,108 @@ const Service7 = () => {
                       marginBottom: 3,
                     }}
                   >
-                    Ser padre puede sentirse como ser el capitán de un barco en
-                    medio de una tormenta. Sabes que debes mantener el rumbo,
-                    pero las olas de berrinches, desobediencia y frustración
-                    pueden hacerte dudar de si realmente lo estás haciendo bien.
-                    A veces, por más que repitas lo mismo una y otra vez,
-                    sientes que tu hijo simplemente no escucha. Y cuando la
-                    paciencia se agota, aparecen los gritos, la culpa y la
-                    sensación de estar a la deriva. Pero aquí hay algo que
-                    necesitas saber: el cerebro de tu hijo no funciona como el
-                    tuyo.
-                  </Typography>
-                  <Typography
-                    variant="body1"
-                    sx={{
-                      color: "#4b3f2f",
-                      fontFamily: "Playfair Display",
-                      textAlign: "justify",
-                      lineHeight: 1.6,
-                      marginBottom: 3,
-                    }}
-                  >
-                    El cerebro infantil es como una semilla en crecimiento,
-                    lleno de emociones intensas, pero aún en desarrollo. No
-                    tiene la misma capacidad que un adulto para regularse,
-                    razonar o anticipar consecuencias. Lo que para ti es lógica,
-                    para él es un océano de sensaciones desbordadas.
-                  </Typography>
-                  <Typography
-                    variant="body1"
-                    sx={{
-                      color: "#4b3f2f",
-                      fontFamily: "Playfair Display",
-                      textAlign: "justify",
-                      lineHeight: 1.6,
-                      marginBottom: 3,
-                    }}
-                  >
-                    El cerebro adulto, en cambio, es como un mapa con caminos ya
-                    trazados. Tienes experiencia, aprendiste a resolver
-                    problemas y reaccionas basándote en lo que viviste. Pero
-                    ¿qué pasa si los caminos que aprendiste no son los mejores?
-                    Si la única respuesta que conoces ante el caos es el castigo
-                    o la exigencia, es normal que te sientas atrapado en un
-                    ciclo de frustración.
-                  </Typography>
-                  <Typography
-                    variant="body1"
-                    sx={{
-                      color: "#4b3f2f",
-                      fontFamily: "Playfair Display",
-                      textAlign: "justify",
-                      lineHeight: 1.6,
-                      marginBottom: 3,
-                    }}
-                  >
-                    La buena noticia es que hay otras rutas. No se trata de ser
-                    permisivo ni de perder autoridad, sino de aprender un nuevo
-                    lenguaje: el de la conexión antes que la corrección, la
-                    firmeza sin perder la empatía y la enseñanza sin recurrir al
-                    miedo.
-                  </Typography>
-                  <Typography
-                    variant="body1"
-                    sx={{
-                      color: "#4b3f2f",
-                      fontFamily: "Playfair Display",
-                      textAlign: "justify",
-                      lineHeight: 1.6,
-                      marginTop: 2,
-                    }}
-                  >
-                    En terapia, trabajamos juntos para:
+                    Ser padre o madre puede sentirse como navegar en un mar de
+                    emociones intensas. Berrinches, desobediencia y la sensación
+                    de que no importa cuánto lo intentes, tu hijo no te escucha.
+                    Cuando la paciencia se acaba, los gritos y la culpa
+                    aparecen, dejándote con la sensación de estar perdido.
+                    <br />
+                    <br />
+                    Es importante saber que el cerebro de tu hijo
+                    <Box component="span" sx={{ fontWeight: "bold", mr: 0.5 }}>
+                      {" "}
+                      no tiene la misma capacidad para regularse
+                    </Box>
+                    que el tuyo. Mientras tú ya has aprendido a resolver
+                    conflictos y manejar problemas, él está desarrollando esas
+                    habilidades, lo que convierte cada situación en un desafío
+                    emocional.
+                    <Box component="span" sx={{ fontWeight: "bold", mr: 0.5 }}>
+                      {" "}
+                      No es que tu hijo no quiera escuchar, es que su cerebro
+                      aún está aprendiendo a gestionar las emociones.
+                    </Box>
+                    La buena noticia es que
+                    <Box component="span" sx={{ fontWeight: "bold", mr: 0.5 }}>
+                      {" "}
+                      hay un camino más efectivo y pacífico.
+                    </Box>
+                    No se trata de ser permisivo ni perder autoridad, sino de
+                    aprender a conectar con tu hijo a través de la
+                    <Box component="span" sx={{ fontWeight: "bold", mr: 0.5 }}>
+                      {" "}
+                      empatía, la firmeza y la comunicación consciente.
+                      <br />
+                      <br />
+                      En terapia, trabajaremos para:{" "}
+                    </Box>
                   </Typography>
                   <List>
-                    <ListItem
-                      sx={{
-                        backgroundColor: "#fff",
-                        margin: 1,
-                        borderRadius: 1,
-                        boxShadow: 1,
-                      }}
-                    >
-                      <ListItemText
-                        primary="Comprender cómo funciona el cerebro infantil y por qué tu hijo reacciona como lo hace."
+                    {[
+                      {
+                        primary: "Entender cómo funciona el cerebro infantil,",
+                        secondary: "y cómo influye en su comportamiento.",
+                      },
+                      {
+                        primary:
+                          "Romper patrones de crianza que ya no son efectivos.",
+                        secondary: "",
+                      },
+                      {
+                        primary:
+                          "Desarrollar estrategias para establecer límites sin necesidad de gritar ni recurrir al castigo.",
+                        secondary: "",
+                      },
+                      {
+                        primary: "Fortalecer la relación con tu hijo,",
+                        secondary:
+                          "para que crezca desde la seguridad y no desde el miedo.",
+                      },
+                    ].map(({ primary, secondary }, i) => (
+                      <ListItem
+                        key={i}
                         sx={{
-                          color: "#4b3f2f",
-                          fontFamily: "Playfair Display",
+                          backgroundColor: "#fff",
+                          margin: 1,
+                          borderRadius: 1,
+                          boxShadow: 1,
                         }}
-                      />
-                    </ListItem>
-                    <ListItem
-                      sx={{
-                        backgroundColor: "#fff",
-                        margin: 1,
-                        borderRadius: 1,
-                        boxShadow: 1,
-                      }}
-                    >
-                      <ListItemText
-                        primary="Romper patrones de crianza heredados que no están funcionando."
-                        sx={{
-                          color: "#4b3f2f",
-                          fontFamily: "Playfair Display",
-                        }}
-                      />
-                    </ListItem>
-                    <ListItem
-                      sx={{
-                        backgroundColor: "#fff",
-                        margin: 1,
-                        borderRadius: 1,
-                        boxShadow: 1,
-                      }}
-                    >
-                      <ListItemText
-                        primary="Aprender herramientas prácticas para establecer límites sin gritos ni castigos."
-                        sx={{
-                          color: "#4b3f2f",
-                          fontFamily: "Playfair Display",
-                        }}
-                      />
-                    </ListItem>
-                    <ListItem
-                      sx={{
-                        backgroundColor: "#fff",
-                        margin: 1,
-                        borderRadius: 1,
-                        boxShadow: 1,
-                      }}
-                    >
-                      <ListItemText
-                        primary="Fortalecer el vínculo con tu hijo, para que aprenda desde la seguridad y no desde el miedo."
-                        sx={{
-                          color: "#4b3f2f",
-                          fontFamily: "Playfair Display",
-                        }}
-                      />
-                    </ListItem>
+                      >
+                        <ListItemText
+                          disableTypography
+                          primary={
+                            <>
+                              <Typography
+                                component="span"
+                                sx={{
+                                  fontWeight: "bold",
+                                  color: "#4b3f2f",
+                                  fontFamily: "Playfair Display",
+                                }}
+                              >
+                                {primary}
+                              </Typography>
+                              {secondary && (
+                                <>
+                                  {" "}
+                                  <Typography
+                                    component="span"
+                                    sx={{
+                                      color: "#4b3f2f",
+                                      fontFamily: "Playfair Display",
+                                    }}
+                                  >
+                                    {secondary}
+                                  </Typography>
+                                </>
+                              )}
+                            </>
+                          }
+                        />
+                      </ListItem>
+                    ))}
                   </List>
+
                   <Typography
                     variant="body1"
                     sx={{
@@ -355,11 +318,26 @@ const Service7 = () => {
                       lineHeight: 1.6,
                     }}
                   >
-                    No nacemos sabiendo ser padres, pero sí podemos aprender a
-                    criar desde la calma y el respeto. Si hoy sientes que la
-                    crianza te desborda, recuerda: si cambias la forma en que te
-                    comunicas con tu hijo, él cambiará la forma en que te
-                    escucha.{" "}
+                    <Box component="span" sx={{ fontWeight: "bold", mr: 0.5 }}>
+                      {" "}
+                      La crianza no es algo que se aprenda por instinto,                   
+                       </Box>
+                       pero con la guía adecuada
+                       puedes aprender a criar desde un lugar de
+                    <Box component="span" sx={{ fontWeight: "bold", mr: 0.5 }}>
+                      {" "}
+                      calma y respeto.
+                    </Box>
+                    Si sientes que estás a
+                    punto de rendirte, recuerda:                    
+                    <Box component="span" sx={{ fontWeight: "bold", mr: 0.5 }}>
+                      {" "}
+                      al cambiar tu forma de comunicarte, tu hijo
+cambiará la forma en que te escucha. <br/>  <br/>
+Agenda una consulta conmigo
+                    </Box>
+                    y comencemos a construir una crianza más
+                    pacífica y efectiva para ti y tu hijo.                   
                   </Typography>
                 </AccordionDetails>
               </Accordion>

@@ -58,14 +58,13 @@ const Image = () => (
       animation: `${moveAnimation} 3s infinite`,
     }}
   >
-   <img
-  src="https://res.cloudinary.com/dhikp5azp/image/upload/f_auto,q_auto,w_800/v1746012631/5_e2qrf8.png"
-  alt="Conflictos interpersonales"
-  loading="lazy"
-  width="100%"
-  style={{ borderRadius: "inherit", display: "block" }}
-/>
-
+    <img
+      src="https://res.cloudinary.com/dhikp5azp/image/upload/f_auto,q_auto,w_800/v1746012631/5_e2qrf8.png"
+      alt="Conflictos interpersonales"
+      loading="lazy"
+      width="100%"
+      style={{ borderRadius: "inherit", display: "block" }}
+    />
   </Box>
 );
 
@@ -198,9 +197,8 @@ const Service5 = () => {
                     component="h2"
                     sx={{ fontFamily: "Playfair Display" }}
                   >
-                    Las relaciones son espejos. A través de ellas, nos
-                    descubrimos a nosotros mismos, nos enfrentamos a nuestras
-                    heridas y aprendemos a crecer.
+                    ¿Te sientes atrapado en discusiones constantes con tu
+                    pareja, familia o amigos?
                   </Typography>
                 </AccordionSummary>
                 <AccordionDetails>
@@ -213,84 +211,86 @@ const Service5 = () => {
                       lineHeight: 1.6,
                     }}
                   >
-                    Pero cuando surgen conflictos, esos espejos pueden volverse
-                    distorsionados, mostrando solo el dolor, la frustración y la
-                    distancia. El problema no es discutir, sino cómo lo hacemos.
-                    Si los conflictos con tu pareja, tu familia o tus amigos se
-                    han vuelto una constante, tal vez es momento de detenerte y
-                    mirar más allá de la problemática. En terapia, exploramos
-                    juntos:
+                    Los conflictos interpersonales pueden distorsionar la manera
+                    en que nos vemos a nosotros mismos y generar dolor,
+                    frustración y distancia. Sin embargo, el verdadero reto no
+                    es el desacuerdo en sí, sino cómo lo gestionamos.
+                    <br />
+                    <br />
+                    <Box component="span" sx={{ fontWeight: "bold" }}>
+                      La clave para superar estos conflictos radica en
+                      comprender su origen y aprender a gestionarlos con
+                      inteligencia emocional.
+                    </Box>
+                    Si notas que las discusiones se han vuelto una constante en
+                    tu vida, es momento de reflexionar y buscar una solución
+                    profunda.
+                    <br />
+                    <br />
+                    En terapia, exploramos juntos:
                   </Typography>
                   <List>
-                    <ListItem
-                      sx={{
-                        backgroundColor: "#fff",
-                        margin: 1,
-                        borderRadius: 1,
-                        boxShadow: 1,
-                      }}
-                    >
-                      <ListItemText
-                        primary="Identificar el origen del conflicto"
-                        secondary="Patrones, heridas del pasado, expectativas no expresadas."
+                    {[
+                      {
+                        primary: "Identificación del origen del conflicto:",
+                        secondary:
+                          "Detectar patrones repetitivos, heridas del pasado y expectativas no expresadas.",
+                      },
+                      {
+                        primary: "Comunicación asertiva:",
+                        secondary:
+                          "Expresar lo que sientes de manera clara y respetuosa, evitando el ataque, el silencio o la evasión.",
+                      },
+                      {
+                        primary: "Gestión de emociones intensas:",
+                        secondary:
+                          "Controlar impulsos para no reaccionar desde la frustración o el dolor.",
+                      },
+                      {
+                        primary: "Fortalecimiento de la relación:",
+                        secondary:
+                          "Reconstruir la conexión emocional desde el respeto, la empatía y el entendimiento mutuo.",
+                      },
+                    ].map(({ primary, secondary }, i) => (
+                      <ListItem
+                        key={i}
                         sx={{
-                          color: "#4b3f2f",
-                          fontFamily: "Playfair Display",
+                          backgroundColor: "#fff",
+                          margin: 1,
+                          borderRadius: 1,
+                          boxShadow: 1,
                         }}
-                      />
-                    </ListItem>
-                    <ListItem
-                      sx={{
-                        backgroundColor: "#fff",
-                        margin: 1,
-                        borderRadius: 1,
-                        boxShadow: 1,
-                      }}
-                    >
-                      <ListItemText
-                        primary="Aprender a comunicarte con asertividad"
-                        secondary="Expresar lo que sientes sin atacar, callar o evitar el problema."
-                        sx={{
-                          color: "#4b3f2f",
-                          fontFamily: "Playfair Display",
-                        }}
-                      />
-                    </ListItem>
-                    <ListItem
-                      sx={{
-                        backgroundColor: "#fff",
-                        margin: 1,
-                        borderRadius: 1,
-                        boxShadow: 1,
-                      }}
-                    >
-                      <ListItemText
-                        primary="Gestionar las emociones intensas"
-                        secondary="Para no reaccionar impulsivamente cuando te sientes frustrado, rechazado o dolido."
-                        sx={{
-                          color: "#4b3f2f",
-                          fontFamily: "Playfair Display",
-                        }}
-                      />
-                    </ListItem>
-                    <ListItem
-                      sx={{
-                        backgroundColor: "#fff",
-                        margin: 1,
-                        borderRadius: 1,
-                        boxShadow: 1,
-                      }}
-                    >
-                      <ListItemText
-                        primary="Fortalecer la relación y recuperar la conexión"
-                        secondary="Desde el respeto, la empatía y la conexión real."
-                        sx={{
-                          color: "#4b3f2f",
-                          fontFamily: "Playfair Display",
-                        }}
-                      />
-                    </ListItem>
+                      >
+                        <ListItemText
+                          disableTypography
+                          primary={
+                            <>
+                              <Typography
+                                component="span"
+                                sx={{
+                                  fontWeight: "bold",
+                                  color: "#4b3f2f",
+                                  fontFamily: "Playfair Display",
+                                }}
+                              >
+                                {primary}
+                              </Typography>{" "}
+                              <Typography
+                                component="span"
+                                sx={{
+                                  color: "#4b3f2f",
+                                  fontFamily: "Playfair Display",
+                                }}
+                              >
+                                {secondary}
+                              </Typography>
+                            </>
+                          }
+                        />
+                      </ListItem>
+                    ))}
                   </List>
+
                   <Typography
                     variant="body1"
                     sx={{
@@ -300,8 +300,16 @@ const Service5 = () => {
                       lineHeight: 1.6,
                     }}
                   >
-                    Resolver conflictos no significa `ganar` una discusión, sino
-                    construir relaciones más sanas y satisfactorias.
+                    <Box component="span" sx={{ fontWeight: "bold" }}>
+                      Resolver conflictos no significa ganar una discusión, sino
+                      construir relaciones más sanas y satisfactorias.
+                    </Box>
+                    Si estás listo para recuperar la paz y la armonía en tus
+                    relaciones,
+                    <Box component="span" sx={{ fontWeight: "bold" }}>
+                      agenda una consulta conmigo. Transformemos juntos la
+                      manera en que te relacionas con los demás y contigo mismo.
+                    </Box>
                   </Typography>
                 </AccordionDetails>
               </Accordion>

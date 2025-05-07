@@ -193,8 +193,8 @@ const Service4 = () => {
                     component="h2"
                     sx={{ fontFamily: "Playfair Display" }}
                   >
-                    Cuando pensamos en duelo, solemos asociarlo con la pérdida
-                    de un ser querido.
+                    Duelo y cambios: cómo sanar una pérdida sin perderte a ti
+                    mismo
                   </Typography>
                 </AccordionSummary>
                 <AccordionDetails>
@@ -207,89 +207,85 @@ const Service4 = () => {
                       lineHeight: 1.6,
                     }}
                   >
-                    Pero va más allá del fallecimiento de alguien: es el proceso
-                    de adaptación ante cualquier pérdida significativa en
-                    nuestra vida. <br /> Un cambio de trabajo, el fin de una
-                    amistad, una mudanza o el cierre de una etapa pueden
-                    despertar un profundo sentimiento de vacío, incertidumbre o
-                    tristeza. Todo eso implica duelo, es decir, dolor. Y aunque
-                    nos digan que `el tiempo lo cura todo`, la realidad es que
-                    sanar requiere mucho más que esperar. <br /> El duelo es un
-                    proceso natural, pero no siempre fácil de transitar. No se
-                    trata solo de dejar ir, sino de aprender a seguir adelante
-                    sin perderte a ti mismo en el camino. En terapia, trabajamos
-                    en:
+                    El duelo no solo ocurre cuando alguien muere. También se
+                    activa tras una ruptura, un despido, una mudanza o el cierre
+                    de una etapa importante. Y aunque a veces no se vea,&nbsp;
+                    <Box component="span" sx={{ fontWeight: "bold" }}>
+                      el dolor de perder algo significativo es real.
+                    </Box>{" "}
+                    Frases como “el tiempo lo cura todo” no siempre ayudan. La
+                    verdad es que{" "}
+                    <Box
+                      component="span"
+                      sx={{
+                        fontWeight: "bold",
+                        display: "inline",
+                        ml: 0 /* si necesitas separador extra */,
+                      }}
+                    >
+                      sanar requiere comprender lo que sientes, no ignorarlo.
+                    </Box>{" "}
+                    El duelo es un proceso natural, pero puede dejarte con una
+                    sensación de vacío, tristeza o confusión que cuesta manejar
+                    solo. En terapia trabajamos juntos para:
                   </Typography>
+
                   <List>
-                    <ListItem
-                      sx={{
-                        backgroundColor: "#fff",
-                        margin: 1,
-                        borderRadius: 1,
-                        boxShadow: 1,
-                      }}
-                    >
-                      <ListItemText
-                        primary="Reconocer la pérdida"
-                        secondary="Validar lo que sientes sin minimizarlo."
+                    {[
+                      [
+                        "Reconocer la pérdida",
+                        "y validar tu dolor, sin minimizarlo.",
+                      ],
+                      [
+                        "Procesar tus emociones,",
+                        "dándoles espacio sin que te arrastren.",
+                      ],
+                      [
+                        "Reconstruir tu identidad,",
+                        "para reencontrarte contigo mismo tras el cambio.",
+                      ],
+                      [
+                        "Mirar hacia adelante,",
+                        "integrando lo vivido sin dejar de avanzar.",
+                      ],
+                    ].map(([primary, secondary], i) => (
+                      <ListItem
+                        key={i}
                         sx={{
-                          color: "#4b3f2f",
-                          fontFamily: "Playfair Display",
+                          backgroundColor: "#fff",
+                          margin: 1,
+                          borderRadius: 1,
+                          boxShadow: 1,
                         }}
-                      />
-                    </ListItem>
-                    <ListItem
-                      sx={{
-                        backgroundColor: "#fff",
-                        margin: 1,
-                        borderRadius: 1,
-                        boxShadow: 1,
-                      }}
-                    >
-                      <ListItemText
-                        primary="Procesar las emociones"
-                        secondary="Dar lugar a la tristeza, el miedo o la nostalgia sin quedar atrapado en ellas."
-                        sx={{
-                          color: "#4b3f2f",
-                          fontFamily: "Playfair Display",
-                        }}
-                      />
-                    </ListItem>
-                    <ListItem
-                      sx={{
-                        backgroundColor: "#fff",
-                        margin: 1,
-                        borderRadius: 1,
-                        boxShadow: 1,
-                      }}
-                    >
-                      <ListItemText
-                        primary="Reencontrarte contigo mismo"
-                        secondary="Reconstruir tu identidad después del cambio."
-                        sx={{
-                          color: "#4b3f2f",
-                          fontFamily: "Playfair Display",
-                        }}
-                      />
-                    </ListItem>
-                    <ListItem
-                      sx={{
-                        backgroundColor: "#fff",
-                        margin: 1,
-                        borderRadius: 1,
-                        boxShadow: 1,
-                      }}
-                    >
-                      <ListItemText
-                        primary="Mirar hacia adelante"
-                        secondary="De qué manera reconstruirte y abrazar el cambio."
-                        sx={{
-                          color: "#4b3f2f",
-                          fontFamily: "Playfair Display",
-                        }}
-                      />
-                    </ListItem>
+                      >
+                        <ListItemText
+                          primary={primary}
+                          secondary={secondary}
+                          primaryTypographyProps={{
+                            component: "span",
+                            sx: {
+                              fontWeight: "bold",
+                              color: "#4b3f2f",
+                              fontFamily: "Playfair Display",
+                            },
+                          }}
+                          secondaryTypographyProps={{
+                            component: "span",
+                            sx: {
+                              color: "#4b3f2f",
+                              fontFamily: "Playfair Display",
+                            },
+                          }}
+                          sx={{
+                            display: "inline-flex",
+                            alignItems: "baseline",
+                            gap: 1,
+                          }}
+                        />
+                      </ListItem>
+                    ))}
                   </List>
+
                   <Typography
                     variant="body1"
                     sx={{
@@ -299,10 +295,18 @@ const Service4 = () => {
                       lineHeight: 1.6,
                     }}
                   >
-                    Una autoestima saludable impacta en todas las áreas de tu
-                    vida: desde la toma de decisiones hasta la calidad de tus
-                    relaciones. En terapia aprenderás a reconstruirla desde la
-                    raíz.
+                    <Box component="span" sx={{ fontWeight: "bold" }}>
+                      No se trata de olvidar lo que fue, sino de darte permiso
+                      para sanar y avanzar a tu propio ritmo.
+                    </Box>
+                    <br />
+                    ¿Estás viviendo un duelo o cambio difícil?
+                    <br />
+                    <br />
+                    <Box component="span" sx={{ fontWeight: "bold" }}>
+                      Agenda tu consulta y comencemos a acompañarte en este
+                      proceso.
+                    </Box>
                   </Typography>
                 </AccordionDetails>
               </Accordion>

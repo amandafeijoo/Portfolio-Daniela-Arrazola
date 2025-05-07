@@ -58,15 +58,13 @@ const Image = () => (
       animation: `${moveAnimation} 3s infinite`,
     }}
   >
-   <img
-  src="https://res.cloudinary.com/dhikp5azp/image/upload/f_auto,q_auto,w_800/v1746012633/1_arc3yr.png"
-  alt="Ansiedad y Depresión"
-  loading="lazy"
-  width="100%"
-  style={{ borderRadius: "inherit", display: "block" }}
-/>
-
-
+    <img
+      src="https://res.cloudinary.com/dhikp5azp/image/upload/f_auto,q_auto,w_800/v1746012633/1_arc3yr.png"
+      alt="Ansiedad y Depresión"
+      loading="lazy"
+      width="100%"
+      style={{ borderRadius: "inherit", display: "block" }}
+    />
   </Box>
 );
 
@@ -194,8 +192,7 @@ const Service1 = () => {
                   component="h2"
                   sx={{ fontFamily: "Playfair Display" }}
                 >
-                  Si los síntomas de ansiedad o depresión están tomando el
-                  control de tu vida...
+                  Identifica los signos de ansiedad para intervenir a tiempo
                 </Typography>
               </AccordionSummary>
               <AccordionDetails>
@@ -206,30 +203,43 @@ const Service1 = () => {
                     fontFamily: "Playfair Display",
                     textAlign: "justify",
                     lineHeight: 1.6,
+                    marginTop: 2,
                   }}
                 >
-                  Quiero que sepas que muchas personas que atraviesan lo mismo
-                  logran recuperar el control de sus vidas con el apoyo
-                  profesional adecuado. Las terapias basadas en ciencia están
-                  diseñadas para ayudarte a superar este malestar y alcanzar una
-                  vida más equilibrada y tranquila.
+                  ¿Sientes que tu mente no deja de dar vueltas y te cuesta
+                  relajarte? La tensión emocional puede manifestarse de muchas
+                  formas, y reconocer sus síntomas es crucial para tomar acción.
+                  Estos son algunos de los más comunes:
                   <br />
                   <br />
                   <List>
                     <ListItem
                       sx={{
-                        backgroundColor: "#fff",
+                        backgroundColor: "#f0f0f0",
                         margin: 1,
                         borderRadius: 1,
                         boxShadow: 1,
                       }}
                     >
                       <ListItemText
-                        primary="ANSIEDAD"
-                        sx={{
-                          color: "#4b3f2f",
-                          fontFamily: "Playfair Display",
-                        }}
+                        primary={
+                          <>
+                            {/* El span en negrita */}
+                            <Box
+                              component="span"
+                              sx={{
+                                fontWeight: "bold",
+                                color: "#4b3f2f",
+                                fontFamily: "Playfair Display",
+                              }}
+                            >
+                              1. Tu mente no para:
+                            </Box>{" "}
+                            {/* Resto del texto */}
+                            Preocupaciones constantes, incluso sin una razón
+                            aparente.
+                          </>
+                        }
                       />
                     </ListItem>
                     <ListItem
@@ -241,11 +251,23 @@ const Service1 = () => {
                       }}
                     >
                       <ListItemText
-                        primary="Preocupación excesiva y miedo persistente sobre situaciones cotidianas."
-                        sx={{
-                          color: "#4b3f2f",
-                          fontFamily: "Playfair Display",
-                        }}
+                        primary={
+                          <>
+                            {/* El span en negrita */}
+                            <Box
+                              component="span"
+                              sx={{
+                                fontWeight: "bold",
+                                color: "#4b3f2f",
+                                fontFamily: "Playfair Display",
+                              }}
+                            >
+                              2. Nudo en el pecho o garganta:
+                            </Box>{" "}
+                            {/* Resto del texto */}o dificultad para respirar,
+                            como si algo te estuviera oprimiendo.
+                          </>
+                        }
                       />
                     </ListItem>
                     <ListItem
@@ -257,11 +279,24 @@ const Service1 = () => {
                       }}
                     >
                       <ListItemText
-                        primary="Miedos intensos e irracionales que no están relacionados con situaciones peligrosas reales."
-                        sx={{
-                          color: "#4b3f2f",
-                          fontFamily: "Playfair Display",
-                        }}
+                        primary={
+                          <>
+                            {/* El span en negrita */}
+                            <Box
+                              component="span"
+                              sx={{
+                                fontWeight: "bold",
+                                color: "#4b3f2f",
+                                fontFamily: "Playfair Display",
+                              }}
+                            >
+                              3. Miedo sin motivo claro:
+                            </Box>{" "}
+                            {/* Resto del texto */}
+                            Sientes un peligro inminente y una angustia
+                            generalizada, incluso cuando todo parece estar bien.
+                          </>
+                        }
                       />
                     </ListItem>
                     <ListItem
@@ -273,11 +308,25 @@ const Service1 = () => {
                       }}
                     >
                       <ListItemText
-                        primary="Dificultad para controlar los pensamientos y sentimientos de ansiedad."
-                        sx={{
-                          color: "#4b3f2f",
-                          fontFamily: "Playfair Display",
-                        }}
+                        primary={
+                          <>
+                            {/* El span en negrita */}
+                            <Box
+                              component="span"
+                              sx={{
+                                fontWeight: "bold",
+                                color: "#4b3f2f",
+                                fontFamily: "Playfair Display",
+                              }}
+                            >
+                              4. No logras soltar el control:
+                            </Box>{" "}
+                            {/* Resto del texto */}
+                            Pensamientos repetitivos que te agotan mental y
+                            emocionalmente, haciéndote sentir que necesitas
+                            controlar todo.
+                          </>
+                        }
                       />
                     </ListItem>
                     <ListItem
@@ -289,11 +338,25 @@ const Service1 = () => {
                       }}
                     >
                       <ListItemText
-                        primary="Sentimientos de pánico o terror que ocurren repentinamente (ataques de pánico)."
-                        sx={{
-                          color: "#4b3f2f",
-                          fontFamily: "Playfair Display",
-                        }}
+                        primary={
+                          <>
+                            {/* El span en negrita */}
+                            <Box
+                              component="span"
+                              sx={{
+                                fontWeight: "bold",
+                                color: "#4b3f2f",
+                                fontFamily: "Playfair Display",
+                              }}
+                            >
+                              5. Ataques de pánico:
+                            </Box>{" "}
+                            {/* Resto del texto */}
+                            Episodios repentinos de miedo extremo, con falta de
+                            aire, palpitaciones y sensación de pérdida de
+                            control.
+                          </>
+                        }
                       />
                     </ListItem>
                     <ListItem
@@ -305,11 +368,24 @@ const Service1 = () => {
                       }}
                     >
                       <ListItemText
-                        primary="Preocupación constante que interfiere con las actividades diarias."
-                        sx={{
-                          color: "#4b3f2f",
-                          fontFamily: "Playfair Display",
-                        }}
+                        primary={
+                          <>
+                            {/* El span en negrita */}
+                            <Box
+                              component="span"
+                              sx={{
+                                fontWeight: "bold",
+                                color: "#4b3f2f",
+                                fontFamily: "Playfair Display",
+                              }}
+                            >
+                              6. Nada te concentra:
+                            </Box>{" "}
+                            {/* Resto del texto */}
+                            interfiere con tu capacidad de enfocarte, afectando
+                            también tu calidad de sueño y descanso.
+                          </>
+                        }
                       />
                     </ListItem>
                     <ListItem
@@ -321,41 +397,69 @@ const Service1 = () => {
                       }}
                     >
                       <ListItemText
-                        primary="Ansiedad intensa que dura mucho tiempo y no se alivia con facilidad."
-                        sx={{
-                          color: "#4b3f2f",
-                          fontFamily: "Playfair Display",
-                        }}
-                      />
-                    </ListItem>
-                    <ListItem
-                      sx={{
-                        backgroundColor: "#f0f0f0",
-                        margin: 1,
-                        borderRadius: 1,
-                        boxShadow: 1,
-                      }}
-                    >
-                      <ListItemText
-                        primary="Reacciones desproporcionadas ante situaciones que no representan un peligro real."
-                        sx={{
-                          color: "#4b3f2f",
-                          fontFamily: "Playfair Display",
-                        }}
+                        primary={
+                          <>
+                            {/* El span en negrita */}
+                            <Box
+                              component="span"
+                              sx={{
+                                fontWeight: "bold",
+                                color: "#4b3f2f",
+                                fontFamily: "Playfair Display",
+                              }}
+                            >
+                              7. Reaccionas con intensidad:
+                            </Box>{" "}
+                            {/* Resto del texto */}
+                            Irritabilidad y reacciones emocionales
+                            desproporcionadas, como si todo te sobrepasara y no
+                            pudieras manejarlo.
+                          </>
+                        }
                       />
                     </ListItem>
                   </List>
+                  <Typography
+                    variant="body1"
+                    sx={{
+                      color: "#4b3f2f",
+                      fontFamily: "Playfair Display",
+                      textAlign: "justify",
+                      lineHeight: 1.6,
+                      marginTop: 2,
+                      marginBottom: 2,
+                    }}
+                  >
+                    ¿Te sientes constantemente desanimado o vacío? Reconoce los
+                    signos de tristeza profunda y busca la ayuda que necesitas.{" "}
+                  </Typography>
                   <ListItem
                     sx={{
-                      backgroundColor: "#fff",
+                      backgroundColor: "#f0f0f0",
                       margin: 1,
                       borderRadius: 1,
                       boxShadow: 1,
                     }}
                   >
                     <ListItemText
-                      primary="DEPRESIÓN"
-                      sx={{ color: "#4b3f2f", fontFamily: "Playfair Display" }}
+                      primary={
+                        <>
+                          {/* El span en negrita */}
+                          <Box
+                            component="span"
+                            sx={{
+                              fontWeight: "bold",
+                              color: "#4b3f2f",
+                              fontFamily: "Playfair Display",
+                            }}
+                          >
+                            1. Tristeza constante:
+                          </Box>{" "}
+                          {/* Resto del texto */}
+                          Sentimiento de vacío o tristeza persistente sin razón
+                          clara.
+                        </>
+                      }
                     />
                   </ListItem>
                   <ListItem
@@ -367,8 +471,23 @@ const Service1 = () => {
                     }}
                   >
                     <ListItemText
-                      primary="Tristeza profunda y constante."
-                      sx={{ color: "#4b3f2f", fontFamily: "Playfair Display" }}
+                      primary={
+                        <>
+                          {/* El span en negrita */}
+                          <Box
+                            component="span"
+                            sx={{
+                              fontWeight: "bold",
+                              color: "#4b3f2f",
+                              fontFamily: "Playfair Display",
+                            }}
+                          >
+                            2. Falta de energía:
+                          </Box>{" "}
+                          {/* Resto del texto */}
+                          Agotamiento extremo, sin ganas de hacer nada.
+                        </>
+                      }
                     />
                   </ListItem>
                   <ListItem
@@ -380,8 +499,24 @@ const Service1 = () => {
                     }}
                   >
                     <ListItemText
-                      primary="Pérdida de interés en actividades que antes se disfrutaban."
-                      sx={{ color: "#4b3f2f", fontFamily: "Playfair Display" }}
+                      primary={
+                        <>
+                          {/* El span en negrita */}
+                          <Box
+                            component="span"
+                            sx={{
+                              fontWeight: "bold",
+                              color: "#4b3f2f",
+                              fontFamily: "Playfair Display",
+                            }}
+                          >
+                            3. Pérdida de interés:
+                          </Box>{" "}
+                          {/* Resto del texto */}
+                          Ya no disfrutas de lo que antes te gustaba.
+                          Disminución del apetito y de la líbido.
+                        </>
+                      }
                     />
                   </ListItem>
                   <ListItem
@@ -393,8 +528,23 @@ const Service1 = () => {
                     }}
                   >
                     <ListItemText
-                      primary="Cansancio extremo incluso tras esfuerzos mínimos."
-                      sx={{ color: "#4b3f2f", fontFamily: "Playfair Display" }}
+                      primary={
+                        <>
+                          {/* El span en negrita */}
+                          <Box
+                            component="span"
+                            sx={{
+                              fontWeight: "bold",
+                              color: "#4b3f2f",
+                              fontFamily: "Playfair Display",
+                            }}
+                          >
+                            4. Sentimientos de inutilidad:
+                          </Box>{" "}
+                          {/* Resto del texto */}
+                          Baja autoestima, te sientes culpable o insuficiente.
+                        </>
+                      }
                     />
                   </ListItem>
                   <ListItem
@@ -406,8 +556,23 @@ const Service1 = () => {
                     }}
                   >
                     <ListItemText
-                      primary="Sentimientos de culpa o incapacidad."
-                      sx={{ color: "#4b3f2f", fontFamily: "Playfair Display" }}
+                      primary={
+                        <>
+                          {/* El span en negrita */}
+                          <Box
+                            component="span"
+                            sx={{
+                              fontWeight: "bold",
+                              color: "#4b3f2f",
+                              fontFamily: "Playfair Display",
+                            }}
+                          >
+                            5. Dificultad para concentrarse:
+                          </Box>{" "}
+                          {/* Resto del texto */}
+                          Problemas para tomar decisiones o recordar cosas.
+                        </>
+                      }
                     />
                   </ListItem>
                   <ListItem
@@ -419,8 +584,23 @@ const Service1 = () => {
                     }}
                   >
                     <ListItemText
-                      primary="Irritabilidad y pesimismo sobre el futuro."
-                      sx={{ color: "#4b3f2f", fontFamily: "Playfair Display" }}
+                      primary={
+                        <>
+                          {/* El span en negrita */}
+                          <Box
+                            component="span"
+                            sx={{
+                              fontWeight: "bold",
+                              color: "#4b3f2f",
+                              fontFamily: "Playfair Display",
+                            }}
+                          >
+                            6. Alteraciones en el sueño:
+                          </Box>{" "}
+                          {/* Resto del texto */}
+                          Insomnio o dormir en exceso, sin descanso real.
+                        </>
+                      }
                     />
                   </ListItem>
                   <ListItem
@@ -432,73 +612,23 @@ const Service1 = () => {
                     }}
                   >
                     <ListItemText
-                      primary="Pensamientos sobre la muerte o suicidio."
-                      sx={{ color: "#4b3f2f", fontFamily: "Playfair Display" }}
-                    />
-                  </ListItem>
-                  <ListItem
-                    sx={{
-                      backgroundColor: "#f0f0f0",
-                      margin: 1,
-                      borderRadius: 1,
-                      boxShadow: 1,
-                    }}
-                  >
-                    <ListItemText
-                      primary="Falta de confianza en uno mismo o en los demás."
-                      sx={{ color: "#4b3f2f", fontFamily: "Playfair Display" }}
-                    />
-                  </ListItem>
-                  <ListItem
-                    sx={{
-                      backgroundColor: "#f0f0f0",
-                      margin: 1,
-                      borderRadius: 1,
-                      boxShadow: 1,
-                    }}
-                  >
-                    <ListItemText
-                      primary="Dificultad para concentrarse y problemas de memoria."
-                      sx={{ color: "#4b3f2f", fontFamily: "Playfair Display" }}
-                    />
-                  </ListItem>
-                  <ListItem
-                    sx={{
-                      backgroundColor: "#f0f0f0",
-                      margin: 1,
-                      borderRadius: 1,
-                      boxShadow: 1,
-                    }}
-                  >
-                    <ListItemText
-                      primary="Intranquilidad."
-                      sx={{ color: "#4b3f2f", fontFamily: "Playfair Display" }}
-                    />
-                  </ListItem>
-                  <ListItem
-                    sx={{
-                      backgroundColor: "#f0f0f0",
-                      margin: 1,
-                      borderRadius: 1,
-                      boxShadow: 1,
-                    }}
-                  >
-                    <ListItemText
-                      primary="Alteraciones en el sueño (insomnio o sueño excesivo)."
-                      sx={{ color: "#4b3f2f", fontFamily: "Playfair Display" }}
-                    />
-                  </ListItem>
-                  <ListItem
-                    sx={{
-                      backgroundColor: "#f0f0f0",
-                      margin: 1,
-                      borderRadius: 1,
-                      boxShadow: 1,
-                    }}
-                  >
-                    <ListItemText
-                      primary="Disminución del apetito y de la líbido."
-                      sx={{ color: "#4b3f2f", fontFamily: "Playfair Display" }}
+                      primary={
+                        <>
+                          {/* El span en negrita */}
+                          <Box
+                            component="span"
+                            sx={{
+                              fontWeight: "bold",
+                              color: "#4b3f2f",
+                              fontFamily: "Playfair Display",
+                            }}
+                          >
+                            7. Pensamientos negativos o suicidas:{" "}
+                          </Box>{" "}
+                          {/* Resto del texto */}
+                          Pensamientos oscuros sobre la vida y el futuro.
+                        </>
+                      }
                     />
                   </ListItem>
                 </Typography>
@@ -512,9 +642,9 @@ const Service1 = () => {
                     marginTop: 2,
                   }}
                 >
-                  Si la ansiedad o la depresión están afectando tu vida, es
-                  momento de actuar. Tu bienestar mental es tan importante como
-                  tu salud física, y merece toda tu atención.{" "}
+                  Si te identificas con alguno de estos síntomas, no estás solo.
+                  Da el primer paso hacia la recuperación y reserva tu sesión
+                  hoy mismo.{" "}
                 </Typography>
               </AccordionDetails>
             </Accordion>

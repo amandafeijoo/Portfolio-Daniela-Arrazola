@@ -196,8 +196,8 @@ const Service2 = () => {
                   component="h2"
                   sx={{ fontFamily: "Playfair Display" }}
                 >
-                  ¿Alguna vez sentiste que emociones como la ira, el miedo, la
-                  tristeza o la vergüenza te dominan?
+                  Aprende a gestionar tus emociones para reducir el estrés y
+                  mejorar tu salud mental
                 </Typography>
               </AccordionSummary>
               <AccordionDetails>
@@ -210,53 +210,112 @@ const Service2 = () => {
                     lineHeight: 1.6,
                   }}
                 >
-                  Las emociones son brújulas internas que nos guían y cumplen
-                  una función vital: nos preparan para la acción, nos informan
-                  sobre nuestro estado y nos ayudan a relacionarnos con el
-                  mundo. Sin embargo, cuando no sabemos gestionarlas, pueden
-                  convertirse en una carga.
+                  {/* Primera parte en negrita */}
+                  ¿Alguna vez sentiste que una emoción te domina por completo?
+                  La ira, el miedo, la tristeza o la vergüenza no son enemigos:
+                  son señales internas que nos ayudan a entender lo que
+                  necesitamos y cómo nos afecta el mundo que nos rodea. El
+                  problema no es sentir, sino no saber{" "}
+                  <Box component="span" sx={{ fontWeight: "bold" }}>
+                    cómo regular lo que sentimos
+                  </Box>
+                  .
                   <br />
-                  <br /> El estrés, la decepción, el rechazo, la sensación de
-                  estar herido o experimentar un duelo pueden generar bloqueos
-                  emocionales que afectan nuestra autoestima, nuestro equilibrio
-                  físico y emocional. Y aunque hoy en día parezca `normal` vivir
-                  con estrés constante, no significa que sea saludable ni que
-                  sea la modalidad correcta de afrontar los desafíos de la vida.
-                  Nuestro cuerpo no está diseñado para estar en alerta todo el
-                  tiempo. Es necesario reeducarlo, enseñarle a salir del estado
-                  de supervivencia y permitir que nuestro sistema nervioso se
-                  regule. En terapia, aprenderás a:
+                  <br />
+                  El estrés constante, los duelos, el rechazo o la decepción
+                  pueden dejar huellas profundas. Si no aprendemos a
+                  procesarlas, estas emociones pueden convertirse en bloqueos
+                  que afectan nuestra autoestima, nuestras relaciones y nuestro
+                  bienestar físico y mental. Aunque parezca “normal” vivir en
+                  modo alerta, tu sistema nervioso no está diseñado para
+                  sostener ese estado de forma continua. En consulta, te
+                  acompaño a{" "}
+                  <Box component="span" sx={{ fontWeight: "bold" }}>
+                    reentrenar tu cuerpo y mente
+                  </Box>
+                  , para que puedas salir del modo supervivencia y vivir desde
+                  un lugar más sereno y consciente.
+                  <br />
+                  <br />
+                  En terapia psicológica aprenderás a:
                 </Typography>
+
                 <List>
-                  <ListItem
-                    sx={{
-                      backgroundColor: "#fff",
-                      margin: 1,
-                      borderRadius: 1,
-                      boxShadow: 1,
-                    }}
-                  >
-                    <ListItemText
-                      primary="Identificar cada emoción"
-                      secondary="Comprender su mensaje y regular su impacto en tu vida."
-                      sx={{ color: "#4b3f2f", fontFamily: "Playfair Display" }}
-                    />
-                  </ListItem>
-                  <ListItem
-                    sx={{
-                      backgroundColor: "#fff",
-                      margin: 1,
-                      borderRadius: 1,
-                      boxShadow: 1,
-                    }}
-                  >
-                    <ListItemText
-                      primary="No se trata de reprimir lo que sientes"
-                      secondary="Sino de escucharlo, entenderlo y comprender su utilidad para transformarla en una gran herramienta de crecimiento."
-                      sx={{ color: "#4b3f2f", fontFamily: "Playfair Display" }}
-                    />
-                  </ListItem>
+                  {[
+                    {
+                      primary: "Identificar y nombrar cada emoción,",
+                      secondary: "comprendiendo su causa y función.",
+                    },
+                    {
+                      primary: "Gestionar su intensidad,",
+                      secondary: "sin reprimir ni reaccionar impulsivamente.",
+                    },
+                    {
+                      primary: "Transformarlas en recursos internos,",
+                      secondary: "que potencien tu crecimiento y bienestar.",
+                    },
+                  ].map(({ primary, secondary }, i) => (
+                    <ListItem
+                      key={i}
+                      sx={{
+                        backgroundColor: "#fff",
+                        margin: 1,
+                        borderRadius: 1,
+                        boxShadow: 1,
+                      }}
+                    >
+                      <ListItemText
+                        disableTypography
+                        primary={
+                          <>
+                            <Typography
+                              component="span"
+                              sx={{
+                                fontWeight: "bold",
+                                color: "#4b3f2f",
+                                fontFamily: "Playfair Display",
+                              }}
+                            >
+                              {primary}
+                            </Typography>{" "}
+                            <Typography
+                              component="span"
+                              sx={{
+                                color: "#4b3f2f",
+                                fontFamily: "Playfair Display",
+                              }}
+                            >
+                              {secondary}
+                            </Typography>
+                          </>
+                        }
+                      />
+                    </ListItem>
+                  ))}
                 </List>
+
+                <Typography
+                  variant="body1"
+                  sx={{
+                    color: "#4b3f2f",
+                    fontFamily: "Playfair Display",
+                    textAlign: "justify",
+                    lineHeight: 1.6,
+                  }}
+                >
+                  <Box component="span" sx={{ fontWeight: "bold" }}>
+                    Sentir no es el problema, el desafío es aprender a gestionar
+                    lo que sientes con equilibrio y conciencia.
+                  </Box>
+                  <br />
+                  ¿Te gustaría recuperar el control emocional y vivir con más
+                  estabilidad y bienestar?
+                  <br />
+                  <br />
+                  <Box component="span" sx={{ fontWeight: "bold" }}>
+                    Inicia tu proceso de bienestar emocional.
+                  </Box>
+                </Typography>
               </AccordionDetails>
             </Accordion>
           </Box>

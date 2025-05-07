@@ -3,7 +3,7 @@
  */
 export const mainLinks = [
   { label: "Inicio", handler: "handleNavigateHome" },
-  { label: "Acerca de", handler: "handleNavigateFullAcerca" },
+  { label: "Sobre mí", handler: "handleNavigateFullAcerca" },
   { label: "Contacto", handler: "handleNavigateContacto" },
 ];
 

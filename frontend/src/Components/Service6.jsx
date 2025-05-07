@@ -58,13 +58,13 @@ const Image = () => (
       animation: `${moveAnimation} 3s infinite`,
     }}
   >
-  <img
-  src="https://res.cloudinary.com/dhikp5azp/image/upload/f_auto,q_auto,w_800/v1746012631/6_d9cvrh.png"
-  alt="Habilidades sociales"
-  loading="lazy"
-  width="100%"
-  style={{ borderRadius: "inherit", display: "block" }}
-/>
+    <img
+      src="https://res.cloudinary.com/dhikp5azp/image/upload/f_auto,q_auto,w_800/v1746012631/6_d9cvrh.png"
+      alt="Habilidades sociales"
+      loading="lazy"
+      width="100%"
+      style={{ borderRadius: "inherit", display: "block" }}
+    />
   </Box>
 );
 
@@ -197,8 +197,7 @@ const Service6 = () => {
                     component="h2"
                     sx={{ fontFamily: "Playfair Display" }}
                   >
-                    Las habilidades sociales son como un puente que nos conecta
-                    con los demás.
+                    ¿Te sientes inseguro al interactuar con los demás?
                   </Typography>
                 </AccordionSummary>
                 <AccordionDetails>
@@ -211,95 +210,95 @@ const Service6 = () => {
                       lineHeight: 1.6,
                     }}
                   >
-                    Para algunas personas, cruzarlo es fácil y natural, mientras
-                    que para otras puede sentirse como un camino inestable,
-                    lleno de inseguridades y miedo al juicio. No se trata solo
-                    de timidez, sino de dificultades reales que pueden generar
-                    aislamiento, ansiedad y sufrimiento. Existen trastornos
-                    relacionados con problemas en las habilidades sociales,
-                    entre ellos encontramos el Trastorno de Ansiedad Social.
-                    Estas condiciones pueden hacer que el contacto con los demás
-                    sea una fuente constante de angustia, afectando la vida
-                    personal, académica y laboral.
+                    Las habilidades sociales son esenciales para construir
+                    relaciones saludables y satisfactorias, pero para algunas
+                    personas, el simple acto de comunicarse puede ser un reto
+                    constante.
+                    <Box component="span" sx={{ fontWeight: "bold", mr: 0.5 }}>
+                      {" "}
+                      No se trata solo de timidez,
+                    </Box>
+                    sino de dificultades reales que pueden generar aislamiento,
+                    ansiedad y sufrimiento.
+                    <br />
+                    <br />
+                    Si sientes que las interacciones sociales se convierten en
+                    una fuente de angustia, puede que estés lidiando con el
+                    <Box component="span" sx={{ fontWeight: "bold" }}>
+                      {" "}
+                      Trastorno de Ansiedad Social
+                    </Box>
+                    u otros trastornos relacionados. Estos problemas afectan
+                    profundamente tu vida personal, académica y profesional.
+                    <Box component="span" sx={{ fontWeight: "bold" }}>
+                      {" "}
+                      En terapia, te ayudo a mejorar tus habilidades sociales y
+                      superar los bloqueos emocionales.
+                    </Box>
+                    Juntos trabajaremos para:
                   </Typography>
-                  <Typography
-                    variant="body1"
-                    sx={{
-                      color: "#4b3f2f",
-                      fontFamily: "Playfair Display",
-                      textAlign: "justify",
-                      lineHeight: 1.6,
-                      marginTop: 2,
-                    }}
-                  >
-                    En terapia, trabajamos juntos para:
-                  </Typography>
+
                   <List>
-                    <ListItem
-                      sx={{
-                        backgroundColor: "#fff",
-                        margin: 1,
-                        borderRadius: 1,
-                        boxShadow: 1,
-                      }}
-                    >
-                      <ListItemText
-                        primary="Identificar pensamientos que generan ansiedad y que te impiden expresarte con seguridad."
+                    {[
+                      {
+                        primary:
+                          "Identificar pensamientos que generan ansiedad",
+                        secondary: "y que te impiden expresarte con seguridad.",
+                      },
+                      {
+                        primary: "Desarrollar estrategias para interactuar",
+                        secondary: "sin miedo al rechazo o la crítica.",
+                      },
+                      {
+                        primary: "Romper patrones de evitación",
+                        secondary:
+                          "que refuerzan el aislamiento y la angustia.",
+                      },
+                      {
+                        primary: "Practicar habilidades sociales",
+                        secondary:
+                          "en un espacio seguro y libre de juicio, para que puedas ganar confianza.",
+                      },
+                    ].map(({ primary, secondary }, i) => (
+                      <ListItem
+                        key={i}
                         sx={{
-                          color: "#4b3f2f",
-                          fontFamily: "Playfair Display",
+                          backgroundColor: "#fff",
+                          margin: 1,
+                          borderRadius: 1,
+                          boxShadow: 1,
                         }}
-                      />
-                    </ListItem>
-                    <ListItem
-                      sx={{
-                        backgroundColor: "#fff",
-                        margin: 1,
-                        borderRadius: 1,
-                        boxShadow: 1,
-                      }}
-                    >
-                      <ListItemText
-                        primary="Desarrollar estrategias para interactuar sin miedo al rechazo o la crítica."
-                        sx={{
-                          color: "#4b3f2f",
-                          fontFamily: "Playfair Display",
-                        }}
-                      />
-                    </ListItem>
-                    <ListItem
-                      sx={{
-                        backgroundColor: "#fff",
-                        margin: 1,
-                        borderRadius: 1,
-                        boxShadow: 1,
-                      }}
-                    >
-                      <ListItemText
-                        primary="Romper patrones de evitación que refuerzan el aislamiento."
-                        sx={{
-                          color: "#4b3f2f",
-                          fontFamily: "Playfair Display",
-                        }}
-                      />
-                    </ListItem>
-                    <ListItem
-                      sx={{
-                        backgroundColor: "#fff",
-                        margin: 1,
-                        borderRadius: 1,
-                        boxShadow: 1,
-                      }}
-                    >
-                      <ListItemText
-                        primary="Practicar habilidades sociales en un espacio seguro y libre de juicio."
-                        sx={{
-                          color: "#4b3f2f",
-                          fontFamily: "Playfair Display",
-                        }}
-                      />
-                    </ListItem>
+                      >
+                        <ListItemText
+                          disableTypography
+                          primary={
+                            <>
+                              <Typography
+                                component="span"
+                                sx={{
+                                  fontWeight: "bold",
+                                  color: "#4b3f2f",
+                                  fontFamily: "Playfair Display",
+                                }}
+                              >
+                                {primary}
+                              </Typography>{" "}
+                              <Typography
+                                component="span"
+                                sx={{
+                                  color: "#4b3f2f",
+                                  fontFamily: "Playfair Display",
+                                }}
+                              >
+                                {secondary}
+                              </Typography>
+                            </>
+                          }
+                        />
+                      </ListItem>
+                    ))}
                   </List>
+
                   <Typography
                     variant="body1"
                     sx={{
@@ -309,24 +308,26 @@ const Service6 = () => {
                       lineHeight: 1.6,
                     }}
                   >
-                    Las relaciones humanas no deberían sentirse como un terreno
-                    minado. Si te cuesta conectar con los demás o sientes que el
-                    miedo te limita, recuerda: las habilidades sociales no son
-                    un `don` con el que se nace, sino una capacidad que se puede
-                    aprender y fortalecer.
-                  </Typography>
-                  <Typography
-                    variant="body1"
-                    sx={{
-                      color: "#4b3f2f",
-                      fontFamily: "Playfair Display",
-                      textAlign: "justify",
-                      lineHeight: 1.6,
-                      marginTop: 2,
-                    }}
-                  >
-                    No tienes que hacerlo solo. Estoy aquí para ayudarte a
-                    cruzar ese puente.
+                    <Box component="span" sx={{ fontWeight: "bold", mr: 0.5 }}>
+                      Las relaciones humanas no deberían sentirse como un
+                      terreno minado.{" "}
+                    </Box>
+                    Las habilidades sociales no son un &quot;don&quot; con el
+                    que se nace, sino una capacidad que se puede aprender y
+                    fortalecer con práctica y apoyo.
+                    <br />
+                    <br />
+                    <Box component="span" sx={{ fontWeight: "bold" }}>
+                      {" "}
+                      No estás solo en este proceso.{" "}
+                    </Box>
+                    Juntos podemos superar esos miedos.
+                    <Box component="span" sx={{ fontWeight: "bold" }}>
+                      {" "}
+                      Agenda una consulta conmigo{" "}
+                    </Box>
+                    y empieza a construir relaciones más seguras y auténticas
+                    desde hoy.{" "}
                   </Typography>
                 </AccordionDetails>
               </Accordion>

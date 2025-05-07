@@ -197,8 +197,7 @@ const Service10 = () => {
                     component="h2"
                     sx={{ fontFamily: "Playfair Display" }}
                   >
-                    El miedo es una emoción natural y necesaria para nuestra
-                    supervivencia.
+                    ¿El miedo está tomando el control de tu vida?
                   </Typography>
                 </AccordionSummary>
                 <AccordionDetails>
@@ -212,76 +211,77 @@ const Service10 = () => {
                     }}
                   >
                     El miedo es una emoción natural y necesaria para nuestra
-                    supervivencia, pero cuando se vuelve intenso, irracional y
-                    limitante, deja de protegernos y empieza a controlarnos. Tal
-                    vez evitas situaciones, lugares o incluso actividades que
-                    antes disfrutabas, lo cual no solo te limita, sino que
-                    también te lleva a experimentar niveles intensos de
+                    supervivencia, pero cuando se vuelve intenso e irracional,
+                    comienza a limitarnos. Tal vez estás evitando situaciones,
+                    lugares o actividades que antes disfrutabas, lo que no solo
+                    te restringe, sino que también genera niveles intensos de
                     ansiedad.
+                    <br />
+                    <br />
+                    <Box component="span" sx={{ fontWeight: "bold", mr: 0.5 }}>
+                      {" "}
+                      En terapia, trabajamos con enfoques basados en evidencia
+                      científica
+                    </Box>
+                    ayudarte a recuperar el control sobre tus emociones:
                   </Typography>
-                  <Typography
-                    variant="body1"
-                    sx={{
-                      color: "#4b3f2f",
-                      fontFamily: "Playfair Display",
-                      textAlign: "justify",
-                      lineHeight: 1.6,
-                      marginTop: 2,
-                    }}
-                  >
-                    En terapia trabajamos con enfoques basados en la evidencia
-                    científica:
-                  </Typography>
+
                   <List>
-                    <ListItem
-                      sx={{
-                        backgroundColor: "#fff",
-                        margin: 1,
-                        borderRadius: 1,
-                        boxShadow: 1,
-                      }}
-                    >
-                      <ListItemText
-                        primary="Aprenderás a regular tu respuesta de miedo."
+                    {[
+                      {
+                        primary: "Aprenderás a regular tu respuesta de miedo,",
+                        secondary: "para que deje de dictar tus decisiones.",
+                      },
+                      {
+                        primary:
+                          "Enfrentarás progresivamente aquello que hoy evitas,",
+                        secondary: "con un acompañamiento seguro y gradual.",
+                      },
+                      {
+                        primary:
+                          "Retomarás el control de tus emociones y decisiones,",
+                        secondary: "para vivir sin que el miedo te limite.",
+                      },
+                    ].map(({ primary, secondary }, i) => (
+                      <ListItem
+                        key={i}
                         sx={{
-                          color: "#4b3f2f",
-                          fontFamily: "Playfair Display",
+                          backgroundColor: "#fff",
+                          margin: 1,
+                          borderRadius: 1,
+                          boxShadow: 1,
                         }}
-                      />
-                    </ListItem>
-                    <ListItem
-                      sx={{
-                        backgroundColor: "#fff",
-                        margin: 1,
-                        borderRadius: 1,
-                        boxShadow: 1,
-                      }}
-                    >
-                      <ListItemText
-                        primary="Enfrentarás progresivamente aquello que hoy evitas."
-                        sx={{
-                          color: "#4b3f2f",
-                          fontFamily: "Playfair Display",
-                        }}
-                      />
-                    </ListItem>
-                    <ListItem
-                      sx={{
-                        backgroundColor: "#fff",
-                        margin: 1,
-                        borderRadius: 1,
-                        boxShadow: 1,
-                      }}
-                    >
-                      <ListItemText
-                        primary="Retomarás el control de tus emociones y decisiones."
-                        sx={{
-                          color: "#4b3f2f",
-                          fontFamily: "Playfair Display",
-                        }}
-                      />
-                    </ListItem>
+                      >
+                        <ListItemText
+                          disableTypography
+                          primary={
+                            <>
+                              <Typography
+                                component="span"
+                                sx={{
+                                  fontWeight: "bold",
+                                  color: "#4b3f2f",
+                                  fontFamily: "Playfair Display",
+                                }}
+                              >
+                                {primary}
+                              </Typography>{" "}
+                              <Typography
+                                component="span"
+                                sx={{
+                                  color: "#4b3f2f",
+                                  fontFamily: "Playfair Display",
+                                }}
+                              >
+                                {secondary}
+                              </Typography>
+                            </>
+                          }
+                        />
+                      </ListItem>
+                    ))}
                   </List>
+
                   <Typography
                     variant="body1"
                     sx={{
@@ -291,11 +291,25 @@ const Service10 = () => {
                       lineHeight: 1.6,
                     }}
                   >
-                    Las fobias pueden hacerte sentir atrapado, pero con el
-                    acompañamiento adecuado puedes aprender a enfrentarlas y
-                    superarlas. No será de un día para otro, ni de eliminar el
-                    miedo por completo, sino de hacer que deje de gobernar en
-                    tus decisiones.
+                    <Box component="span" sx={{ fontWeight: "bold", mr: 0.5 }}>
+                      {" "}
+                      Las fobias pueden hacerte sentir atrapado,
+                    </Box>
+                    pero con el acompañamiento adecuado,
+                    <Box component="span" sx={{ fontWeight: "bold", mr: 0.5 }}>
+                      {" "}
+                      puedes aprender a enfrentarlas y superarlas.{" "}
+                    </Box>
+                    No se trata de eliminar el miedo por completo, sino de hacer
+                    que deje de gobernar tu vida.
+                    <br />
+                    <br />
+                    <Box component="span" sx={{ fontWeight: "bold", mr: 0.5 }}>
+                      {" "}
+                      Agenda una consulta conmigo
+                    </Box>
+                    y comienza a recuperar el control, superando las barreras
+                    que el miedo ha creado en tu camino.
                   </Typography>
                 </AccordionDetails>
               </Accordion>

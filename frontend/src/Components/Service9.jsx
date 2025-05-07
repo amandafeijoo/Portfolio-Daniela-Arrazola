@@ -193,7 +193,7 @@ const Service9 = () => {
                     variant={isMobile ? "h6" : "h5"}
                     sx={{ fontFamily: "Playfair Display" }}
                   >
-                    Imagina que tu bienestar es un jardín.
+¿Te gustaría cultivar hábitos que nutran tu bienestar de manera duradera?
                   </Typography>
                 </AccordionSummary>
                 <AccordionDetails>
@@ -206,107 +206,77 @@ const Service9 = () => {
                       lineHeight: 1.6,
                     }}
                   >
-                    Cada pensamiento, hábito y elección es una semilla que
-                    siembras. Algunas darán frutos llenos de energía y
-                    satisfacción, mientras que otras pueden absorber tus fuerzas
-                    y limitar tu crecimiento. La clave está en aprender a
-                    cultivar lo que realmente nutre tu vida.
-                  </Typography>
-                  <Typography
-                    variant="body1"
-                    sx={{
-                      color: "#4b3f2f",
-                      fontFamily: "Playfair Display",
-                      textAlign: "justify",
-                      lineHeight: 1.6,
-                      marginTop: 2,
-                    }}
-                  >
-                    El crecimiento personal no es un destino, sino un proceso
-                    continuo de autoconocimiento y mejora. Se trata de aprender
-                    a identificar lo que te impulsa y lo que te frena,
-                    desarrollar habilidades para gestionar emociones y construir
-                    hábitos que te ayuden a sentirte mejor, tanto física como
-                    mentalmente.
-                  </Typography>
-                  <Typography
-                    variant="body1"
-                    sx={{
-                      color: "#4b3f2f",
-                      fontFamily: "Playfair Display",
-                      textAlign: "justify",
-                      lineHeight: 1.6,
-                      marginTop: 2,
-                    }}
-                  >
-                    En sesión, trabajamos juntos para:
+                    Imagina que tu vida es un jardín, donde cada elección y hábito es una semilla que
+decides plantar. Algunas de estas semillas darán frutos llenos de energía y
+satisfacción, mientras que otras pueden drenarte y limitar tu crecimiento. La clave
+está en aprender a cultivar lo que realmente te beneficia.
+<Box component="span" sx={{ fontWeight: "bold", mr: 0.5 }}>
+                      {" "}
+                      El crecimiento personal es un proceso continuo
+                    </Box>
+                    de autoconocimiento y mejora.
+Se trata de aprender a identificar lo que te impulsa y lo que te frena, gestionar tus
+emociones y construir hábitos que te ayuden a sentirte mejor, tanto física como
+mentalmente.
                   </Typography>
                   <List>
-                    <ListItem
-                      sx={{
-                        backgroundColor: "#fff",
-                        margin: 1,
-                        borderRadius: 1,
-                        boxShadow: 1,
-                      }}
-                    >
-                      <ListItemText
-                        primary="Identificar creencias limitantes y transformarlas en pensamientos que te potencien."
-                        sx={{
-                          color: "#4b3f2f",
-                          fontFamily: "Playfair Display",
-                        }}
-                      />
-                    </ListItem>
-                    <ListItem
-                      sx={{
-                        backgroundColor: "#fff",
-                        margin: 1,
-                        borderRadius: 1,
-                        boxShadow: 1,
-                      }}
-                    >
-                      <ListItemText
-                        primary="Reemplazar hábitos dañinos por prácticas saludables y sostenibles."
-                        sx={{
-                          color: "#4b3f2f",
-                          fontFamily: "Playfair Display",
-                        }}
-                      />
-                    </ListItem>
-                    <ListItem
-                      sx={{
-                        backgroundColor: "#fff",
-                        margin: 1,
-                        borderRadius: 1,
-                        boxShadow: 1,
-                      }}
-                    >
-                      <ListItemText
-                        primary="Equilibrar tu bienestar emocional, físico y mental sin caer en la autoexigencia extrema."
-                        sx={{
-                          color: "#4b3f2f",
-                          fontFamily: "Playfair Display",
-                        }}
-                      />
-                    </ListItem>
-                    <ListItem
-                      sx={{
-                        backgroundColor: "#fff",
-                        margin: 1,
-                        borderRadius: 1,
-                        boxShadow: 1,
-                      }}
-                    >
-                      <ListItemText
-                        primary="Definir objetivos alineados con lo que realmente quieres y necesitas, no con lo que los demás esperan de ti."
-                        sx={{
-                          color: "#4b3f2f",
-                          fontFamily: "Playfair Display",
-                        }}
-                      />
-                    </ListItem>
-                  </List>
+  {[
+    {
+      primary: "Identificar creencias limitantes,",
+      secondary: "y transformarlas en pensamientos que te impulsen.",
+    },
+    {
+      primary: "Reemplazar hábitos dañinos por prácticas saludables,",
+      secondary: "y sostenibles.",
+    },
+    {
+      primary: "Equilibrar tu bienestar emocional, físico y mental,",
+      secondary: "sin caer en la autoexigencia extrema.",
+    },
+    {
+      primary: "Definir objetivos alineados con lo que realmente deseas,",
+      secondary: "no con lo que otros esperan de ti.",
+    },
+  ].map(({ primary, secondary }, i) => (
+    <ListItem
+      key={i}
+      sx={{
+        backgroundColor: "#fff",
+        margin: 1,
+        borderRadius: 1,
+        boxShadow: 1,
+      }}
+    >
+      <ListItemText
+        disableTypography
+        primary={
+          <>
+            <Typography
+              component="span"
+              sx={{
+                fontWeight: "bold",
+                color: "#4b3f2f",
+                fontFamily: "Playfair Display",
+              }}
+            >
+              {primary}
+            </Typography>{" "}
+            <Typography
+              component="span"
+              sx={{
+                color: "#4b3f2f",
+                fontFamily: "Playfair Display",
+              }}
+            >
+              {secondary}
+            </Typography>
+          </>
+        }
+      />
+    </ListItem>
+  ))}
+</List>
+
                   <Typography
                     variant="body1"
                     sx={{
@@ -316,25 +286,35 @@ const Service9 = () => {
                       lineHeight: 1.6,
                     }}
                   >
-                    Los hábitos saludables no se tratan solo de alimentación y
-                    ejercicio, sino también de descanso, relaciones sanas y amor
-                    propio. Si sientes que te cuesta avanzar o que repites
-                    patrones que no te hacen bien, es momento de cambiar el
-                    enfoque. El crecimiento personal no es un lujo, es la base
-                    para una vida plena y consciente.
-                  </Typography>
-                  <Typography
-                    variant="body1"
-                    sx={{
-                      color: "#4b3f2f",
-                      fontFamily: "Playfair Display",
-                      textAlign: "justify",
-                      lineHeight: 1.6,
-                      marginTop: 2,
-                    }}
-                  >
-                    Tú tienes el poder de transformar tu historia, un pequeño
-                    paso a la vez.
+                   Los hábitos saludables no son solo sobre
+                    <Box component="span" sx={{ fontWeight: "bold", mr: 0.5 }}>
+                      {" "}
+                      alimentación o ejercicio,
+                    </Box>
+                    sino también
+sobre
+                    <Box component="span" sx={{ fontWeight: "bold", mr: 0.5 }}>
+                      {" "}
+                      descanso, relaciones sanas y amor propio.                    </Box>
+                      Si sientes que te cuesta
+avanzar o que repites patrones que no te benefician, es momento de
+                    <Box component="span" sx={{ fontWeight: "bold", mr: 0.5 }}>
+                      {" "}
+                      cambiar el
+                      enfoque.                   
+                       </Box>
+                      <br /> <br />
+                    <Box component="span" sx={{ fontWeight: "bold", mr: 0.5 }}>
+                      {" "}
+                      El crecimiento personal no es un lujo, es la base para una vida plena y
+                      consciente.                    </Box>
+                      Tú tienes el poder de transformar tu historia, un paso a la vez.
+                      <br /> <br />
+                    <Box component="span" sx={{ fontWeight: "bold", mr: 0.5 }}>
+                      {" "}
+                      Agenda una consulta conmigo</Box>
+                      y empieza a cultivar los hábitos que te ayudarán a
+vivir la vida que realmente deseas.
                   </Typography>
                 </AccordionDetails>
               </Accordion>

@@ -196,8 +196,8 @@ const Service3 = () => {
                     component="h2"
                     sx={{ fontFamily: "Playfair Display" }}
                   >
-                    La relación más importante de tu vida es la que tienes
-                    contigo mismo.
+                    Autoestima: reconstruye la relación más importante de tu
+                    vida
                   </Typography>
                 </AccordionSummary>
                 <AccordionDetails>
@@ -210,99 +210,83 @@ const Service3 = () => {
                       lineHeight: 1.6,
                     }}
                   >
-                    Tu autoestima define cómo te valoras, cómo te hablas y cómo
-                    te enfrentas al mundo. Si te miras al espejo y sientes que
-                    no eres suficiente… es momento de cambiar esa narrativa. En
-                    terapia, trabajamos en cada uno de los pilares de la
-                    autoestima:
+                    ¿Sientes que no eres suficiente, que te juzgas con dureza o
+                    que dudas constantemente de ti mismo? Esa voz crítica
+                    interna no nació contigo: fue aprendida… y también puede
+                    transformarse. Tu autoestima influye en cómo tomas
+                    decisiones, cómo te relacionas y cómo enfrentas la vida.
+                    Cuando está debilitada, aparecen la inseguridad, el miedo al
+                    rechazo, la comparación constante y la sensación de no
+                    merecer más. En terapia psicológica trabajamos en los
+                    pilares clave de una autoestima sana:
                   </Typography>
                   <List>
-                    <ListItem
-                      sx={{
-                        backgroundColor: "#fff",
-                        margin: 1,
-                        borderRadius: 1,
-                        boxShadow: 1,
-                      }}
-                    >
-                      <ListItemText
-                        primary="Autoconocimiento"
-                        secondary="Aprenderás a identificar tus fortalezas y áreas de mejora, entendiendo quién eres realmente."
+                    {[
+                      {
+                        primary: "Autoconocimiento",
+                        secondary:
+                          "– Te ayudaré a descubrir quién eres, reconociendo tus fortalezas y entendiendo tus áreas de mejora sin juicios.",
+                      },
+                      {
+                        primary: "Autoconcepto",
+                        secondary:
+                          "– Identificarás las creencias negativas que tienes sobre ti, para reemplazarlas por pensamientos más realistas y compasivos.",
+                      },
+                      {
+                        primary: "Autoevaluación",
+                        secondary:
+                          "– Aprenderás a valorar tus logros y errores sin culpas, con una mirada más justa hacia ti mismo.",
+                      },
+                      {
+                        primary: "Autoaceptación",
+                        secondary:
+                          "– Te acompañaré a aceptar tu historia y tu presente, sin exigencias ni rechazos.",
+                      },
+                      {
+                        primary: "Autorespeto",
+                        secondary:
+                          "– Practicarás poner límites, priorizarte y darte el valor que mereces, sin sentir culpa.",
+                      },
+                    ].map(({ primary, secondary }, i) => (
+                      <ListItem
+                        key={i}
                         sx={{
-                          color: "#4b3f2f",
-                          fontFamily: "Playfair Display",
+                          backgroundColor: "#fff",
+                          margin: 1,
+                          borderRadius: 1,
+                          boxShadow: 1,
                         }}
-                      />
-                    </ListItem>
-                    <ListItem
-                      sx={{
-                        backgroundColor: "#fff",
-                        margin: 1,
-                        borderRadius: 1,
-                        boxShadow: 1,
-                      }}
-                    >
-                      <ListItemText
-                        primary="Autoconcepto"
-                        secondary="Descubrirás cómo te percibes y qué creencias tienes sobre ti mismo, para transformarlas en pensamientos más positivos y realistas."
-                        sx={{
-                          color: "#4b3f2f",
-                          fontFamily: "Playfair Display",
-                        }}
-                      />
-                    </ListItem>
-                    <ListItem
-                      sx={{
-                        backgroundColor: "#fff",
-                        margin: 1,
-                        borderRadius: 1,
-                        boxShadow: 1,
-                      }}
-                    >
-                      <ListItemText
-                        primary="Autoevaluación"
-                        secondary="Desarrollarás un criterio propio para analizar tus logros y errores sin castigarte, sino aprendiendo de ellos."
-                        sx={{
-                          color: "#4b3f2f",
-                          fontFamily: "Playfair Display",
-                        }}
-                      />
-                    </ListItem>
-                    <ListItem
-                      sx={{
-                        backgroundColor: "#fff",
-                        margin: 1,
-                        borderRadius: 1,
-                        boxShadow: 1,
-                      }}
-                    >
-                      <ListItemText
-                        primary="Autoaceptación"
-                        secondary="Entenderás que aceptarte no significa conformarte, sino reconocer quién eres sin juicios ni rechazos."
-                        sx={{
-                          color: "#4b3f2f",
-                          fontFamily: "Playfair Display",
-                        }}
-                      />
-                    </ListItem>
-                    <ListItem
-                      sx={{
-                        backgroundColor: "#fff",
-                        margin: 1,
-                        borderRadius: 1,
-                        boxShadow: 1,
-                      }}
-                    >
-                      <ListItemText
-                        primary="Autorespeto"
-                        secondary="Aprenderás a darte el valor que mereces, a poner límites y a priorizarte sin sentir culpa."
-                        sx={{
-                          color: "#4b3f2f",
-                          fontFamily: "Playfair Display",
-                        }}
-                      />
-                    </ListItem>
+                      >
+                        <ListItemText
+                          disableTypography
+                          primary={
+                            <>
+                              <Typography
+                                component="span"
+                                sx={{
+                                  fontWeight: "bold",
+                                  color: "#4b3f2f",
+                                  fontFamily: "Playfair Display",
+                                }}
+                              >
+                                {primary}
+                              </Typography>{" "}
+                              <Typography
+                                component="span"
+                                sx={{
+                                  color: "#4b3f2f",
+                                  fontFamily: "Playfair Display",
+                                }}
+                              >
+                                {secondary}
+                              </Typography>
+                            </>
+                          }
+                        />
+                      </ListItem>
+                    ))}
                   </List>
+
                   <Typography
                     variant="body1"
                     sx={{
@@ -312,10 +296,18 @@ const Service3 = () => {
                       lineHeight: 1.6,
                     }}
                   >
-                    Una autoestima saludable impacta en todas las áreas de tu
-                    vida: desde la toma de decisiones hasta la calidad de tus
-                    relaciones. En terapia aprenderás a reconstruirla desde la
-                    raíz.
+                    <Box component="span" sx={{ fontWeight: "bold" }}>
+                      Trabajar tu autoestima es dejar de sobrevivir y empezar a
+                      vivir con confianza, claridad y sentido.
+                    </Box>
+                    <br />
+                    ¿Te identificas con este proceso?
+                    <br />
+                    <br />
+                    <Box component="span" sx={{ fontWeight: "bold" }}>
+                      Reserva tu cita y empecemos a construir la relación más
+                      importante: la que tienes contigo.
+                    </Box>
                   </Typography>
                 </AccordionDetails>
               </Accordion>

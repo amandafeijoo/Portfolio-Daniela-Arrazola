@@ -190,7 +190,7 @@ const Service13 = () => {
                 }}
               >
                 <Typography
-                  variant={isMobile ? "h6" : "h5"} //
+                  variant={isMobile ? "h6" : "h5"} 
                   component="h2"
                   sx={{ fontFamily: "Playfair Display" }}
                 >

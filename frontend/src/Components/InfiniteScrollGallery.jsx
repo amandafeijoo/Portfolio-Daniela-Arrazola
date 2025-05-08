@@ -1,3 +1,5 @@
+// src/components/InfiniteScrollGallery.jsx
+import { useEffect, useRef } from "react";
 import {
   Box,
   Typography,
@@ -7,34 +9,25 @@ import {
 } from "@mui/material";
 import { motion, useAnimation } from "framer-motion";
 import { useNavigate } from "react-router-dom";
-import { useEffect } from "react";
 import styled from "styled-components";
-// import Swal from "sweetalert2";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import "@fontsource/playfair-display";
-import { img } from "../utils/imagePath";
-
 
 const StyledContainer = styled(Box)`
-  /* 1) Forzar que ocupe todo el ancho de su padre */
   width: 100%;
   box-sizing: border-box;
-
-  /* 2) Recortar cualquier hijo que se salga lateralmente */
   overflow: hidden;
-
-  /* 3) Tus estilos existentes */
   border: 2px solid #d2b48c;
   border-radius: 8px;
-  box-shadow: 
+  box-shadow:
     0 0 5px 2px rgba(0,0,0,0.3),
     0 0 10px 4px rgba(34,139,34,0.2),
     0 0 15px 6px rgba(0,0,0,0.2);
   background-color: #f5eedc;
   padding: 30px;
   margin: 20px auto;
-  max-width: 1200px;
+  max-width: 1300px;
   text-align: center;
 
   @media (max-width: 600px) {
@@ -49,262 +42,187 @@ const StyledContainer = styled(Box)`
   }
 `;
 
-
-const images = [
-  { src: img("s1image.svg"), path: "/service1" },
-  { src: "https://res.cloudinary.com/dhikp5azp/image/upload/f_auto,q_auto,w_300/v1746450458/ANSIEDAD_DEPRESI%C3%93N_axetxe.jpg", path: "/service1" },
-  { src: img("s2image.svg"), path: "/service2" },
-
-  // { src: img("servicios2.svg") },
-  // { src: img("servicios18.svg") },
-  
-  // {  ilustrativa imagen 
-  //   src: "https://res.cloudinary.com/dhikp5azp/image/upload/f_auto,q_auto,w_300/v1746486490/Post_de_Instagram_Terapia_Emocional_Doodle_Crudo_y4d6kf.png",
-  //   path: "/service2"
-  // },
-
-  // { src: img("servicios3.svg") },
-  {src: "https:///res.cloudinary.com/dhikp5azp/image/upload/f_auto,q_auto,w_300/v1746450462/REG.EMOCIONAL_ohzlyi.jpg",
-    path: "/service2"
-  },
-  { src: img("s3image.svg"), path: "/service3" },
-  
-  { src: img("servicios4.svg") },
-  { src: img("s4image.svg"), path: "/service4" },
-  { src: img("servicios5.svg") },
-  { src: img("s5image.svg"), path: "/service5" },
-  { src: img("servicios6.svg") },
-  { src: img("s6image.svg"), path: "/service6" },
-  { src: img("servicios7.svg") },
-  // { src: img("servicios15.svg") },
-  { src: img("s7image.svg"), path: "/service7" },
-  { src: img("servicios8.svg") },
-  { src: img("s8image.svg"), path: "/service8" },
-  { src: img("servicios9.svg") },
-  // { src: img("servicios16.svg") },
-  { src: img("s9image.svg"), path: "/service9" },
-  { src: img("servicios18.svg") },
-  { src: img("s10image.svg"), path: "/service10" },
-  { src: img("servicios11.svg") },
-  { src: img("s11image.svg"), path: "/service11" },
-  { src: img("servicios12.svg") },
-  { src: img("s12image.svg"), path: "/service12" },
-  { src: img("servicios13.svg") },
-  { src: img("s13image.svg"), path: "/service13" },
+const serviceImages = [
+  { src: "https://res.cloudinary.com/dhikp5azp/image/upload/f_auto,q_auto,w_300/v1746704694/2_lzz3ja.png",  path: "/service1" },
+  { src: "https://res.cloudinary.com/dhikp5azp/image/upload/f_auto,q_auto,w_300/v1746704694/3_glsfrp.png",  path: "/service2" },
+  { src: "https://res.cloudinary.com/dhikp5azp/image/upload/f_auto,q_auto,w_300/v1746704692/4_c9hqpk.png",  path: "/service3" },
+  { src: "https://res.cloudinary.com/dhikp5azp/image/upload/f_auto,q_auto,w_300/v1746704695/1_qguckr.png",  path: "/service4" },
+  { src: "https://res.cloudinary.com/dhikp5azp/image/upload/f_auto,q_auto,w_300/v1746704693/6_z4mmba.png",  path: "/service5" },
+  { src: "https://res.cloudinary.com/dhikp5azp/image/upload/f_auto,q_auto,w_300/v1746704693/7_km6zbh.png",  path: "/service6" },
+  { src: "https://res.cloudinary.com/dhikp5azp/image/upload/f_auto,q_auto,w_300/v1746704692/5_x5qbsk.png",  path: "/service7" },
+  { src: "https://res.cloudinary.com/dhikp5azp/image/upload/f_auto,q_auto,w_300/v1746704690/8_kpyjfe.png",  path: "/service8" },
+  { src: "https://res.cloudinary.com/dhikp5azp/image/upload/f_auto,q_auto,w_300/v1746704690/9_aghbs8.png",  path: "/service9" },
+  { src: "https://res.cloudinary.com/dhikp5azp/image/upload/f_auto,q_auto,w_300/v1746704691/10_qrctcf.png", path: "/service10" },
+  { src: "https://res.cloudinary.com/dhikp5azp/image/upload/f_auto,q_auto,w_300/v1746704691/11_rilchd.png", path: "/service11" },
+  { src: "https://res.cloudinary.com/dhikp5azp/image/upload/f_auto,q_auto,w_300/v1746704690/12_m3faqv.png", path: "/service12" },
+  { src: "https://res.cloudinary.com/dhikp5azp/image/upload/f_auto,q_auto,w_300/v1746704691/13_u8jng9.png", path: "/service13" },
 ];
 
-const getRandomSize = (index, isMobile, isTablet, isText = false) => {
-  if (isText) {
-    return {
-      width: isMobile ? "140px" : isTablet ? "160px" : "220px",
-      height: isMobile ? "160px" : isTablet ? "180px" : "260px",
-    };
-  }
-
-  const mobileSizes = [
-    { width: "110px", height: "140px" },
-    { width: "140px", height: "120px" },
-    { width: "140px", height: "135px" },
-  ];
-
-  const tabletSizes = [
-    { width: "160px", height: "180px" },
-    { width: "180px", height: "160px" },
-    { width: "200px", height: "190px" },
-  ];
-
-  const desktopSizes = [
-    { width: "200px", height: "300px" },
-    { width: "250px", height: "200px" },
-    { width: "300px", height: "225px" },
-    { width: "200px", height: "280px" },
-    { width: "320px", height: "240px" },
-    { width: "150px", height: "150px" },
-    { width: "200px", height: "300px" },
-    { width: "200px", height: "150px" },
-    { width: "240px", height: "360px" },
-  ];
-
-  if (isMobile) return mobileSizes[index % mobileSizes.length];
-  if (isTablet) return tabletSizes[index % tabletSizes.length];
-  return desktopSizes[index % desktopSizes.length];
-};
+// Sólo dos tamaños en desktop, alternados
+const desktopSizes = [
+  { width: "180px", height: "260px" },
+  { width: "220px", height: "350px" },
+];
 
 const InfiniteScrollGallery = () => {
-  useEffect(() => {
-    window.scrollTo(0, 0);
-  }, []);
   const navigate = useNavigate();
   const controls = useAnimation();
   const theme = useTheme();
-  const isMobile = useMediaQuery(theme.breakpoints.down("sm")); // iPhones y móviles pequeños
-  const isTablet = useMediaQuery(theme.breakpoints.between("sm", "md")); // iPads y tablets
+  const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
+  const isTablet = useMediaQuery(theme.breakpoints.between("sm", "md"));
+  const carouselRef = useRef(null);
 
-  const handleImageClick = (path) => {
-    if (path) navigate(path);
-  };
 
-  // Función para manejar la llamada urgente
-  // const handleUrgentCall = () => {
-  //   Swal.fire({
-  //     title: "Cita urgente",
-  //     text: "¿Deseas llamar al número de urgencia +47 983 15 132?",
-  //     icon: "warning",
-  //     showCancelButton: true,
-  //     confirmButtonText: "Sí, llamar",
-  //     cancelButtonText: "Cancelar",
-  //     confirmButtonColor: "#d33",
-  //   }).then((result) => {
-  //     if (result.isConfirmed) {
-  //       // Utiliza el protocolo tel: para iniciar la llamada
-  //       window.location.href = "tel:+4798315132";
-  //     }
-  //   });
-  // };
+  // al montar, scroll arriba
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
 
+  // animación infinita  y VELOCIDAD 
   useEffect(() => {
     controls.start({
       x: ["0%", "-100%"],
       transition: {
         ease: "linear",
-        duration: isMobile ? 280 : 580, //******* */ Animación más rápida en móviles/////***** */
+        duration: isMobile ? 200 : 40,
         repeat: Infinity,
       },
     });
   }, [controls, isMobile]);
 
+  // rueda vertical → scrollLeft
+  const handleWheel = (e) => {
+    if (!isMobile && !isTablet && carouselRef.current) {
+      e.preventDefault();
+      carouselRef.current.scrollLeft += e.deltaY;
+    }
+  };
+
+  // clic en imagen
+  const handleImageClick = (path) => {
+    if (path) navigate(path);
+  };
+
   return (
-    <StyledContainer>
+    <StyledContainer
+      ref={carouselRef}
+      onWheel={handleWheel}
+    >
+      {/* Título principal */}
       <Typography
         variant="h4"
         sx={{
           color: "#4b3f2f",
           fontFamily: "Playfair Display",
-          marginBottom: "10px",
           fontWeight: "bold",
+          mb: 1,
           fontSize: { xs: "2rem", md: "3rem" },
         }}
       >
         Servicios
       </Typography>
+
+      {/* Subtítulo */}
       <Typography
         variant="h6"
         sx={{
           color: "#654828",
           fontFamily: "Playfair Display",
-          marginBottom: "30px",
           fontStyle: "italic",
+          mb: 3,
           fontSize: { xs: "0.85rem", md: "1.1rem" },
         }}
       >
-        Haz clic en un servicio para más información
+        Haz clic en un servicio y conoce cómo puedo
       </Typography>
+
+      {/* Flecha animada */}
       <motion.div
-        initial={{ opacity: 0, y: 0 }}
+        initial={{ opacity: 0 }}
         animate={{ opacity: 1, y: [0, 10, 0] }}
         transition={{ duration: 1.5, repeat: Infinity }}
       >
         <Typography
           variant="h4"
           sx={{
-            color: "rgba(75, 63, 47, 0.8)",
-            fontWeight: "300",
-            position: "relative",
+            color: "rgba(75,63,47,0.8)",
+            fontWeight: 300,
+            mb: 3,
             fontSize: { xs: "1.5rem", md: "2rem" },
           }}
         >
           ↓
         </Typography>
       </motion.div>
-      <div
-      style={{
-        position: 'relative',
-        width: '100%',       // ocupa el ancho completo de StyledContainer
-        overflow: 'hidden',  // recorta cualquier hijo que se salga
-      }}
-    >
-      <Box
-        sx={{
-          width: '100%',         // asegura 100%
-          boxSizing: 'border-box',
-          display: 'grid',
-          gridTemplateColumns: {
-            xs: 'repeat(1, 1fr)',
-            sm: 'repeat(2, 1fr)',
-            md: 'repeat(3, 1fr)',
-            lg: 'repeat(6, 1fr)',
-          },
-          alignItems: 'center',
-          padding: '20px',
-          minHeight: '200px',
-          /* ya no necesitamos overflow aquí */
-        }}
-      >
-        <motion.div style={{ display: 'flex' }} animate={controls}>
-  {[...images, ...images].map((img, index) => {
-    const isText = Boolean(img.path); // ✅ detecta si es una imagen de texto
-    const size = getRandomSize(index, isMobile, isTablet, isText);
 
-    return (
-      <Box
-        key={index}
-        sx={{
-          width: size.width,
-          height: size.height,
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center',
-          border: '2px solid #d2b48c',
-          borderRadius: '6px',
-          margin: '4px',
-          overflow: 'hidden',
-          backgroundColor: isText ? '#6f8e7c' : 'transparent',
-          cursor: isText ? 'pointer' : 'default',
-          boxShadow: isText ? '0 2px 4px rgba(0,0,0,0.1)' : 'none',
-        }}
-        onClick={() => handleImageClick(img.path)}
-      >
-        <motion.img
-          src={img.src}
-          alt="Gallery"
-          style={{
-            width: '100%',
-            height: '100%',
-            objectFit: 'cover', // ✅ Siempre "cover"
-            padding: isText ? '0' : '2px', // menos padding visual para las de texto
-            borderRadius: '4px',
-          }}
-        />
-      </Box>
-    );
-  })}
-</motion.div>
+      {/* Galería infinita */}
+      <Box sx={{ position: "relative", width: "100%", overflow: "hidden",  mb: 3, }}>
+        <motion.div style={{ display: "flex" }} animate={controls}>
+          {serviceImages.concat(serviceImages).map((imgObj, idx) => {
+            // tamaño según breakpoints
+            const size = isMobile
+              ? { width: "120px", height: "140px" }
+              : isTablet
+              ? { width: "160px", height: "180px" }
+              : desktopSizes[idx % 2];
 
+            // ajusta el w_300 por w_{ancho} para mejor calidad
+            const srcHighRes = imgObj.src.replace(
+              /w_300/,
+              `w_${parseInt(size.width, 10) * (isTablet ? 1.5 : 2)}`
+            );
+
+            return (
+              <Box
+                key={idx}
+                onClick={() => handleImageClick(imgObj.path)}
+                sx={{
+                  flex: "0 0 auto",
+                  width: size.width,
+                  height: size.height,
+                  m: 1,
+                  cursor: "pointer",
+                  overflow: "hidden",
+                  border: "2px solid #d2b48c",
+                  borderRadius: "8px",
+                  boxShadow: "0 2px 4px rgba(0,0,0,0.1)",
+                }}
+              >
+                <Box
+                  component="img"
+                  src={srcHighRes}
+                  alt=""
+                  sx={{
+                    width: "100%",
+                    height: "100%",
+                    objectFit: "cover",
+                    display: "block",
+                  }}
+                />
+              </Box>
+            );
+          })}
+        </motion.div>
       </Box>
-    </div>
-      {/* Botón para solicitud de cita urgente */}
-      <Box sx={{ textAlign: "center", mt: 2 }}>
-        {/* <Button
-          variant="contained"
-          color="error"
-          onClick={handleUrgentCall}
-          sx={{
-            backgroundColor: "#AC5038",
-            color: "#f5eedc",
-            borderRadius: "10px",
-            padding: "10px",
-            fontFamily: "Playfair Display",
-            fontSize: { xs: "0.85rem", md: "1rem" },
-            "&:hover": {
-              backgroundColor: "#93362c",
-            },
-          }}
-        >
-          Necesito una cita urgente
-        </Button> */}
-      </Box>
-    </StyledContainer>
-  );
+
+          {/* Botón cita urgente (comentado) */}
+    {/*
+    <Box sx={{ textAlign: "center", mt: 2 }}>
+      <Button
+        variant="contained"
+        color="error"
+        onClick={handleUrgentCall}
+        sx={{}}  // si quieres añadir estilos, escríbelos aquí directamente
+      >
+        Necesito una cita urgente
+      </Button>
+    </Box>
+    */}
+  </StyledContainer>
+);
+
 };
 
 export default InfiniteScrollGallery;
+
+

@@ -59,7 +59,7 @@ const Image = () => (
     }}
   >
     <img
-      src="https://res.cloudinary.com/dhikp5azp/image/upload/f_auto,q_auto,w_800/v1746700467/5_epkfcv.png"
+      src="https://res.cloudinary.com/dhikp5azp/image/upload/f_auto,q_auto,w_1700/v1746700467/5_epkfcv.png"
       alt="Conflictos interpersonales"
       loading="lazy"
       width="100%"

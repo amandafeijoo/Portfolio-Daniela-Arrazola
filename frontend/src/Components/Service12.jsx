@@ -59,7 +59,7 @@ const Image = () => (
     }}
   >
     <img
-      src="https://res.cloudinary.com/dhikp5azp/image/upload/f_auto,q_auto,w_800/v1746700406/12_lnl22t.png"
+      src="https://res.cloudinary.com/dhikp5azp/image/upload/f_auto,q_auto,w_1700/v1746700406/12_lnl22t.png"
       alt="Trastornos del Neurodesarrollo"
       loading="lazy"
       width="100%"

@@ -57,7 +57,7 @@ const Image = () => (
     }}
   >
     <img
-      src="https://res.cloudinary.com/dhikp5azp/image/upload/f_auto,q_auto,w_800/v1746700408/13_queqq3.png"
+      src="https://res.cloudinary.com/dhikp5azp/image/upload/f_auto,q_auto,w_1700/v1746700408/13_queqq3.png"
       alt="Prevención del suicidio"
       loading="lazy"
       width="100%"

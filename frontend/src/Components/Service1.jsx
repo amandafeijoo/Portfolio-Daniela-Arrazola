@@ -59,8 +59,8 @@ const Image = () => (
     }}
   >
     <img
-      src="https://res.cloudinary.com/dhikp5azp/image/upload/f_auto,q_auto,w_800//v1746700474/1_oj2vbz.png"      alt="Ansiedad y Depresión"
-      loading="lazy"
+ src="https://res.cloudinary.com/dhikp5azp/image/upload/f_auto,q_auto,dpr_auto,w_1700/v1746700474/1_oj2vbz.png"
+loading="lazy"
       width="100%"
       style={{ borderRadius: "inherit", display: "block" }}
     />

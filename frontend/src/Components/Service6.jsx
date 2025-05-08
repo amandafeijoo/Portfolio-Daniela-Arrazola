@@ -59,7 +59,7 @@ const Image = () => (
     }}
   >
     <img
-      src="https://res.cloudinary.com/dhikp5azp/image/upload/f_auto,q_auto,w_800/v1746700469/6_vxlh8x.png"      alt="Habilidades sociales"
+      src="https://res.cloudinary.com/dhikp5azp/image/upload/f_auto,q_auto,w_1700/v1746700469/6_vxlh8x.png"      alt="Habilidades sociales"
       loading="lazy"
       width="100%"
       style={{ borderRadius: "inherit", display: "block" }}

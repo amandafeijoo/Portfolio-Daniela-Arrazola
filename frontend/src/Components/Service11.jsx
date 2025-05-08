@@ -59,7 +59,7 @@ const Image = () => (
     }}
   >
     <img
-      src="https://res.cloudinary.com/dhikp5azp/image/upload/f_auto,q_auto,w_800/v1746700409/11_zz8w9a.png"
+      src="https://res.cloudinary.com/dhikp5azp/image/upload/f_auto,q_auto,w_1700/v1746700409/11_zz8w9a.png"
   
       alt="Trastorno Obsesivo Compulsivo"
       loading="lazy"

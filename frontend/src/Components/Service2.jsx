@@ -59,7 +59,7 @@ const Image = () => (
     }}
   >
     <img
-      src="  https://res.cloudinary.com/dhikp5azp/image/upload//f_auto,q_auto,w_800/v1746700471/2_gjdoks.png"
+      src="  https://res.cloudinary.com/dhikp5azp/image/upload//f_auto,q_auto,w_1700/v1746700471/2_gjdoks.png"
       alt="Regulación emocional"
       loading="lazy"
       width="100%"

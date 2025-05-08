@@ -59,7 +59,7 @@ const Image = () => (
     }}
   >
     <img
-      src="https://res.cloudinary.com/dhikp5azp/image/upload/f_auto,q_auto,w_800/v1746700405/9_rp2cij.png"
+      src="https://res.cloudinary.com/dhikp5azp/image/upload/f_auto,q_auto,w_1700/v1746700405/9_rp2cij.png"
       alt="Crecimiento personal y hábitos saludables"
       loading="lazy"
       width="100%"

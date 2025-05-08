@@ -76,7 +76,7 @@ const Home = () => {
           }}
         >
           <source
-            src="https://res.cloudinary.com/dhikp5azp/video/upload/f_auto,q_auto:eco,w_1920,h_1080,c_fill/v1745534943/Cada_preocupaci%C3%B3n_es_solo_una_parte_del_paisaje-7_nnkd5l.mp4"
+            src="https://res.cloudinary.com/dhikp5azp/video/upload/f_auto,q_auto:eco,w_1920,h_1080,c_fill/v1746696216/Cada_preocupaci%C3%B3n_es_solo_una_parte_del_paisaje-8_slf58a.mp4"
             type="video/mp4"
           />
         </Box>

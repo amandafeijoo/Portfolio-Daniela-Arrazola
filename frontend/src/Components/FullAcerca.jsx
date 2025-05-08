@@ -1,4 +1,3 @@
-// src/components/FullAcerca.jsx
 import { useEffect } from "react";
 import styled, { keyframes } from "styled-components";
 import "@fontsource/playfair-display";
@@ -166,11 +165,11 @@ const FullAcerca = () => {
   }, []);
 
     // Preload
-    const imgs = [
-      "v1746407263/1_oy23bt",
-      "v1746407262/3_khk7e6",
-      "v1746407261/2_jvx6dl",
-    ];
+       const imgs = [
+           "v1746697724/1_pe1mgr",
+           "v1746697726/3_rpa9lw",
+           "v1746697725/2_zjc4h4",
+         ];
     imgs.forEach((id) => {
       const i = new Image();
       i.src = `https://res.cloudinary.com/dhikp5azp/image/upload/f_auto,q_auto,w_640/${id}.png`;
@@ -228,7 +227,7 @@ const FullAcerca = () => {
           </TextContainer>
           <MediaContainer>
             <ResponsiveImage
-              publicId="v1746407263/1_oy23bt"
+              publicId="v1746697724/1_pe1mgr"
               alt="Primera imagen ilustrativa"
             />
           </MediaContainer>
@@ -240,7 +239,7 @@ const FullAcerca = () => {
           {/* Imagen a la izquierda (o arriba en móvil) */}
           <MediaContainer>
             <ResponsiveImage
-              publicId="v1746407262/3_khk7e6"
+              publicId="v1746697726/3_rpa9lw"
               alt="Segunda imagen ilustrativa"
             />
           </MediaContainer>
@@ -377,7 +376,7 @@ const FullAcerca = () => {
           {/* Imagen a la derecha (o abajo en móvil) */}
           <MediaContainer>
             <ResponsiveImage
-              publicId="v1746407261/2_jvx6dl"
+              publicId="v1746697725/2_zjc4h4"
               alt="Tercera imagen ilustrativa"
             />
           </MediaContainer>

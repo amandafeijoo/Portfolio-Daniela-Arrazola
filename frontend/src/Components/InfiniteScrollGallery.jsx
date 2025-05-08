@@ -1,7 +1,7 @@
 import {
   Box,
   Typography,
-  Button,
+  // Button,
   useTheme,
   useMediaQuery,
 } from "@mui/material";
@@ -9,7 +9,7 @@ import { motion, useAnimation } from "framer-motion";
 import { useNavigate } from "react-router-dom";
 import { useEffect } from "react";
 import styled from "styled-components";
-import Swal from "sweetalert2";
+// import Swal from "sweetalert2";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import "@fontsource/playfair-display";
@@ -145,22 +145,22 @@ const InfiniteScrollGallery = () => {
   };
 
   // Función para manejar la llamada urgente
-  const handleUrgentCall = () => {
-    Swal.fire({
-      title: "Cita urgente",
-      text: "¿Deseas llamar al número de urgencia +47 983 15 132?",
-      icon: "warning",
-      showCancelButton: true,
-      confirmButtonText: "Sí, llamar",
-      cancelButtonText: "Cancelar",
-      confirmButtonColor: "#d33",
-    }).then((result) => {
-      if (result.isConfirmed) {
-        // Utiliza el protocolo tel: para iniciar la llamada
-        window.location.href = "tel:+4798315132";
-      }
-    });
-  };
+  // const handleUrgentCall = () => {
+  //   Swal.fire({
+  //     title: "Cita urgente",
+  //     text: "¿Deseas llamar al número de urgencia +47 983 15 132?",
+  //     icon: "warning",
+  //     showCancelButton: true,
+  //     confirmButtonText: "Sí, llamar",
+  //     cancelButtonText: "Cancelar",
+  //     confirmButtonColor: "#d33",
+  //   }).then((result) => {
+  //     if (result.isConfirmed) {
+  //       // Utiliza el protocolo tel: para iniciar la llamada
+  //       window.location.href = "tel:+4798315132";
+  //     }
+  //   });
+  // };
 
   useEffect(() => {
     controls.start({
@@ -284,7 +284,7 @@ const InfiniteScrollGallery = () => {
     </div>
       {/* Botón para solicitud de cita urgente */}
       <Box sx={{ textAlign: "center", mt: 2 }}>
-        <Button
+        {/* <Button
           variant="contained"
           color="error"
           onClick={handleUrgentCall}
@@ -301,7 +301,7 @@ const InfiniteScrollGallery = () => {
           }}
         >
           Necesito una cita urgente
-        </Button>
+        </Button> */}
       </Box>
     </StyledContainer>
   );

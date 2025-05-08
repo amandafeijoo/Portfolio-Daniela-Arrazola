@@ -64,7 +64,7 @@ const ContenedorPrincipal1 = styled.div`
 
 const ContenedorPrincipal2 = styled.div`
   position: absolute;
-  top: 120px;
+  top: 90px;
   right: 120px;
   width: 35%;
   padding: 10px;
@@ -179,7 +179,7 @@ const ImagenDaniela = () => {
               fontFamily: "Playfair Display",
               fontWeight: 600,
               fontSize: { xs: "1.3rem", sm: "1.5rem" },
-              mb: 2,
+              mb: 3,
               textAlign: { xs: "center", sm: "center" },
               lineHeight: 1.2,
             }}
@@ -205,7 +205,9 @@ const ImagenDaniela = () => {
             caminamos juntos a tu ritmo. Te acompaño a reconectar contigo, a
             poner palabras a lo que duele y a construir relaciones más sanas
             contigo y con los demás. No estás solo. Aquí empieza tu proceso de
-            volver a ti. Conoce más sobre mí y cómo puedo acompañarte en tu
+            volver a ti. 
+            <br/>    <br/>
+            Conoce más sobre mí y cómo puedo acompañarte en tu
             proceso
           </Typography>
         </div>
@@ -217,7 +219,7 @@ const ImagenDaniela = () => {
             width: { xs: "100%", md: "auto" }, // 100% en movil, auto en escritorio
             display: "flex",
             justifyContent: { xs: "center", md: "center" }, // centrado en xs, al final en md+
-            mt: { xs: 2, md: 1 },
+            mt: { xs: 2, md: -2 },
           }}
         >
           <Button

@@ -36,7 +36,7 @@ const services = [
   { name: "Fobias", path: "/service10" },
   { name: "Trastorno Obsesivo Compulsivo", path: "/service11" },
   { name: "Trastornos del Neurodesarrollo", path: "/service12" },
-  { name: "Trastornos de la conducta alimentaria", path: "/service13" },
+  { name: "Prevención del suicidio", path: "/service13" },
 ];
 
 const moveAnimation = keyframes`
@@ -59,7 +59,7 @@ const Image = () => (
     }}
   >
     <img
-      src="  https://res.cloudinary.com/dhikp5azp/image/upload//f_auto,q_auto,w_800/v1746012631/2_u0dr3m.png"
+      src="  https://res.cloudinary.com/dhikp5azp/image/upload//f_auto,q_auto,w_800/v1746700471/2_gjdoks.png"
       alt="Regulación emocional"
       loading="lazy"
       width="100%"

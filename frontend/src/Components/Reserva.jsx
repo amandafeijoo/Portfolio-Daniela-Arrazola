@@ -97,7 +97,7 @@ const Reserva = () => {
     "Fobias",
     "Trastorno Obsesivo Compulsivo",
     "Trastornos del Neurodesarrollo",
-    "Trastornos de la conducta alimentaria",
+    "Prevención del suicidio",
     "Otro (especifique en el campo de comentarios)",
   ];
 

@@ -42,7 +42,7 @@ const services = [
   { name: "Fobias", path: "/service10" },
   { name: "Trastorno Obsesivo Compulsivo", path: "/service11" },
   { name: "Trastornos del Neurodesarrollo", path: "/service12" },
-  { name: "Trastornos de la conducta alimentaria", path: "/service13" },
+  { name: "Prevención del suicidio", path: "/service13" },
 ];
 
 const Image = () => (
@@ -59,7 +59,7 @@ const Image = () => (
     }}
   >
     <img
-      src="https://res.cloudinary.com/dhikp5azp/image/upload/f_auto,q_auto,w_800/v1746012630/9_uovdnw.png"
+      src="https://res.cloudinary.com/dhikp5azp/image/upload/f_auto,q_auto,w_800/v1746700405/9_rp2cij.png"
       alt="Crecimiento personal y hábitos saludables"
       loading="lazy"
       width="100%"

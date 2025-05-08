@@ -42,7 +42,7 @@ const services = [
   { name: "Fobias", path: "/service10" },
   { name: "Trastorno Obsesivo Compulsivo", path: "/service11" },
   { name: "Trastornos del Neurodesarrollo", path: "/service12" },
-  { name: "Trastornos de la conducta alimentaria", path: "/service13" },
+  { name: "Prevención del suicidio", path: "/service13" },
 ];
 
 const Image = () => (
@@ -59,7 +59,7 @@ const Image = () => (
     }}
   >
     <img
-      src="https://res.cloudinary.com/dhikp5azp/image/upload/f_auto,q_auto,w_800/v1746012630/8_uxwhgp.png"
+      src="https://res.cloudinary.com/dhikp5azp/image/upload/f_auto,q_auto,w_800/v1746700404/8_b9cx16.png"
       alt="Productividad y gestión del tiempo"
       loading="lazy"
       width="100%"

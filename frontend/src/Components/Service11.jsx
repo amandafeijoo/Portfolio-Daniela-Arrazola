@@ -38,7 +38,7 @@ const services = [
   { name: "Habilidades sociales", path: "/service6" },
   { name: "Crianza", path: "/service7" },
   { name: "Productividad y gestión del tiempo", path: "/service8" },
-  { name: "Crecimiento personal y hábitos saludables", path: "/service9" },
+  { name: "Hábitos saludables", path: "/service9" },
   { name: "Fobias", path: "/service10" },
   { name: "Trastorno Obsesivo Compulsivo", path: "/service11" },
   { name: "Trastornos del Neurodesarrollo", path: "/service12" },
@@ -60,7 +60,6 @@ const Image = () => (
   >
     <img
       src="https://res.cloudinary.com/dhikp5azp/image/upload/f_auto,q_auto,w_1700/v1746700409/11_zz8w9a.png"
-  
       alt="Trastorno Obsesivo Compulsivo"
       loading="lazy"
       width="100%"
@@ -110,7 +109,20 @@ const Service11 = () => {
 
   return (
     <>
-      <Container>
+      <Container
+        maxWidth="lg"
+        disableGutters
+        sx={{
+          maxWidth: {
+            xs: "100%", // móvil ocupa el 100%
+            sm: "90%", // tablet 90%
+            md: "1200px", // desktop estándar
+            lg: "1400px", // pantallas muy grandes
+          },
+          px: { xs: 0, sm: 2 },
+        }}
+      >
+        {" "}
         <Tabs
           value={currentIndex}
           onChange={(event, newValue) => navigate(services[newValue].path)}
@@ -147,7 +159,7 @@ const Service11 = () => {
           sx={{
             width: "100%",
             maxWidth: "1200px",
-            margin: { xs: 1, sm: 2 },
+            margin: { xs: 0, sm: 2 },
             padding: { xs: 1, sm: 4, md: 6 },
             border: "2px solid #d2b48c",
             borderRadius: { xs: 1, sm: 2 },

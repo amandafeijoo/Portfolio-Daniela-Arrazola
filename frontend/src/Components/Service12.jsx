@@ -108,8 +108,19 @@ const Service12 = () => {
 
   return (
     <>
-      <Container>
-        <Tabs
+<Container
+        maxWidth="lg"
+        disableGutters
+        sx={{
+          maxWidth: {
+            xs: "100%", // móvil ocupa el 100%
+            sm: "90%", // tablet 90%
+            md: "1200px", // desktop estándar
+            lg: "1400px", // pantallas muy grandes
+          },
+          px: { xs: 0, sm: 2 },
+        }}
+      >        <Tabs
           value={currentIndex}
           onChange={(event, newValue) => navigate(services[newValue].path)}
           variant="scrollable"
@@ -145,7 +156,7 @@ const Service12 = () => {
           sx={{
             width: "100%",
             maxWidth: "1200px",
-            margin: { xs: 1, sm: 2 },
+            margin: { xs: 0, sm: 2 },
             padding: { xs: 1, sm: 4, md: 6 },
             border: "2px solid #d2b48c",
             borderRadius: { xs: 1, sm: 2 },

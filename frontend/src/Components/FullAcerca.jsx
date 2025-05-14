@@ -2,6 +2,8 @@ import { useEffect } from "react";
 import styled, { keyframes } from "styled-components";
 import "@fontsource/playfair-display";
 import { Typography, Box } from "@mui/material";
+import PropTypes from "prop-types";
+
 
 const moveAnimation = keyframes`
   0% { transform: translateY(0); }
@@ -23,9 +25,12 @@ const FullAcercaContainer = styled.div`
   margin: auto;
 
   @media (max-width: 768px) {
-    padding: 15px;
-    width: 95%;
+    width: 102%;        /* ocupa todo el ancho del viewport */
+    max-width: none;    /* quita el tope de 1400px */
+    padding: 24px 16px; /* más espacio arriba/abajo y laterales */
+    margin: 0 auto;     /* centrado horizontal */
   }
+
   @media (max-width: 320px) {
     padding: 10px;
     width: 100%;
@@ -48,6 +53,7 @@ const Section = styled.div`
   width: 100%;
   background-color: #8fa99e;
   border-radius: 8px;
+  box-sizing: border-box;
   padding: 20px;
   margin-bottom: 20px;
   box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2);
@@ -55,11 +61,13 @@ const Section = styled.div`
   @media (min-width: 768px) {
     flex-direction: row;
     justify-content: space-between;
+    padding:20px;
+    margin-bottom:20px;
   }
 `;
 
 const Section2 = styled(Section)`
-  background-color: #7f918e;
+  background-color: #8fa99e;
 `;
 
 const ContentContainer = styled.div`
@@ -124,8 +132,22 @@ const MediaContainer = styled.div`
   }
 `;
 
-// Componente para imagen responsiva Cloudinary
-import PropTypes from "prop-types";
+const StyledImg = styled.img`
+  width: 65%;
+  height: auto;
+  border-radius: 15px;
+  box-shadow:
+    0 0 5px 2px rgba(0, 0, 0, 0.3),
+    0 0 10px 4px rgba(34, 139, 34, 0.2),
+    0 0 15px 6px rgba(0, 0, 0, 0.5);
+
+  /* ↑ estilos por defecto (desktop) */
+
+  @media (max-width: 768px) {
+    width: 90%;    /* en móvil sube a 90% del contenedor */
+  }
+`;
+
 
 function ResponsiveImage({ publicId, alt }) {
   const base = `https://res.cloudinary.com/dhikp5azp/image/upload`;
@@ -136,14 +158,13 @@ function ResponsiveImage({ publicId, alt }) {
     .join(", ");
 
   return (
-    <img
+    <StyledImg
       src={`${base}/${flags},w_640/${publicId}.png`}
       srcSet={srcSet}
       sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 640px"
       loading="lazy"
       alt={alt}
       style={{
-        width: "65%",
         height: "auto",
         borderRadius: "15px",
         boxShadow: [
@@ -155,8 +176,6 @@ function ResponsiveImage({ publicId, alt }) {
     />
   );
 }
-
-// Removed duplicate ResponsiveImage.propTypes declaration
 
 const FullAcerca = () => {
 
@@ -182,6 +201,12 @@ const FullAcerca = () => {
 
       <Section>
         <ContentContainer>
+        <MediaContainer>
+            <ResponsiveImage
+              publicId="v1746697724/1_pe1mgr"
+              alt="Primera imagen ilustrativa"
+            />
+          </MediaContainer>
           <TextContainer>
             {/* Título grande */}
             <Typography
@@ -225,12 +250,6 @@ const FullAcerca = () => {
               sin dañar sus relaciones.
             </Typography>
           </TextContainer>
-          <MediaContainer>
-            <ResponsiveImage
-              publicId="v1746697724/1_pe1mgr"
-              alt="Primera imagen ilustrativa"
-            />
-          </MediaContainer>
         </ContentContainer>
       </Section>
 
@@ -317,6 +336,13 @@ const FullAcerca = () => {
       <Section2>
         <ContentContainer>
           {/* Texto a la izquierda (o arriba en móvil) */}
+           {/* Imagen a la derecha (o abajo en móvil) */}
+           <MediaContainer>
+            <ResponsiveImage
+              publicId="v1746697725/2_zjc4h4"
+              alt="Tercera imagen ilustrativa"
+            />
+          </MediaContainer>
           <TextContainer>
             {/* Título en negrita y responsivo */}
             <Typography
@@ -341,16 +367,18 @@ const FullAcerca = () => {
                 "& li": {
                   fontFamily: "Playfair Display",
                   fontSize: { xs: "0.95rem", sm: "1.1rem" },
+                  textAlign: "Left",
+
                   lineHeight: 1.6,
                   mb: 1,
                 },
               }}
             >
-              <li>Disfrutando del sol y los paisajes naturales</li>
-              <li>Bailando ritmos latinoamericanos</li>
-              <li>Descubriendo nuevos rincones del mundo</li>
+              <li>Disfrutando del sol y los paisajes naturales.</li>
+              <li>Bailando ritmos latinoamericanos.</li>
+              <li>Descubriendo nuevos rincones del mundo.</li>
               <li>
-                Viviendo experiencias gastronómicas que despierten los sentidos
+                Viviendo experiencias gastronómicas que despierten los sentidos.
               </li>
             </Box>
 
@@ -372,14 +400,6 @@ const FullAcerca = () => {
               esencia.
             </Typography>
           </TextContainer>
-
-          {/* Imagen a la derecha (o abajo en móvil) */}
-          <MediaContainer>
-            <ResponsiveImage
-              publicId="v1746697725/2_zjc4h4"
-              alt="Tercera imagen ilustrativa"
-            />
-          </MediaContainer>
         </ContentContainer>
       </Section2>
     </FullAcercaContainer>

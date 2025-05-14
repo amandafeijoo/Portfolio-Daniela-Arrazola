@@ -38,7 +38,7 @@ const services = [
   { name: "Habilidades sociales", path: "/service6" },
   { name: "Crianza", path: "/service7" },
   { name: "Productividad y gestión del tiempo", path: "/service8" },
-  { name: "Crecimiento personal y hábitos saludables", path: "/service9" },
+  { name: "Hábitos saludables", path: "/service9" },
   { name: "Fobias", path: "/service10" },
   { name: "Trastorno Obsesivo Compulsivo", path: "/service11" },
   { name: "Trastornos del Neurodesarrollo", path: "/service12" },
@@ -59,8 +59,8 @@ const Image = () => (
     }}
   >
     <img
- src="https://res.cloudinary.com/dhikp5azp/image/upload/f_auto,q_auto,dpr_auto,w_1700/v1746700474/1_oj2vbz.png"
-loading="lazy"
+      src="https://res.cloudinary.com/dhikp5azp/image/upload/f_auto,q_auto,dpr_auto,w_1700/v1747143774/1_cqvjrb.png"
+      loading="lazy"
       width="100%"
       style={{ borderRadius: "inherit", display: "block" }}
     />
@@ -102,7 +102,19 @@ const Service1 = () => {
 
   return (
     <>
-      <Container maxWidth="lg">
+      <Container
+        maxWidth="lg"
+        disableGutters
+        sx={{
+          maxWidth: {
+            xs: "100%", // móvil ocupa el 100%
+            sm: "90%", // tablet 90%
+            md: "1200px", // desktop estándar
+            lg: "1400px", // pantallas muy grandes
+          },
+          px: { xs: 0, sm: 2 },
+        }}
+      >
         {" "}
         {/* 📌 Define un límite máximo */}
         <Tabs
@@ -141,7 +153,7 @@ const Service1 = () => {
           sx={{
             width: "100%",
             maxWidth: "1200px",
-            margin: { xs: 1, sm: 2 }, // 📌 Margen reducido en móviles
+            margin: { xs: 0, sm: 2 }, // 📌 Margen reducido en móviles
             padding: { xs: 1, sm: 4, md: 6 },
             border: "2px solid #d2b48c",
             borderRadius: { xs: 1, sm: 2 },

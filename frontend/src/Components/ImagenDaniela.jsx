@@ -4,7 +4,6 @@ import { motion } from "framer-motion";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import "@fontsource/playfair-display";
-// import { img } from "../utils/imagePath";
 
 const ContenedorPadre = styled.div`
   position: relative;
@@ -28,13 +27,15 @@ const ContenedorPadre = styled.div`
 
   /* MOBILE */
   @media (max-width: 768px) {
-    width: 100%; /* ✅ en lugar de 100vw */
+    width: 100%;
+    height: 50vh;
     padding: 0;
     margin: 0;
-    border: none;
-    border-radius: 0;
+    border-radius: 2;
     box-shadow: none;
-    overflow-x: hidden; /* ✅ Evita que se desborde horizontalmente */
+    height: 60%;
+    border: 3px solid #d2b48c;
+    overflow: hidden;
   }
 `;
 
@@ -59,6 +60,11 @@ const ContenedorPrincipal1 = styled.div`
     width: 70%;
     margin: 20px auto;
     transform: none !important;
+    margin-bottom: -50px;
+
+    /* → cuadrado y redondo: */
+    aspect-ratio: 1 / 1; /* fuerza 1:1 */
+    border-radius: 50%; /* círculo */
   }
 `;
 
@@ -66,9 +72,9 @@ const ContenedorPrincipal2 = styled.div`
   position: absolute;
   top: 90px;
   right: 120px;
-  width: 35%;
+  width: 40%;
   padding: 10px;
-  border: 3px solid #a1ad7f;
+  border: 3px solid #d2b48c;
   border-radius: 15px;
   background-color: rgba(255, 255, 255, 0.2);
   transition: transform 1.5s ease-out;
@@ -145,106 +151,115 @@ const ImagenDaniela = () => {
   const navigate = useNavigate();
 
   return (
-    <ContenedorPadre>
-      <ContenedorPrincipal1
-        ref={contenedor1Ref}
-        className={!isMobile ? "hidden" : ""}
-      >
-        <img
-          src="https://res.cloudinary.com/dhikp5azp/image/upload/f_auto,q_auto,w_1600/v1746396624/BAF17E77-9F94-4A6A-A2BD-790A98334D42_1_105_c_n2rcpc.jpg"
-          alt="Daniela"
-          style={{ width: "100%", borderRadius: "15px" }}
-          loading="lazy"
-        />
-      </ContenedorPrincipal1>
-      <ContenedorPrincipal2
-        ref={contenedor2Ref}
-        className={!isMobile ? "hidden" : ""}
-      >
-        <div
-          style={{
-            background: isMobile ? "transparent" : "#f5eedc",
-            borderRadius: isMobile ? "0px" : "15px",
-            padding: isMobile ? "20px" : "30px",
-            textAlign: "justify",
-            fontFamily: '"Playfair Display", serif', // ◀ aquí
-            lineHeight: 1.6,
-            color: "rgb(75, 60, 45)",
-          }}
+    <Box
+      sx={{
+        // Sólo en xs (móvil) dejamos visible todo y damos colchón abajo
+        overflow: { xs: "visible", md: "hidden" },
+        pb: { xs: 5, md: 0 }, // 8 * 8px = 64px de padding-bottom en móvil
+        boxSizing: "border-box",
+      }}
+    >
+      <ContenedorPadre>
+        <ContenedorPrincipal1
+          ref={contenedor1Ref}
+          className={!isMobile ? "hidden" : ""}
         >
-          {/* ─── Título en negrita ─── */}
-          <Typography
-            component="h2"
-            sx={{
-              fontFamily: "Playfair Display",
-              fontWeight: 600,
-              fontSize: { xs: "1.3rem", sm: "1.5rem" },
-              mb: 3,
-              textAlign: { xs: "center", sm: "center" },
-              lineHeight: 1.2,
-            }}
-          >
-            ¿Te sientes emocionalmente agotado?
-          </Typography>
-
-          {/* ─── Texto principal ─── */}
-          <Typography
-            component="p"
-            sx={{
-              fontFamily: "Playfair Display",
-              fontSize: { xs: "0.95rem", sm: "1rem" },
-              mb: 2,
-            }}
-          >
-            Hola, soy Daniela, psicóloga especializada en límites y regulación
-            emocional. Si estás aquí, puede que estés cansado de cuidar a todos
-            menos a ti, que te cueste decir “no” sin culpa o que te sientas
-            desconectado de lo que antes te hacía bien. Quizás estás atravesando
-            ansiedad, tristeza, confusión o simplemente el deseo profundo de
-            recuperar tu bienestar emocional. En este espacio terapéutico,
-            caminamos juntos a tu ritmo. Te acompaño a reconectar contigo, a
-            poner palabras a lo que duele y a construir relaciones más sanas
-            contigo y con los demás. No estás solo. Aquí empieza tu proceso de
-            volver a ti. 
-            <br/>    <br/>
-            Conoce más sobre mí y cómo puedo acompañarte en tu
-            proceso
-          </Typography>
-        </div>
-
-        {/* ─── Botón dentro de un Box responsive ─── */}
-        {/* ─── Botón dentro de un Box responsive ─── */}
-        <Box
-          sx={{
-            width: { xs: "100%", md: "auto" }, // 100% en movil, auto en escritorio
-            display: "flex",
-            justifyContent: { xs: "center", md: "center" }, // centrado en xs, al final en md+
-            mt: { xs: 2, md: -2 },
-          }}
+          <img
+            src="https://res.cloudinary.com/dhikp5azp/image/upload/f_auto,q_auto,w_1600/v1746396624/BAF17E77-9F94-4A6A-A2BD-790A98334D42_1_105_c_n2rcpc.jpg"
+            alt="Daniela"
+            style={{ width: "100%", borderRadius: "15px" }}
+            loading="lazy"
+          />
+        </ContenedorPrincipal1>
+        <ContenedorPrincipal2
+          ref={contenedor2Ref}
+          className={!isMobile ? "hidden" : ""}
         >
-          <Button
-            variant="contained"
-            component={motion.button}
-            whileHover={!isMobile ? { scale: 1.1 } : {}}
-            whileTap={!isMobile ? { scale: 0.95 } : {}}
-            sx={{
-              backgroundColor: "rgb(211, 190, 151)",
-              color: "rgb(92, 116, 101)",
-              fontFamily: "Playfair Display",
-              textTransform: "none",
-              borderRadius: "30px",
-              border: "2px solid rgb(120, 150, 131)",
-              fontSize: { xs: "1rem", sm: "1rem" },
-              px: { xs: 3, sm: 3 },
-              py: { xs: 1.5, sm: 1 },
+          <div
+            style={{
+              background: isMobile ? "transparent" : "#f5eedc",
+              borderRadius: isMobile ? "0px" : "15px",
+              padding: isMobile ? "20px" : "30px",
+              textAlign: "justify",
+              fontFamily: '"Playfair Display", serif',
+              lineHeight: 1.6,
+              color: "rgb(75, 60, 45)",
             }}
-            onClick={() => navigate("/full-acerca")}
           >
-            Leer más
-          </Button>
-        </Box>
-      </ContenedorPrincipal2>
-    </ContenedorPadre>
+            {/* ─── Título en negrita ─── */}
+            <Typography
+              component="h2"
+              sx={{
+                fontFamily: "Playfair Display",
+                fontWeight: 600,
+                fontSize: { xs: "1.1rem", sm: "1.3rem" },
+                mt: 4,
+                mb: 4,
+                textAlign: { xs: "center", sm: "center" },
+                lineHeight: 1.2,
+              }}
+            >
+              ¿Te sientes emocionalmente agotado?
+            </Typography>
+
+            {/* ─── Texto principal ─── */}
+            <Typography
+              component="p"
+              sx={{
+                fontFamily: "Playfair Display",
+                fontSize: { xs: "0.95rem", sm: "1rem" },
+                mb: 3,
+              }}
+            >
+              Hola, soy Daniela, psicóloga especializada en límites y regulación
+              emocional. Si estás aquí, puede que estés cansado de cuidar a
+              todos menos a ti, que te cueste decir “no” sin culpa o que te
+              sientas desconectado de lo que antes te hacía bien. Quizás estás
+              atravesando ansiedad, tristeza, confusión o simplemente el deseo
+              profundo de recuperar tu bienestar emocional. En este espacio
+              terapéutico, caminamos juntos a tu ritmo. Te acompaño a reconectar
+              contigo, a poner palabras a lo que duele y a construir relaciones
+              más sanas contigo y con los demás. No estás solo. Aquí empieza tu
+              proceso de volver a ti.
+              <br /> <br />
+              Conoce más sobre mí y cómo puedo acompañarte en tu proceso
+            </Typography>
+          </div>
+
+          {/* ─── Botón dentro de un Box responsive ─── */}
+          <Box
+            sx={{
+              width: { xs: "100%", md: "auto" }, // 100% en movil, auto en escritorio
+              display: "flex",
+              justifyContent: { xs: "center", md: "center" }, // centrado en xs, al final en md+
+              mt: { xs: -2, md: -2 },
+              mb: { xs: 0, md: 4 },
+            }}
+          >
+            <Button
+              variant="contained"
+              component={motion.button}
+              whileHover={!isMobile ? { scale: 1.1 } : {}}
+              whileTap={!isMobile ? { scale: 0.95 } : {}}
+              sx={{
+                backgroundColor: "rgb(211, 190, 151)",
+                color: "rgb(92, 116, 101)",
+                fontFamily: "Playfair Display",
+                textTransform: "none",
+                borderRadius: "30px",
+                border: "2px solid rgb(120, 150, 131)",
+                fontSize: { xs: "1rem", sm: "1rem" },
+                px: { xs: 3, sm: 3 },
+                py: { xs: 1.5, sm: 1 },
+              }}
+              onClick={() => navigate("/full-acerca")}
+            >
+              Leer más
+            </Button>
+          </Box>
+        </ContenedorPrincipal2>
+      </ContenedorPadre>
+    </Box>
   );
 };
 

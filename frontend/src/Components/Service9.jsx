@@ -38,7 +38,7 @@ const services = [
   { name: "Habilidades sociales", path: "/service6" },
   { name: "Crianza", path: "/service7" },
   { name: "Productividad y gestión del tiempo", path: "/service8" },
-  { name: "Crecimiento personal y hábitos saludables", path: "/service9" },
+  { name: "Hábitos saludables", path: "/service9" },
   { name: "Fobias", path: "/service10" },
   { name: "Trastorno Obsesivo Compulsivo", path: "/service11" },
   { name: "Trastornos del Neurodesarrollo", path: "/service12" },
@@ -59,7 +59,7 @@ const Image = () => (
     }}
   >
     <img
-      src="https://res.cloudinary.com/dhikp5azp/image/upload/f_auto,q_auto,w_1700/v1746700405/9_rp2cij.png"
+      src="https://res.cloudinary.com/dhikp5azp/image/upload/f_auto,q_auto,w_1700/v1747143774/9_x2c175.png"
       alt="Crecimiento personal y hábitos saludables"
       loading="lazy"
       width="100%"
@@ -106,7 +106,20 @@ const Service9 = () => {
 
   return (
     <>
-      <Container>
+      <Container
+        maxWidth="lg"
+        disableGutters
+        sx={{
+          maxWidth: {
+            xs: "100%", // móvil ocupa el 100%
+            sm: "90%", // tablet 90%
+            md: "1200px", // desktop estándar
+            lg: "1400px", // pantallas muy grandes
+          },
+          px: { xs: 0, sm: 2 },
+        }}
+      >
+        {" "}
         <Tabs
           value={currentIndex}
           onChange={(event, newValue) => navigate(services[newValue].path)}
@@ -143,7 +156,7 @@ const Service9 = () => {
           sx={{
             width: "100%",
             maxWidth: "1200px",
-            margin: { xs: 1, sm: 2 },
+            margin: { xs: 0, sm: 2 },
             padding: { xs: 1, sm: 4, md: 6 },
             border: "2px solid #d2b48c",
             borderRadius: { xs: 1, sm: 2 },
@@ -193,7 +206,8 @@ const Service9 = () => {
                     variant={isMobile ? "h6" : "h5"}
                     sx={{ fontFamily: "Playfair Display" }}
                   >
-¿Te gustaría cultivar hábitos que nutran tu bienestar de manera duradera?
+                    ¿Te gustaría cultivar hábitos que nutran tu bienestar de
+                    manera duradera?
                   </Typography>
                 </AccordionSummary>
                 <AccordionDetails>
@@ -206,76 +220,82 @@ const Service9 = () => {
                       lineHeight: 1.6,
                     }}
                   >
-                    Imagina que tu vida es un jardín, donde cada elección y hábito es una semilla que
-decides plantar. Algunas de estas semillas darán frutos llenos de energía y
-satisfacción, mientras que otras pueden drenarte y limitar tu crecimiento. La clave
-está en aprender a cultivar lo que realmente te beneficia.
-<Box component="span" sx={{ fontWeight: "bold", mr: 0.5 }}>
+                    Imagina que tu vida es un jardín, donde cada elección y
+                    hábito es una semilla que decides plantar. Algunas de estas
+                    semillas darán frutos llenos de energía y satisfacción,
+                    mientras que otras pueden drenarte y limitar tu crecimiento.
+                    La clave está en aprender a cultivar lo que realmente te
+                    beneficia.
+                    <Box component="span" sx={{ fontWeight: "bold", mr: 0.5 }}>
                       {" "}
                       El crecimiento personal es un proceso continuo
                     </Box>
-                    de autoconocimiento y mejora.
-Se trata de aprender a identificar lo que te impulsa y lo que te frena, gestionar tus
-emociones y construir hábitos que te ayuden a sentirte mejor, tanto física como
-mentalmente.
+                    de autoconocimiento y mejora. Se trata de aprender a
+                    identificar lo que te impulsa y lo que te frena, gestionar
+                    tus emociones y construir hábitos que te ayuden a sentirte
+                    mejor, tanto física como mentalmente.
                   </Typography>
                   <List>
-  {[
-    {
-      primary: "Identificar creencias limitantes,",
-      secondary: "y transformarlas en pensamientos que te impulsen.",
-    },
-    {
-      primary: "Reemplazar hábitos dañinos por prácticas saludables,",
-      secondary: "y sostenibles.",
-    },
-    {
-      primary: "Equilibrar tu bienestar emocional, físico y mental,",
-      secondary: "sin caer en la autoexigencia extrema.",
-    },
-    {
-      primary: "Definir objetivos alineados con lo que realmente deseas,",
-      secondary: "no con lo que otros esperan de ti.",
-    },
-  ].map(({ primary, secondary }, i) => (
-    <ListItem
-      key={i}
-      sx={{
-        backgroundColor: "#fff",
-        margin: 1,
-        borderRadius: 1,
-        boxShadow: 1,
-      }}
-    >
-      <ListItemText
-        disableTypography
-        primary={
-          <>
-            <Typography
-              component="span"
-              sx={{
-                fontWeight: "bold",
-                color: "#4b3f2f",
-                fontFamily: "Playfair Display",
-              }}
-            >
-              {primary}
-            </Typography>{" "}
-            <Typography
-              component="span"
-              sx={{
-                color: "#4b3f2f",
-                fontFamily: "Playfair Display",
-              }}
-            >
-              {secondary}
-            </Typography>
-          </>
-        }
-      />
-    </ListItem>
-  ))}
-</List>
+                    {[
+                      {
+                        primary: "Identificar creencias limitantes,",
+                        secondary:
+                          "y transformarlas en pensamientos que te impulsen.",
+                      },
+                      {
+                        primary:
+                          "Reemplazar hábitos dañinos por prácticas saludables,",
+                        secondary: "y sostenibles.",
+                      },
+                      {
+                        primary:
+                          "Equilibrar tu bienestar emocional, físico y mental,",
+                        secondary: "sin caer en la autoexigencia extrema.",
+                      },
+                      {
+                        primary:
+                          "Definir objetivos alineados con lo que realmente deseas,",
+                        secondary: "no con lo que otros esperan de ti.",
+                      },
+                    ].map(({ primary, secondary }, i) => (
+                      <ListItem
+                        key={i}
+                        sx={{
+                          backgroundColor: "#fff",
+                          margin: 1,
+                          borderRadius: 1,
+                          boxShadow: 1,
+                        }}
+                      >
+                        <ListItemText
+                          disableTypography
+                          primary={
+                            <>
+                              <Typography
+                                component="span"
+                                sx={{
+                                  fontWeight: "bold",
+                                  color: "#4b3f2f",
+                                  fontFamily: "Playfair Display",
+                                }}
+                              >
+                                {primary}
+                              </Typography>{" "}
+                              <Typography
+                                component="span"
+                                sx={{
+                                  color: "#4b3f2f",
+                                  fontFamily: "Playfair Display",
+                                }}
+                              >
+                                {secondary}
+                              </Typography>
+                            </>
+                          }
+                        />
+                      </ListItem>
+                    ))}
+                  </List>
 
                   <Typography
                     variant="body1"
@@ -286,35 +306,37 @@ mentalmente.
                       lineHeight: 1.6,
                     }}
                   >
-                   Los hábitos saludables no son solo sobre
+                    Los hábitos saludables no son solo sobre
                     <Box component="span" sx={{ fontWeight: "bold", mr: 0.5 }}>
                       {" "}
                       alimentación o ejercicio,
                     </Box>
-                    sino también
-sobre
+                    sino también sobre
                     <Box component="span" sx={{ fontWeight: "bold", mr: 0.5 }}>
                       {" "}
-                      descanso, relaciones sanas y amor propio.                    </Box>
-                      Si sientes que te cuesta
-avanzar o que repites patrones que no te benefician, es momento de
+                      descanso, relaciones sanas y amor propio.{" "}
+                    </Box>
+                    Si sientes que te cuesta avanzar o que repites patrones que
+                    no te benefician, es momento de
                     <Box component="span" sx={{ fontWeight: "bold", mr: 0.5 }}>
                       {" "}
-                      cambiar el
-                      enfoque.                   
-                       </Box>
-                      <br /> <br />
+                      cambiar el enfoque.
+                    </Box>
+                    <br /> <br />
                     <Box component="span" sx={{ fontWeight: "bold", mr: 0.5 }}>
                       {" "}
-                      El crecimiento personal no es un lujo, es la base para una vida plena y
-                      consciente.                    </Box>
-                      Tú tienes el poder de transformar tu historia, un paso a la vez.
-                      <br /> <br />
+                      El crecimiento personal no es un lujo, es la base para una
+                      vida plena y consciente.{" "}
+                    </Box>
+                    Tú tienes el poder de transformar tu historia, un paso a la
+                    vez.
+                    <br /> <br />
                     <Box component="span" sx={{ fontWeight: "bold", mr: 0.5 }}>
                       {" "}
-                      Agenda una consulta conmigo</Box>
-                      y empieza a cultivar los hábitos que te ayudarán a
-vivir la vida que realmente deseas.
+                      Agenda una consulta conmigo
+                    </Box>
+                    y empieza a cultivar los hábitos que te ayudarán a vivir la
+                    vida que realmente deseas.
                   </Typography>
                 </AccordionDetails>
               </Accordion>

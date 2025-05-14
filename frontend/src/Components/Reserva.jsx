@@ -93,7 +93,7 @@ const Reserva = () => {
     "Habilidades sociales",
     "Crianza",
     "Productividad y gestión del tiempo",
-    "Crecimiento personal y hábitos saludables",
+    "Hábitos saludables",
     "Fobias",
     "Trastorno Obsesivo Compulsivo",
     "Trastornos del Neurodesarrollo",

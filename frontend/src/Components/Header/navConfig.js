@@ -19,7 +19,7 @@ export const servicesLinks = [
   { label: "Habilidades sociales", handler: "handleNavigateService6" },
   { label: "Crianza", handler: "handleNavigateService7" },
   {label: "Productividad y gestión del tiempo",handler: "handleNavigateService8",},
-  {label: "Crecimiento personal y hábitos", handler: "handleNavigateService9",},
+  {label: "Hábitos saludables", handler: "handleNavigateService9",},
   { label: "Fobias", handler: "handleNavigateService10" },
   { label: "TOC", handler: "handleNavigateService11" },
   { label: "Neurodesarrollo", handler: "handleNavigateService12" },

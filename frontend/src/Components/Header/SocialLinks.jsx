@@ -76,14 +76,22 @@ export default function SocialLinks() {
         <Typography
           variant="body2"
           sx={{
-            fontSize: "0.8em",
+            fontSize: "0.7em",
             marginTop: 2,
             fontFamily: "Playfair Display",
             color: "#305445",
           }}
         >
-          © {new Date().getFullYear()} Creado por webcode-art.com | Daniela
-          Arrazola
+          © {new Date().getFullYear()} Creado por{" "}
+          <a
+            href="https://webcode-art.com"
+            target="_blank"
+            rel="noopener noreferrer"
+            style={{ color: "inherit", textDecoration: "underline" }}
+          >
+            webcode-art.com
+          </a>{" "}
+          | Daniela Arrázola
         </Typography>
       </Box>
     </>

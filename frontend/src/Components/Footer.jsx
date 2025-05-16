@@ -70,23 +70,28 @@ const Footer = () => {
         <Divider orientation="vertical" flexItem sx={{ bgcolor: "#557c70" }} />
         <Link onClick={() => handleNavigate("/faq")}>Preguntas Frecuentes</Link>
         <Divider orientation="vertical" flexItem sx={{ bgcolor: "#557c70" }} />
-
       </FooterLinks>
 
-      <FooterText variant="body2">
-  © {new Date().getFullYear()}{' '}
-  Creado por{' '}
-  <a
-    href="https://webcode-art.com"
-    target="_blank"
-    rel="noopener noreferrer"
-    style={{ color: 'inherit', textDecoration: 'underline' }}
-  >
-    webcode-art.com
-  </a>{' '}
-  | Daniela Arrázola
-</FooterText>
-
+      <FooterText
+        variant="body2"
+        sx={{
+          // Solo en xs (≤600px) más pequeño y con margen-top
+          fontSize: { xs: "0.75rem", sm: "1rem" },
+          mt: { xs: 2, sm: 0 }, // 2*8px=16px en móvil, 0 en sm+
+          textAlign: "center",
+        }}
+      >
+        © {new Date().getFullYear()} Creado por{" "}
+        <a
+          href="https://webcode-art.com"
+          target="_blank"
+          rel="noopener noreferrer"
+          style={{ color: "inherit", textDecoration: "underline" }}
+        >
+          webcode-art.com
+        </a>{" "}
+        | Daniela Arrázola
+      </FooterText>
     </FooterContainer>
   );
 };

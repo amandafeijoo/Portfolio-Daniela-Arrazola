@@ -1,4 +1,4 @@
-import { Box, IconButton } from "@mui/material";
+import { Box, IconButton,Button } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import MobileMenu from "./Header/MobileMenu";
 import DesktopNav from "./Header/DesktopNav";
@@ -50,6 +50,55 @@ export default function Header() {
       >
         {/* Mobile hamburger (md‑only handled in MobileMenu) */}
         <MobileMenu handlers={handlers} />
+        {/* Mobile-only admin icon */}
+        <IconButton
+          onClick={handlers.handleLoginClick}
+          sx={{
+            display: { xs: "flex", md: "none" }, // only below the md breakpoint
+            position: "absolute",
+            right: 16,
+            top: "50%",
+            transform: "translateY(-50%)",
+            color: "#f5eedc",
+            fontSize: "1.3em",
+          }}
+        >
+          <FontAwesomeIcon icon={faUserShield} />
+        </IconButton>
+
+          {/* ─── Mobile-only second bar with Reserva button ─── */}
+      <Box
+        sx={{
+          display: { xs: "flex", md: "none" },
+          position: "fixed",
+          top: { xs: "80px", md: 0 },
+          left: 0,
+          width: "100%",
+          height: "50px",
+          bgcolor: "rgb(135, 152, 138)",
+          alignItems: "center",
+          justifyContent: "center",
+          zIndex: 19999,
+        }}
+      >
+        <Button
+          variant="outlined"
+          onClick={handlers.handleReservaClick}
+          sx={{
+            borderColor: "#f5eedc",
+            color: "#f5eedc",
+            "&:hover": { backgroundColor: "rgba(213,195,151,0.2)" },
+          }}
+        >
+          RESERVA
+        </Button>
+      </Box>
+
+      {/* ─── Desktop navigation (only md+) ─── */}
+      <DesktopNav handlers={handlers} />
+
+      {/* Push the rest of the page down so it’s not hidden under those two fixed bars */}
+      <Box sx={{ mt: { xs: "130px", md: "110px" } }} />
 
         {/* Logo centrado */}
         {/* Logo centrado solo en escritorio */}
@@ -60,7 +109,7 @@ export default function Header() {
           onClick={handlers.handleNavigateHome}
           sx={{
             position: "absolute",
-            top: 10, 
+            top: 10,
             left: "50%",
             transform: "translateX(-50%)",
             cursor: "pointer",
@@ -87,7 +136,7 @@ export default function Header() {
       <DesktopNav handlers={handlers} />
 
       {/* ─── Empuja el contenido para no quedar bajo header + nav ─── */}
-      <Box sx={{ mt: { xs: "-80px", md: "10px" } }} />
+      <Box sx={{ mt: { xs: "-50px", md: "10px" } }} />
     </>
   );
 }

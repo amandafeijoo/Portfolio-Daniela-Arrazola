@@ -77,7 +77,7 @@ const Service4 = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const theme = useTheme();
-  const isMobile = useMediaQuery(theme.breakpoints.down("sm")); // 📌 Detección de móvil
+  const isMobile = useMediaQuery(theme.breakpoints.down("sm")); 
 
   // 📌 Identificar el índice actual
   const currentIndex = services.findIndex(
@@ -110,10 +110,10 @@ const Service4 = () => {
         disableGutters
         sx={{
           maxWidth: {
-            xs: "100%", // móvil ocupa el 100%
-            sm: "90%", // tablet 90%
-            md: "1200px", // desktop estándar
-            lg: "1400px", // pantallas muy grandes
+            xs: "100%",
+            sm: "90%", 
+            md: "1200px", 
+            lg: "1400px", 
           },
           px: { xs: 0, sm: 2 },
         }}
@@ -154,13 +154,15 @@ const Service4 = () => {
           sx={{
             width: "100%",
             maxWidth: "1200px",
-            margin: { xs: 0, sm: 2 },
-            padding: { xs: 1, sm: 4, md: 6 },
+            mx: "auto", 
+            my: { xs: 1, sm: 2 }, 
+            px: { xs: 1, sm: 4, md: 6 },
+            py: { xs: 2, sm: 4, md: 6 },
             border: "2px solid #d2b48c",
             borderRadius: { xs: 1, sm: 2 },
             boxShadow: {
-              xs: "0 0 3px 1px rgba(0, 0, 0, 0.2)",
-              sm: "0 0 5px 2px rgba(0, 0, 0, 0.3), 0 0 10px 4px rgba(34, 139, 34, 0.2), 0 0 15px 6px rgba(0, 0, 0, 0.2)",
+              xs: "0 0 3px 1px rgba(0,0,0,0.2)",
+              sm: "0 0 5px 2px rgba(0,0,0,0.3), 0 0 10px 4px rgba(34,139,34,0.2), 0 0 15px 6px rgba(0,0,0,0.2)",
             },
             backgroundColor: "#f5eedc",
             transition: "transform 0.3s ease, box-shadow 0.3s ease",
@@ -198,12 +200,43 @@ const Service4 = () => {
                   sx={{
                     backgroundColor: "rgba(48, 84, 69, 0.8)",
                     color: "#f5eedc",
+
+                    // Target the wrapper that contains the icon
+                    "& .MuiAccordionSummary-expandIconWrapper": {
+                      // make it a fixed‐size circle on mobile
+                      width: { xs: 45, sm: "auto" },
+                      height: { xs: 25, sm: "auto" },
+                      borderRadius: { xs: "50%", sm: "50%" },
+                      backgroundColor: {
+                        xs: "rgba(245,238,220,0.3)",
+                        sm: "rgba(245,238,220,0.3)",
+                      },
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "center",
+
+                      // push it further right on mobile
+                      ml: { xs: 2, sm: "auto" },
+                      mr: { xs: -1, sm: 0 },
+
+                      // lighten the arrow itself
+                      "& svg": {
+                        color: "rgba(245,238,220,0.8)",
+                        fontSize: { xs: "1.3rem", sm: "1.5rem" },
+                      },
+                    },
                   }}
                 >
                   <Typography
-                    variant={isMobile ? "h6" : "h5"} // 📌 Tamaño de texto dinámico
                     component="h2"
-                    sx={{ fontFamily: "Playfair Display" }}
+                    variant={isMobile ? "subtitle1" : "h5"}
+                    sx={{
+                      fontFamily: "Playfair Display",
+                      fontSize: isMobile ? "1rem" : "1.5rem",
+                      lineHeight: isMobile ? 1.4 : 1.6,
+                      textAlign: isMobile ? "justify" : "left",
+                      mb: isMobile ? 1 : 0,
+                    }}
                   >
                     Duelo y cambios: cómo sanar una pérdida sin perderte a ti
                     mismo
@@ -232,7 +265,7 @@ const Service4 = () => {
                       sx={{
                         fontWeight: "bold",
                         display: "inline",
-                        ml: 0 /* si necesitas separador extra */,
+                        ml: 0,
                       }}
                     >
                       sanar requiere comprender lo que sientes, no ignorarlo.

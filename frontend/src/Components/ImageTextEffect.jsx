@@ -31,7 +31,7 @@ const ImageTextEffect = () => {
         display: "flex",
         justifyContent: "center",
         // ─── Aquí metemos el colchón ───
-      pb: { xs: "120px", md: 0 },  // 120px en móvil, 0 en escritorio
+      pb: { xs: "220px", md: 0 },  // 120px en móvil, 0 en escritorio
     }}
     >
       <Box
@@ -119,7 +119,7 @@ const ImageTextEffect = () => {
               }}
               onClick={handleNavigate}
             >
-              Reservar una cita
+              RESERVA
             </Button>
           </Box>
         </motion.div>
@@ -185,12 +185,13 @@ const ImageTextEffect = () => {
                 mb: 2,
               }}
             >
-              La terapia no solo te ayuda a gestionar dificultades, sino que te
-              brinda un espacio único para conocer y atender tus necesidades.{" "}
+              La terapia es mucho más que resolver problemas: es un espacio seguro para
+              comprender lo que necesitas.{" "}
               <Box component="span" sx={{ fontWeight: 700 }}>
-                Cada persona tiene su propio ritmo
+              Cada proceso es único,
               </Box>
-              , y mi compromiso es acompañarte respetando tu proceso.
+              y mi compromiso es
+acompañarte respetando tu propio ritmo.
             </Typography>
 
             <Typography
@@ -202,18 +203,22 @@ const ImageTextEffect = () => {
                 mb: 2,
               }}
             >
+            Imagina tu bienestar como un rompecabezas: tus pensamientos, emociones,
+              entorno, historia de vida y hábitos se conectan para influir en cómo te sientes.<br/><br/>
+              Trabajo desde un
               <Box component="span" sx={{ fontWeight: 700 }}>
-                Imagina tu bienestar como un rompecabezas:
-              </Box>{" "}
-              tus pensamientos, emociones y hábitos se conectan para formar cómo
-              te sientes. Con el enfoque Cognitivo Conductual, ajustaremos las
-              piezas claves para que logres una vida más equilibrada. Te ofrezco
-              herramientas prácticas, basadas en{" "}
-              <Box component="span" sx={{ fontWeight: 700 }}>
-                evidencia científica
+              {" "}enfoque integrador,{" "}
               </Box>
-              , para aplicar en tu día a día.
-            </Typography>
+              con base en la Terapia Cognitivo
+Conductual, combinando herramientas prácticas y científicas. El objetivo:{" "}
+              <Box component="span" sx={{ fontWeight: 700 }}>
+              ayudarte
+              a entender lo que te pasa              </Box>
+              y brindarte estrategias concretas para sentirte mejor. 
+              <br/><br/>
+              No tienes que estar “listo”, solo comprometido contigo mismo. Agenda una consulta
+conmigo y comienza a tomar el control de tu vida.
+               </Typography>
 
             <Typography
               variant="body1"
@@ -270,7 +275,7 @@ const ImageTextEffect = () => {
                 }}
                 onClick={handleNavigate}
               >
-                Reservar una cita
+                RESERVA
               </Button>
             </Box>
           </Box>

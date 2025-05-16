@@ -83,7 +83,7 @@ const Reserva = () => {
     privacyAccepted: false,
   });
 
-  // 📌 Definir las opciones disponibles
+  // 📌 Opciones disponibles
   const options = [
     "Ansiedad y Depresión",
     "Regulación emocional",
@@ -226,20 +226,22 @@ const Reserva = () => {
       <BackgroundContainer>
         <Title variant="h4">Reserva tu Terapia</Title>
 
-        <Grid container spacing={2}>
+        <Grid container spacing={{ xs: 0, md: 2 }}>
           <Grid item xs={12} md={8}>
             <Box
               component="form"
               onSubmit={handleCheckout}
               sx={{
-                p: { xs: 3, md: 4 },
+                p: { xs: 2, md: 4 },
                 backgroundColor: "#f5eedc",
                 border: "3px solid #d2b48c",
                 borderRadius: "25px",
                 boxShadow:
                   "0 6px 12px rgba(0, 0, 0, 0.3), 0 0 10px 3px rgba(34, 139, 34, 0.2)",
-                width: "100%",
-                marginTop: "20px",
+                width: { xs: "82vw", md: "100%" },
+                ml: { xs: "-16px", md: 0 },
+
+                  marginTop: "20px",
                 fontFamily: "Playfair Display",
               }}
             >
@@ -272,45 +274,103 @@ const Reserva = () => {
                 setSelectedTime={setSelectedTime}
               />
               <TextField
-                select
-                label="Motivo de la consulta"
-                value={selectedOption}
-                onChange={(e) => setSelectedOption(e.target.value)}
-                fullWidth
-                margin="normal"
-                error={errors.selectedOption}
-                helperText={
-                  errors.selectedOption ? "Este campo es obligatorio" : ""
-                }
-                required
-              >
-                {options.map((option) => (
-                  <MenuItem key={option} value={option}>
-                    {option}
-                  </MenuItem>
-                ))}
-              </TextField>
-              <TextField
-                select
-                label="Tipo de terapia"
-                value={selectedConsultationType}
-                onChange={(e) => setSelectedConsultationType(e.target.value)}
-                fullWidth
-                margin="normal"
-                error={errors.selectedConsultationType}
-                helperText={
-                  errors.selectedConsultationType
-                    ? "Este campo es obligatorio"
-                    : ""
-                }
-                required
-              >
-                {consultationTypes.map((type) => (
-                  <MenuItem key={type} value={type}>
-                    {type}
-                  </MenuItem>
-                ))}
-              </TextField>
+              select
+              label="Motivo de la consulta"
+              value={selectedOption}
+              onChange={(e) => setSelectedOption(e.target.value)}
+              fullWidth
+              margin="normal"
+              error={errors.selectedOption}
+              helperText={errors.selectedOption && "Este campo es obligatorio"}
+
+              // 1) Shrink label & selected value font on mobile:
+              sx={{
+                "& .MuiInputLabel-root": {
+                  fontSize: { xs: "0.8rem", sm: "1rem" },
+                  color: "#4b3f2f",
+                },
+                "& .MuiSelect-select": {
+                  fontSize: { xs: "0.8rem", sm: "1rem" },
+                  color: "#4b3f2f",
+                },
+              }}
+
+              // 2) Style the dropdown menu itself:
+              SelectProps={{
+                MenuProps: {
+                  PaperProps: {
+                    sx: {
+                      backgroundColor: "#f5eedc",
+                      backdropFilter: "blur(10px)",
+                      border: "2px solid #d2b48c",
+                      // taller list on mobile so you can scroll more:
+                      maxHeight: { xs: "60vh", sm: "40vh" },
+                      // style each item:
+                      "& .MuiMenuItem-root": {
+                        fontSize: { xs: "0.8rem", sm: "1rem" },
+                        color: "#4b3f2f",
+                      },
+                    },
+                  },
+                },
+              }}
+            >
+              {options.map((option) => (
+                <MenuItem key={option} value={option}>
+                  {option}
+                </MenuItem>
+              ))}
+            </TextField>
+            <TextField
+  select
+  label="Tipo de terapia"
+  value={selectedConsultationType}
+  onChange={(e) => setSelectedConsultationType(e.target.value)}
+  fullWidth
+  margin="normal"
+  error={Boolean(errors.selectedConsultationType)}
+  helperText={
+    errors.selectedConsultationType && "Este campo es obligatorio"
+  }
+  required
+
+  // 1) Ajustes de fuente y color en el campo
+  sx={{
+    "& .MuiInputLabel-root": {
+      fontSize: { xs: "0.8rem", sm: "1rem" },
+      color: "#4b3f2f",
+    },
+    "& .MuiSelect-select": {
+      fontSize: { xs: "0.8rem", sm: "1rem" },
+      color: "#4b3f2f",
+    },
+  }}
+
+  // 2) Estilos del dropdown
+  SelectProps={{
+    MenuProps: {
+      PaperProps: {
+        sx: {
+          backgroundColor: "#f5eedc",
+          backdropFilter: "blur(10px)",
+          border: "2px solid #d2b48c",
+          maxHeight: { xs: "60vh", sm: "40vh" },
+          "& .MuiMenuItem-root": {
+            fontSize: { xs: "0.8rem", sm: "1rem" },
+            color: "#4b3f2f",
+          },
+        },
+      },
+    },
+  }}
+>
+  {consultationTypes.map((type) => (
+    <MenuItem key={type} value={type}>
+      {type}
+    </MenuItem>
+  ))}
+</TextField>
+
               <TextField
                 label="Comentarios"
                 value={comments}

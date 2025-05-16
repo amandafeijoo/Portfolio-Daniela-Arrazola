@@ -90,7 +90,7 @@ const Service12 = () => {
   // 📌 Referencias a los Tabs
   const tabRefs = useRef([]);
 
-  // 📌 Al montar componente, subir arriba
+  // 📌 Montar componente, subir arriba
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
@@ -113,10 +113,10 @@ const Service12 = () => {
         disableGutters
         sx={{
           maxWidth: {
-            xs: "100%", // móvil ocupa el 100%
-            sm: "90%", // tablet 90%
-            md: "1200px", // desktop estándar
-            lg: "1400px", // pantallas muy grandes
+            xs: "100%", 
+            sm: "90%", 
+            md: "1200px", 
+            lg: "1400px", 
           },
           px: { xs: 0, sm: 2 },
         }}
@@ -153,25 +153,27 @@ const Service12 = () => {
           ))}
         </Tabs>
         <Box
-          sx={{
-            width: "100%",
-            maxWidth: "1200px",
-            margin: { xs: 0, sm: 2 },
-            padding: { xs: 1, sm: 4, md: 6 },
-            border: "2px solid #d2b48c",
-            borderRadius: { xs: 1, sm: 2 },
-            boxShadow: {
-              xs: "0 0 3px 1px rgba(0, 0, 0, 0.2)",
-              sm: "0 0 5px 2px rgba(0, 0, 0, 0.3), 0 0 10px 4px rgba(34, 139, 34, 0.2), 0 0 15px 6px rgba(0, 0, 0, 0.2)",
-            },
-            backgroundColor: "#f5eedc",
-            transition: "transform 0.3s ease, box-shadow 0.3s ease",
-            position: "relative",
-            zIndex: 1,
-            "&:hover": {
-              transform: "translateY(-5px)",
-              boxShadow: 8,
-            },
+            sx={{
+      width: "100%",
+      maxWidth: "1200px",
+      mx: "auto",            
+      my: { xs: 1, sm: 2 }, 
+      px: { xs: 1, sm: 4, md: 6 },
+      py: { xs: 2, sm: 4, md: 6 },
+      border: "2px solid #d2b48c",
+      borderRadius: { xs: 1, sm: 2 },
+      boxShadow: {
+        xs: "0 0 3px 1px rgba(0,0,0,0.2)",
+        sm: "0 0 5px 2px rgba(0,0,0,0.3), 0 0 10px 4px rgba(34,139,34,0.2), 0 0 15px 6px rgba(0,0,0,0.2)",
+      },
+      backgroundColor: "#f5eedc",
+      transition: "transform 0.3s ease, box-shadow 0.3s ease",
+      position: "relative",
+      zIndex: 1,
+      "&:hover": {
+        transform: "translateY(-5px)",
+        boxShadow: 8,
+      },
           }}
         >
           <Box
@@ -199,12 +201,43 @@ const Service12 = () => {
                 sx={{
                   backgroundColor: "rgba(48, 84, 69, 0.8)",
                   color: "#f5eedc",
+
+                  // Target the wrapper that contains the icon
+                  "& .MuiAccordionSummary-expandIconWrapper": {
+                    // make it a fixed‐size circle on mobile
+                    width: { xs: 45, sm: "auto" },
+                    height: { xs: 25, sm: "auto" },
+                    borderRadius: { xs: "50%", sm: "50%" },
+                    backgroundColor: {
+                      xs: "rgba(245,238,220,0.3)",
+                      sm: "rgba(245,238,220,0.3)",
+                    },
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+
+                    // push it further right on mobile
+                    ml: { xs: 2, sm: "auto" },
+                    mr: { xs: -1, sm: 0 },
+
+                    // lighten the arrow itself
+                    "& svg": {
+                      color: "rgba(245,238,220,0.8)",
+                      fontSize: { xs: "1.3rem", sm: "1.5rem" },
+                    },
+                  },
                 }}
               >
                 <Typography
-                  variant={isMobile ? "h6" : "h5"}
                   component="h2"
-                  sx={{ fontFamily: "Playfair Display" }}
+                  variant={isMobile ? "subtitle1" : "h5"}
+                  sx={{
+                    fontFamily: "Playfair Display",
+                    fontSize: isMobile ? "1rem" : "1.5rem",
+                    lineHeight: isMobile ? 1.4 : 1.6,
+                    textAlign: isMobile ? "justify" : "left",
+                    mb: isMobile ? 1 : 0,
+                  }}
                 >
                   Los trastornos del neurodesarrollo son condiciones que afectan
                   el funcionamiento del cerebro y el desarrollo de habilidades

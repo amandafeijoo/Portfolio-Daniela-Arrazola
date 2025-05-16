@@ -4,6 +4,7 @@ import { motion } from "framer-motion";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import "@fontsource/playfair-display";
+// import { img } from "../utils/imagePath";
 
 const ContenedorPadre = styled.div`
   position: relative;
@@ -27,7 +28,7 @@ const ContenedorPadre = styled.div`
 
   /* MOBILE */
   @media (max-width: 768px) {
-    width: 100%;
+    width: 100%; /* ✅ en lugar de 100vw */
     height: 50vh;
     padding: 0;
     margin: 0;
@@ -155,7 +156,7 @@ const ImagenDaniela = () => {
       sx={{
         // Sólo en xs (móvil) dejamos visible todo y damos colchón abajo
         overflow: { xs: "visible", md: "hidden" },
-        pb: { xs: 5, md: 0 }, // 8 * 8px = 64px de padding-bottom en móvil
+        pb: { xs: 17, md: 0 }, // 8 * 8px = 64px de padding-bottom en móvil
         boxSizing: "border-box",
       }}
     >
@@ -181,7 +182,7 @@ const ImagenDaniela = () => {
               borderRadius: isMobile ? "0px" : "15px",
               padding: isMobile ? "20px" : "30px",
               textAlign: "justify",
-              fontFamily: '"Playfair Display", serif',
+              fontFamily: '"Playfair Display", serif', // ◀ aquí
               lineHeight: 1.6,
               color: "rgb(75, 60, 45)",
             }}
@@ -195,7 +196,7 @@ const ImagenDaniela = () => {
                 fontSize: { xs: "1.1rem", sm: "1.3rem" },
                 mt: 4,
                 mb: 4,
-                textAlign: { xs: "center", sm: "center" },
+                textAlign: { xs: "center", sm: "center" }, // ← left en xs, center en sm+
                 lineHeight: 1.2,
               }}
             >
@@ -211,16 +212,27 @@ const ImagenDaniela = () => {
                 mb: 3,
               }}
             >
-              Hola, soy Daniela, psicóloga especializada en límites y regulación
-              emocional. Si estás aquí, puede que estés cansado de cuidar a
-              todos menos a ti, que te cueste decir “no” sin culpa o que te
-              sientas desconectado de lo que antes te hacía bien. Quizás estás
-              atravesando ansiedad, tristeza, confusión o simplemente el deseo
-              profundo de recuperar tu bienestar emocional. En este espacio
-              terapéutico, caminamos juntos a tu ritmo. Te acompaño a reconectar
-              contigo, a poner palabras a lo que duele y a construir relaciones
-              más sanas contigo y con los demás. No estás solo. Aquí empieza tu
-              proceso de volver a ti.
+              Hola, soy Daniela, psicóloga especializada en{" "}
+              <Box component="span" sx={{ fontWeight: "bold" }}>
+                límites y regulación emocional{" "}
+              </Box>{" "}
+              . Si estás aquí, puede que estés{" "}
+              <Box component="span" sx={{ fontWeight: "bold" }}>
+                cansado de cuidar a todos menos a ti{" "}
+              </Box>{" "}
+              , que te cueste decir “no” sin culpa o que te sientas desconectado
+              de lo que antes te hacía bien. Quizás estás atravesando ansiedad,
+              tristeza, confusión o simplemente el deseo profundo de{" "}
+              <Box component="span" sx={{ fontWeight: "bold" }}>
+                recuperar tu bienestar emocional.{" "}
+              </Box>{" "}
+              En este espacio terapéutico te acompaño a reconectar contigo, a
+              poner palabras a lo que duele y a construir relaciones más sanas
+              contigo y con los demás.{" "}
+              <Box component="span" sx={{ fontWeight: "bold" }}>
+                No estás solo.{" "}
+              </Box>{" "}
+              Aquí empieza tu proceso de volver a ti.
               <br /> <br />
               Conoce más sobre mí y cómo puedo acompañarte en tu proceso
             </Typography>
@@ -229,9 +241,9 @@ const ImagenDaniela = () => {
           {/* ─── Botón dentro de un Box responsive ─── */}
           <Box
             sx={{
-              width: { xs: "100%", md: "auto" }, // 100% en movil, auto en escritorio
+              width: { xs: "100%", md: "auto" },
               display: "flex",
-              justifyContent: { xs: "center", md: "center" }, // centrado en xs, al final en md+
+              justifyContent: { xs: "center", md: "center" },
               mt: { xs: -2, md: -2 },
               mb: { xs: 0, md: 4 },
             }}
@@ -249,8 +261,8 @@ const ImagenDaniela = () => {
                 borderRadius: "30px",
                 border: "2px solid rgb(120, 150, 131)",
                 fontSize: { xs: "1rem", sm: "1rem" },
-                px: { xs: 3, sm: 3 },
-                py: { xs: 1.5, sm: 1 },
+                px: { xs: 2, sm: 3 },
+                py: { xs: 1.2, sm: 1 },
               }}
               onClick={() => navigate("/full-acerca")}
             >

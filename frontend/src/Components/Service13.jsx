@@ -81,7 +81,7 @@ const Service13 = () => {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
 
-  // 📌 Identificar el índice actual
+  // 📌 Identifica el índice actual
   const currentIndex = services.findIndex(
     (service) => service.path === location.pathname
   );
@@ -89,7 +89,7 @@ const Service13 = () => {
   // 📌 Referencias a los Tabs
   const tabRefs = useRef([]);
 
-  // 📌 Al montar componente, subir arriba
+  // 📌 Al montar componente, sube arriba
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
@@ -112,10 +112,10 @@ const Service13 = () => {
         disableGutters
         sx={{
           maxWidth: {
-            xs: "100%", // móvil ocupa el 100%
-            sm: "90%", // tablet 90%
-            md: "1200px", // desktop estándar
-            lg: "1400px", // pantallas muy grandes
+            xs: "100%", 
+            sm: "90%", 
+            md: "1200px", 
+            lg: "1400px",
           },
           px: { xs: 0, sm: 2 },
         }}
@@ -157,13 +157,15 @@ const Service13 = () => {
           sx={{
             width: "100%",
             maxWidth: "1200px",
-            margin: { xs: 0, sm: 2 },
-            padding: { xs: 1, sm: 4, md: 6 },
+            mx: "auto",
+            my: { xs: 1, sm: 2 },
+            px: { xs: 1, sm: 4, md: 6 },
+            py: { xs: 2, sm: 4, md: 6 },
             border: "2px solid #d2b48c",
             borderRadius: { xs: 1, sm: 2 },
             boxShadow: {
-              xs: "0 0 3px 1px rgba(0, 0, 0, 0.2)",
-              sm: "0 0 5px 2px rgba(0, 0, 0, 0.3), 0 0 10px 4px rgba(34, 139, 34, 0.2), 0 0 15px 6px rgba(0, 0, 0, 0.2)",
+              xs: "0 0 3px 1px rgba(0,0,0,0.2)",
+              sm: "0 0 5px 2px rgba(0,0,0,0.3), 0 0 10px 4px rgba(34,139,34,0.2), 0 0 15px 6px rgba(0,0,0,0.2)",
             },
             backgroundColor: "#f5eedc",
             transition: "transform 0.3s ease, box-shadow 0.3s ease",
@@ -200,15 +202,46 @@ const Service13 = () => {
                 sx={{
                   backgroundColor: "rgba(48, 84, 69, 0.8)",
                   color: "#f5eedc",
+
+                  // Target the wrapper that contains the icon
+                  "& .MuiAccordionSummary-expandIconWrapper": {
+                    // make it a fixed‐size circle on mobile
+                    width: { xs: 45, sm: "auto" },
+                    height: { xs: 25, sm: "auto" },
+                    borderRadius: { xs: "50%", sm: "50%" },
+                    backgroundColor: {
+                      xs: "rgba(245,238,220,0.3)",
+                      sm: "rgba(245,238,220,0.3)",
+                    },
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+
+                    // push it further right on mobile
+                    ml: { xs: 2, sm: "auto" },
+                    mr: { xs: -1, sm: 0 },
+
+                    // lighten the arrow itself
+                    "& svg": {
+                      color: "rgba(245,238,220,0.8)",
+                      fontSize: { xs: "1.3rem", sm: "1.5rem" },
+                    },
+                  },
                 }}
               >
                 <Typography
-                  variant={isMobile ? "h6" : "h5"}
                   component="h2"
-                  sx={{ fontFamily: "Playfair Display" }}
+                  variant={isMobile ? "subtitle1" : "h5"}
+                  sx={{
+                    fontFamily: "Playfair Display",
+                    fontSize: isMobile ? "1rem" : "1.5rem",
+                    lineHeight: isMobile ? 1.4 : 1.6,
+                    textAlign: isMobile ? "justify" : "left",
+                    mb: isMobile ? 1 : 0,
+                  }}
                 >
-                  Los Trastornos de la Conducta Alimentaria (TCA) no son una
-                  moda ni una elección.
+                  ¿Alguna vez has sentido que ya no puedes más, aunque nadie lo
+                  note?
                 </Typography>
               </AccordionSummary>
               <AccordionDetails>
@@ -221,8 +254,12 @@ const Service13 = () => {
                     lineHeight: 1.6,
                   }}
                 >
-                  Son condiciones psicológicas complejas que alteran la relación
-                  con tu cuerpo, la comida y el control.
+                  No es que quieras morir. Es que ya no sabes cómo vivir con
+                  tanto dolor. A veces el cansancio es tan profundo que hasta
+                  explicar lo que sientes parece imposible. Los pensamientos
+                  suicidas son la la expresión de un sufrimiento acumulado, que
+                  no ha encontrado salida ni alivio. <br />
+                  <br />
                 </Typography>
                 <Typography
                   variant="body1"
@@ -231,121 +268,15 @@ const Service13 = () => {
                     fontFamily: "Playfair Display",
                     textAlign: "justify",
                     lineHeight: 1.6,
-                    marginTop: 2,
                   }}
                 >
-                  Actualmente, los manuales de clasificación diagnóstica
-                  incluyen:
+                  <Box component="span" sx={{ fontWeight: "bold", mr: 0.5 }}>
+                    {" "}
+                    ¿Y si no se trata de valentía, sino de cuánta carga llevas
+                    encima en silencio?
+                  </Box>
                 </Typography>
-                <List>
-                  <ListItem
-                    sx={{
-                      backgroundColor: "#fff",
-                      margin: 1,
-                      borderRadius: 1,
-                      boxShadow: 1,
-                    }}
-                  >
-                    <ListItemText
-                      primary="Anorexia Nerviosa"
-                      secondary="Alteración grave de la conducta alimentaria que se caracteriza por el rechazo a mantener el peso corporal en los valores mínimos normales. Sus principales características son:"
-                      sx={{ color: "#4b3f2f", fontFamily: "Playfair Display" }}
-                    />
-                  </ListItem>
-                  <ListItem
-                    sx={{
-                      backgroundColor: "#f0f0f0",
-                      margin: 1,
-                      borderRadius: 1,
-                      boxShadow: 1,
-                    }}
-                  >
-                    <ListItemText
-                      primary="Restricción extrema de alimentos"
-                      sx={{ color: "#4b3f2f", fontFamily: "Playfair Display" }}
-                    />
-                  </ListItem>
-                  <ListItem
-                    sx={{
-                      backgroundColor: "#f0f0f0",
-                      margin: 1,
-                      borderRadius: 1,
-                      boxShadow: 1,
-                    }}
-                  >
-                    <ListItemText
-                      primary="Miedo intenso a ganar peso con una idealización de la delgadez"
-                      sx={{ color: "#4b3f2f", fontFamily: "Playfair Display" }}
-                    />
-                  </ListItem>
-                  <ListItem
-                    sx={{
-                      backgroundColor: "#f0f0f0",
-                      margin: 1,
-                      borderRadius: 1,
-                      boxShadow: 1,
-                    }}
-                  >
-                    <ListItemText
-                      primary="Percepción distorsionada del cuerpo"
-                      sx={{ color: "#4b3f2f", fontFamily: "Playfair Display" }}
-                    />
-                  </ListItem>
-                </List>
-                <List>
-                  <ListItem
-                    sx={{
-                      backgroundColor: "#fff",
-                      margin: 1,
-                      borderRadius: 1,
-                      boxShadow: 1,
-                    }}
-                  >
-                    <ListItemText
-                      primary="Bulimia Nerviosa"
-                      secondary="Episodios de
-                        atracones seguidos de conductas
-                        compensatorias como vómitos,
-                        ejercicio excesivo o uso de laxantes."
-                      sx={{ color: "#4b3f2f", fontFamily: "Playfair Display" }}
-                    />
-                  </ListItem>
-                  <ListItem
-                    sx={{
-                      backgroundColor: "#f0f0f0",
-                      margin: 1,
-                      borderRadius: 1,
-                      boxShadow: 1,
-                    }}
-                  >
-                    <ListItemText
-                      primary="No suele haber distorsión de
-la imagen corporal, como en
-la anorexia, pero suelen
-estar a disgusto con su
-cuerpo o partes de él."
-                      sx={{ color: "#4b3f2f", fontFamily: "Playfair Display" }}
-                    />
-                  </ListItem>
-                  <ListItem
-                    sx={{
-                      backgroundColor: "#f0f0f0",
-                      margin: 1,
-                      borderRadius: 1,
-                      boxShadow: 1,
-                    }}
-                  >
-                    <ListItemText
-                      primary="La figura y peso corporal
-tienen una influencia
-excesiva en la
 
-autoevaluación y el
-autoconcepto."
-                      sx={{ color: "#4b3f2f", fontFamily: "Playfair Display" }}
-                    />
-                  </ListItem>
-                </List>
                 <List>
                   <ListItem
                     sx={{
@@ -355,55 +286,132 @@ autoconcepto."
                       boxShadow: 1,
                     }}
                   >
-                    <ListItemText
-                      primary="Trastorno por Atracón"
-                      secondary="consumo
-de grandes cantidades de comida
-en poco tiempo, sin conductas
-compensatorias (vómitos
-autoinducidos, abuso de laxantes,
-diuréticos u otros fármacos, ayuno y
-ejercicio físico excesivo),
-acompañado de culpa y vergüenza."
-                      sx={{ color: "#4b3f2f", fontFamily: "Playfair Display" }}
-                    />
+                    <Typography
+                      variant="body1"
+                      sx={{
+                        color: "#4b3f2f",
+                        fontFamily: "Playfair Display",
+                        textAlign: "justify",
+                        lineHeight: 1.6,
+                      }}
+                    >
+                      El suicidio no es un acto de debilidad.
+                      <Box
+                        component="span"
+                        sx={{ fontWeight: "bold", mr: 0.5 }}
+                      >
+                        {" "}
+                        Tampoco es cuestión de coraje. Es cuestión de
+                        sufrimiento emocional no atendido.
+                        <br />
+                        <br />
+                      </Box>
+                      Aún hoy existen mitos como: “Si lo dice, no lo hará”,
+                      “solo busca atención”, “hablar del suicidio lo provoca”.
+                      <Box
+                        component="span"
+                        sx={{ fontWeight: "bold", mr: 0.5 }}
+                      >
+                        {" "}
+                        ¡La verdad es que hablarlo puede salvar vidas!
+                        <br />
+                        <br />
+                      </Box>
+                      Quien contempla el suicidio, en realidad,
+                      <Box
+                        component="span"
+                        sx={{ fontWeight: "bold", mr: 0.5 }}
+                      >
+                        {" "}
+                        quiere dejar de sufrir, no dejar de vivir.{" "}
+                      </Box>
+                      Esa idea suele venir acompañada de aislamiento, insomnio,
+                      pensamientos negativos, fatiga extrema o frases como: “Ya
+                      no puedo más” o “Ojalá no existiera”.
+                      <Box
+                        component="span"
+                        sx={{ fontWeight: "bold", mr: 0.5 }}
+                      >
+                        {" "}
+                        No estás roto. Estás agotado. .{" "}
+                      </Box>
+                      Y no, no estás exagerando.
+                      <br />
+                      <br />
+                      <Box
+                        component="span"
+                        sx={{ fontWeight: "bold", mr: 0.5 }}
+                      >
+                        {" "}
+                        Tu dolor merece atención, no silencios.
+                        <br />
+                        <br />
+                      </Box>
+                      Desde un enfoque clínico y basado en evidencia, apostamos
+                      por la prevención del suicidio. La terapia
+                      <Box
+                        component="span"
+                        sx={{ fontWeight: "bold", mr: 0.5 }}
+                      >
+                        {" "}
+                        no te obliga a ser positivo.
+                      </Box>
+                      Te ayuda a entenderte, aliviar el dolor y recuperar
+                      sentido. Por eso, te ofrezco un espacio seguro para:{" "}
+                      <br />
+                      <br />
+                    </Typography>
                   </ListItem>
-                </List>
-                <List>
                   <ListItem
                     sx={{
-                      backgroundColor: "#fff",
+                      backgroundColor: "#f0f0f0",
                       margin: 1,
                       borderRadius: 1,
                       boxShadow: 1,
                     }}
                   >
                     <ListItemText
-                      primary="Trastornos de la Conducta
-Alimentaria No Especificados
-(TCANE)"
-                      secondary="Muchos casos de TCA no se
-presentan en estado puro. Por tanto,
-son cuadros de AN o BN
-incompletos ,aunque no por ello
-menos grave."
+                      primary="Validar lo que sientes, sin juicio ni presión."
                       sx={{ color: "#4b3f2f", fontFamily: "Playfair Display" }}
                     />
                   </ListItem>
-                </List>
-                <List>
                   <ListItem
                     sx={{
-                      backgroundColor: "#fff",
+                      backgroundColor: "#f0f0f0",
                       margin: 1,
                       borderRadius: 1,
                       boxShadow: 1,
                     }}
                   >
                     <ListItemText
-                      primary="Ortorexia y Vigorexia"
-                      secondary="Obsesión con la alimentación “saludable” o con el
-ejercicio como forma de control."
+                      primary="Comprender el origen del dolor emocional que estás atravesando."
+                      sx={{ color: "#4b3f2f", fontFamily: "Playfair Display" }}
+                    />
+                  </ListItem>
+                  <ListItem
+                    sx={{
+                      backgroundColor: "#f0f0f0",
+                      margin: 1,
+                      borderRadius: 1,
+                      boxShadow: 1,
+                    }}
+                  >
+                    <ListItemText
+                      primary="Incorporar herramientas reales para enfrentar la tristeza, la ansiedad o la
+desesperanza."
+                      sx={{ color: "#4b3f2f", fontFamily: "Playfair Display" }}
+                    />
+                  </ListItem>
+                  <ListItem
+                    sx={{
+                      backgroundColor: "#f0f0f0",
+                      margin: 1,
+                      borderRadius: 1,
+                      boxShadow: 1,
+                    }}
+                  >
+                    <ListItemText
+                      primary="Reconectar con un sentido de vida posible, realista y sostenido en el tiempo."
                       sx={{ color: "#4b3f2f", fontFamily: "Playfair Display" }}
                     />
                   </ListItem>
@@ -417,20 +425,13 @@ ejercicio como forma de control."
                     lineHeight: 1.6,
                   }}
                 >
-                  Estos trastornos no desaparecen por sí solos y pueden tener
-                  consecuencias graves. Los TCA se equiparan a las adicciones o
-                  dependencias. Son una enfermedad biopsicosocial que tiene
-                  causas complejas y multifactoriales. Genera una pérdida de
-                  control en quienes la padecen y un sentimiento de culpa y
-                  frustración debido a sus intentos fallidos de recuperarse por
-                  propia voluntad. La ciencia nos dice que el cambio es posible.
-                  No se trata de fuerza de voluntad, sino de tener un
-                  acompañamiento profesional y especializado que te acompañe a
-                  aprender a hacer las paces con tu cuerpo escuchándolo y
-                  respetándolo en lugar de castigarlo. Para resolver el problema
-                  se requiere ayuda psicológica y médica. Son trastornos que,
-                  habitualmente, tienen un proceso largo de resolución, con
-                  recaídas, avances y retrocesos.
+                  Tu vida vale. Tu historia importa. Y puedes recibir ayuda. Y
+                  si tú o alguien cercano está teniendo pensamientos suicidas,
+                  no esperes a que sea una crisis para actuar. Nadie debería
+                  atravesar esta lucha en soledad.
+                  <br />
+                  <br />
+                  Hablemos. Aún estás a tiempo.
                 </Typography>
               </AccordionDetails>
             </Accordion>

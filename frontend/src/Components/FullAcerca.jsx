@@ -4,7 +4,6 @@ import "@fontsource/playfair-display";
 import { Typography, Box } from "@mui/material";
 import PropTypes from "prop-types";
 
-
 const moveAnimation = keyframes`
   0% { transform: translateY(0); }
   50% { transform: translateY(-10px); }
@@ -25,10 +24,10 @@ const FullAcercaContainer = styled.div`
   margin: auto;
 
   @media (max-width: 768px) {
-    width: 102%;        /* ocupa todo el ancho del viewport */
-    max-width: none;    /* quita el tope de 1400px */
+    width: 102%; /* ocupa todo el ancho del viewport */
+    max-width: none; /* quita el tope de 1400px */
     padding: 24px 16px; /* más espacio arriba/abajo y laterales */
-    margin: 0 auto;     /* centrado horizontal */
+    margin: 0 auto; /* centrado horizontal */
   }
 
   @media (max-width: 320px) {
@@ -61,8 +60,8 @@ const Section = styled.div`
   @media (min-width: 768px) {
     flex-direction: row;
     justify-content: space-between;
-    padding:20px;
-    margin-bottom:20px;
+    padding: 20px;
+    margin-bottom: 20px;
   }
 `;
 
@@ -136,18 +135,15 @@ const StyledImg = styled.img`
   width: 65%;
   height: auto;
   border-radius: 15px;
-  box-shadow:
-    0 0 5px 2px rgba(0, 0, 0, 0.3),
-    0 0 10px 4px rgba(34, 139, 34, 0.2),
-    0 0 15px 6px rgba(0, 0, 0, 0.5);
+  box-shadow: 0 0 5px 2px rgba(0, 0, 0, 0.3),
+    0 0 10px 4px rgba(34, 139, 34, 0.2), 0 0 15px 6px rgba(0, 0, 0, 0.5);
 
   /* ↑ estilos por defecto (desktop) */
 
   @media (max-width: 768px) {
-    width: 90%;    /* en móvil sube a 90% del contenedor */
+    width: 90%; /* en móvil sube a 90% del contenedor */
   }
 `;
-
 
 function ResponsiveImage({ publicId, alt }) {
   const base = `https://res.cloudinary.com/dhikp5azp/image/upload`;
@@ -178,22 +174,20 @@ function ResponsiveImage({ publicId, alt }) {
 }
 
 const FullAcerca = () => {
-
   useEffect(() => {
-    window.scrollTo(0, 0)
+    window.scrollTo(0, 0);
   }, []);
 
-    // Preload
-       const imgs = [
-           "v1746697724/1_pe1mgr",
-           "v1746697726/3_rpa9lw",
-           "v1746697725/2_zjc4h4",
-         ];
-    imgs.forEach((id) => {
-      const i = new Image();
-      i.src = `https://res.cloudinary.com/dhikp5azp/image/upload/f_auto,q_auto,w_640/${id}.png`;
-    });
-
+  // Preload
+  const imgs = [
+    "v1746697724/1_pe1mgr",
+    "v1746697726/3_rpa9lw",
+    "v1746697725/2_zjc4h4",
+  ];
+  imgs.forEach((id) => {
+    const i = new Image();
+    i.src = `https://res.cloudinary.com/dhikp5azp/image/upload/f_auto,q_auto,w_640/${id}.png`;
+  });
 
   return (
     <FullAcercaContainer>
@@ -201,7 +195,7 @@ const FullAcerca = () => {
 
       <Section>
         <ContentContainer>
-        <MediaContainer>
+          <MediaContainer>
             <ResponsiveImage
               publicId="v1746697724/1_pe1mgr"
               alt="Primera imagen ilustrativa"
@@ -209,19 +203,26 @@ const FullAcerca = () => {
           </MediaContainer>
           <TextContainer>
             {/* Título grande */}
+
             <Typography
               component="h3"
               sx={{
                 fontFamily: "Playfair Display",
                 fontWeight: 700,
-                fontSize: { xs: "1.5rem", sm: "2rem", md: "1.7rem" },
+                // ↓ smaller on xs, medium‐small on sm, your normal size on md+
+                fontSize: { xs: "1.1rem", sm: "1.5rem", md: "1.6rem" },
+                // always left-aligned, but you could center on desktop if you wanted
                 textAlign: "left",
+                // space below
                 mb: 2,
+                // add a little horizontal padding up to sm
+                pl: { xs: 0, sm: 0 },
               }}
             >
               Sobre mí
             </Typography>
 
+            {/* Texto descriptivo */}
             {/* Texto descriptivo */}
             <Typography
               component="p"
@@ -233,21 +234,32 @@ const FullAcerca = () => {
             >
               La vida no viene con un manual, y como tú, yo también estoy en
               constante aprendizaje. Mi mayor impulso como terapeuta es mi
-              propia humanidad: Nací en Colombia, crecí en Noruega y elegí
-              España como mi hogar. Cada país dejó algo en mí, me invitó a
-              soltar lo conocido y también me obligó a empezar de nuevo. Aprendí
-              a cambiar de idioma, de casa, de piel. Me adapté, me esforcé por
-              encajar, y sin darme cuenta, fui dejando partes de mí en el
-              intento. Hasta que comprendí que poner límites no me aleja de los
-              demás, me acerca a mí misma. Desde entonces, los límites se
-              convirtieron en un puente hacia mi autenticidad. Me han ayudado a
-              vivir con coherencia, a cuidar mi bienestar emocional y a
-              enseñarle al mundo cómo deseo ser tratada. Por eso hoy, desde mi
-              experiencia y formación como psicóloga especializada en límites y
-              regulación emocional, acompaño a personas que se han perdido de
-              tanto dar, ceder o callar. A quienes desean aprender a decir
-              “hasta aquí”, pero no saben cómo hacerlo sin culpa, sin miedo o
-              sin dañar sus relaciones.
+              propia humanidad:{" "}
+              <Box component="span" sx={{ fontWeight: "bold" }}>
+                Nací en Colombia, crecí en Noruega y elegí España como mi hogar.
+              </Box>
+              Cada país dejó algo en mí, me invitó a soltar lo conocido y
+              también me obligó a empezar de nuevo. Aprendí a cambiar de idioma,
+              de casa, de piel. Me adapté, me esforcé por encajar, y sin darme
+              cuenta, fui dejando partes de mí en el intento. Hasta que
+              comprendí que{" "}
+              <Box component="span" sx={{ fontWeight: "bold" }}>
+                poner límites no me aleja de los demás, me acerca a mí misma.
+              </Box>
+              Desde entonces, los límites se convirtieron en un puente hacia mi
+              autenticidad. Me han ayudado a vivir con coherencia, a cuidar mi
+              bienestar emocional y a{" "}
+              <Box component="span" sx={{ fontWeight: "bold" }}>
+                enseñarle al mundo cómo deseo ser tratada.
+              </Box>{" "}
+              Por eso hoy, desde mi experiencia y formación como psicóloga
+              especializada en límites y regulación emocional,{" "}
+              <Box component="span" sx={{ fontWeight: "bold" }}>
+                acompaño a personas que se han perdido de tanto dar, ceder o
+                callar.
+              </Box>{" "}
+              A quienes desean aprender a decir “hasta aquí”, pero no saben cómo
+              hacerlo sin culpa, sin miedo o sin dañar sus relaciones.
             </Typography>
           </TextContainer>
         </ContentContainer>
@@ -265,20 +277,24 @@ const FullAcerca = () => {
 
           {/* Texto con dos bloques de título + párrafo */}
           <TextContainer>
-            {/* Título principal */}
+            {/* First title */}
             <Typography
               component="h3"
               sx={{
                 fontFamily: "Playfair Display",
                 fontWeight: 700,
-                fontSize: { xs: "1.5rem", sm: "2rem", md: "1.7rem" },
+                // ↓ smaller on xs, medium‐small on sm, your normal size on md+
+                fontSize: { xs: "1.1rem", sm: "1.5rem", md: "1.4rem" },
+                // always left-aligned, but you could center on desktop if you wanted
                 textAlign: "left",
+                // space below
                 mb: 2,
+                // add a little horizontal padding up to sm
+                pl: { xs: 0, sm: 0 },
               }}
             >
               De lo forense a lo emocional
             </Typography>
-
             {/* Párrafo descriptivo */}
             <Typography
               component="p"
@@ -289,8 +305,11 @@ const FullAcerca = () => {
                 mb: 3,
               }}
             >
-              Mi trayectoria comenzó en el mundo de la Criminología, con
-              especialidad en Seguridad Privada y formación como Detective
+              Mi trayectoria comenzó en el mundo de{" "}
+              <Box component="span" sx={{ fontWeight: "bold" }}>
+                la Criminología
+              </Box>{" "}
+              , con especialidad en Seguridad Privada y formación como Detective
               Privado. Aunque mi camino evolucionó hacia la psicología, esa base
               me dio herramientas valiosas para entender al ser humano desde
               múltiples perspectivas.
@@ -302,9 +321,14 @@ const FullAcerca = () => {
               sx={{
                 fontFamily: "Playfair Display",
                 fontWeight: 700,
-                fontSize: { xs: "1.5rem", sm: "2rem", md: "1.7rem" },
+                // ↓ smaller on xs, medium‐small on sm, your normal size on md+
+                fontSize: { xs: "1.1rem", sm: "1.5rem", md: "1.4rem" },
+                // always left-aligned, but you could center on desktop if you wanted
                 textAlign: "left",
+                // space below
                 mb: 2,
+                // add a little horizontal padding up to sm
+                pl: { xs: 0, sm: 0 },
               }}
             >
               Una vida con propósito, dentro y fuera de consulta
@@ -320,9 +344,11 @@ const FullAcerca = () => {
               }}
             >
               Me considero una persona extrovertida y profundamente sensible.
-              Esa mezcla de energía y sensibilidad es lo que me permite conectar
-              de forma auténtica, tanto conmigo misma como con quienes acompaño
-              en terapia.
+              Esa mezcla de energía y sensibilidad es lo que me permite{" "}
+              <Box component="span" sx={{ fontWeight: "bold" }}>
+                conectar de forma auténtica{" "}
+              </Box>{" "}
+              , tanto conmigo misma como con quienes acompaño en terapia.
               <br />
               <br />
               Tengo una curiosidad infinita por aprender, crecer y nutrirme de
@@ -336,8 +362,8 @@ const FullAcerca = () => {
       <Section2>
         <ContentContainer>
           {/* Texto a la izquierda (o arriba en móvil) */}
-           {/* Imagen a la derecha (o abajo en móvil) */}
-           <MediaContainer>
+          {/* Imagen a la derecha (o abajo en móvil) */}
+          <MediaContainer>
             <ResponsiveImage
               publicId="v1746697725/2_zjc4h4"
               alt="Tercera imagen ilustrativa"
@@ -350,12 +376,17 @@ const FullAcerca = () => {
               sx={{
                 fontFamily: "Playfair Display",
                 fontWeight: 700,
-                fontSize: { xs: "1.5rem", sm: "2rem", md: "1.5rem" },
-                textAlign: "Left",
+                // ↓ smaller on xs, medium‐small on sm, your normal size on md+
+                fontSize: { xs: "1.1rem", sm: "1.5rem", md: "1.4rem" },
+                // always left-aligned, but you could center on desktop if you wanted
+                textAlign: "left",
+                // space below
                 mb: 2,
+                // add a little horizontal padding up to sm
+                pl: { xs: 0, sm: 0 },
               }}
             >
-              Mi tiempo libre
+              Cuando no trabajo, estoy probablemente:
             </Typography>
 
             {/* Lista de actividades */}
@@ -378,10 +409,28 @@ const FullAcerca = () => {
               <li>Bailando ritmos latinoamericanos.</li>
               <li>Descubriendo nuevos rincones del mundo.</li>
               <li>
-                Viviendo experiencias gastronómicas que despierten los sentidos.
+                O viviendo experiencias gastronómicas que despierten los
+                sentidos.
               </li>
             </Box>
-
+            <Typography
+              component="h3"
+              sx={{
+                fontFamily: "Playfair Display",
+                fontWeight: 700,
+                // ↓ smaller on xs, medium‐small on sm, your normal size on md+
+                fontSize: { xs: "0.9rem", sm: "1.5rem", md: "1.1rem" },
+                // always left-aligned, but you could center on desktop if you wanted
+                textAlign: "left",
+                // space below
+                mb: 2,
+                // add a little horizontal padding up to sm
+                pl: { xs: 0, sm: 0 },
+              }}
+            >
+              ¿Qué valores hay detrás del color que elegí para acompañarte en tu
+              proceso?
+            </Typography>
             {/* Párrafo final */}
             <Typography
               component="p"
@@ -391,13 +440,26 @@ const FullAcerca = () => {
                 lineHeight: 1.6,
               }}
             >
-              El verde esmeralda es más que un color para mí: es el símbolo de
-              mi historia y mis raíces. Representa la belleza natural de Noruega
-              y la fuerza vital de las esmeraldas colombianas. En mi trabajo
-              como psicóloga, este verde se convierte en vida, conexión y
-              crecimiento. Son los valores que me guían al acompañarte en tu
-              proceso terapéutico, para que también tú puedas florecer desde tu
-              esencia.
+              El{" "}
+              <Box component="span" sx={{ fontWeight: "bold" }}>
+                verde esmeralda{" "}
+              </Box>{" "}
+              es más que un color para mí: es el símbolo de mi historia y mis
+              raíces. Representa la{" "}
+              <Box component="span" sx={{ fontWeight: "bold" }}>
+                belleza natural de Noruega y la fuerza vital de las esmeraldas
+                colombianas.
+              </Box>{" "}
+              En mi trabajo como psicóloga, este verde se convierte en vida,
+              conexión y crecimiento. Son los valores que me guían al
+              acompañarte en tu proceso terapéutico, para que también tú puedas
+              florecer desde tu esencia.Gracias a mi historia de vida y a mis
+              constantes viajes entre ambos países, puedo ofrecerte terapia en
+              los dos idiomas:
+              <Box component="span" sx={{ fontWeight: "bold" }}>
+                {" "}
+                noruego y español.
+              </Box>
             </Typography>
           </TextContainer>
         </ContentContainer>

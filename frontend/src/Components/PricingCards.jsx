@@ -76,7 +76,8 @@ const PricingCards = () => {
         ref={videoRef}
         sx={{
           position: "absolute",
-          top: 0,
+          top: 10,
+          botton:12,
           left: "50%",
           transform: "translateX(-50%)",
           width: "100%",
@@ -85,7 +86,7 @@ const PricingCards = () => {
           maxWidth: "100vw",
           overflow: "hidden",
           zIndex: -1,
-          borderRadius: isMobile ? "10px" : "0",
+          borderRadius: isMobile ? "15px" : "10px",
         }}
       >
         {loadVideo ? (

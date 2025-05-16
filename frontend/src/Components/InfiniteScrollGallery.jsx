@@ -46,16 +46,17 @@ const ScrollContainer = styled(Box)`
   width: 100%;
   overflow-x: scroll;
   overflow-y: hidden;
-
-  /* momentum scrolling en iOS/Safari */
-  -webkit-overflow-scrolling: touch;
-  /* permite swipe horizontal nativo */
   touch-action: pan-x;
 
-  /* oculta scrollbar */
-  &::-webkit-scrollbar {
-    display: none;
+  /* Opcional: desactiva momentum en iOS si hace falta */
+  &.no-momentum {
+    -webkit-overflow-scrolling: auto;
   }
+  &.with-momentum {
+    -webkit-overflow-scrolling: touch;
+  }
+
+  &::-webkit-scrollbar { display: none; }
   -ms-overflow-style: none;
   scrollbar-width: none;
 `;
@@ -125,41 +126,45 @@ const InfiniteScrollGallery = () => {
   const navigate = useNavigate();
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
-  const isTablet = useMediaQuery(theme.breakpoints.between("sm", "md"));
+  const isTablet = useMediaQuery(theme.breakpoints.between("sm","md"));
   const carouselRef = useRef(null);
-
-  // ref para pausar auto-scroll durante la interacción táctil
   const isInteracting = useRef(false);
+  const scrollTimeout = useRef(null);
 
-  // cuando el usuario toca, pausamos
-  const handleTouchStart = () => {
+  const handleInteractionStart = () => {
     isInteracting.current = true;
-  };
-  // al soltar, reanudamos
-  const handleTouchEnd = () => {
-    isInteracting.current = false;
+    clearTimeout(scrollTimeout.current);
   };
 
-  // Auto-scroll infinito (se detiene mientras isInteracting=true)
+  const handleInteractionEnd = () => {
+    clearTimeout(scrollTimeout.current);
+    scrollTimeout.current = setTimeout(() => {
+      isInteracting.current = false;
+    }, 100); // espera 100ms tras el último scroll/touch antes de reanudar
+  };
+
   useEffect(() => {
     let rafId;
-    const speed = isMobile ? 0.5 : 1.2; // px por frame
+    // sube un poco la velocidad en móvil
+    const speed = isMobile ? 1 : 1.2;
 
     const step = () => {
-      if (!isInteracting.current) {
-        const el = carouselRef.current;
-        if (el) {
-          el.scrollLeft += speed;
-          if (el.scrollLeft >= el.scrollWidth / 2) {
-            el.scrollLeft = 0;
-          }
+      const el = carouselRef.current;
+      if (el && !isInteracting.current) {
+        el.scrollLeft += speed;
+        // reinicio al llegar a la mitad
+        if (el.scrollLeft >= el.scrollWidth / 2) {
+          el.scrollLeft = 0;
         }
       }
       rafId = requestAnimationFrame(step);
     };
 
     rafId = requestAnimationFrame(step);
-    return () => cancelAnimationFrame(rafId);
+    return () => {
+      cancelAnimationFrame(rafId);
+      clearTimeout(scrollTimeout.current);
+    };
   }, [isMobile]);
 
   // Scroll con rueda (solo en desktop/tablet)
@@ -205,8 +210,13 @@ const InfiniteScrollGallery = () => {
       <ScrollContainer
         ref={carouselRef}
         onWheel={handleWheel}
-        onTouchStart={handleTouchStart}
-        onTouchEnd={handleTouchEnd}
+        // cubrimos todos los eventos táctiles y de scroll
+        onTouchStart={handleInteractionStart}
+        onTouchMove={handleInteractionStart}
+        onTouchEnd={handleInteractionEnd}
+        onTouchCancel={handleInteractionEnd}
+        onScroll={handleInteractionStart && handleInteractionEnd}
+        className={isMobile ? "no-momentum" : "with-momentum"}
       >
         <Box
           sx={{

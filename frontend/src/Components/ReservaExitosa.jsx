@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import { Box, Button, Alert } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import "@fontsource/playfair-display";
-import { img } from "../utils/imagePath";
+import { FaCheckCircle } from "react-icons/fa";
 
 const ReservaExitosa = () => {
   useEffect(() => {
@@ -10,15 +10,19 @@ const ReservaExitosa = () => {
   }, []);
   const navigate = useNavigate();
 
+  // URL optimizada: formato y calidad automáticos, ancho máximo 800px
+  const imagenReserva =
+    "https://res.cloudinary.com/dhikp5azp/image/upload/f_auto,q_auto,w_800/v1747669001/reserva-cancelada-2_knisbq.png";
+
   return (
     <Box
       sx={{
         minHeight: "100vh",
-        backgroundColor: "#84978b", // 💚 Fondo verde suave
+        backgroundColor: "#84978b",
         display: "flex",
         alignItems: "center",
         justifyContent: "center",
-        padding: 2,
+        p: 2,
       }}
     >
       <Box
@@ -32,7 +36,6 @@ const ReservaExitosa = () => {
           backgroundColor: "#fff",
         }}
       >
-        {/* Alerta informativa */}
         <Alert
           severity="info"
           sx={{
@@ -41,19 +44,27 @@ const ReservaExitosa = () => {
             fontFamily: "Playfair Display, serif",
             fontSize: "17px",
             borderRadius: "10px",
+            display: "flex",
+            alignItems: "center",
           }}
+          iconMapping={{ info: <FaCheckCircle /> }}
         >
           Hemos enviado un correo de confirmación de tu reserva. Revisa también
           tu carpeta de spam o correo no deseado. ✉️
         </Alert>
-        <img
-          src={img("reservaok.svg")}
+
+        <Box
+          component="img"
+          src={imagenReserva}
           alt="Reserva Exitosa"
-          style={{
+          loading="lazy"
+          sx={{
             width: "100%",
             display: "block",
+            mt: 2,
           }}
         />
+
         <Box
           sx={{
             position: "absolute",
@@ -85,3 +96,4 @@ const ReservaExitosa = () => {
 };
 
 export default ReservaExitosa;
+

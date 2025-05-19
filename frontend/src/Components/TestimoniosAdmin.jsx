@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { API_URL } from "../utils/config";
 import { Typography, Divider, Card, Button } from "@mui/material";
 import Swal from "sweetalert2";
-import { FaCheck, FaTrash } from "react-icons/fa";
+import { FaCheck, FaTrash,FaExclamationCircle } from "react-icons/fa";
 import styled from "styled-components";
 import { format } from "date-fns";
 
@@ -181,6 +181,7 @@ const TestimoniosAdmin = () => {
   return (
     <>
       <Divider sx={{ margin: "30px 0" }} />
+
       <TransparentBackground>
         <Typography
           variant="h5"
@@ -191,32 +192,41 @@ const TestimoniosAdmin = () => {
         </Typography>
       </TransparentBackground>
 
-      {testimoniosAprobados.map((t) => (
-        <StyledCard
-          key={t.id}
-          style={{ padding: "16px", marginBottom: "16px" }}
+      {testimoniosAprobados.length === 0 ? (
+        
+        <Typography
+          variant="body1"
+          color="rgb(40, 34, 29)"
+          sx={{ display: "flex", alignItems: "center", mb: 2 }}
         >
-          <Typography fontWeight="bold" color="#4b3f2f">
-            {t.nombre_cliente}
-          </Typography>
-          <Typography variant="body2" color="rgb(100, 54, 17)">
-            ✉️ {t.email_cliente}
-          </Typography>
-          <Typography variant="body2" color="rgb(40, 34, 29)">
-            🗓️ {format(new Date(t.created_at), "dd/MM/yyyy HH:mm")}
-          </Typography>
-          <br />
-          <Typography variant="body2" color="rgb(70, 40, 20)">
-            {t.consentimiento
-              ? "✔️ Consentimiento otorgado"
-              : "❌ Sin consentimiento"}
-          </Typography>
-
-          <Typography sx={{ mt: 1 }}>{t.mensaje}</Typography>
-        </StyledCard>
-      ))}
+          <FaExclamationCircle style={{ marginRight: 8 }} />
+          Aún no hay testimonios aprobados.
+        </Typography>
+      ) : (
+        testimoniosAprobados.map((t) => (
+          <StyledCard key={t.id} sx={{ p: 2, mb: 2 }}>
+            <Typography fontWeight="bold" color="#4b3f2f">
+              {t.nombre_cliente}
+            </Typography>
+            <Typography variant="body2" color="rgb(100, 54, 17)">
+              ✉️ {t.email_cliente}
+            </Typography>
+            <Typography variant="body2" color="rgb(40, 34, 29)">
+              🗓️ {format(new Date(t.created_at), "dd/MM/yyyy HH:mm")}
+            </Typography>
+            <br />
+            <Typography variant="body2" color="rgb(70, 40, 20)">
+              {t.consentimiento
+                ? "✔️ Consentimiento otorgado"
+                : "❌ Sin consentimiento"}
+            </Typography>
+            <Typography sx={{ mt: 1 }}>{t.mensaje}</Typography>
+          </StyledCard>
+        ))
+      )}
 
       <Divider sx={{ margin: "30px 0" }} />
+
       <TransparentBackground>
         <Typography
           variant="h5"
@@ -226,39 +236,47 @@ const TestimoniosAdmin = () => {
           🕒 Testimonios Pendientes
         </Typography>
       </TransparentBackground>
-      {testimoniosPendientes.map((t) => (
-        <StyledCard
-          key={t.id}
-          style={{ padding: "16px", marginBottom: "16px" }}
+
+      {testimoniosPendientes.length === 0 ? (
+        <Typography
+          variant="body1"
+          color="rgb(40, 34, 29)"
+          sx={{ display: "flex", alignItems: "center" }}
         >
-          <Typography fontWeight="bold" color="#4b3f2f">
-            {t.nombre_cliente}
-          </Typography>
-          <Typography variant="body2" color="rgb(100, 54, 17)">
-            ✉️ {t.email_cliente}
-          </Typography>
-          <Typography variant="body2" color="rgb(40, 34, 29)">
-            🗓️ {format(new Date(t.created_at), "dd/MM/yyyy HH:mm")}
-          </Typography>
-          <br />
-          <Typography variant="body2" color="rgb(70, 40, 20)">
-            {t.consentimiento
-              ? "✔️ Consentimiento otorgado"
-              : "❌ Sin consentimiento"}
-          </Typography>
+          <FaExclamationCircle style={{ marginRight: 8 }} />
+          Aún no hay testimonios pendientes.
+        </Typography>
+      ) : (
+        testimoniosPendientes.map((t) => (
+          <StyledCard key={t.id} sx={{ p: 2, mb: 2 }}>
+            <Typography fontWeight="bold" color="#4b3f2f">
+              {t.nombre_cliente}
+            </Typography>
+            <Typography variant="body2" color="rgb(100, 54, 17)">
+              ✉️ {t.email_cliente}
+            </Typography>
+            <Typography variant="body2" color="rgb(40, 34, 29)">
+              🗓️ {format(new Date(t.created_at), "dd/MM/yyyy HH:mm")}
+            </Typography>
+            <br />
+            <Typography variant="body2" color="rgb(70, 40, 20)">
+              {t.consentimiento
+                ? "✔️ Consentimiento otorgado"
+                : "❌ Sin consentimiento"}
+            </Typography>
+            <Typography sx={{ mt: 1 }}>{t.mensaje}</Typography>
 
-          <Typography sx={{ mt: 1 }}>{t.mensaje}</Typography>
-
-          <ButtonGroup>
-            <ApproveButton onClick={() => handleApproveTestimonial(t.id)}>
-              <FaCheck /> Aprobar
-            </ApproveButton>
-            <DeleteButton onClick={() => handleDeleteTestimonial(t.id)}>
-              <FaTrash /> Eliminar
-            </DeleteButton>
-          </ButtonGroup>
-        </StyledCard>
-      ))}
+            <ButtonGroup>
+              <ApproveButton onClick={() => handleApproveTestimonial(t.id)}>
+                <FaCheck /> Aprobar
+              </ApproveButton>
+              <DeleteButton onClick={() => handleDeleteTestimonial(t.id)}>
+                <FaTrash /> Eliminar
+              </DeleteButton>
+            </ButtonGroup>
+          </StyledCard>
+        ))
+      )}
     </>
   );
 };

@@ -4,6 +4,12 @@ import { useNavigate } from "react-router-dom";
 import "@fontsource/playfair-display";
 import { FaCheckCircle } from "react-icons/fa";
 
+const colors = {
+  greenLight: "#ABC4AA",
+  green: "#8AA398",
+  greenDark: "#40513B",
+};
+
 const ReservaExitosa = () => {
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -33,7 +39,8 @@ const ReservaExitosa = () => {
           boxShadow: "0 10px 30px rgba(0,0,0,0.2)",
           overflow: "hidden",
           textAlign: "center",
-          backgroundColor: "#fff",
+          border: "2px solid #d2b48c",
+          backgroundColor: "#EBDCC8",
         }}
       >
         <Alert
@@ -61,6 +68,7 @@ const ReservaExitosa = () => {
           sx={{
             width: "100%",
             display: "block",
+            borderRadius: "20px",
             mt: 2,
           }}
         />
@@ -75,19 +83,32 @@ const ReservaExitosa = () => {
         >
           <Button
             variant="contained"
+            onClick={() => navigate("/reserva")}
             sx={{
-              backgroundColor: "#4A6F5E",
-              px: 3,
-              fontFamily: "Playfair Display, serif",
-              borderRadius: "12px",
-              boxShadow: "0 4px 10px rgba(0,0,0,0.2)",
+              backgroundColor: colors.greenLight,
+              color: colors.greenDark,
+              px: 3, // 1.5rem horizontal
+              py: 2, // 0.75rem vertical
+              fontSize: "1rem",
+              fontWeight: 600,
+              border: "none",
+              borderRadius: "0.5rem",
+              boxShadow: "0 4px 8px rgba(0,0,0,0.1)",
+              cursor: "pointer",
+              transition: "background-color 0.2s ease, transform 0.1s ease",
+
               "&:hover": {
-                backgroundColor: "#3b5e50",
+                backgroundColor: colors.green,
+                transform: "translateY(-2px)",
+              },
+              "&:active": {
+                backgroundColor: colors.greenDark,
+                color: "#fff",
+                transform: "translateY(0)",
               },
             }}
-            onClick={() => navigate("/")}
           >
-            VOLVER AL INICIO
+            Volver a reservar
           </Button>
         </Box>
       </Box>
@@ -96,4 +117,3 @@ const ReservaExitosa = () => {
 };
 
 export default ReservaExitosa;
-

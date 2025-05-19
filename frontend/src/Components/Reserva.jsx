@@ -113,6 +113,7 @@ const Reserva = () => {
   const handleCheckout = async (e) => {
     e.preventDefault();
 
+    // 1️⃣ Validación de campos obligatorios
     const newErrors = {
       firstName: firstName.trim() === "",
       email: email.trim() === "" || !validateEmail(email),
@@ -122,10 +123,8 @@ const Reserva = () => {
       selectedConsultationType: selectedConsultationType.trim() === "",
       privacyAccepted: !privacyAccepted,
     };
-
     setErrors(newErrors);
-
-    if (Object.values(newErrors).some((error) => error)) {
+    if (Object.values(newErrors).some((err) => err)) {
       await Swal.fire({
         icon: "error",
         title: "Oops...",
@@ -135,36 +134,37 @@ const Reserva = () => {
       return;
     }
 
+    // 2️⃣ Validación en cliente: fecha y hora no pasadas
+    const now = new Date();
+    const [horas, minutos] = selectedTime.split(":").map(Number);
+    const fechaHoraSeleccionada = new Date(selectedDate);
+    fechaHoraSeleccionada.setHours(horas, minutos, 0, 0);
+
+    if (fechaHoraSeleccionada <= now) {
+      await Swal.fire({
+        icon: "error",
+        title: "Hora pasada",
+        text: "La fecha y hora seleccionadas ya han pasado. Por favor, elige un horario futuro.",
+        confirmButtonColor: "#c0a080",
+      });
+      return;
+    }
+
+    // 3️⃣ Preparamos payload y comprobamos disponibilidad en backend
     const fechaISO = selectedDate.toISOString().split("T")[0];
-
+    let disponibilidadData;
     try {
-      const disponibilidadResponse = await fetch(
-        `${API_URL}/api/verificar-disponibilidad/`,
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            fecha_reserva: fechaISO,
-            hora_reserva: selectedTime,
-          }),
-        }
-      );
-
-      const disponibilidadData = await disponibilidadResponse.json();
-
-      if (!disponibilidadData.disponible) {
-        await Swal.fire({
-          icon: "error",
-          title: "Horario no disponible",
-          text: "Ya existe una reserva para esta fecha y hora. Por favor, elige otro horario.",
-          confirmButtonColor: "#c0a080",
-        });
-        return;
-      }
-    } catch (error) {
-      console.error("Error al verificar disponibilidad:", error);
+      const resp = await fetch(`${API_URL}/api/verificar-disponibilidad/`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          fecha_reserva: fechaISO,
+          hora_reserva: selectedTime,
+        }),
+      });
+      disponibilidadData = await resp.json();
+    } catch (err) {
+      console.error("Error al verificar disponibilidad:", err);
       await Swal.fire({
         icon: "error",
         title: "Error de servidor",
@@ -174,6 +174,19 @@ const Reserva = () => {
       return;
     }
 
+    if (!disponibilidadData.disponible) {
+      await Swal.fire({
+        icon: "error",
+        title: disponibilidadData.error || "Horario no disponible",
+        text: disponibilidadData.error
+          ? disponibilidadData.error
+          : "Ya existe una reserva para esta fecha y hora.",
+        confirmButtonColor: "#c0a080",
+      });
+      return;
+    }
+
+    // 4️⃣ Enviar a Stripe si todo está OK
     const reservaData = {
       tipo_terapia: selectedConsultationType,
       nombre_completo: firstName,
@@ -183,38 +196,29 @@ const Reserva = () => {
       hora_reserva: selectedTime,
       comentarios: comments,
     };
-
     try {
       const response = await fetch(`${API_URL}/api/pago/crear-sesion/`, {
         method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify(reservaData),
       });
-
       const data = await response.json();
-
       if (response.ok && data.url) {
-        window.location.assign(data.url); // Redirige a Stripe Checkout
+        window.location.assign(data.url);
       } else {
-        await Swal.fire({
-          icon: "error",
-          title: "Error",
-          text: data.error || "No se pudo iniciar el pago.",
-          confirmButtonColor: "#c0a080",
-        });
+        throw new Error(data.error || "No se pudo iniciar el pago.");
       }
-    } catch (error) {
-      console.error("❌ Error con Stripe:", error);
+    } catch (err) {
+      console.error("❌ Error con Stripe:", err);
       await Swal.fire({
         icon: "error",
         title: "Error del servidor",
-        text: "No se pudo conectar con el servidor de pagos.",
+        text: err.message,
         confirmButtonColor: "#c0a080",
       });
     }
   };
+
 
   return (
     <>

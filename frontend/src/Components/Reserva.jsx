@@ -1,17 +1,15 @@
 import { useState, useEffect } from "react";
 import { API_URL } from "../utils/config";
 import {
-  Grid,
-  Box,
-  Typography,
-  TextField,
-  MenuItem,
-  Button,
-  Checkbox,
+  Link as MuiLink,
   FormControlLabel,
-  FormHelperText,
   FormGroup,
+  FormHelperText,
+  Checkbox,
+  Typography,
 } from "@mui/material";
+import { Link as RouterLink } from "react-router-dom";
+import { Grid, Box, TextField, MenuItem, Button } from "@mui/material";
 import Calendar from "./Calendar";
 import "@fontsource/playfair-display";
 import ReservationVideo from "./ReservationVideo";
@@ -187,16 +185,13 @@ const Reserva = () => {
     };
 
     try {
-      const response = await fetch(
-        `${API_URL}/api/pago/crear-sesion/`,
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(reservaData),
-        }
-      );
+      const response = await fetch(`${API_URL}/api/pago/crear-sesion/`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(reservaData),
+      });
 
       const data = await response.json();
 
@@ -241,7 +236,7 @@ const Reserva = () => {
                 width: { xs: "82vw", md: "100%" },
                 ml: { xs: "-16px", md: 0 },
 
-                  marginTop: "20px",
+                marginTop: "20px",
                 fontFamily: "Playfair Display",
               }}
             >
@@ -274,102 +269,100 @@ const Reserva = () => {
                 setSelectedTime={setSelectedTime}
               />
               <TextField
-              select
-              label="Motivo de la consulta"
-              value={selectedOption}
-              onChange={(e) => setSelectedOption(e.target.value)}
-              fullWidth
-              margin="normal"
-              error={errors.selectedOption}
-              helperText={errors.selectedOption && "Este campo es obligatorio"}
-
-              // 1) Shrink label & selected value font on mobile:
-              sx={{
-                "& .MuiInputLabel-root": {
-                  fontSize: { xs: "0.8rem", sm: "1rem" },
-                  color: "#4b3f2f",
-                },
-                "& .MuiSelect-select": {
-                  fontSize: { xs: "0.8rem", sm: "1rem" },
-                  color: "#4b3f2f",
-                },
-              }}
-
-              // 2) Style the dropdown menu itself:
-              SelectProps={{
-                MenuProps: {
-                  PaperProps: {
-                    sx: {
-                      backgroundColor: "#f5eedc",
-                      backdropFilter: "blur(10px)",
-                      border: "2px solid #d2b48c",
-                      // taller list on mobile so you can scroll more:
-                      maxHeight: { xs: "60vh", sm: "40vh" },
-                      // style each item:
-                      "& .MuiMenuItem-root": {
-                        fontSize: { xs: "0.8rem", sm: "1rem" },
-                        color: "#4b3f2f",
+                select
+                label="Motivo de la consulta"
+                value={selectedOption}
+                onChange={(e) => setSelectedOption(e.target.value)}
+                fullWidth
+                margin="normal"
+                error={errors.selectedOption}
+                helperText={
+                  errors.selectedOption && "Este campo es obligatorio"
+                }
+                // 1) Shrink label & selected value font on mobile:
+                sx={{
+                  "& .MuiInputLabel-root": {
+                    fontSize: { xs: "0.8rem", sm: "1rem" },
+                    color: "#4b3f2f",
+                  },
+                  "& .MuiSelect-select": {
+                    fontSize: { xs: "0.8rem", sm: "1rem" },
+                    color: "#4b3f2f",
+                  },
+                }}
+                // 2) Style the dropdown menu itself:
+                SelectProps={{
+                  MenuProps: {
+                    PaperProps: {
+                      sx: {
+                        backgroundColor: "#f5eedc",
+                        backdropFilter: "blur(10px)",
+                        border: "2px solid #d2b48c",
+                        // taller list on mobile so you can scroll more:
+                        maxHeight: { xs: "60vh", sm: "40vh" },
+                        // style each item:
+                        "& .MuiMenuItem-root": {
+                          fontSize: { xs: "0.8rem", sm: "1rem" },
+                          color: "#4b3f2f",
+                        },
                       },
                     },
                   },
-                },
-              }}
-            >
-              {options.map((option) => (
-                <MenuItem key={option} value={option}>
-                  {option}
-                </MenuItem>
-              ))}
-            </TextField>
-            <TextField
-  select
-  label="Tipo de terapia"
-  value={selectedConsultationType}
-  onChange={(e) => setSelectedConsultationType(e.target.value)}
-  fullWidth
-  margin="normal"
-  error={Boolean(errors.selectedConsultationType)}
-  helperText={
-    errors.selectedConsultationType && "Este campo es obligatorio"
-  }
-  required
-
-  // 1) Ajustes de fuente y color en el campo
-  sx={{
-    "& .MuiInputLabel-root": {
-      fontSize: { xs: "0.8rem", sm: "1rem" },
-      color: "#4b3f2f",
-    },
-    "& .MuiSelect-select": {
-      fontSize: { xs: "0.8rem", sm: "1rem" },
-      color: "#4b3f2f",
-    },
-  }}
-
-  // 2) Estilos del dropdown
-  SelectProps={{
-    MenuProps: {
-      PaperProps: {
-        sx: {
-          backgroundColor: "#f5eedc",
-          backdropFilter: "blur(10px)",
-          border: "2px solid #d2b48c",
-          maxHeight: { xs: "60vh", sm: "40vh" },
-          "& .MuiMenuItem-root": {
-            fontSize: { xs: "0.8rem", sm: "1rem" },
-            color: "#4b3f2f",
-          },
-        },
-      },
-    },
-  }}
->
-  {consultationTypes.map((type) => (
-    <MenuItem key={type} value={type}>
-      {type}
-    </MenuItem>
-  ))}
-</TextField>
+                }}
+              >
+                {options.map((option) => (
+                  <MenuItem key={option} value={option}>
+                    {option}
+                  </MenuItem>
+                ))}
+              </TextField>
+              <TextField
+                select
+                label="Tipo de terapia"
+                value={selectedConsultationType}
+                onChange={(e) => setSelectedConsultationType(e.target.value)}
+                fullWidth
+                margin="normal"
+                error={Boolean(errors.selectedConsultationType)}
+                helperText={
+                  errors.selectedConsultationType && "Este campo es obligatorio"
+                }
+                required
+                // 1) Ajustes de fuente y color en el campo
+                sx={{
+                  "& .MuiInputLabel-root": {
+                    fontSize: { xs: "0.8rem", sm: "1rem" },
+                    color: "#4b3f2f",
+                  },
+                  "& .MuiSelect-select": {
+                    fontSize: { xs: "0.8rem", sm: "1rem" },
+                    color: "#4b3f2f",
+                  },
+                }}
+                // 2) Estilos del dropdown
+                SelectProps={{
+                  MenuProps: {
+                    PaperProps: {
+                      sx: {
+                        backgroundColor: "#f5eedc",
+                        backdropFilter: "blur(10px)",
+                        border: "2px solid #d2b48c",
+                        maxHeight: { xs: "60vh", sm: "40vh" },
+                        "& .MuiMenuItem-root": {
+                          fontSize: { xs: "0.8rem", sm: "1rem" },
+                          color: "#4b3f2f",
+                        },
+                      },
+                    },
+                  },
+                }}
+              >
+                {consultationTypes.map((type) => (
+                  <MenuItem key={type} value={type}>
+                    {type}
+                  </MenuItem>
+                ))}
+              </TextField>
 
               <TextField
                 label="Comentarios"
@@ -396,16 +389,51 @@ const Reserva = () => {
                         fontStyle: "italic",
                       }}
                     >
-                      He leído y acepto las políticas de privacidad
+                      He leído y acepto las{" "}
+                      <MuiLink
+                        component={RouterLink}
+                        to="/privacy-policy"
+                        underline="hover"
+                        sx={{ fontFamily: "Playfair Display" }}
+                      >
+                        políticas de privacidad
+                      </MuiLink>
                     </Typography>
                   }
                 />
+
                 {errors.privacyAccepted && (
                   <FormHelperText error>
                     Este campo es obligatorio
                   </FormHelperText>
                 )}
+
+                <Typography
+                  variant="caption"
+                  component="p"
+                  sx={{
+                    mt: 1,
+                    fontFamily: "Playfair Display",
+                    fontSize: { xs: "0.6rem", sm: "0.75rem" },
+                    lineHeight: 1.4,
+                    color: "text.secondary",
+                    whiteSpace: "pre-line",
+                    textAlign: "justify",
+                  }}
+                >
+                  Al enviar el formulario se solicitan datos como tu email y
+                  nombre que se almacenan en una cookie para que no tengas que
+                  volver a completarlos en próximos envíos. Para enviar el
+                  formulario debes aceptar nuestra política de privacidad.
+                  Responsable de los datos: Daniela Arrázola Benítez |
+                  Finalidad: Responder a solicitudes del formulario |
+                  Legitimación: Tu consentimiento expreso | Destinatario:
+                  Daniela Arrázola Benítez (datos almacenados sólo en cliente
+                  email) | Derechos: Tienes derecho al acceso, rectificación,
+                  supresión, limitación, portabilidad y olvido de tus datos.
+                </Typography>
               </FormGroup>
+
               <Button
                 type="button"
                 onClick={handleCheckout} // ✅ Llama a la función de Stripe

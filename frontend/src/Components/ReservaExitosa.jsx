@@ -28,7 +28,7 @@ const ReservaExitosa = () => {
         display: "flex",
         alignItems: "center",
         justifyContent: "center",
-        p: { xs: 1, sm: 2 }, // menos padding en móvil
+        p: { xs: 1, sm: 2 },              // menos padding en móvil
       }}
     >
       <Box
@@ -47,7 +47,7 @@ const ReservaExitosa = () => {
           severity="info"
           icon={<FaCheckCircle />}
           sx={{
-            mt: { xs: 1, sm: 2 }, // menos margen arriba en XS
+            mt: { xs: 1, sm: 2 },           // menos margen arriba en XS
             mx: { xs: 1, sm: 2 },
             fontFamily: "Playfair Display, serif",
             fontSize: { xs: "0.85rem", sm: "17px" }, // texto más pequeño en XS
@@ -55,12 +55,13 @@ const ReservaExitosa = () => {
             display: "flex",
             alignItems: "center",
             backgroundColor: "#EBDCC8",
-            textAlign: "justify",
+            textAlign: "justify"
           }}
         >
           Hemos enviado un correo de confirmación de tu reserva. Revisa también
           tu carpeta de spam o correo no deseado. ✉️
         </Alert>
+
         <Box
           component="img"
           src={imagenReserva}
@@ -70,7 +71,7 @@ const ReservaExitosa = () => {
             width: "100%",
             display: "block",
             borderRadius: "20px",
-            mt: { xs: 1, sm: 2 }, // menos separación en XS
+            mt: { xs: 1, sm: 2 },           // menos separación en XS
           }}
         />
 
@@ -79,10 +80,18 @@ const ReservaExitosa = () => {
           onClick={() => navigate("/reserva")}
           sx={{
             position: "absolute",
-            bottom: { xs: 16, sm: 62 },
+            bottom: { xs: 16, sm: 62 },    // más abajo en desktop
             left: "50%",
             transform: "translateX(-50%)",
-            /* … */
+            backgroundColor: colors.greenLight,
+            color: colors.greenDark,
+            px: { xs: 1, sm: 3 },          // menos padding horizontal en XS
+            py: { xs: 0.5, sm: 2 },          // menos padding vertical en XS
+            fontSize: { xs: "0.9rem", sm: "1rem" },
+            fontWeight: 600,
+            border: "none",
+            borderRadius: "0.5rem",
+            boxShadow: "0 4px 8px rgba(0,0,0,0.1)",
             transition: "background-color 0.2s ease, transform 0.1s ease",
 
             "&:hover": {
@@ -104,3 +113,4 @@ const ReservaExitosa = () => {
 };
 
 export default ReservaExitosa;
+

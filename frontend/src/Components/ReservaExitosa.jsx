@@ -16,7 +16,8 @@ const ReservaExitosa = () => {
   }, []);
   const navigate = useNavigate();
 
-  const imagenOK =
+  // URL optimizada: formato y calidad automáticos, ancho máximo 800px
+  const imagenReserva =
     "https://res.cloudinary.com/dhikp5azp/image/upload/f_auto,q_auto,w_800/v1747669001/reserva-cancelada-2_knisbq.png";
 
   return (
@@ -27,7 +28,8 @@ const ReservaExitosa = () => {
         display: "flex",
         alignItems: "center",
         justifyContent: "center",
-        p: 2,
+        p: { xs: 1, sm: 2 },
+
       }}
     >
       <Box
@@ -38,21 +40,26 @@ const ReservaExitosa = () => {
           boxShadow: "0 10px 30px rgba(0,0,0,0.2)",
           overflow: "hidden",
           textAlign: "center",
-          backgroundColor: "#fff",
+          border: "2px solid #d2b48c",
+          backgroundColor: "#EBDCC8",
         }}
       >
         <Alert
           severity="info"
-          icon={<FaCheckCircle fontSize="inherit" />}
           sx={{
-            mx: { xs: 1, sm: 2 },
-            my: { xs: 2, sm: 3 },
-            px: { xs: 1, sm: 2 },
-            py: { xs: 1, sm: 1.5 },
+            position: "absolute",
+            top: { xs: 16, sm: 24 },
+            width: { xs: "90%", sm: "70%" },
+            mx: 2,
             fontFamily: "Playfair Display, serif",
-            fontSize: { xs: "0.85rem", sm: "1rem" },
-            borderRadius: "12px",
+            fontSize: "17px",
+            borderRadius: "10px",
+            display: "flex",
+            alignItems: "center",
+            backgroundColor: "#ABC4AA",
+
           }}
+          iconMapping={{ info: <FaCheckCircle /> }}
         >
           Hemos enviado un correo de confirmación de tu reserva. Revisa también
           tu carpeta de spam o correo no deseado. ✉️
@@ -60,39 +67,43 @@ const ReservaExitosa = () => {
 
         <Box
           component="img"
-          src={imagenOK}
+          src={imagenReserva}
           alt="Reserva Exitosa"
           loading="lazy"
           sx={{
             width: "100%",
             display: "block",
+            borderRadius: "20px",
+            mt: 2,
           }}
         />
 
         <Box
           sx={{
-            mt: { xs: 2, sm: 4 },
-            mb: { xs: 4, sm: 6 },
-            display: "flex",
-            justifyContent: "center",
+            position: "absolute",
+            bottom: 62,
+            left: "50%",
+            transform: "translateX(-50%)",
           }}
         >
           <Button
             variant="contained"
-            onClick={() => navigate("/")}
+            onClick={() => navigate("/reserva")}
             sx={{
-              width: { xs: "80%", sm: "auto" },
-              maxWidth: 300,
-              fontFamily: "Playfair Display, serif",
-              px: { xs: 2, sm: 3 },
-              py: { xs: 1, sm: 1.25 },
-              fontSize: { xs: "0.9rem", sm: "1rem" },
-              fontWeight: 600,
-              borderRadius: "12px",
+              bottom: { xs: 16, sm: 32, md: 48 },
+
               backgroundColor: colors.greenLight,
               color: colors.greenDark,
+              px: { xs: 2, sm: 3 },
+            py: { xs: 1, sm: 1.25 },
+            fontSize: { xs: "0.9rem", sm: "1rem" },
+              fontWeight: 600,
+              border: "none",
+              borderRadius: "0.5rem",
               boxShadow: "0 4px 8px rgba(0,0,0,0.1)",
+              cursor: "pointer",
               transition: "background-color 0.2s ease, transform 0.1s ease",
+
               "&:hover": {
                 backgroundColor: colors.green,
                 transform: "translateY(-2px)",
@@ -104,7 +115,7 @@ const ReservaExitosa = () => {
               },
             }}
           >
-            Volver al inicio
+            Volver a reservar
           </Button>
         </Box>
       </Box>
@@ -113,4 +124,3 @@ const ReservaExitosa = () => {
 };
 
 export default ReservaExitosa;
-

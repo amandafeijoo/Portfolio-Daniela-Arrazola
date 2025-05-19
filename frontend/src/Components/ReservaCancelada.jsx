@@ -8,13 +8,13 @@ const colors = {
   green: "#8AA398",
   greenDark: "#40513B",
 };
+
 const ReservaCancelada = () => {
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
   const navigate = useNavigate();
 
-  // URL Cloudinary optimizada: formato y calidad automáticos, ancho máximo 800px
   const imagenCancelada =
     "https://res.cloudinary.com/dhikp5azp/image/upload/f_auto,q_auto,w_800/v1747667480/reserva-cancelada_axvpxq.png";
 
@@ -26,19 +26,19 @@ const ReservaCancelada = () => {
         display: "flex",
         alignItems: "center",
         justifyContent: "center",
-        p: 2,
+        p: { xs: 1, sm: 2, md: 3 },
       }}
     >
       <Box
         sx={{
           position: "relative",
-          width: { xs: "90%", sm: "70%", md: "40%" },
+          width: { xs: "100%", sm: "80%", md: "60%", lg: "40%" },
           borderRadius: "20px",
           boxShadow: "0 10px 30px rgba(0,0,0,0.2)",
           overflow: "hidden",
-          border: "2px solid #d2b48c",
-          textAlign: "center",
           backgroundColor: "#EBDCC8",
+          // Padding interior para que la imagen no toque el borde dorado
+          p: { xs: 0, sm: 1 },
         }}
       >
         <Box
@@ -49,51 +49,49 @@ const ReservaCancelada = () => {
           sx={{
             width: "100%",
             display: "block",
-            borderRadius: "20px",
+            // para que mantenga el mismo borderRadius que el padre
+            borderRadius: { xs: 0, sm: "18px" },
           }}
         />
 
-        <Box
+        <Button
+          variant="contained"
+          onClick={() => navigate("/reserva")}
           sx={{
             position: "absolute",
-            bottom: 62,
+            // ajustamos la posición vertical según breakpoints
+            bottom: { xs: 16, sm: 32, md: 48 },
             left: "50%",
             transform: "translateX(-50%)",
+            width: { xs: "75%", sm: "auto" },
+            maxWidth: 240,
+            fontFamily: "Playfair Display, serif",
+            px: { xs: 2, sm: 3 },
+            py: { xs: 1, sm: 1.25 },
+            fontSize: { xs: "0.9rem", sm: "1rem" },
+            fontWeight: 600,
+            borderRadius: "12px",
+            backgroundColor: colors.greenLight,
+            color: colors.greenDark,
+            boxShadow: "0 4px 8px rgba(0,0,0,0.1)",
+            transition: "background-color 0.2s ease, transform 0.1s ease",
+            "&:hover": {
+              backgroundColor: colors.green,
+              transform: "translate(-50%, -2px)",
+            },
+            "&:active": {
+              backgroundColor: colors.greenDark,
+              color: "#fff",
+              transform: "translate(-50%, 0)",
+            },
           }}
         >
-          <Button
-            variant="contained"
-            onClick={() => navigate("/reserva")}
-            sx={{
-              backgroundColor: colors.greenLight,
-              color: colors.greenDark,
-              px: 3, // 1.5rem horizontal
-              py: 2, // 0.75rem vertical
-              fontSize: "1rem",
-              fontWeight: 600,
-              border: "none",
-              borderRadius: "0.5rem",
-              boxShadow: "0 4px 8px rgba(0,0,0,0.1)",
-              cursor: "pointer",
-              transition: "background-color 0.2s ease, transform 0.1s ease",
-
-              "&:hover": {
-                backgroundColor: colors.green,
-                transform: "translateY(-2px)",
-              },
-              "&:active": {
-                backgroundColor: colors.greenDark,
-                color: "#fff",
-                transform: "translateY(0)",
-              },
-            }}
-          >
-            Volver a reservar
-          </Button>
-        </Box>
+          Volver a reservar
+        </Button>
       </Box>
     </Box>
   );
 };
 
 export default ReservaCancelada;
+

@@ -36,6 +36,7 @@ const ReservaCancelada = () => {
           borderRadius: "20px",
           boxShadow: "0 10px 30px rgba(0,0,0,0.2)",
           overflow: "hidden",
+          border: "2px solid #d2b48c",
           textAlign: "center",
           backgroundColor: "#EBDCC8",
         }}
@@ -48,8 +49,7 @@ const ReservaCancelada = () => {
           sx={{
             width: "100%",
             display: "block",
-            backgroundColor: "#EBDCC8",
-            border: "2px solid #d2b48c"
+            borderRadius: "20px",
           }}
         />
 

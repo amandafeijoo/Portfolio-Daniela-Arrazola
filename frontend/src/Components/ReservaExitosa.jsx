@@ -55,6 +55,7 @@ const ReservaExitosa = () => {
             display: "flex",
             alignItems: "center",
             backgroundColor: "#EBDCC8",
+            textAlign: "justify"
           }}
         >
           Hemos enviado un correo de confirmación de tu reserva. Revisa también

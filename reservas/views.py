@@ -4,6 +4,8 @@ from rest_framework.decorators import api_view
 from rest_framework import status
 from django.core.exceptions import ValidationError
 from .models import Reserva
+from django.utils import timezone
+from datetime import datetime
 from .serializers import ReservaSerializer
 from .utils.emails import enviar_email_confirmacion_reserva
 from .utils.emails import enviar_email_cancelacion_reserva 
@@ -92,19 +94,37 @@ def cancelar_reserva(request, reserva_id):
 @api_view(["POST"])
 @permission_classes([AllowAny])
 def verificar_disponibilidad(request):
-    fecha = request.data.get("fecha_reserva")
-    hora = request.data.get("hora_reserva")
-
-    if not fecha or not hora:
+    fecha_str = request.data.get("fecha_reserva")
+    hora_str = request.data.get("hora_reserva")
+    if not fecha_str or not hora_str:
         return Response({"error": "Fecha y hora requeridas"}, status=400)
 
+    # 1️⃣ Parseo
+    try:
+        fecha = datetime.strptime(fecha_str, "%Y-%m-%d").date()
+        hora = datetime.strptime(hora_str, "%H:%M").time()
+    except ValueError:
+        return Response({"error": "Formato de fecha u hora inválido"}, status=400)
+
+    # 2️⃣ Combinamos y hacemos tz-aware
+    dt_sel = datetime.combine(fecha, hora)
+    dt_sel = timezone.make_aware(dt_sel, timezone.get_default_timezone())
+
+    # 3️⃣ Validamos que no sea pasado
+    if dt_sel <= timezone.now():
+        return Response({
+            "disponible": False,
+            "error": "La hora seleccionada ya ha pasado. Por favor, elige un horario futuro."
+        }, status=200)
+
+    # 4️⃣ Comprobamos solapamiento
     ya_reservado = Reserva.objects.filter(
         fecha_reserva=fecha,
         hora_reserva=hora,
         cancelada=False
     ).exists()
 
-    return Response({"disponible": not ya_reservado})
+    return Response({"disponible": not ya_reservado}, status=200)
 
 
 

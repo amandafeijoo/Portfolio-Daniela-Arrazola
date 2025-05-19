@@ -22,6 +22,6 @@ export const servicesLinks = [
   {label: "Hábitos saludables", handler: "handleNavigateService9",},
   { label: "Fobias", handler: "handleNavigateService10" },
   { label: "TOC", handler: "handleNavigateService11" },
-  { label: "Neurodesarrollo", handler: "handleNavigateService12" },
+  { label: "Trastornos del Neurodesarrollo", handler: "handleNavigateService12" },
   { label: "Prevención del suicidio", handler: "handleNavigateService13" },
 ];

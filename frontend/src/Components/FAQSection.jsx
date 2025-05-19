@@ -46,30 +46,30 @@ const faqs = [
       "Se dan de cortesía 15 minutos de espera y en ese caso dispones de los minutos restantes que corresponden, no puedo extender la hora porque hayas llegado tarde, debo atender al siguiente paciente. Si por el contrario no recibo ningún aviso y no apareces, doy por anulada la sesión.",
     icon: <FaClock />,
   },
-  {
-    question: "¿Con qué frecuencia debo asistir a terapia?",
-    answer:
-      "Me adapto 100% a tu situación personal y es algo que podemos abordar en sesión. Sin embargo, al empezar se recomienda una vez por semana, máximo 1 vez cada 2 semanas de cara al vínculo terapeutico y a los resultados que te gustaría alcanzar. 1 vez al mes no es efectivo, esta científicamente comprobado de cara a empezar un proceso terapeutico.",
-    icon: <FaBrain />,
-  },
-  {
-    question: "¿Durante cuánto tiempo tengo que hacer terapia?",
-    answer:
-      "El fin último de una terapia psicológica es que no tengas dependencia del terapeuta. NO puedo decirte cuanto tiempo durara tu proceso porque eso es personal. Puede que poco, mucho, el objetivo es que llegue el momento en que dejes de necesitarlo y puedas volar con las herramientas que has ido adquiriendo en terapia.",
-    icon: <FaClock />,
-  },
+  // {
+  //   question: "¿Con qué frecuencia debo asistir a terapia?",
+  //   answer:
+  //     "Me adapto 100% a tu situación personal y es algo que podemos abordar en sesión. Sin embargo, al empezar se recomienda una vez por semana, máximo 1 vez cada 2 semanas de cara al vínculo terapeutico y a los resultados que te gustaría alcanzar. 1 vez al mes no es efectivo, esta científicamente comprobado de cara a empezar un proceso terapeutico.",
+  //   icon: <FaBrain />,
+  // },
+  // {
+  //   question: "¿Durante cuánto tiempo tengo que hacer terapia?",
+  //   answer:
+  //     "El fin último de una terapia psicológica es que no tengas dependencia del terapeuta. NO puedo decirte cuanto tiempo durara tu proceso porque eso es personal. Puede que poco, mucho, el objetivo es que llegue el momento en que dejes de necesitarlo y puedas volar con las herramientas que has ido adquiriendo en terapia.",
+  //   icon: <FaClock />,
+  // },
   {
     question: "¿Es confidencial todo lo que comparto en terapia?",
     answer:
       "¡Absolutamente! Tu intimidad es mi prioridad. El Código Deontológico garantiza que toda tu información se mantenga en estricta confidencialidad, salvo en situaciones donde tu vida o la de otros esté en riesgo.",
     icon: <FaUserShield />,
   },
-  {
-    question: "¿Cómo puedo agendar una cita?",
-    answer:
-      "Es muy fácil. Simplemente completa el formulario especificando dia y hora junto con el motivo de consulta. Una vez que te confirme la disponibilidad solicitada, es necesario realizar el pago por adelantado. Este paso es fundamental para asegurar tu lugar, ya que solo puedo agendarte una vez que el pago esté confirmado.",
-    icon: <FaCalendarCheck />,
-  },
+  // {
+  //   question: "¿Cómo puedo agendar una cita?",
+  //   answer:
+  //     "Es muy fácil. Simplemente completa el formulario especificando dia y hora junto con el motivo de consulta. Una vez que te confirme la disponibilidad solicitada, es necesario realizar el pago por adelantado. Este paso es fundamental para asegurar tu lugar, ya que solo puedo agendarte una vez que el pago esté confirmado.",
+  //   icon: <FaCalendarCheck />,
+  // },
   {
     question: "¿Tengo derecho a reembolso después de realizar el pago?",
     answer:

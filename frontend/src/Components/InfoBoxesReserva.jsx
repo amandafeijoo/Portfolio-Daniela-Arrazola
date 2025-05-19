@@ -60,7 +60,7 @@ const InfoBoxesReserva = () => {
     {
       icon: faVideo,
       title: "¿En qué plataforma realizamos la consulta online?",
-      text: "A través de zoom",
+      text: "A través de Zoom",
       bg: "rgba(255, 255, 255, 0.7)",
       color: "#654828",
     },

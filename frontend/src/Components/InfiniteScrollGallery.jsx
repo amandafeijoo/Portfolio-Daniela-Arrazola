@@ -108,7 +108,7 @@ const serviceImages = [
     path: "/service11",
   },
   {
-    src: "https://res.cloudinary.com/dhikp5azp/image/upload/f_auto,q_auto,w_300/v1746704690/12_m3faqv.png",
+    src: "https://res.cloudinary.com/dhikp5azp/image/upload/f_auto,q_auto,w_300/v1747651883/ICONOS_SERVICIOS_mn3a9q.png",
     path: "/service12",
   },
   {

@@ -70,11 +70,11 @@ const ImageTextEffect = () => {
             style={{
               width: "100%",
               height: isMobile ? "auto" : "100%",
-              maxHeight: isMobile ? "190px" : "620px", // ✅ controla altura según dispositivo
+              maxHeight: isMobile ? "190px" : "650px", // ✅ controla altura según dispositivo
               borderRadius: "15px",
               objectFit: "cover",
               border: "2px solid rgb(211, 190, 151)",
-              boxShadow: "0 0 9px rgba(0, 0, 0, 0.8)",
+              boxShadow:"0 4px 8px rgba(0,0,0,0.1)",
             }}
           >
             <source src={img("terapias.mp4")} type="video/mp4" />
@@ -219,26 +219,6 @@ Conductual, combinando herramientas prácticas y científicas. El objetivo:{" "}
               No tienes que estar “listo”, solo comprometido contigo mismo. Agenda una consulta
 conmigo y comienza a tomar el control de tu vida.
                </Typography>
-
-            <Typography
-              variant="body1"
-              sx={{
-                fontFamily: "Playfair Display, serif",
-                fontSize: { xs: "0.8rem", md: "1rem" },
-                textAlign: "justify",
-                mb: 2,
-              }}
-            >
-              <Box component="span" sx={{ fontWeight: 700 }}>
-                No tienes que estar “listo”
-              </Box>
-              , solo comprometido con tu proceso.{" "}
-              <Box component="span" sx={{ fontWeight: 700 }}>
-                Agenda una consulta conmigo
-              </Box>{" "}
-              y comienza a tomar el control de tu bienestar.
-            </Typography>
-
             {/* BOTÓN SOLO VISIBLE EN WEB */}
             <Box
               sx={{

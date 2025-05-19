@@ -11,6 +11,15 @@ import { useNavigate } from "react-router-dom";
 import "@fontsource/playfair-display";
 import WhatsAppContact from "./WhatsAppContact";
 
+
+const colors = {
+  greenLight:  '#ABC4AA',
+  green:       '#8AA398',
+  greenDark:   '#40513B',
+  beige:       '#EBDCC8',
+  brown:       '#8B7355',
+};
+
 const ContactContainer = styled(Box)`
   display: flex;
   flex-direction: column;
@@ -34,6 +43,8 @@ const ContactContainer = styled(Box)`
     padding: 30px;
   }
 `;
+
+
 
 /* 🔹 Ajuste para subir el icono de WhatsApp */
 const WhatsAppContainer = styled.div`
@@ -126,17 +137,45 @@ const VideoContainer = styled(Box)`
 
 const FAQBox = styled(Box)`
   position: absolute;
+  padding: 1rem;
+  border-radius: 0.5rem;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  display: grid;
+  gap: 0.5rem;
   top: 70%;
   left: 50%;
   transform: translateX(-50%);
-  background: white;
-  padding: 15px;
-  border-radius: 10px;
+  background: ${colors.beige};
+  color: rgb(56, 72, 59);
   border: 2px solid #d2b48c;
-  box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.6);
   z-index: 100;
   width: 250px;
   text-align: center;
+/* aquí estilo el button interno */
+button {
+    background-color:  ${colors.greenLight};
+    color:             ${colors.greenDark};
+    padding:           0.75rem 1.5rem;
+    border:            none;
+    border-radius:     0.5rem;
+    font-size:         1rem;
+    font-weight:       600;
+    cursor:            pointer;
+    transition:        background-color 0.2s ease, transform 0.1s ease;
+    box-shadow:        0 4px 8px rgba(0,0,0,0.1);
+  }
+
+  button:hover {
+    background-color: ${colors.green};
+    transform:        translateY(-2px);
+  }
+
+  button:active {
+    background-color: ${colors.greenDark};
+    color:            #fff;
+    transform:        translateY(0);
+  }
+
 
   @media (max-width: 768px) {
     width: 90%;
@@ -144,18 +183,20 @@ const FAQBox = styled(Box)`
   }
 `;
 
+
+
 const QuestionBubble = styled(Box)`
   position: absolute;
   top: -10px;
   left: 50%;
   transform: translateX(-50%);
-  background-color: rgba(255, 255, 255, 0.9);
+  background-color: rgba(230, 215, 201, 0.9);
   padding: 10px 15px;
   border-radius: 20px;
   text-align: center;
   font-family: "Playfair Display", serif;
   font-size: 1rem;
-  color: #4b3f2f;
+  color: rgb(47, 57, 48);
   box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2);
 `;
 

@@ -77,7 +77,7 @@ const Footer = () => {
         sx={{
           // Solo en xs (≤600px) más pequeño y con margen-top
           fontSize: { xs: "0.75rem", sm: "1rem" },
-          mt: { xs: 2, sm: 0 }, // 2*8px=16px en móvil, 0 en sm+
+          mt: { xs: 2, sm: 1 }, // 2*8px=16px en móvil, 0 en sm+
           textAlign: "center",
         }}
       >

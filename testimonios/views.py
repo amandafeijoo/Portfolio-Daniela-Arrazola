@@ -11,35 +11,42 @@ from reservas.models import Reserva
 from .serializers import TestimonioSerializer
 from rest_framework.permissions import IsAdminUser
 
-
 @api_view(["POST"])
 @parser_classes([MultiPartParser, FormParser])
 def crear_testimonio(request):
-    reserva_id = request.data.get("reserva_id")
     try:
-        reserva = Reserva.objects.get(id=reserva_id)
-    except Reserva.DoesNotExist:
-        return Response({"error": "Reserva no encontrada"}, status=status.HTTP_404_NOT_FOUND)
+        reserva_id = request.data.get("reserva_id")
+        try:
+            reserva = Reserva.objects.get(pk=reserva_id)
+        except Reserva.DoesNotExist:
+            return Response({"error": "Reserva no encontrada"},
+                            status=status.HTTP_404_NOT_FOUND)
 
-    # Verificar que el correo ingresado coincida con el de la reserva
-    email_cliente = request.data.get("email_cliente")
-    if email_cliente != reserva.email:
-        return Response({"error": "El correo no coincide con la reserva"}, status=status.HTTP_400_BAD_REQUEST)
+        # Validaciones previas
+        if request.data.get("email_cliente") != reserva.email:
+            return Response({"error": "El correo no coincide con la reserva"},
+                            status=status.HTTP_400_BAD_REQUEST)
 
-    # Evitar que se deje más de un testimonio por reserva
-    if Testimonio.objects.filter(reserva=reserva).exists():
-        return Response({"error": "Ya existe un testimonio para esta reserva"}, status=status.HTTP_400_BAD_REQUEST)
+        if Testimonio.objects.filter(reserva=reserva).exists():
+            return Response({"error": "Ya existe un testimonio para esta reserva"},
+                            status=status.HTTP_400_BAD_REQUEST)
 
-    data = request.data.copy()
-    data["reserva"] = reserva_id
+        # Ya que DRF con MultiPartParser mete los archivos en request.FILES,
+        # no hace falta copiar nada: pásalo tal cual y luego sobreescribe
+        # la relación reserva al guardar.
+        serializer = TestimonioSerializer(data=request.data)
+        if serializer.is_valid(raise_exception=True):
+            serializer.save(reserva=reserva)
+            return Response({"message": "Testimonio enviado correctamente"},
+                            status=status.HTTP_201_CREATED)
 
-    serializer = TestimonioSerializer(data=data)
-    if serializer.is_valid():
-        serializer.save()
-        return Response({"message": "Testimonio enviado correctamente"}, status=status.HTTP_201_CREATED)
-
-    print(serializer.errors)  # Para depuración
-    return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+    except Exception as e:
+        # Atrapa TODO tipo de excepción y devuélvelo JSON
+        print("Error interno creando testimonio:", e)
+        return Response(
+            {"error": "Error interno al procesar el testimonio"},
+            status=status.HTTP_500_INTERNAL_SERVER_ERROR
+        )
 
 
 # ///////////enviar testimonio desde admin front //////////////

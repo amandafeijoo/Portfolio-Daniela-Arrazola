@@ -85,8 +85,8 @@ const ReservaExitosa = () => {
             transform: "translateX(-50%)",
             backgroundColor: colors.greenLight,
             color: colors.greenDark,
-            px: { xs: 2, sm: 3 },          // menos padding horizontal en XS
-            py: { xs: 1, sm: 2 },          // menos padding vertical en XS
+            px: { xs: 1, sm: 3 },          // menos padding horizontal en XS
+            py: { xs: 0.5, sm: 2 },          // menos padding vertical en XS
             fontSize: { xs: "0.9rem", sm: "1rem" },
             fontWeight: 600,
             border: "none",

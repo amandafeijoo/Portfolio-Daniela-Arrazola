@@ -173,14 +173,16 @@ const Reserva = () => {
       });
       return;
     }
-
     if (!disponibilidadData.disponible) {
+      // Distinguimos si el backend nos mandó un mensaje de hora pasada
+      const msg =
+        disponibilidadData.error ||
+        "Ya existe una reserva para esta fecha y hora.";
+      const isPast = msg.toLowerCase().includes("pasado");
       await Swal.fire({
         icon: "error",
-        title: disponibilidadData.error || "Horario no disponible",
-        text: disponibilidadData.error
-          ? disponibilidadData.error
-          : "Ya existe una reserva para esta fecha y hora.",
+        title: isPast ? "Fecha u hora pasada" : "Horario no disponible",
+        text: msg,
         confirmButtonColor: "#c0a080",
       });
       return;
@@ -218,7 +220,6 @@ const Reserva = () => {
       });
     }
   };
-
 
   return (
     <>

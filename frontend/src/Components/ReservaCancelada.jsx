@@ -2,23 +2,31 @@ import { useEffect } from "react";
 import { Box, Button } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import "@fontsource/playfair-display";
-import { img } from "../utils/imagePath";
 
+const colors = {
+  greenLight: "#ABC4AA",
+  green: "#8AA398",
+  greenDark: "#40513B",
+};
 const ReservaCancelada = () => {
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
   const navigate = useNavigate();
 
+  // URL Cloudinary optimizada: formato y calidad automáticos, ancho máximo 800px
+  const imagenCancelada =
+    "https://res.cloudinary.com/dhikp5azp/image/upload/f_auto,q_auto,w_800/v1747667480/reserva-cancelada_axvpxq.png";
+
   return (
     <Box
       sx={{
         minHeight: "100vh",
-        backgroundColor: "#84978b", // 💚 Fondo en verde suave
+        backgroundColor: "#84978b",
         display: "flex",
         alignItems: "center",
         justifyContent: "center",
-        padding: 2,
+        p: 2,
       }}
     >
       <Box
@@ -27,17 +35,21 @@ const ReservaCancelada = () => {
           width: { xs: "90%", sm: "70%", md: "40%" },
           borderRadius: "20px",
           boxShadow: "0 10px 30px rgba(0,0,0,0.2)",
-          overflow: "hidden", // 🔐 Asegura que el botón no sobresalga
+          overflow: "hidden",
           textAlign: "center",
-          backgroundColor: "#fff",
+          backgroundColor: "#EBDCC8",
         }}
       >
-        <img
-          src={img("reservano.svg")}
+        <Box
+          component="img"
+          src={imagenCancelada}
           alt="Reserva Cancelada"
-          style={{
+          loading="lazy"
+          sx={{
             width: "100%",
             display: "block",
+            backgroundColor: "#EBDCC8",
+            border: "2px solid #d2b48c"
           }}
         />
 
@@ -51,17 +63,30 @@ const ReservaCancelada = () => {
         >
           <Button
             variant="contained"
+            onClick={() => navigate("/reserva")}
             sx={{
-              backgroundColor: "#4A6F5E",
-              px: 3,
-              fontFamily: "Playfair Display serif",
-              borderRadius: "12px",
-              boxShadow: "0 4px 10px rgba(0,0,0,0.2)",
+              backgroundColor: colors.greenLight,
+              color: colors.greenDark,
+              px: 3, // 1.5rem horizontal
+              py: 2, // 0.75rem vertical
+              fontSize: "1rem",
+              fontWeight: 600,
+              border: "none",
+              borderRadius: "0.5rem",
+              boxShadow: "0 4px 8px rgba(0,0,0,0.1)",
+              cursor: "pointer",
+              transition: "background-color 0.2s ease, transform 0.1s ease",
+
               "&:hover": {
-                backgroundColor: "#3b5e50",
+                backgroundColor: colors.green,
+                transform: "translateY(-2px)",
+              },
+              "&:active": {
+                backgroundColor: colors.greenDark,
+                color: "#fff",
+                transform: "translateY(0)",
               },
             }}
-            onClick={() => navigate("/reserva")}
           >
             Volver a reservar
           </Button>

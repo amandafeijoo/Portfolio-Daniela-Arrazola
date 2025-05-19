@@ -28,14 +28,13 @@ const ReservaExitosa = () => {
         display: "flex",
         alignItems: "center",
         justifyContent: "center",
-        p: { xs: 1, sm: 2 },
-
+        p: { xs: 1, sm: 2 },              // menos padding en móvil
       }}
     >
       <Box
         sx={{
           position: "relative",
-          width: { xs: "100%", sm: "80%", md: "50%", lg: "40%" },
+          width: { xs: "95%", sm: "70%", md: "40%" }, // más ancho en móvil
           borderRadius: "20px",
           boxShadow: "0 10px 30px rgba(0,0,0,0.2)",
           overflow: "hidden",
@@ -46,20 +45,17 @@ const ReservaExitosa = () => {
       >
         <Alert
           severity="info"
+          icon={<FaCheckCircle />}
           sx={{
-            position: "absolute",
-            top: { xs: 16, sm: 24 },
-            width: { xs: "90%", sm: "70%" },
-            mx: 2,
+            mt: { xs: 1, sm: 2 },           // menos margen arriba en XS
+            mx: { xs: 1, sm: 2 },
             fontFamily: "Playfair Display, serif",
-            fontSize: "17px",
+            fontSize: { xs: "0.85rem", sm: "17px" }, // texto más pequeño en XS
             borderRadius: "10px",
             display: "flex",
             alignItems: "center",
-            backgroundColor: "#ABC4AA",
-
+            backgroundColor: "#EBDCC8",
           }}
-          iconMapping={{ info: <FaCheckCircle /> }}
         >
           Hemos enviado un correo de confirmación de tu reserva. Revisa también
           tu carpeta de spam o correo no deseado. ✉️
@@ -74,53 +70,46 @@ const ReservaExitosa = () => {
             width: "100%",
             display: "block",
             borderRadius: "20px",
-            mt: 2,
+            mt: { xs: 1, sm: 2 },           // menos separación en XS
           }}
         />
 
-        <Box
+        <Button
+          variant="contained"
+          onClick={() => navigate("/reserva")}
           sx={{
             position: "absolute",
-            bottom: 62,
+            bottom: { xs: 16, sm: 62 },    // más abajo en desktop
             left: "50%",
             transform: "translateX(-50%)",
+            backgroundColor: colors.greenLight,
+            color: colors.greenDark,
+            px: { xs: 2, sm: 3 },          // menos padding horizontal en XS
+            py: { xs: 1, sm: 2 },          // menos padding vertical en XS
+            fontSize: { xs: "0.9rem", sm: "1rem" },
+            fontWeight: 600,
+            border: "none",
+            borderRadius: "0.5rem",
+            boxShadow: "0 4px 8px rgba(0,0,0,0.1)",
+            transition: "background-color 0.2s ease, transform 0.1s ease",
+
+            "&:hover": {
+              backgroundColor: colors.green,
+              transform: "translateY(-2px)",
+            },
+            "&:active": {
+              backgroundColor: colors.greenDark,
+              color: "#fff",
+              transform: "translateY(0)",
+            },
           }}
         >
-          <Button
-            variant="contained"
-            onClick={() => navigate("/reserva")}
-            sx={{
-              bottom: { xs: 16, sm: 32, md: 48 },
-
-              backgroundColor: colors.greenLight,
-              color: colors.greenDark,
-              px: { xs: 2, sm: 3 },
-            py: { xs: 1, sm: 1.25 },
-            fontSize: { xs: "0.9rem", sm: "1rem" },
-              fontWeight: 600,
-              border: "none",
-              borderRadius: "0.5rem",
-              boxShadow: "0 4px 8px rgba(0,0,0,0.1)",
-              cursor: "pointer",
-              transition: "background-color 0.2s ease, transform 0.1s ease",
-
-              "&:hover": {
-                backgroundColor: colors.green,
-                transform: "translateY(-2px)",
-              },
-              "&:active": {
-                backgroundColor: colors.greenDark,
-                color: "#fff",
-                transform: "translateY(0)",
-              },
-            }}
-          >
-            Volver a reservar
-          </Button>
-        </Box>
+          Volver a reservar
+        </Button>
       </Box>
     </Box>
   );
 };
 
 export default ReservaExitosa;
+

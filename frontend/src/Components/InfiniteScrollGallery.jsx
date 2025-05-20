@@ -34,9 +34,9 @@ const StyledContainer = styled(Box)`
     padding: 20px;
     margin: 0 auto;
     max-width: 95%;
-    margin-top: -170px;
-    margin-bottom:-120px;
-    min-height: 500px; /* ya lo tienes, pero podrías subirlo si quieres */
+    margin-top: -40px;
+    margin-bottom:0px;
+    min-height: 550px; /* ya lo tienes, pero podrías subirlo si quieres */
   }
 `;
 

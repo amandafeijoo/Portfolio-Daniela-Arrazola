@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { useSearchParams, useNavigate } from "react-router-dom";
 import { img } from "../utils/imagePath";
+import { API_URL } from "../utils/config";
 import {
   TextField,
   Button,
@@ -27,11 +28,10 @@ const FormContainer = styled(Paper)`
 
   @media (max-width: 600px) {
     background: transparent; /* 👈 Se elimina el fondo en móviles */
-    box-shadow: none;      
+    box-shadow: none;
     padding: 15px;
   }
 `;
-
 
 const StyledButton = styled(Button)`
   background-color: #b07241 !important;
@@ -74,7 +74,7 @@ const TestimonialForm = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
+  
     if (!reservaId) {
       Swal.fire({
         icon: "error",
@@ -84,7 +84,7 @@ const TestimonialForm = () => {
       });
       return;
     }
-
+  
     if (!consentimiento) {
       Swal.fire({
         icon: "error",
@@ -94,8 +94,9 @@ const TestimonialForm = () => {
       });
       return;
     }
-
+  
     try {
+      // Preparamos el FormData
       const formData = new FormData();
       formData.append("reserva_id", reservaId);
       formData.append("nombre_cliente", nombre);
@@ -105,16 +106,18 @@ const TestimonialForm = () => {
       if (imagen) {
         formData.append("imagen", imagen);
       }
-
+  
+      // Hacemos la petición
       const response = await fetch(
-        `${import.meta.env.VITE_API_URL}/api/testimonios/crear/`,
+        `${API_URL}/api/testimonios/crear/`,
         {
           method: "POST",
           body: formData,
         }
       );
-
+  
       if (response.ok) {
+        // Éxito
         await Swal.fire({
           icon: "success",
           title: "¡Gracias por tu testimonio!",
@@ -122,18 +125,26 @@ const TestimonialForm = () => {
           timer: 3000,
           confirmButtonColor: "#b07241",
         });
-
+  
         // Limpiar campos
         setNombre("");
         setEmail("");
         setMensaje("");
         setImagen(null);
         setConsentimiento(false);
-
+  
         // Redirigir al inicio
         navigate("/");
       } else {
-        const errorData = await response.json();
+        // Intentamos leer el JSON de error
+        let errorData = {};
+        try {
+          errorData = await response.json();
+        } catch (parseErr) {
+          console.warn("No vino JSON en la respuesta de error:", parseErr);
+        }
+  
+        // Mostramos el mensaje adecuado
         if (errorData.error === "Ya existe un testimonio para esta reserva") {
           Swal.fire({
             icon: "error",
@@ -152,13 +163,14 @@ const TestimonialForm = () => {
           Swal.fire({
             icon: "error",
             title: "Error",
-            text: "Hubo un problema al enviar el testimonio.",
+            text: errorData.error || "Hubo un problema al enviar el testimonio.",
             confirmButtonColor: "#b07241",
           });
         }
       }
-    } catch (error) {
-      console.error("Error de conexión:", error);
+    } catch (networkError) {
+      // Error de red o de conexión
+      console.error("Error de conexión:", networkError);
       Swal.fire({
         icon: "error",
         title: "Error de Conexión",
@@ -167,6 +179,7 @@ const TestimonialForm = () => {
       });
     }
   };
+  
 
   return (
     <Box
@@ -176,9 +189,9 @@ const TestimonialForm = () => {
         alignItems: "center",
         minHeight: "100vh",
         backgroundImage: {
-      xs: "none", // 👈 elimina la imagen en móviles
-      sm: `url(${img("contact.svg")})`,
-    },
+          xs: "none", // 👈 elimina la imagen en móviles
+          sm: `url(${img("contact.svg")})`,
+        },
         backgroundSize: "cover",
         backgroundPosition: "center",
         fontFamily: "'Playfair Display', serif",

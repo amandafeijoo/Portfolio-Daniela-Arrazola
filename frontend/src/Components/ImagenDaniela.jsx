@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import { Button, Box, Typography } from "@mui/material";
-import { motion } from "framer-motion";
 import { useNavigate } from "react-router-dom";
+import { motion } from "framer-motion";
 import styled from "styled-components";
 import "@fontsource/playfair-display";
 // import { img } from "../utils/imagePath";
@@ -251,22 +251,33 @@ const ImagenDaniela = () => {
             <Button
               variant="contained"
               component={motion.button}
-              whileHover={!isMobile ? { scale: 1.1 } : {}}
-              whileTap={!isMobile ? { scale: 0.95 } : {}}
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}              onClick={() => navigate("/full-acerca")}
               sx={{
-                backgroundColor: "rgb(211, 190, 151)",
+                backgroundColor: "  rgb(211, 190, 151)",
                 color: "rgb(92, 116, 101)",
+                fontSize: { xs: "0.8rem", md: "1rem" },
                 fontFamily: "Playfair Display",
-                textTransform: "none",
-                borderRadius: "30px",
-                border: "2px solid rgb(120, 150, 131)",
-                fontSize: { xs: "1rem", sm: "1rem" },
+                fontWeight: "500", // texto beige
                 px: { xs: 2, sm: 3 },
                 py: { xs: 1.2, sm: 1 },
+                borderRadius: "8px",
+                textTransform: "none", // para que respete las mayúsculas y el acento
+                letterSpacing: "0.7px",
+                border: "2px solid rgb(120, 150, 131)",
+                boxShadow: "0 4px 6px rgba(0, 0, 0, 0.1)",
+                transition: "all 0.3s ease-in-out",
+                "&:hover": {
+                  backgroundColor: "#6F8979",
+                  boxShadow: "0 6px 10px rgba(0, 0, 0, 0.15)",
+                  color: "#f5eedc",                },
+                "&:active": {
+                  transform: "scale(0.98)",
+                },
               }}
-              onClick={() => navigate("/full-acerca")}
+              // Efecto hover con tu marrón acento
             >
-              Leer más
+              LEER MÁS
             </Button>
           </Box>
         </ContenedorPrincipal2>

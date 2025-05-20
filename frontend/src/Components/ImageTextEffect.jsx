@@ -31,8 +31,8 @@ const ImageTextEffect = () => {
         display: "flex",
         justifyContent: "center",
         // ─── Aquí metemos el colchón ───
-      pb: { xs: "220px", md: 0 },  // 120px en móvil, 0 en escritorio
-    }}
+        pb: { xs: "220px", md: 0 }, // 120px en móvil, 0 en escritorio
+      }}
     >
       <Box
         sx={{
@@ -74,13 +74,13 @@ const ImageTextEffect = () => {
               borderRadius: "15px",
               objectFit: "cover",
               border: "2px solid rgb(211, 190, 151)",
-              boxShadow:"0 4px 8px rgba(0,0,0,0.1)",
+              boxShadow: "0 4px 8px rgba(0,0,0,0.1)",
             }}
           >
             <source src={img("terapias.mp4")} type="video/mp4" />
           </motion.video>
 
-          {/* BOTÓN SOLO VISIBLE EN MÓVIL */}
+          {/* BOTÓN SOLO VISIBLE EN MÓVIL
           <Box
             sx={{
               position: "absolute",
@@ -103,9 +103,10 @@ const ImageTextEffect = () => {
                 fontSize: { xs: "0.9rem", md: "1rem" },
                 fontFamily: "Playfair Display",
                 fontWeight: "500",
-                padding: "8px 18px",
+                px: { xs: 2, sm: 3 },
+                py: { xs: 1.2, sm: 1 },               
                 textTransform: "none",
-                borderRadius: "30px",
+                borderRadius: "10px",
                 border: "2px solid rgb(211, 190, 151)",
                 boxShadow: "0 4px 6px rgba(0, 0, 0, 0.1)",
                 transition: "all 0.3s ease-in-out",
@@ -121,7 +122,7 @@ const ImageTextEffect = () => {
             >
               RESERVA
             </Button>
-          </Box>
+          </Box> */}
         </motion.div>
 
         {/* Contenedor del texto */}
@@ -185,13 +186,12 @@ const ImageTextEffect = () => {
                 mb: 2,
               }}
             >
-              La terapia es mucho más que resolver problemas: es un espacio seguro para
-              comprender lo que necesitas.{" "}
+              La terapia es mucho más que resolver problemas: es un espacio
+              seguro para comprender lo que necesitas.{" "}
               <Box component="span" sx={{ fontWeight: 700 }}>
-              Cada proceso es único,
+                Cada proceso es único,
               </Box>
-              y mi compromiso es
-acompañarte respetando tu propio ritmo.
+              y mi compromiso es acompañarte respetando tu propio ritmo.
             </Typography>
 
             <Typography
@@ -203,22 +203,28 @@ acompañarte respetando tu propio ritmo.
                 mb: 2,
               }}
             >
-            Imagina tu bienestar como un rompecabezas: tus pensamientos, emociones,
-              entorno, historia de vida y hábitos se conectan para influir en cómo te sientes.<br/><br/>
+              Imagina tu bienestar como un rompecabezas: tus pensamientos,
+              emociones, entorno, historia de vida y hábitos se conectan para
+              influir en cómo te sientes.
+              <br />
+              <br />
               Trabajo desde un
               <Box component="span" sx={{ fontWeight: 700 }}>
-              {" "}enfoque integrador,{" "}
+                {" "}
+                enfoque integrador,{" "}
               </Box>
-              con base en la Terapia Cognitivo
-Conductual, combinando herramientas prácticas y científicas. El objetivo:{" "}
+              con base en la Terapia Cognitivo Conductual, combinando
+              herramientas prácticas y científicas. El objetivo:{" "}
               <Box component="span" sx={{ fontWeight: 700 }}>
-              ayudarte
-              a entender lo que te pasa              </Box>
-              y brindarte estrategias concretas para sentirte mejor. 
-              <br/><br/>
-              No tienes que estar “listo”, solo comprometido contigo mismo. Agenda una consulta
-conmigo y comienza a tomar el control de tu vida.
-               </Typography>
+                ayudarte a entender lo que te pasa{" "}
+              </Box>
+              y brindarte estrategias concretas para sentirte mejor.
+              <br />
+              <br />
+              No tienes que estar “listo”, solo comprometido contigo mismo.
+              Agenda una consulta conmigo y comienza a tomar el control de tu
+              vida.
+            </Typography>
             {/* BOTÓN SOLO VISIBLE EN WEB */}
             <Box
               sx={{
@@ -239,9 +245,10 @@ conmigo y comienza a tomar el control de tu vida.
                   fontSize: { xs: "0.9rem", md: "1rem" },
                   fontFamily: "Playfair Display",
                   fontWeight: "500",
-                  padding: "8px 18px",
+                  px: { xs: 2, sm: 3 },
+                  py: { xs: 1.2, sm: 1 },
                   textTransform: "none",
-                  borderRadius: "30px",
+                  borderRadius: "10px",
                   border: "2px solid rgb(211, 190, 151)",
                   boxShadow: "0 4px 6px rgba(0, 0, 0, 0.1)",
                   transition: "all 0.3s ease-in-out",

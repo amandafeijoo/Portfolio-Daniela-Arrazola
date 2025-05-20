@@ -222,10 +222,14 @@ minHeight: isMobile ? "145px" : isTablet ? "300px" : "260px",
         <Button
           variant="contained"
           sx={{
-            backgroundColor: "#4A6F5E",
+            backgroundColor:" #557c70",
+            color: "#f5eedc",
+            fontWeight: "500",
+            border: "2px solid rgb(211, 190, 151)",
+
             px: { xs: 3, sm: 4 },
             py: { xs: 1, sm: 1.5 },
-            borderRadius: "25px",
+            borderRadius: "10px",
             fontFamily: "Playfair Display",
             fontSize: { xs: "0.9rem", sm: "1.1rem" },
             boxShadow: "0 4px 10px rgba(0,0,0,0.2)",

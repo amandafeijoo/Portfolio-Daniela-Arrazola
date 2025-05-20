@@ -122,6 +122,11 @@ const desktopSizes = [
   { width: "180px", height: "260px" },
   { width: "250px", height: "350px" },
 ];
+
+const mobileSizes = [
+  { width: "160px", height: "200px" },
+  { width: "180px", height: "220px" },
+ ];
 const InfiniteScrollGallery = () => {
   const navigate = useNavigate();
   const theme = useTheme();
@@ -228,10 +233,11 @@ const InfiniteScrollGallery = () => {
           {serviceImages.concat(serviceImages).map((img, idx) => {
             // 1) calculamos tamaño de la tarjeta
             const size = isMobile
-              ? { width: "120px", height: "140px" }
-              : isTablet
-              ? { width: "160px", height: "180px" }
-              : desktopSizes[idx % 2];
+           // alterna entre los dos tamaños definidos para móvil
+            ? mobileSizes[idx % mobileSizes.length]
+             : isTablet
+             ? { width: "160px", height: "180px" }
+            : desktopSizes[idx % desktopSizes.length];
 
             // 2) calculamos ancho real en Cloudinary
             const base = parseInt(size.width, 10);

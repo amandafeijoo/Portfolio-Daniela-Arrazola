@@ -63,32 +63,33 @@ def crear_testimonio(request):
 @permission_classes([IsAdminUser])
 def enviar_correo_testimonio(request):
     reserva_id = request.data.get("reserva_id")
-
     try:
         reserva = Reserva.objects.get(id=reserva_id)
     except Reserva.DoesNotExist:
         return Response({"error": "Reserva no encontrada"}, status=status.HTTP_404_NOT_FOUND)
 
-    enlace_testimonio = f"http://localhost:5173/testimonios?reserva_id={reserva.id}"
+    # Usa aquí tu variable de entorno
+    base = settings.FRONTEND_URL.rstrip("/")
+    enlace_testimonio = f"{base}/testimonios?reserva_id={reserva.id}"
 
     mensaje = f"""
-    Hola {reserva.nombre_completo},
+Hola {reserva.nombre_completo},
 
-    Espero que estés bien. Ayer tuviste una consulta y me gustaría saber tu experiencia.
+Espero que estés bien. Ayer tuviste una consulta y me gustaría saber tu experiencia.
 
-    Si deseas compartir tu testimonio, puedes hacerlo en el siguiente enlace:
+Si deseas compartir tu testimonio, puedes hacerlo en el siguiente enlace:
 
-    👉 {enlace_testimonio}
+👉 {enlace_testimonio}
 
-    Tu opinión me ayuda a mejorar y a que otros conozcan mi trabajo.
+Tu opinión me ayuda a mejorar y a que otros conozcan mi trabajo.
 
-    ¡Gracias por tu tiempo y confianza!
+¡Gracias por tu tiempo y confianza!
 
-    Un cordial saludo,
+Un cordial saludo,
 
-    Daniela Arrazola  
-    Psicóloga Sanitaria
-    """
+Daniela Arrazola  
+Psicóloga Sanitaria
+"""
 
     send_mail(
         "Comparte tu experiencia - Daniela Arrazola Psicóloga Sanitaria",
@@ -97,7 +98,6 @@ def enviar_correo_testimonio(request):
         [reserva.email],
         fail_silently=False,
     )
-
     return Response({"message": "Correo enviado correctamente"}, status=status.HTTP_200_OK)
 
 @api_view(["GET"])

@@ -89,6 +89,9 @@ Un cordial saludo,
 
 Daniela Arrazola  
 Psicóloga Sanitaria
+ "📧 daniela@arrazolapsicologia.com\n"
+ "📞 WhatsApp: +47 983 15 132"
+
 """
 
     send_mail(

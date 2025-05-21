@@ -41,7 +41,9 @@ Tu opinión me ayuda a mejorar y a que otros conozcan mi trabajo.
 Un cordial saludo,
 
 **Daniela Arrazola**  
-Psicóloga Sanitaria  
+Psicóloga Sanitaria
+"📧 daniela@arrazolapsicologia.com\n"
+"📞 WhatsApp: +47 983 15 132"  
 """
 
         send_mail(

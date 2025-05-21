@@ -22,7 +22,9 @@ def enviar_email_testimonio(email_cliente, nombre_cliente, reserva_id):
     Un cordial saludo,
     
     Daniela Arrázola 
-    Psicóloga Sanitaria  
+    Psicóloga Sanitaria
+     "📧 daniela@arrazolapsicologia.com\n"
+    "📞 WhatsApp: +47 983 15 132"  
     """
 
     send_mail(
@@ -55,7 +57,7 @@ def enviar_email_confirmacion_reserva(reserva):
         "Atentamente,\n\n"
         "Daniela Arrázola\n"
         "Psicóloga Sanitaria\n"
-        "📧 Correo: danielaarrazolabenitez@gmail.com\n"
+        "📧 Correo: daniela@arrazolapsicologia.com\n"
         "📞 WhatsApp: +47 983 15 132\n"
     )
 
@@ -85,7 +87,7 @@ def enviar_email_confirmacion_reserva(reserva):
         "📬 Nueva reserva recibida",
         mensaje_psicologa,
         settings.EMAIL_HOST_USER,
-        ["danielaarrazolabenitez@gmail.com"],
+        ["daniela@arrazolapsicologia.com"],
         fail_silently=False,
     )
 
@@ -103,7 +105,7 @@ def enviar_email_cancelacion_reserva(reserva):
         "Atentamente,\n"
         "Daniela Arrázola\n"
         "Psicóloga Sanitaria\n"
-        "📧 danielaarrazolabenitez@gmail.com\n"
+        "📧 daniela@arrazolapsicologia.com\n"
         "📞 WhatsApp: +47 983 15 132"
     )
 

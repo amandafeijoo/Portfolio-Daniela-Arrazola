@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { img } from "../utils/imagePath";
 import { API_URL } from "../utils/config";
 import {
   Box,
@@ -29,11 +28,19 @@ import Swal from "sweetalert2";
 import TestimoniosAdmin from "./TestimoniosAdmin";
 import CalendarioReservas from "./CalendarioReservas";
 
+
+const cloudinaryBg =
+
+  "https://res.cloudinary.com/dhikp5azp/image/upload/" +
+  "f_auto,q_auto,w_1200/" +
+  "v1747847099/1_xolwob.png";
+
+
 const DashboardContainer = styled(Box)`
   padding: 40px;
   max-width: 1200px;
   margin: auto;
-  background-image: url(${img("adminfoto.svg")});
+  background-image: url("${cloudinaryBg}");
   background-size: cover;
   background-position: center;
   border-radius: 15px;

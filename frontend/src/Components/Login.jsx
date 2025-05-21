@@ -1,3 +1,5 @@
+// src/components/Login.jsx
+
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { API_URL } from "../utils/config";
@@ -14,7 +16,13 @@ import Swal from "sweetalert2";
 import { motion } from "framer-motion";
 import styled from "styled-components";
 import "@fontsource/playfair-display";
-import { img } from "../utils/imagePath";
+
+
+// URL optimizada de Cloudinary
+const cloudinaryBg =
+  "https://res.cloudinary.com/dhikp5azp/image/upload/" +
+  "f_auto,q_auto,w_800/" +
+  "v1745570838/Historia_de_Instagram_Lista_de_Precios_de_Joyas_Elegante_Negro_y_Beige_V%C3%ADdeo_qxuzag_di9opo.jpg";
 
 // 📌 Contenedor principal
 const LoginContainer = styled(Box)`
@@ -22,7 +30,7 @@ const LoginContainer = styled(Box)`
   justify-content: center;
   align-items: center;
   height: 100vh;
-  background-image: url(${img("contact.svg")});
+  background-image: url("${cloudinaryBg}");
   background-size: cover;
   background-position: center;
   background-color: rgba(232, 221, 206, 0.9);
@@ -39,6 +47,7 @@ const LoginBox = styled(motion.div)`
   border: 2px solid #b07241;
 `;
 
+// Botón estilizado
 const StyledButton = styled(Button)`
   background-color: #b07241;
   color: #fff;
@@ -47,7 +56,6 @@ const StyledButton = styled(Button)`
   padding: 12px;
   border-radius: 10px;
   transition: all 0.3s ease;
-
   &:hover {
     background-color: #8c6b52;
   }
@@ -56,22 +64,19 @@ const StyledButton = styled(Button)`
 const Login = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-  const [showPassword, setShowPassword] = useState(false); // Estado para alternar visibilidad de contraseña
+  const [showPassword, setShowPassword] = useState(false);
   const navigate = useNavigate();
 
   const handleTogglePassword = () => {
-    setShowPassword(!showPassword);
+    setShowPassword((show) => !show);
   };
 
   const handleLogin = async (e) => {
     e.preventDefault();
-
     try {
       const response = await fetch(`${API_URL}/api/users/login/`, {
         method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ username, password }),
       });
 
@@ -79,11 +84,8 @@ const Login = () => {
         const data = await response.json();
         localStorage.setItem("accessToken", data.access);
         localStorage.setItem("refreshToken", data.refresh);
-
-        // Verificar si el usuario es admin antes de redirigir
         if (username === "psicoarrazola") {
           localStorage.setItem("role", "admin");
-
           Swal.fire({
             icon: "success",
             title: "¡Bienvenido!",
@@ -91,10 +93,7 @@ const Login = () => {
             showConfirmButton: false,
             timer: 2000,
           });
-
-          setTimeout(() => {
-            navigate("/admin-dashboard");
-          }, 2000);
+          setTimeout(() => navigate("/admin-dashboard"), 2000);
         } else {
           Swal.fire({
             icon: "warning",
@@ -128,59 +127,39 @@ const Login = () => {
       >
         <Typography
           variant="h4"
-          sx={{
-            fontFamily: "Playfair Display",
-            fontWeight: "bold",
-            color: "#4b3f2f",
-          }}
+          sx={{ fontFamily: "Playfair Display", fontWeight: "bold", color: "#4b3f2f" }}
         >
           Administrador
         </Typography>
         <Typography
           variant="body1"
-          sx={{
-            marginBottom: "20px",
-            fontFamily: "Playfair Display",
-            color: "#654828",
-          }}
+          sx={{ mb: 2, fontFamily: "Playfair Display", color: "#654828" }}
         >
           Ingrese sus credenciales
         </Typography>
 
         <form onSubmit={handleLogin}>
-          {/* Campo de Usuario */}
           <TextField
             fullWidth
             label="Usuario"
             variant="outlined"
             sx={{
-              marginBottom: "15px",
+              mb: 2,
               background: "#fff",
               borderRadius: "5px",
-              "& .MuiInputBase-input": {
-                fontSize: { xs: "0.9rem", sm: "1rem" },
-              },
+              "& .MuiInputBase-input": { fontSize: { xs: "0.9rem", sm: "1rem" } },
             }}
             value={username}
             onChange={(e) => setUsername(e.target.value)}
-            inputProps={{
-              autoCapitalize: "none",
-              autoCorrect: "off",
-              spellCheck: false,
-            }}
+            inputProps={{ autoCapitalize: "none", autoCorrect: "off", spellCheck: false }}
           />
 
-          {/* Campo de Contraseña con Ícono de Visibilidad */}
           <TextField
             fullWidth
             label="Contraseña"
-            type={showPassword ? "text" : "password"} // Alterna entre texto y contraseña
+            type={showPassword ? "text" : "password"}
             variant="outlined"
-            sx={{
-              marginBottom: "20px",
-              background: "#fff",
-              borderRadius: "5px",
-            }}
+            sx={{ mb: 3, background: "#fff", borderRadius: "5px" }}
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             InputProps={{
@@ -204,3 +183,4 @@ const Login = () => {
 };
 
 export default Login;
+

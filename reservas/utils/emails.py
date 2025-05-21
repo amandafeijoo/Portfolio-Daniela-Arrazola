@@ -23,8 +23,8 @@ def enviar_email_testimonio(email_cliente, nombre_cliente, reserva_id):
     
     Daniela Arrázola 
     Psicóloga Sanitaria
-     "📧 daniela@arrazolapsicologia.com\n"
-    "📞 WhatsApp: +47 983 15 132"  
+    📧 daniela@arrazolapsicologia.com\n"
+    📞 WhatsApp: +47 983 15 132
     """
 
     send_mail(

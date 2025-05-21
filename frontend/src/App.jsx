@@ -7,8 +7,6 @@ import HeroSocialLinks from './Components/HeroSocialLinks';
 import CookieConsent from "react-cookie-consent";
 import "@fontsource/playfair-display";
 
-
-
 // Importación de componentes con Lazy Loading
 const Home = lazy(() => import("./Components/Home"));
 const AcercaDe = lazy(() => import("./Components/AcercaDe"));

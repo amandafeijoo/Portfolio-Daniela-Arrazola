@@ -1,6 +1,7 @@
+// src/components/TestimonialForm.jsx
+
 import { useState, useEffect } from "react";
 import { useSearchParams, useNavigate } from "react-router-dom";
-import { img } from "../utils/imagePath";
 import { API_URL } from "../utils/config";
 import {
   TextField,
@@ -27,7 +28,7 @@ const FormContainer = styled(Paper)`
   text-align: center;
 
   @media (max-width: 600px) {
-    background: transparent; /* 👈 Se elimina el fondo en móviles */
+    background: transparent;
     box-shadow: none;
     padding: 15px;
   }
@@ -48,13 +49,14 @@ const TestimonialForm = () => {
   const [reservaId, setReservaId] = useState(null);
   const [searchParams] = useSearchParams();
   const [consentimiento, setConsentimiento] = useState(false);
-
   const navigate = useNavigate();
 
+  // Scroll to top on mount
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
 
+  // Leer reserva_id de la query
   useEffect(() => {
     const id = searchParams.get("reserva_id");
     if (id) {
@@ -74,50 +76,38 @@ const TestimonialForm = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-  
     if (!reservaId) {
-      Swal.fire({
+      return Swal.fire({
         icon: "error",
         title: "Error",
         text: "No se encontró una reserva válida.",
         confirmButtonColor: "#b07241",
       });
-      return;
     }
-  
     if (!consentimiento) {
-      Swal.fire({
+      return Swal.fire({
         icon: "error",
         title: "Consentimiento requerido",
         text: "Debes aceptar los términos para enviar el testimonio.",
         confirmButtonColor: "#b07241",
       });
-      return;
     }
-  
+
     try {
-      // Preparamos el FormData
       const formData = new FormData();
       formData.append("reserva_id", reservaId);
       formData.append("nombre_cliente", nombre);
       formData.append("email_cliente", email);
       formData.append("mensaje", mensaje);
       formData.append("consentimiento", consentimiento);
-      if (imagen) {
-        formData.append("imagen", imagen);
-      }
-  
-      // Hacemos la petición
-      const response = await fetch(
-        `${API_URL}/api/testimonios/crear/`,
-        {
-          method: "POST",
-          body: formData,
-        }
-      );
-  
+      if (imagen) formData.append("imagen", imagen);
+
+      const response = await fetch(`${API_URL}/api/testimonios/crear/`, {
+        method: "POST",
+        body: formData,
+      });
+
       if (response.ok) {
-        // Éxito
         await Swal.fire({
           icon: "success",
           title: "¡Gracias por tu testimonio!",
@@ -125,52 +115,27 @@ const TestimonialForm = () => {
           timer: 3000,
           confirmButtonColor: "#b07241",
         });
-  
-        // Limpiar campos
+        // limpiar
         setNombre("");
         setEmail("");
         setMensaje("");
         setImagen(null);
         setConsentimiento(false);
-  
-        // Redirigir al inicio
         navigate("/");
       } else {
-        // Intentamos leer el JSON de error
-        let errorData = {};
-        try {
-          errorData = await response.json();
-        } catch (parseErr) {
-          console.warn("No vino JSON en la respuesta de error:", parseErr);
-        }
-  
-        // Mostramos el mensaje adecuado
-        if (errorData.error === "Ya existe un testimonio para esta reserva") {
-          Swal.fire({
-            icon: "error",
-            title: "Testimonio ya existente",
-            text: "Ya has dejado un testimonio. No se pueden dejar 2 testimonios.",
-            confirmButtonColor: "#b07241",
-          });
-        } else if (errorData.error === "El correo no coincide con la reserva") {
-          Swal.fire({
-            icon: "error",
-            title: "Correo no registrado",
-            text: "El correo proporcionado no coincide con la reserva.",
-            confirmButtonColor: "#b07241",
-          });
-        } else {
-          Swal.fire({
-            icon: "error",
-            title: "Error",
-            text: errorData.error || "Hubo un problema al enviar el testimonio.",
-            confirmButtonColor: "#b07241",
-          });
-        }
+        const errorData = await response.json().catch(() => ({}));
+        const msg =
+          errorData.error ||
+          "Hubo un problema al enviar el testimonio.";
+        Swal.fire({
+          icon: "error",
+          title: "Error",
+          text: msg,
+          confirmButtonColor: "#b07241",
+        });
       }
-    } catch (networkError) {
-      // Error de red o de conexión
-      console.error("Error de conexión:", networkError);
+    } catch (err) {
+      console.error(err);
       Swal.fire({
         icon: "error",
         title: "Error de Conexión",
@@ -179,7 +144,12 @@ const TestimonialForm = () => {
       });
     }
   };
-  
+
+  // URL optimizada de Cloudinary
+  const cloudinaryBg =
+    "https://res.cloudinary.com/dhikp5azp/image/upload/" +
+    "f_auto,q_auto,w_800/" +
+    "v1745570838/Historia_de_Instagram_Lista_de_Precios_de_Joyas_Elegante_Negro_y_Beige_V%C3%ADdeo_qxuzag_di9opo.jpg";
 
   return (
     <Box
@@ -189,8 +159,8 @@ const TestimonialForm = () => {
         alignItems: "center",
         minHeight: "100vh",
         backgroundImage: {
-          xs: "none", // 👈 elimina la imagen en móviles
-          sm: `url(${img("contact.svg")})`,
+          xs: "none",
+          sm: `url("${cloudinaryBg}")`,
         },
         backgroundSize: "cover",
         backgroundPosition: "center",
@@ -201,11 +171,7 @@ const TestimonialForm = () => {
         <Typography
           variant="h5"
           fontWeight="bold"
-          sx={{
-            mb: 2,
-            color: "#4b3f2f",
-            fontFamily: "'Playfair Display', serif",
-          }}
+          sx={{ mb: 2, color: "#4b3f2f" }}
         >
           Deja tu Testimonio
         </Typography>
@@ -215,7 +181,7 @@ const TestimonialForm = () => {
             fullWidth
             value={nombre}
             onChange={(e) => setNombre(e.target.value)}
-            sx={{ mb: 2, fontFamily: "'Playfair Display', serif" }}
+            sx={{ mb: 2 }}
             required
           />
           <TextField
@@ -224,7 +190,7 @@ const TestimonialForm = () => {
             fullWidth
             value={email}
             onChange={(e) => setEmail(e.target.value)}
-            sx={{ mb: 2, fontFamily: "'Playfair Display', serif" }}
+            sx={{ mb: 2 }}
             required
           />
           <TextField
@@ -234,30 +200,24 @@ const TestimonialForm = () => {
             rows={4}
             value={mensaje}
             onChange={(e) => setMensaje(e.target.value)}
-            sx={{ mb: 2, fontFamily: "'Playfair Display', serif" }}
+            sx={{ mb: 2 }}
             required
           />
+
+          {/* Input de imagen */}
           <input
             type="file"
             accept="image/png, image/jpeg"
             onChange={handleFileChange}
             style={{ marginBottom: "15px" }}
           />
-          <Typography
-            variant="body2"
-            sx={{ mb: 2, fontFamily: "'Playfair Display', serif" }}
-          >
+          <Typography variant="body2" sx={{ mb: 2 }}>
             Sube tu foto (*opcional)
           </Typography>
 
+          {/* Preview de imagen */}
           {imagen && (
-            <Box
-              sx={{
-                mb: 2,
-                textAlign: "center",
-                fontFamily: "'Playfair Display', serif",
-              }}
-            >
+            <Box sx={{ mb: 2, textAlign: "center" }}>
               <Typography variant="body2">Imagen seleccionada:</Typography>
               <img
                 src={URL.createObjectURL(imagen)}
@@ -268,6 +228,7 @@ const TestimonialForm = () => {
                   margin: "10px auto",
                   display: "block",
                 }}
+                loading="lazy"
               />
               <Button
                 variant="outlined"
@@ -278,12 +239,13 @@ const TestimonialForm = () => {
               </Button>
             </Box>
           )}
+
           <FormControl required sx={{ alignItems: "flex-start", mt: 2 }}>
             <FormControlLabel
               control={
                 <Checkbox
                   name="consentimiento"
-                  sx={{ color: " #8fa99e" }}
+                  sx={{ color: "#8fa99e" }}
                   checked={consentimiento}
                   onChange={handleConsentimientoChange}
                 />
@@ -293,27 +255,17 @@ const TestimonialForm = () => {
                   variant="body2"
                   sx={{
                     color: "#4b3f2f",
-                    fontFamily: "'Playfair Display', serif",
-                    textAlign: "justify",
                     fontSize: "14px",
-                    lineHeight: "1.5",
+                    lineHeight: 1.5,
                   }}
                 >
-                  He leído y acepto que mi testimonio, junto con mi nombre y, si
-                  lo incluyo, mi fotografía, pueda ser publicado en la web{" "}
-                  <strong>danielapsicologia.com</strong>. Entiendo que puedo
-                  solicitar su eliminación en cualquier momento.
+                  He leído y acepto que mi testimonio, junto con mi nombre
+                  y, si lo incluyo, mi fotografía, pueda ser publicado en la
+                  web <strong>danielapsicologia.com</strong>.
                 </Typography>
               }
             />
-            <FormHelperText
-              sx={{
-                fontFamily: "'Playfair Display', serif",
-                fontSize: "12px",
-                color: "#4b3f2f",
-                pl: 4.5,
-              }}
-            >
+            <FormHelperText sx={{ pl: 4.5, fontSize: "12px" }}>
               (*Campo obligatorio)
             </FormHelperText>
           </FormControl>
@@ -328,3 +280,4 @@ const TestimonialForm = () => {
 };
 
 export default TestimonialForm;
+

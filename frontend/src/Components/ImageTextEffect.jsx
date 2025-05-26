@@ -26,20 +26,27 @@ const ImageTextEffect = () => {
   return (
     <Box
       sx={{
-        width: "100%", // 🖐️ ancho total pantalla
+        width: "100%",
         backgroundColor: "#f5eedc",
         display: "flex",
         justifyContent: "center",
-        // ─── Aquí metemos el colchón ───
-        pb: { xs: "220px", md: 0 }, // 120px en móvil, 0 en escritorio
+        // ───  colchón ───
+        pt: {
+          xs: "calc(env(safe-area-inset-top) + 60px)",
+          md: "280px",
+        },
+        pb: {
+          xs: "calc(env(safe-area-inset-bottom) + 150px)",
+          md: 0,
+        },
       }}
     >
       <Box
         sx={{
           display: "grid",
           gridTemplateColumns: { xs: "1fr", md: "1fr 1fr" },
-          alignItems: "center",
-          minHeight: "100vh",
+          alignItems: "flex-start",
+          minHeight: { xs: "auto", md: "100vh" },
           padding: { xs: "20px", md: "40px" },
           gap: "5px",
           maxWidth: "1200px",
@@ -58,6 +65,8 @@ const ImageTextEffect = () => {
             width: "100%",
             maxWidth: "450px",
             margin: "0 auto",
+            alignSelf: "flex-start",
+            marginTop: isMobile ? "-70px" : "-300px",
           }}
         >
           <motion.video
@@ -69,8 +78,7 @@ const ImageTextEffect = () => {
             playsInline
             style={{
               width: "100%",
-              height: isMobile ? "auto" : "100%",
-              maxHeight: isMobile ? "190px" : "650px", // ✅ controla altura según dispositivo
+              maxHeight: isMobile ? "140px" : "607px",
               borderRadius: "15px",
               objectFit: "cover",
               border: "2px solid rgb(211, 190, 151)",
@@ -79,50 +87,6 @@ const ImageTextEffect = () => {
           >
             <source src={img("terapias.mp4")} type="video/mp4" />
           </motion.video>
-
-          {/* BOTÓN SOLO VISIBLE EN MÓVIL
-          <Box
-            sx={{
-              position: "absolute",
-              bottom: "20px",
-              left: "50%",
-              transform: "translateX(-50%)",
-              width: "80%",
-              display: { xs: "flex", md: "none" },
-              justifyContent: "center",
-            }}
-          >
-            <Button
-              variant="contained"
-              component={motion.button}
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              sx={{
-                backgroundColor: "rgb(120, 150, 131)",
-                color: "#f5eedc",
-                fontSize: { xs: "0.9rem", md: "1rem" },
-                fontFamily: "Playfair Display",
-                fontWeight: "500",
-                px: { xs: 2, sm: 3 },
-                py: { xs: 1.2, sm: 1 },               
-                textTransform: "none",
-                borderRadius: "10px",
-                border: "2px solid rgb(211, 190, 151)",
-                boxShadow: "0 4px 6px rgba(0, 0, 0, 0.1)",
-                transition: "all 0.3s ease-in-out",
-                "&:hover": {
-                  backgroundColor: "#6F8979",
-                  boxShadow: "0 6px 10px rgba(0, 0, 0, 0.15)",
-                },
-                "&:active": {
-                  transform: "scale(0.98)",
-                },
-              }}
-              onClick={handleNavigate}
-            >
-              RESERVA
-            </Button>
-          </Box> */}
         </motion.div>
 
         {/* Contenedor del texto */}
@@ -132,23 +96,27 @@ const ImageTextEffect = () => {
           transition={{ duration: 1, delay: 0.3 }}
           style={{
             width: "100%",
-            maxWidth: "600px",
+            maxWidth: isMobile ? "90vw" : "700px",
             margin: "0 auto",
             textAlign: "center",
+            transformOrigin: "top center",
           }}
         >
           <Box
             sx={{
+              transform: { xs: "scale(1)", md: "scale(0.9)" },
               background: "rgba(48, 84, 69, 0.3)",
               marginRight: { xs: "0", md: "20px" },
               border: "2px solid #557c70",
-              padding: { xs: "20px", md: "30px" },
+              p: { xs: 2, md: 3 },
               borderRadius: "15px",
               color: "#4b3f2f",
               boxShadow:
-                "0 4px 8px rgba(210, 180, 140, 0.9), 0 6px 20px rgba(0, 0, 0, 0.19)",
+                "0 4px 8px rgba(210, 180, 140, 0.9), 0 6px 20px rgba(0,0,0,0.19)",
               position: "relative",
-              maxWidth: { xs: "105%", md: "750px" },
+              width: "100%",
+              alignSelf: "flex-start",
+              mt: { xs: -1, md: "-330px" },
             }}
           >
             <Typography
@@ -158,7 +126,7 @@ const ImageTextEffect = () => {
                 fontWeight: "bold",
                 mb: 2,
                 fontFamily: "Playfair Display, serif",
-                fontSize: { xs: "1.5rem", md: "2.5rem" },
+                fontSize: { xs: "1.4rem", md: "2.5rem" },
               }}
             >
               Terapia
@@ -169,7 +137,7 @@ const ImageTextEffect = () => {
               sx={{
                 fontFamily: "Playfair Display, serif",
                 fontWeight: 600,
-                fontSize: { xs: "0.9rem", md: "1.3rem" },
+                fontSize: { xs: "0.8rem", md: "1.3rem" },
                 textAlign: "center",
                 mb: 2,
               }}
@@ -181,7 +149,7 @@ const ImageTextEffect = () => {
               variant="body1"
               sx={{
                 fontFamily: "Playfair Display, serif",
-                fontSize: { xs: "0.8rem", md: "1rem" },
+                fontSize: { xs: "0.7rem", md: "1.1rem" },
                 textAlign: "justify",
                 mb: 2,
               }}
@@ -198,7 +166,7 @@ const ImageTextEffect = () => {
               variant="body1"
               sx={{
                 fontFamily: "Playfair Display, serif",
-                fontSize: { xs: "0.8rem", md: "1rem" },
+                fontSize: { xs: "0.7rem", md: "1.1rem" },
                 textAlign: "justify",
                 mb: 2,
               }}
@@ -219,7 +187,6 @@ const ImageTextEffect = () => {
                 ayudarte a entender lo que te pasa{" "}
               </Box>
               y brindarte estrategias concretas para sentirte mejor.
-              <br />
               <br />
               No tienes que estar “listo”, solo comprometido contigo mismo.
               Agenda una consulta conmigo y comienza a tomar el control de tu

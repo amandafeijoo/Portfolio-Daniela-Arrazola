@@ -63,7 +63,7 @@ const PricingCards = () => {
       sx={{
         position: "relative",
         padding: "60px 15px 40px",
-        minHeight: "75vh",
+        minHeight: "80vh",
         width: "100%",
         maxWidth: "1200px",
         margin: "0 auto",
@@ -76,20 +76,19 @@ const PricingCards = () => {
         ref={videoRef}
         sx={{
           position: "absolute",
-          top: 10,
-          botton:12,
+          top: { xs: "2px", md: "65px" },
+          bottom: { xs: "0px", md: "80px" },
+          border: "3px solid #c2a97c",
           left: "50%",
           transform: "translateX(-50%)",
           width: "100%",
-          height: isMobile ? "100vh" : "100%",
-          minHeight: isMobile ? "100vh" : undefined,
           maxWidth: "100vw",
           overflow: "hidden",
           zIndex: -1,
           borderRadius: isMobile ? "15px" : "10px",
         }}
       >
-        {loadVideo ? (
+        {loadVideo && (
           <video
             autoPlay
             loop
@@ -102,8 +101,6 @@ const PricingCards = () => {
               height: "100%",
               objectFit: "cover",
               opacity: videoLoaded ? 0.6 : 0,
-              border: "2px solid rgb(67, 60, 54)",
-              boxShadow: "4px 4px 10px rgba(0, 0, 0, 0.9)",
               transition: "opacity 0.5s ease-in-out",
             }}
           >
@@ -112,7 +109,7 @@ const PricingCards = () => {
               type="video/mp4"
             />
           </video>
-        ) : null}
+        )}
       </Box>
 
       {/* 🧾 Título */}
@@ -123,7 +120,8 @@ const PricingCards = () => {
           fontFamily: "Playfair Display",
           fontWeight: "bold",
           color: "#2c2c2c",
-          mb: 8,
+          mt: 4,
+          mb: 5,
           zIndex: 2,
           position: "relative",
           fontSize: {
@@ -173,8 +171,8 @@ const PricingCards = () => {
               boxShadow: "4px 4px 10px rgba(0, 0, 0, 0.1)",
               textAlign: "center",
               width: "100%",
-       maxWidth: isMobile ? "75vw" : isTablet ? "300px" : "350px",
-minHeight: isMobile ? "145px" : isTablet ? "300px" : "260px",
+              maxWidth: isMobile ? "75vw" : isTablet ? "300px" : "350px",
+              minHeight: isMobile ? "145px" : isTablet ? "300px" : "260px",
 
               color: "#4b3f2f",
               margin: "0 auto",
@@ -222,7 +220,7 @@ minHeight: isMobile ? "145px" : isTablet ? "300px" : "260px",
         <Button
           variant="contained"
           sx={{
-            backgroundColor:" #557c70",
+            backgroundColor: " #557c70",
             color: "#f5eedc",
             fontWeight: "500",
             border: "2px solid rgb(211, 190, 151)",

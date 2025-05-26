@@ -9,7 +9,6 @@ export default createGlobalStyle`
     margin: 0;
     padding: 0;
   }
-
   /* 2) Asegura que html, body y #root ocupen 100% */
   html, body, #root {
     width: 100%;
@@ -18,9 +17,7 @@ export default createGlobalStyle`
     padding: 0;
     overflow-y:auto;
     overflow-x: hidden;
-
   }
-
   /* 3) Estilos base del body */
   body {
     background-color: #9FB0A2;
@@ -72,8 +69,6 @@ export default createGlobalStyle`
     .footer-container .social-icons { justify-content: flex-end; }
   }
 `;
-
-
 
 // background-color: #557C70;
 // background-color: #A1AD7F;

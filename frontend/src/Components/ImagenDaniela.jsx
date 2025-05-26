@@ -28,13 +28,12 @@ const ContenedorPadre = styled.div`
 
   /* MOBILE */
   @media (max-width: 768px) {
-    width: 100%; /* ✅ en lugar de 100vw */
-    height: 50vh;
+    width: 100%;
+    height: auto;
     padding: 0;
     margin: 0;
     border-radius: 2;
     box-shadow: none;
-    height: 60%;
     border: 3px solid #d2b48c;
     overflow: hidden;
   }
@@ -81,7 +80,7 @@ const ContenedorPrincipal2 = styled.div`
   transition: transform 1.5s ease-out;
   box-shadow: 0 0 5px 2px rgba(0, 0, 0, 0.3), 0 0 15px 6px rgba(0, 0, 0, 0.2);
 
-  /* TABLET: movemos un poco hacia la izquierda y hacemos más ancho */
+  /* TABLET */
   @media (max-width: 1024px) and (min-width: 769px) {
     top: 140px;
     right: 40px;
@@ -116,7 +115,6 @@ const ImagenDaniela = () => {
     window.addEventListener("resize", handleResize);
 
     if (!isMobile) {
-      // 📌 Store ref values inside the effect
       const contenedor1 = contenedor1Ref.current;
       const contenedor2 = contenedor2Ref.current;
 
@@ -154,9 +152,8 @@ const ImagenDaniela = () => {
   return (
     <Box
       sx={{
-        // Sólo en xs (móvil) dejamos visible todo y damos colchón abajo
         overflow: { xs: "visible", md: "hidden" },
-        pb: { xs: 17, md: 0 }, // 8 * 8px = 64px de padding-bottom en móvil
+        pb: { xs: 0, md: 0 },
         boxSizing: "border-box",
       }}
     >
@@ -182,7 +179,7 @@ const ImagenDaniela = () => {
               borderRadius: isMobile ? "0px" : "15px",
               padding: isMobile ? "20px" : "30px",
               textAlign: "justify",
-              fontFamily: '"Playfair Display", serif', // ◀ aquí
+              fontFamily: '"Playfair Display", serif',
               lineHeight: 1.6,
               color: "rgb(75, 60, 45)",
             }}
@@ -196,7 +193,7 @@ const ImagenDaniela = () => {
                 fontSize: { xs: "1.1rem", sm: "1.3rem" },
                 mt: 4,
                 mb: 4,
-                textAlign: { xs: "center", sm: "center" }, // ← left en xs, center en sm+
+                textAlign: { xs: "center", sm: "center" },
                 lineHeight: 1.2,
               }}
             >
@@ -234,7 +231,7 @@ const ImagenDaniela = () => {
               </Box>{" "}
               Aquí empieza tu proceso de volver a ti.
               <br /> <br />
-              Conoce más sobre mí y cómo puedo acompañarte en tu proceso
+              Conoce más sobre mí y cómo puedo acompañarte en tu proceso.
             </Typography>
           </div>
 
@@ -252,17 +249,18 @@ const ImagenDaniela = () => {
               variant="contained"
               component={motion.button}
               whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}              onClick={() => navigate("/full-acerca")}
+              whileTap={{ scale: 0.95 }}
+              onClick={() => navigate("/full-acerca")}
               sx={{
                 backgroundColor: "  rgb(211, 190, 151)",
                 color: "rgb(92, 116, 101)",
                 fontSize: { xs: "0.8rem", md: "1rem" },
                 fontFamily: "Playfair Display",
-                fontWeight: "500", // texto beige
+                fontWeight: "500",
                 px: { xs: 2, sm: 3 },
                 py: { xs: 1.2, sm: 1 },
                 borderRadius: "8px",
-                textTransform: "none", // para que respete las mayúsculas y el acento
+                textTransform: "none",
                 letterSpacing: "0.7px",
                 border: "2px solid rgb(120, 150, 131)",
                 boxShadow: "0 4px 6px rgba(0, 0, 0, 0.1)",
@@ -270,12 +268,12 @@ const ImagenDaniela = () => {
                 "&:hover": {
                   backgroundColor: "#6F8979",
                   boxShadow: "0 6px 10px rgba(0, 0, 0, 0.15)",
-                  color: "#f5eedc",                },
+                  color: "#f5eedc",
+                },
                 "&:active": {
                   transform: "scale(0.98)",
                 },
               }}
-              // Efecto hover con tu marrón acento
             >
               LEER MÁS
             </Button>

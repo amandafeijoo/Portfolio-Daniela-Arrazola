@@ -1,9 +1,11 @@
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import { lazy, Suspense } from "react";
+import ScrollToTop from "./Components/ScrollToTop";
+
 import styled from "styled-components";
 import GlobalStyle from "./GlobalStyle";
 import Header from "./Components/Header";
-import HeroSocialLinks from './Components/HeroSocialLinks';
+import HeroSocialLinks from "./Components/HeroSocialLinks";
 import CookieConsent from "react-cookie-consent";
 import "@fontsource/playfair-display";
 
@@ -30,7 +32,9 @@ const Service11 = lazy(() => import("./Components/Service11"));
 const Service12 = lazy(() => import("./Components/Service12"));
 const Service13 = lazy(() => import("./Components/Service13"));
 const ImageTextEffect = lazy(() => import("./Components/ImageTextEffect"));
-const InfiniteScrollGallery = lazy(() => import("./Components/InfiniteScrollGallery"));
+const InfiniteScrollGallery = lazy(() =>
+  import("./Components/InfiniteScrollGallery")
+);
 const PricingCards = lazy(() => import("./Components/PricingCards"));
 const InfoBoxesReserva = lazy(() => import("./Components/InfoBoxesReserva"));
 const FAQSection = lazy(() => import("./Components/FAQSection"));
@@ -66,12 +70,14 @@ const Section = styled.div`
 const StickySection = styled.div`
   position: sticky;
   top: 0;
-  height: 100vh;
   width: 100%;
-  /* overflow:hidden; */
+  max-height: 150vh;
+  /* scroll solo en vertical si el contenido sobrepasa */
+  overflow-y: auto;
   display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
   align-items: center;
-  justify-content: center;
   background-color: #8fa99e;
   box-shadow: 0 0 5px 2px rgba(0, 0, 0, 0.2),
     0 0 10px 4px rgba(34, 139, 34, 0.2), 0 0 15px 6px rgba(0, 0, 0, 0.2);
@@ -80,352 +86,355 @@ const StickySection = styled.div`
 `;
 
 const Container = styled.div`
-  min-height: 300vh;
   display: flex;
   flex-direction: column;
-  width: 100%; 
+  width: 100%;
   /* max-width: 100vw; */
   margin: 0 auto;
   padding: 0;
   /* overflow-x: hidden; */
-
+  /* border: 3px solid red;  */
 `;
-
 const MainWrapper = styled.main`
-  padding-top: 155px; /* deja hueco para el Header */
-  width: 100%;
-  /* overflow-x: hidden; */
-  
-
+  flex: 1; 
+  overflow: auto; 
+  padding-top: 150px; 
+`;
+const AppContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
 `;
 
 function App() {
   return (
     <Router>
+      <ScrollToTop />
       <GlobalStyle />
       <Header />
-      <HeroSocialLinks /> 
-      <MainWrapper>
-      <Suspense fallback={<div>Loading...</div>}>
-        <Routes>
-          <Route
-            path="/"
-            element={
-              <>
-                <Section>
-                  <Home />
-                </Section>
-                <Section>
-                  <ImagenDaniela />
-                </Section>
-                <Container>
-                  <StickySection style={{ zIndex: 1 }}>
-                    <ImageTextEffect />
-                  </StickySection>
-                  <StickySection style={{ zIndex: 2 }}>
-                    <InfiniteScrollGallery />
-                  </StickySection>
-                  <StickySection style={{ zIndex: 3 }}>
-                    <PricingCards />
-                  </StickySection>
-                </Container>
-                <Section>
-                  <InfoBoxesReserva />
-                </Section>
-                <Section>
-                  <Testimonials />
-                </Section>
-              </>
-            }
-          />
-          <Route
-            path="/acerca-de"
-            element={
-              <Section>
-                <AcercaDe />
-              </Section>
-            }
-          />
-          <Route
-            path="/full-acerca"
-            element={
-              <Section>
-                <FullAcerca />
-              </Section>
-            }
-          />
-          <Route
-            path="/servicios"
-            element={
-              <Section>
-                <Services />
-              </Section>
-            }
-          />
-          <Route
-            path="/contact"
-            element={
-              <Section>
-                <Contact />
-              </Section>
-            }
-          />
-          <Route
-            path="/reserva"
-            element={
-              <Section>
-                <Reserva />
-              </Section>
-            }
-          />
-          <Route
-            path="/calendar"
-            element={
-              <Section>
-                <Calendar />
-              </Section>
-            }
-          />
-          <Route
-            path="/service1"
-            element={
-              <Section>
-                <Service1 />
-              </Section>
-            }
-          />
-          <Route
-            path="/service2"
-            element={
-              <Section>
-                <Service2 />
-              </Section>
-            }
-          />
-          <Route
-            path="/service3"
-            element={
-              <Section>
-                <Service3 />
-              </Section>
-            }
-          />
-          <Route
-            path="/service4"
-            element={
-              <Section>
-                <Service4 />
-              </Section>
-            }
-          />
-          <Route
-            path="/service5"
-            element={
-              <Section>
-                <Service5 />
-              </Section>
-            }
-          />
-          <Route
-            path="/service6"
-            element={
-              <Section>
-                <Service6 />
-              </Section>
-            }
-          />
-          <Route
-            path="/service7"
-            element={
-              <Section>
-                <Service7 />
-              </Section>
-            }
-          />
-          <Route
-            path="/service8"
-            element={
-              <Section>
-                <Service8 />
-              </Section>
-            }
-          />
-          <Route
-            path="/service9"
-            element={
-              <Section>
-                <Service9 />
-              </Section>
-            }
-          />
-          <Route
-            path="/service10"
-            element={
-              <Section>
-                <Service10 />
-              </Section>
-            }
-          />
-          <Route
-            path="/service11"
-            element={
-              <Section>
-                <Service11 />
-              </Section>
-            }
-          />
-          <Route
-            path="/service12"
-            element={
-              <Section>
-                <Service12 />
-              </Section>
-            }
-          />
-          <Route
-            path="/service13"
-            element={
-              <Section>
-                <Service13 />
-              </Section>
-            }
-          />
-          <Route
-            path="/faq"
-            element={
-              <Section>
-                <FAQSection />
-              </Section>
-            }
-          />
-          <Route
-            path="/privacy-policy"
-            element={
-              <Section>
-                <PrivacyPolicy />
-              </Section>
-            }
-          />
-          <Route
-            path="/login"
-            element={
-              <Section>
-                <Login />
-              </Section>
-            }
-          />
-          <Route
-            path="/admin-dashboard"
-            element={
-              <Section>
-                <AdminDashboard />
-              </Section>
-            }
-          />
-          <Route
-            path="/legal-notice"
-            element={
-              <Section>
-                <LegalNotice />
-              </Section>
-            }
-          />
-          <Route
-            path="/cookies-policy"
-            element={
-              <Section>
-                <CookiesPolicy />
-              </Section>
-            }
-          />
-          <Route
-            path="/testimonios"
-            element={
-              <Section>
-                <TestimonialForm />
-              </Section>
-            }
-          />
-          <Route
-            path="/reserva-exitosa"
-            element={
-              <Section>
-                <ReservaExitosa />
-              </Section>
-            }
-          />
-          <Route
-            path="/reserva-cancelada"
-            element={
-              <Section>
-                <ReservaCancelada />
-              </Section>
-            }
-          />
-        </Routes>
-      </Suspense>
-      </MainWrapper>
-      <Section>
-        <Footer />
-      </Section>
+      <HeroSocialLinks />
+      <AppContainer>
+        <MainWrapper id="main-scroll-container">
+          <Suspense fallback={<div>Loading...</div>}>
+            <Routes>
+              <Route
+                path="/"
+                element={
+                  <>
+                    <Section>
+                      <Home />
+                    </Section>
+                    <Section>
+                      <ImagenDaniela />
+                    </Section>
+                    <Container>
+                      <StickySection style={{ zIndex: 1 }}>
+                        <ImageTextEffect />
+                      </StickySection>
+                      <StickySection style={{ zIndex: 2 }}>
+                        <InfiniteScrollGallery />
+                      </StickySection>
+                      <StickySection style={{ zIndex: 3 }}>
+                        <PricingCards />
+                      </StickySection>
+                    </Container>
+                    <Section>
+                      <InfoBoxesReserva />
+                    </Section>
+                    <Section>
+                      <Testimonials />
+                    </Section>
+                  </>
+                }
+              />
+              <Route
+                path="/acerca-de"
+                element={
+                  <Section>
+                    <AcercaDe />
+                  </Section>
+                }
+              />
+              <Route
+                path="/full-acerca"
+                element={
+                  <Section>
+                    <FullAcerca />
+                  </Section>
+                }
+              />
+              <Route
+                path="/servicios"
+                element={
+                  <Section>
+                    <Services />
+                  </Section>
+                }
+              />
+              <Route
+                path="/contact"
+                element={
+                  <Section>
+                    <Contact />
+                  </Section>
+                }
+              />
+              <Route
+                path="/reserva"
+                element={
+                  <Section>
+                    <Reserva />
+                  </Section>
+                }
+              />
+              <Route
+                path="/calendar"
+                element={
+                  <Section>
+                    <Calendar />
+                  </Section>
+                }
+              />
+              <Route
+                path="/service1"
+                element={
+                  <Section>
+                    <Service1 />
+                  </Section>
+                }
+              />
+              <Route
+                path="/service2"
+                element={
+                  <Section>
+                    <Service2 />
+                  </Section>
+                }
+              />
+              <Route
+                path="/service3"
+                element={
+                  <Section>
+                    <Service3 />
+                  </Section>
+                }
+              />
+              <Route
+                path="/service4"
+                element={
+                  <Section>
+                    <Service4 />
+                  </Section>
+                }
+              />
+              <Route
+                path="/service5"
+                element={
+                  <Section>
+                    <Service5 />
+                  </Section>
+                }
+              />
+              <Route
+                path="/service6"
+                element={
+                  <Section>
+                    <Service6 />
+                  </Section>
+                }
+              />
+              <Route
+                path="/service7"
+                element={
+                  <Section>
+                    <Service7 />
+                  </Section>
+                }
+              />
+              <Route
+                path="/service8"
+                element={
+                  <Section>
+                    <Service8 />
+                  </Section>
+                }
+              />
+              <Route
+                path="/service9"
+                element={
+                  <Section>
+                    <Service9 />
+                  </Section>
+                }
+              />
+              <Route
+                path="/service10"
+                element={
+                  <Section>
+                    <Service10 />
+                  </Section>
+                }
+              />
+              <Route
+                path="/service11"
+                element={
+                  <Section>
+                    <Service11 />
+                  </Section>
+                }
+              />
+              <Route
+                path="/service12"
+                element={
+                  <Section>
+                    <Service12 />
+                  </Section>
+                }
+              />
+              <Route
+                path="/service13"
+                element={
+                  <Section>
+                    <Service13 />
+                  </Section>
+                }
+              />
+              <Route
+                path="/faq"
+                element={
+                  <Section>
+                    <FAQSection />
+                  </Section>
+                }
+              />
+              <Route
+                path="/privacy-policy"
+                element={
+                  <Section>
+                    <PrivacyPolicy />
+                  </Section>
+                }
+              />
+              <Route
+                path="/login"
+                element={
+                  <Section>
+                    <Login />
+                  </Section>
+                }
+              />
+              <Route
+                path="/admin-dashboard"
+                element={
+                  <Section>
+                    <AdminDashboard />
+                  </Section>
+                }
+              />
+              <Route
+                path="/legal-notice"
+                element={
+                  <Section>
+                    <LegalNotice />
+                  </Section>
+                }
+              />
+              <Route
+                path="/cookies-policy"
+                element={
+                  <Section>
+                    <CookiesPolicy />
+                  </Section>
+                }
+              />
+              <Route
+                path="/testimonios"
+                element={
+                  <Section>
+                    <TestimonialForm />
+                  </Section>
+                }
+              />
+              <Route
+                path="/reserva-exitosa"
+                element={
+                  <Section>
+                    <ReservaExitosa />
+                  </Section>
+                }
+              />
+              <Route
+                path="/reserva-cancelada"
+                element={
+                  <Section>
+                    <ReservaCancelada />
+                  </Section>
+                }
+              />
+            </Routes>
+          </Suspense>
+          <Section>
+            <Footer />
+          </Section>
+        </MainWrapper>
+      </AppContainer>
+      {/* Banner de Cookies */}
+      <CookieConsent
+        location="bottom"
+        cookieName="mi_consentimiento_cookies"
+        style={{
+          background: "rgb(138, 158, 142)", 
+          border: "2px solid rgb(60, 75, 67)",
 
-       {/* Banner de Cookies */}
-       <CookieConsent
-  location="bottom"
-  cookieName="mi_consentimiento_cookies"
-  style={{
-    background: "rgb(138, 158, 142)", // fondo suave, verde salvia claro
-    border: "2px solid rgb(60, 75, 67)",
-
-    color: "#2e4036",       // texto oscuro pero no negro
-    fontFamily: "'Playfair Display', serif",
-    padding: "22px",
-    fontSize: "15px",
-    boxShadow: "0 -4px 12px rgba(0, 0, 0, 0.08)",
-  }}
-  buttonStyle={{
-    background: "transparent",
-    color: "#2e4036",
-    fontFamily: "'Playfair Display', serif",
-    border: "2px solid #2e4036",
-    borderRadius: "6px",
-    padding: "10px 18px",
-    marginLeft: "10px",
-    cursor: "pointer",
-  }}
-  declineButtonStyle={{
-    background: "transparent",
-    color: "#6e3c2b", // tono tierra cálido
-    fontFamily: "'Playfair Display', serif",
-    border: "2px solid #6e3c2b",
-    borderRadius: "6px",
-    padding: "10px 18px",
-    marginLeft: "10px",
-    cursor: "pointer",
-  }}
-  buttonText="Aceptar todas"
-  declineButtonText="Rechazar"
-  enableDeclineButton
-  expires={150}
->
-  Usamos cookies propias y de terceros para analizar el tráfico y mejorar tu experiencia. Puedes aceptarlas, rechazarlas o configurarlas.
-  <a
-    href="/cookies-policy"
-    style={{
-      color: "#2c2c2c",
-      fontWeight: "bold",
-      marginLeft: "8px",
-      textDecoration: "underline dotted",
-      transition: "color 0.3s ease",
-    }}
-    onMouseOver={(e) => (e.target.style.color = "#6e3c2b")}
-    onMouseOut={(e) => (e.target.style.color = "#2e4036")}
-  >
-    Leer más
-  </a>
-</CookieConsent>
+          color: "#2e4036", 
+          fontFamily: "'Playfair Display', serif",
+          padding: "22px",
+          fontSize: "15px",
+          boxShadow: "0 -4px 12px rgba(0, 0, 0, 0.08)",
+        }}
+        buttonStyle={{
+          background: "transparent",
+          color: "#2e4036",
+          fontFamily: "'Playfair Display', serif",
+          border: "2px solid #2e4036",
+          borderRadius: "6px",
+          padding: "10px 18px",
+          marginLeft: "10px",
+          cursor: "pointer",
+        }}
+        declineButtonStyle={{
+          background: "transparent",
+          color: "#6e3c2b", 
+          fontFamily: "'Playfair Display', serif",
+          border: "2px solid #6e3c2b",
+          borderRadius: "6px",
+          padding: "10px 18px",
+          marginLeft: "10px",
+          cursor: "pointer",
+        }}
+        buttonText="Aceptar todas"
+        declineButtonText="Rechazar"
+        enableDeclineButton
+        expires={150}
+      >
+        Usamos cookies propias y de terceros para analizar el tráfico y mejorar
+        tu experiencia. Puedes aceptarlas, rechazarlas o configurarlas.
+        <a
+          href="/cookies-policy"
+          style={{
+            color: "#2c2c2c",
+            fontWeight: "bold",
+            marginLeft: "8px",
+            textDecoration: "underline dotted",
+            transition: "color 0.3s ease",
+          }}
+          onMouseOver={(e) => (e.target.style.color = "#6e3c2b")}
+          onMouseOut={(e) => (e.target.style.color = "#2e4036")}
+        >
+          Leer más
+        </a>
+      </CookieConsent>
     </Router>
-    
   );
 }
 

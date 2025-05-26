@@ -31,7 +31,7 @@ const sections = [
     - Titular: Daniela Arrázola Benítez\n
     - NIF: XXXX\n
     - Domicilio: XXXX\n
-    - Contacto: Danielaarrazolabenitez@gmail.com | +47 98315132\n
+    - Contacto: daniela@arrazolapsicologia.com | +47 98315132\n
    Las presentes condiciones regulan el acceso y navegación de los usuarios a través del presente sitio
 web. Mediante su visita, usted acepta estas condiciones. El titular podrá modificar en cualquier
 momento el contenido y finalidad de este sitio web, así como de las condiciones.
@@ -146,7 +146,7 @@ cookies. (crear hipervínculo).`,
   },
   {
     title: "🛡️ Responsabilidad",
-    icon: faShieldAlt, // Puedes cambiarlo a otro de la lista según prefieras
+    icon: faShieldAlt, 
     content: `El titular se exime de cualquier tipo de responsabilidad derivada de cualquier daño que pudiera sufrir
 el usuario, o en consecuencia cualquier tercero, producido por el acceso y utilización del sitio web,
 por la imposibilidad de acceso, por confiar en la información facilitada en el mismo o al acceder a
@@ -196,7 +196,7 @@ establecidas.`,
   },
   {
     title: "⏸️ Suspensión del sitio web",
-    icon: faPauseCircle, // Puedes cambiarlo a otro de la lista según prefieras
+    icon: faPauseCircle, 
     content: `El titular podrá en cualquier momento suspender el funcionamiento de su sitio web, con o sin previa
     notificación, y sin que el usuario tenga posibilidad de exigir indemnización alguna por esta causa.`,
   },

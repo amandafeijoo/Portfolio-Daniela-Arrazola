@@ -5,8 +5,9 @@ import { FaFacebook, FaLinkedin, FaInstagram } from "react-icons/fa";
 export default function HeroSocialLinks() {
   return (
     <Box
+     id="hero-social-links"
       sx={{
-        position: "fixed",
+        position: "absolute",
         top: "50%",
         right: { xs: 8, md: 24 },
         transform: "translateY(-50%)",
@@ -41,3 +42,4 @@ export default function HeroSocialLinks() {
     </Box>
   );
 }
+

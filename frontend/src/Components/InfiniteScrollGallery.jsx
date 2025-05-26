@@ -14,41 +14,38 @@ const StyledContainer = styled(Box)`
   border: 6px solid #d2b48c;
   border-radius: 8px;
   box-shadow: 0 0 5px 2px rgba(0, 0, 0, 0.3),
-              0 0 10px 4px rgba(34, 139, 34, 0.2),
-              0 0 15px 6px rgba(0, 0, 0, 0.2);
+    0 0 10px 4px rgba(34, 139, 34, 0.2), 0 0 15px 6px rgba(0, 0, 0, 0.2);
   padding: 30px;
   margin: 20px auto;
   max-width: 1300px;
   position: relative;
   text-align: center;
-
-  /* altura mínima general */
   min-height: 620px;
+  /* —— aquí sube todo el contenedor —— */
+  top: 9px;
+  margin-top: 0px;
 
   @media (max-width: 960px) {
     padding: 25px;
-    /* podrías ajustar también aquí si quieres menos altura en tablets */
     min-height: 550px;
+    top: -40px;
   }
   @media (max-width: 600px) {
     padding: 20px;
     margin: 0 auto;
     max-width: 95%;
-    margin-top: -40px;
-    margin-bottom:0px;
-    min-height: 550px; /* ya lo tienes, pero podrías subirlo si quieres */
+    margin-bottom: 0;
+    min-height: 520px;
+    top: 8px;
   }
 `;
 
-
-// Sólo scroll horizontal de imágenes
 const ScrollContainer = styled(Box)`
   width: 100%;
   overflow-x: scroll;
   overflow-y: hidden;
   touch-action: pan-x;
 
-  /* Opcional: desactiva momentum en iOS si hace falta */
   &.no-momentum {
     -webkit-overflow-scrolling: auto;
   }
@@ -56,11 +53,12 @@ const ScrollContainer = styled(Box)`
     -webkit-overflow-scrolling: touch;
   }
 
-  &::-webkit-scrollbar { display: none; }
+  &::-webkit-scrollbar {
+    display: none;
+  }
   -ms-overflow-style: none;
   scrollbar-width: none;
 `;
-
 
 const serviceImages = [
   {
@@ -117,7 +115,6 @@ const serviceImages = [
   },
 ];
 
-// Sólo dos tamaños en desktop, alternados
 const desktopSizes = [
   { width: "180px", height: "260px" },
   { width: "250px", height: "350px" },
@@ -126,12 +123,12 @@ const desktopSizes = [
 const mobileSizes = [
   { width: "160px", height: "200px" },
   { width: "180px", height: "220px" },
- ];
+];
 const InfiniteScrollGallery = () => {
   const navigate = useNavigate();
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
-  const isTablet = useMediaQuery(theme.breakpoints.between("sm","md"));
+  const isTablet = useMediaQuery(theme.breakpoints.between("sm", "md"));
   const carouselRef = useRef(null);
   const isInteracting = useRef(false);
   const scrollTimeout = useRef(null);
@@ -145,12 +142,12 @@ const InfiniteScrollGallery = () => {
     clearTimeout(scrollTimeout.current);
     scrollTimeout.current = setTimeout(() => {
       isInteracting.current = false;
-    }, 100); // espera 100ms tras el último scroll/touch antes de reanudar
+    }, 100);
   };
 
   useEffect(() => {
     let rafId;
-    // sube un poco la velocidad en móvil
+    // velocidad en móvil
     const speed = isMobile ? 1 : 1.2;
 
     const step = () => {
@@ -179,8 +176,6 @@ const InfiniteScrollGallery = () => {
       carouselRef.current.scrollLeft += e.deltaY;
     }
   };
-
-  // click en imagen
   const handleImageClick = (path) => navigate(path);
 
   return (
@@ -215,7 +210,6 @@ const InfiniteScrollGallery = () => {
       <ScrollContainer
         ref={carouselRef}
         onWheel={handleWheel}
-        // cubrimos todos los eventos táctiles y de scroll
         onTouchStart={handleInteractionStart}
         onTouchMove={handleInteractionStart}
         onTouchEnd={handleInteractionEnd}
@@ -231,20 +225,15 @@ const InfiniteScrollGallery = () => {
           }}
         >
           {serviceImages.concat(serviceImages).map((img, idx) => {
-            // 1) calculamos tamaño de la tarjeta
             const size = isMobile
-           // alterna entre los dos tamaños definidos para móvil
-            ? mobileSizes[idx % mobileSizes.length]
-             : isTablet
-             ? { width: "160px", height: "180px" }
-            : desktopSizes[idx % desktopSizes.length];
-
-            // 2) calculamos ancho real en Cloudinary
+              ? // alterna entre los dos tamaños definidos para móvil
+                mobileSizes[idx % mobileSizes.length]
+              : isTablet
+              ? { width: "160px", height: "180px" }
+              : desktopSizes[idx % desktopSizes.length];
             const base = parseInt(size.width, 10);
             const factor = isTablet ? 1.5 : 2;
             const newWidth = Math.round(base * factor);
-
-            // 3) recortamos bordes y escalamos
             const srcHighRes = img.src
               .replace(
                 "/upload/",

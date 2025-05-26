@@ -9,7 +9,7 @@ export default function HeroSocialLinks() {
       sx={{
         position: "absolute",
         top: "50%",
-        right: { xs: 8, md: 24 },
+        right: { xs: 2, md: 34 },
         transform: "translateY(-50%)",
         display: "flex",
         flexDirection: "column",

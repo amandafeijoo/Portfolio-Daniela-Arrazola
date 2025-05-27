@@ -28,18 +28,14 @@ RUN VITE_API_URL=https://web-production-70fa.up.railway.app npm run build && nod
 # Regresa al backend y copia archivos del build al directorio que Django sirve
 WORKDIR /app
 RUN mkdir -p staticfiles && \
-    cp -r frontend_build/assets                staticfiles/ && \
-    cp -r frontend_build/images                staticfiles/ && \
-    cp    frontend_build/index.html            staticfiles/ && \
-    cp    frontend_build/favicon.ico           staticfiles/ && \
-    cp    frontend_build/favicon-16x16.png      staticfiles/ && \
-    cp    frontend_build/favicon-32x32.png      staticfiles/ && \
-    cp    frontend_build/apple-touch-icon.png   staticfiles/ && \
-    cp    frontend_build/site.webmanifest       staticfiles/
-
+    cp -r frontend_build/assets staticfiles/ && \
+    cp -r frontend_build/images staticfiles/ && \
+    cp frontend_build/index.html staticfiles/
+    
 
 # Expone el puerto para Gunicorn
 EXPOSE 8080
 
 # Ejecuta la app con Gunicorn
 CMD gunicorn danielabackend.wsgi:application --bind 0.0.0.0:8080
+

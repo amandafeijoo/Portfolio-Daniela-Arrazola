@@ -3,12 +3,13 @@
 <head>
   <link rel="apple-touch-icon" sizes="180x180"
         href="/static/apple-touch-icon.png">
-  <link rel="icon" type="image/png" sizes="32x32"
-        href="/static/favicon-32x32.png">
-  <link rel="icon" type="image/png" sizes="16x16"
-        href="/static/favicon-16x16.png">
-  <link rel="manifest"
-        href="/static/site.webmanifest">
+  <!-- SVG favicon para navegadores que lo soporten -->
+  <link rel="icon" type="image/svg+xml"
+        href="/static/favicon.svg">
+  <!-- Fallback PNG 96×96 para navegadores sin SVG -->
+  <link rel="icon" type="image/png" sizes="96x96"
+        href="/static/favicon-96x96.png">
+  <link rel="manifest" href="/static/site.webmanifest">
   <link rel="icon" type="image/x-icon"
         href="/static/favicon.ico">
   <meta charset="UTF-8" />
@@ -23,5 +24,6 @@
   <script type="module" src="/src/main.jsx"></script>
 </body>
 </html>
+
 
 

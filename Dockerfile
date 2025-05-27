@@ -30,7 +30,12 @@ WORKDIR /app
 RUN mkdir -p staticfiles && \
     cp -r frontend_build/assets staticfiles/ && \
     cp -r frontend_build/images staticfiles/ && \
-    cp frontend_build/index.html staticfiles/
+    cp frontend_build/index.html staticfiles/ \
+    cp frontend/public/favicon.ico staticfiles/ && \
+    cp frontend/public/favicon-16x16.png staticfiles/ && \
+    cp frontend/public/favicon-32x32.png staticfiles/ && \
+    cp frontend/public/apple-touch-icon.png staticfiles/ && \
+    cp frontend/public/site.webmanifest staticfiles/
 
 # Expone el puerto para Gunicorn
 EXPOSE 8080
